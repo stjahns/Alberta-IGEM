@@ -2,3 +2,6 @@ Hello World!
 HI MIKE!
 
 hello sir
+
+while(1)
+{ print hello world}
