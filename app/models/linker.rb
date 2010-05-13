@@ -1,0 +1,2 @@
+class Linker < BioByte
+end
