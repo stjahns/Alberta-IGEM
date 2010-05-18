@@ -1,0 +1,9 @@
+log/*.log
+tmp/*
+tmp/**/*
+doc/api
+doc/app
+db/*.mysql
+*.swp
+*~
+.DS_Store
