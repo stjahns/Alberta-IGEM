@@ -391,3 +391,29 @@ Rendering rescues/layout (not_found)
 Processing HomeController#index (for 127.0.0.1 at 2010-05-18 10:45:26) [GET]
 Rendering home/index
 Completed in 31ms (View: 3, DB: 0) | 200 OK [http://localhost/]
+  [4;36;1mSQL (0.5ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+  [4;35;1mSQL (39.5ms)[0m   [0mSHOW TABLES[0m
+  [4;36;1mSQL (15.3ms)[0m   [0;1mSELECT version FROM schema_migrations[0m
+  [4;35;1mExperiment Columns (21.2ms)[0m   [0mSHOW FIELDS FROM `experiments`[0m
+  [4;36;1mStep Columns (0.0ms)[0m   [0;1mMysql::Error: Table 'igem_development.steps' doesn't exist: SHOW FIELDS FROM `steps`[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+  [4;35;1mSQL (0.7ms)[0m   [0mSHOW TABLES[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSELECT version FROM schema_migrations[0m
+Migrating to CreateExperiments (20100518180316)
+Migrating to CreateSteps (20100519203759)
+  [4;35;1mSQL (201.5ms)[0m   [0mCREATE TABLE `steps` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `description` text, `title` varchar(255), `image` varchar(255), `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB[0m
+  [4;36;1mSQL (65.0ms)[0m   [0;1mINSERT INTO schema_migrations (version) VALUES ('20100519203759')[0m
+  [4;35;1mSQL (0.8ms)[0m   [0mSHOW TABLES[0m
+  [4;36;1mSQL (0.6ms)[0m   [0;1mSELECT version FROM schema_migrations[0m
+  [4;35;1mSQL (0.7ms)[0m   [0mSHOW TABLES[0m
+  [4;36;1mSQL (2.1ms)[0m   [0;1mSHOW FIELDS FROM `experiments`[0m
+  [4;35;1mSQL (1.9ms)[0m   [0mdescribe `experiments`[0m
+  [4;36;1mSQL (17.6ms)[0m   [0;1mSHOW KEYS FROM `experiments`[0m
+  [4;35;1mSQL (3.4ms)[0m   [0mSHOW FIELDS FROM `steps`[0m
+  [4;36;1mSQL (2.9ms)[0m   [0;1mdescribe `steps`[0m
+  [4;35;1mSQL (1.2ms)[0m   [0mSHOW KEYS FROM `steps`[0m
+  [4;36;1mSQL (0.5ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+  [4;35;1mSQL (1.1ms)[0m   [0mSHOW TABLES[0m
+  [4;36;1mSQL (0.5ms)[0m   [0;1mSELECT version FROM schema_migrations[0m
+  [4;35;1mExperiment Columns (1.5ms)[0m   [0mSHOW FIELDS FROM `experiments`[0m
+  [4;36;1mStep Columns (2.1ms)[0m   [0;1mSHOW FIELDS FROM `steps`[0m
