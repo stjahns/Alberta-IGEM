@@ -1,5 +1,6 @@
 class CreateExperiments < ActiveRecord::Migration
   def self.up
+    drop_table :experiments
     create_table :experiments do |t|
       t.string :title
       t.string :authour
