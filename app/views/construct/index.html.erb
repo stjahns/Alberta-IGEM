@@ -1,0 +1,12 @@
+<h1>Constructs:</h1>
+
+<ul>
+<% @constructs.each do |const| %>
+  <li><%=const.name %> | 
+      <%= link_to "Edit", {:action => :edit, :id => const.id} %> | 
+      <%= link_to "Delete", {:action => :delete, :id => const.id} %> 
+<% end %>
+</ul>
+
+<p><%= link_to "New Construct", {:action => :new} %></p>
+<p><%= link_to "Home", {:controller => 'home'} %></p>

@@ -1,0 +1,9 @@
+<h1><%= @construct.name %></h1>
+
+<ul>
+<% @order.each do |part| %>
+  <li><%= part.bio_byte.name %>
+<% end %>
+</ul>
+
+<%= link_to "Back", {:action => :index} %>

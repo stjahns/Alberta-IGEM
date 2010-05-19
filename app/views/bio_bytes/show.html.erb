@@ -1,0 +1,26 @@
+<h1><%= @byte.name %></h1>
+
+<table>
+  <tr>
+    <td>Name:</td>
+    <td><%=@byte.name%></td>
+  </tr>
+  <tr>
+    <td>Type:</td>
+    <td><%=@byte.type%></td>
+  </tr> 
+  <tr>
+    <td>Description:</td>
+    <td><%=@byte.description%></td>
+  </tr>
+  <tr>
+    <td>Author:</td>
+    <td><%=@byte.author%></td>
+  </tr>
+  <tr>
+    <td>Sequence:</td>
+    <td><%=@byte.sequence%></td>
+  </tr>
+</table>
+
+<%= link_to "Back",  :action => :index %>
