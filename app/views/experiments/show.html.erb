@@ -1,0 +1,28 @@
+<p>
+  <b>Title:</b>
+  <%=h @experiment.title %>
+</p>
+
+<p>
+  <b>Authour:</b>
+  <%=h @experiment.authour %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%=h @experiment.description %>
+</p>
+
+<p>
+  <b>Published:</b>
+  <%=h @experiment.published %>
+</p>
+
+<p>
+  <b>Image:</b>
+  <%=h @experiment.image %>
+</p>
+
+
+<%= link_to 'Edit', edit_experiment_path(@experiment) %> |
+<%= link_to 'Back', experiments_path %>
