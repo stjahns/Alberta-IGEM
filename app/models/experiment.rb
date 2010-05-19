@@ -1,20 +1,24 @@
 # == Schema Information
-# Schema version: 20100518180316
+# Schema version: 20100519212344
 #
 # Table name: experiments
 #
 #  id          :integer(4)      not null, primary key
-#  name        :string(255)
-#  description :string(255)
+#  title       :string(255)
+#  authour     :string(255)
+#  description :text
+#  published   :boolean(1)
+#  image       :string(255)
 #  created_at  :datetime
 #  updated_at  :datetime
 #
 
 class Experiment < ActiveRecord::Base
-#  attr_accessor :name, :email
+  attr_accessible :title, :authour, :description, :published, :image
 
- # def initialize(attributes = {})
-  #  @name = attributes[
-
-
+  # Experiments are initialized as draft before 
+  # they are ready to be published  
+  def publish 
+    @published = true
+  end
 end
