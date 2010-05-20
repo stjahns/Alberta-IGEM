@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20100519212344
+# Schema version: 20100520175910
 #
 # Table name: experiments
 #
@@ -14,15 +14,6 @@
 #
 
 class Experiment < ActiveRecord::Base
-  # associations
-  has_many :steps, :dependent => :destroy
-
-  # accesors
   attr_accessible :title, :authour, :description, :published, :image
-
-  # Experiments are initialized as draft before 
-  # they are ready to be published  
-  def publish 
-    @published = true
-  end
+  has_many :steps  
 end

@@ -731,3 +731,160 @@ Migrating to CreateSteps (20100520175910)
   [4;35;1mSQL (36.7ms)[0m   [0mSHOW FIELDS FROM `steps`[0m
   [4;36;1mSQL (2.7ms)[0m   [0;1mdescribe `steps`[0m
   [4;35;1mSQL (1.2ms)[0m   [0mSHOW KEYS FROM `steps`[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+  [4;35;1mSQL (26.3ms)[0m   [0mSHOW TABLES[0m
+  [4;36;1mSQL (0.4ms)[0m   [0;1mSELECT version FROM schema_migrations[0m
+  [4;35;1mExperiment Columns (1.8ms)[0m   [0mSHOW FIELDS FROM `experiments`[0m
+  [4;36;1mStep Columns (1.5ms)[0m   [0;1mSHOW FIELDS FROM `steps`[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing ExperimentsController#index (for 127.0.0.1 at 2010-05-20 14:08:28) [GET]
+  [4;35;1mExperiment Load (0.3ms)[0m   [0mSELECT * FROM `experiments` [0m
+Rendering template within layouts/experiments
+Rendering experiments/index
+  [4;36;1mExperiment Columns (2.7ms)[0m   [0;1mSHOW FIELDS FROM `experiments`[0m
+Completed in 422ms (View: 377, DB: 3) | 200 OK [http://localhost/experiments]
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+  [4;35;1mSQL (0.7ms)[0m   [0mSHOW TABLES[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSELECT version FROM schema_migrations[0m
+Migrating to CreateExperiments (20100519212344)
+Migrating to CreateSteps (20100520175910)
+Migrating to AddExperimentIdToSteps (20100520201543)
+  [4;35;1mSQL (403.6ms)[0m   [0mALTER TABLE `steps` ADD `experiment_id` int(11)[0m
+  [4;36;1mSQL (101.2ms)[0m   [0;1mINSERT INTO schema_migrations (version) VALUES ('20100520201543')[0m
+  [4;35;1mSQL (0.7ms)[0m   [0mSHOW TABLES[0m
+  [4;36;1mSQL (0.6ms)[0m   [0;1mSELECT version FROM schema_migrations[0m
+  [4;35;1mSQL (0.8ms)[0m   [0mSHOW TABLES[0m
+  [4;36;1mSQL (2.6ms)[0m   [0;1mSHOW FIELDS FROM `experiments`[0m
+  [4;35;1mSQL (1.7ms)[0m   [0mdescribe `experiments`[0m
+  [4;36;1mSQL (0.7ms)[0m   [0;1mSHOW KEYS FROM `experiments`[0m
+  [4;35;1mSQL (1.9ms)[0m   [0mSHOW FIELDS FROM `steps`[0m
+  [4;36;1mSQL (1.8ms)[0m   [0;1mdescribe `steps`[0m
+  [4;35;1mSQL (0.7ms)[0m   [0mSHOW KEYS FROM `steps`[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mBEGIN[0m
+  [4;36;1mSQL (0.8ms)[0m   [0;1mSHOW TABLES[0m
+  [4;35;1mStep Columns (1.6ms)[0m   [0mSHOW FIELDS FROM `steps`[0m
+  [4;36;1mSQL (0.8ms)[0m   [0;1mSHOW TABLES[0m
+  [4;35;1mStep Columns (2.2ms)[0m   [0mSHOW FIELDS FROM `steps`[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mROLLBACK[0m
+  [4;35;1mSQL (0.3ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing StepsController#index (for 127.0.0.1 at 2010-05-20 14:19:20) [GET]
+  [4;36;1mSQL (0.8ms)[0m   [0;1mSHOW TABLES[0m
+  [4;35;1mStep Columns (2.0ms)[0m   [0mSHOW FIELDS FROM `steps`[0m
+  [4;36;1mSQL (0.8ms)[0m   [0;1mSHOW TABLES[0m
+  [4;35;1mStep Columns (2.2ms)[0m   [0mSHOW FIELDS FROM `steps`[0m
+
+NoMethodError (undefined method `attr_accesible' for #<Class:0xb7181700>):
+  app/models/step.rb:18
+  app/controllers/steps_controller.rb:5:in `index'
+  /usr/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+  /usr/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+  /usr/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+  /usr/lib/ruby/1.8/webrick/server.rb:162:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+  /usr/lib/ruby/1.8/webrick/server.rb:95:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:92:in `each'
+  /usr/lib/ruby/1.8/webrick/server.rb:92:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:23:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendered rescues/_trace (161.6ms)
+Rendered rescues/_request_and_response (43.3ms)
+Rendering rescues/layout (internal_server_error)
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing ExperimentsController#index (for 127.0.0.1 at 2010-05-20 14:19:28) [GET]
+  [4;35;1mExperiment Load (0.3ms)[0m   [0mSELECT * FROM `experiments` [0m
+Rendering template within layouts/experiments
+Rendering experiments/index
+  [4;36;1mExperiment Columns (2.2ms)[0m   [0;1mSHOW FIELDS FROM `experiments`[0m
+Completed in 108ms (View: 80, DB: 3) | 200 OK [http://localhost/experiments/]
+  [4;35;1mSQL (0.4ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing StepsController#index (for 127.0.0.1 at 2010-05-20 14:20:01) [GET]
+  [4;36;1mStep Load (0.7ms)[0m   [0;1mSELECT * FROM `steps` [0m
+Rendering template within layouts/steps
+Rendering steps/index
+Completed in 209ms (View: 74, DB: 1) | 200 OK [http://localhost/steps]
+  [4;35;1mSQL (0.3ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing StepsController#index (for 127.0.0.1 at 2010-05-20 14:23:43) [GET]
+  [4;36;1mStep Load (0.3ms)[0m   [0;1mSELECT * FROM `steps` [0m
+Rendering template within layouts/steps
+Rendering steps/index
+Completed in 30ms (View: 5, DB: 1) | 200 OK [http://localhost/steps]
+  [4;35;1mSQL (0.3ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing StepsController#index (for 127.0.0.1 at 2010-05-20 14:23:47) [GET]
+  [4;36;1mStep Load (0.3ms)[0m   [0;1mSELECT * FROM `steps` [0m
+Rendering template within layouts/steps
+Rendering steps/index
+Completed in 30ms (View: 5, DB: 1) | 200 OK [http://localhost/steps]
+  [4;35;1mSQL (0.3ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing StepsController#new (for 127.0.0.1 at 2010-05-20 14:23:49) [GET]
+  [4;36;1mStep Columns (2.1ms)[0m   [0;1mSHOW FIELDS FROM `steps`[0m
+Rendering template within layouts/steps
+Rendering steps/new
+Completed in 70ms (View: 44, DB: 2) | 200 OK [http://localhost/steps/new]
+  [4;35;1mSQL (0.3ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing StepsController#create (for 127.0.0.1 at 2010-05-20 14:24:11) [POST]
+  Parameters: {"step"=>{"title"=>"this is its title", "description"=>"this is a test step", "image"=>"no image"}, "commit"=>"Create", "authenticity_token"=>"o1GD+cXUojL0EF8H57Ev7GW6YbJs29HocSzGztEAgCA="}
+  [4;36;1mStep Columns (2.1ms)[0m   [0;1mSHOW FIELDS FROM `steps`[0m
+  [4;35;1mSQL (0.3ms)[0m   [0mBEGIN[0m
+  [4;36;1mStep Create (77.0ms)[0m   [0;1mINSERT INTO `steps` (`experiment_id`, `created_at`, `title`, `updated_at`, `description`, `image`) VALUES(NULL, '2010-05-20 20:24:11', 'this is its title', '2010-05-20 20:24:11', 'this is a test step', 'no image')[0m
+  [4;35;1mSQL (44.8ms)[0m   [0mCOMMIT[0m
+Redirected to http://localhost:3000/steps/1
+Completed in 169ms (DB: 124) | 302 Found [http://localhost/steps]
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing StepsController#show (for 127.0.0.1 at 2010-05-20 14:24:11) [GET]
+  Parameters: {"id"=>"1"}
+  [4;35;1mStep Columns (2.4ms)[0m   [0mSHOW FIELDS FROM `steps`[0m
+  [4;36;1mStep Load (35.6ms)[0m   [0;1mSELECT * FROM `steps` WHERE (`steps`.`id` = 1) [0m
+Rendering template within layouts/steps
+Rendering steps/show
+Completed in 95ms (View: 28, DB: 38) | 200 OK [http://localhost/steps/1]
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mBEGIN[0m
+  [4;36;1mExperiment Columns (2.4ms)[0m   [0;1mSHOW FIELDS FROM `experiments`[0m
+  [4;35;1mStep Columns (2.1ms)[0m   [0mSHOW FIELDS FROM `steps`[0m
+  [4;36;1mExperiment Load (15.2ms)[0m   [0;1mSELECT * FROM `experiments` WHERE (`experiments`.`id` = 2) LIMIT 1[0m
+  [4;35;1mExperiment Load (0.7ms)[0m   [0mSELECT * FROM `experiments` WHERE (`experiments`.`id` = 3) LIMIT 1[0m
+  [4;36;1mExperiment Load (1.1ms)[0m   [0;1mSELECT * FROM `experiments` WHERE (`experiments`.`id` = 4) LIMIT 1[0m
+  [4;35;1mStep Load (0.7ms)[0m   [0mSELECT * FROM `steps` WHERE (`steps`.`experiment_id` = 4) [0m
+  [4;36;1mStep Load (0.4ms)[0m   [0;1mSELECT * FROM `steps` WHERE (`steps`.`experiment_id` = 4) [0m
+  [4;35;1mStep Load (1.0ms)[0m   [0mSELECT * FROM `steps` WHERE (`steps`.experiment_id = 4) [0m
+  [4;36;1mExperiment Load (1.1ms)[0m   [0;1mSELECT * FROM `experiments` [0m
+  [4;35;1mStep Load (0.9ms)[0m   [0mSELECT * FROM `steps` [0m
+  [4;36;1mSQL (0.4ms)[0m   [0;1mSAVEPOINT active_record_1[0m
+  [4;35;1mStep Create (0.6ms)[0m   [0mINSERT INTO `steps` (`experiment_id`, `created_at`, `title`, `updated_at`, `id`, `description`, `image`) VALUES(4, '2010-05-20 20:55:30', 'this is my title', '2010-05-20 20:55:30', 10, 'this is my description', 'this is my image')[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mRELEASE SAVEPOINT active_record_1[0m
+  [4;35;1mStep Load (0.9ms)[0m   [0mSELECT * FROM `steps` [0m
+  [4;36;1mStep Load (0.7ms)[0m   [0;1mSELECT * FROM `steps` WHERE (`steps`.`experiment_id` = 4) LIMIT 1[0m
+  [4;35;1mExperiment Load (1.1ms)[0m   [0mSELECT * FROM `experiments` WHERE (`experiments`.`id` = 4) [0m
+  [4;36;1mSQL (85.4ms)[0m   [0;1mROLLBACK[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mBEGIN[0m
+  [4;36;1mExperiment Load (0.9ms)[0m   [0;1mSELECT * FROM `experiments` LIMIT 1[0m
+  [4;35;1mExperiment Columns (2.4ms)[0m   [0mSHOW FIELDS FROM `experiments`[0m
+  [4;36;1mStep Load (0.8ms)[0m   [0;1mSELECT * FROM `steps` [0m
+  [4;35;1mStep Columns (2.2ms)[0m   [0mSHOW FIELDS FROM `steps`[0m
+  [4;36;1mStep Load (1.0ms)[0m   [0;1mSELECT * FROM `steps` LIMIT 1[0m
+  [4;35;1mSQL (0.3ms)[0m   [0mSAVEPOINT active_record_1[0m
+  [4;36;1mStep Update (25.9ms)[0m   [0;1mUPDATE `steps` SET `updated_at` = '2010-05-20 21:02:08', `experiment_id` = 4 WHERE `id` = 1[0m
+  [4;35;1mSQL (0.3ms)[0m   [0mRELEASE SAVEPOINT active_record_1[0m
+  [4;36;1mStep Load (1.0ms)[0m   [0;1mSELECT * FROM `steps` WHERE (`steps`.experiment_id = 4) [0m
+  [4;35;1mSQL (72.0ms)[0m   [0mROLLBACK[0m
