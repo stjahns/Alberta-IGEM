@@ -14,6 +14,10 @@
 #
 
 class Experiment < ActiveRecord::Base
+  # associations
+  has_many :steps, :dependent => :destroy
+
+  # accesors
   attr_accessible :title, :authour, :description, :published, :image
 
   # Experiments are initialized as draft before 
