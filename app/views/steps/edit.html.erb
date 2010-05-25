@@ -20,5 +20,5 @@
   </p>
 <% end %>
 
-<%= link_to 'Show', @step %> |
-<%= link_to 'Back', experiment_steps_path(@experiment) h%i
+<%= link_to 'Show', experiment_step_path( @experiment, @step ) %> |
+<%= link_to 'Back', experiment_steps_path( @experiment ) %>
