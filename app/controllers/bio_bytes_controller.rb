@@ -35,6 +35,7 @@ class BioBytesController < ApplicationController
   def create
     #linker or ORF?
     @byte=params[:byte][:type].constantize.new(params[:byte])
+    @byte.sequence = @byte.sequence.upcase
     #TODO exceptions
     if @byte.save
       redirect_to :action => 'index'

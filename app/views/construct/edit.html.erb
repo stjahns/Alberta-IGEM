@@ -1,35 +1,108 @@
-<body>
 <h1>Editing <%= @construct.name %></h1>
 
+<script>
+  $(document).ready(function() {
 
-<ul>
+      $("#parts_list").sortable({
+
+        axis: 'y',
+
+        update: function(){
+          
+          $.ajax({
+            type: 'post',
+            data: $('#parts_list').sortable('serialize') + '&id=<%= @construct.id %>', 
+                                                              <!-- this looks kinda bad -->
+            dataType: 'script',
+            url: '/construct/sort_parts',
+            
+            success: function(html){
+              //update sequence
+              $("#sequence").html(html);} 
+            })
+          
+        }
+      
+      }).droppable({
+        
+        accept: ":not(.ui-sortable-helper)",
+        drop: function(event, ui) {
+          $(this).find("#placeholder").remove();
+
+          $("<li id='part_new'></li>").html(function(){
+            //ui.draggable.text()
+            return "New Part"
+            }).prependTo(this);
+
+          $.ajax({
+            type: 'post',
+            data: '&part=' + ui.draggable.text() + '&id=<%= @construct.id %>',
+            dataType: 'json',
+            url: '/construct/new_part',
+            success: function(data){
+              //get part id #, part name, etc.
+              $("#part_new").attr("style", "background-color:pink; border:1px solid #999999");
+              $("#part_new").attr("id", "part_" + data.part_id);
+              $("#part_" + data.part_id).html( 
+              
+                data.name
+                + " | <a href='/construct/delete_part?id=<%= @construct.id %>&amp;part_id="
+                + data.part_id
+                + "'>Delete</a>"
+
+                );
+              $("#sequence").text(data.sequence);
+              }
+          })  
+             
+
+        }
+      });
+
+      $("#parts_list").disableSelection();
+
+      $(".byte").draggable({
+        axis: 'y',
+        helper: "clone"
+
+      });
+      
+
+    });
+</script>
+
+
+<!-- The sortable parts list.. -->
+<ol id="parts_list">
+<% if @order.empty? %>
+
+  <li id = "placeholder">Drag parts here</li>
+
+<% else %>
 <% @order.each do |part| %>
-  <li><%= part.bio_byte.name %> | 
-  <!-- show part -->
-      <%= link_to  "Show" %> | 
-  <!-- delete part -->
+  <li id = "part_<%=part.id%>" class = "part" style="background-color:pink; border:1px solid #999999"><%= part.bio_byte.name %> | 
       <%= link_to  "Delete", {:action => :delete_part,
                                  :id => @construct.id, 
                                  :part_id => part.id } %>
-
+  </li>
   
+<% end %>
+<% end %>
+</ol>
+
+<!-- Sequence box -->
+<h2>Sequence:</h2>
+<div id = "sequence">
+  <%= @sequence %>
+</div>
+
+<!-- Parts Bin -->
+<h2>Parts Bin:</h2>
+
+<ul id="parts_bin">
+<% BioByte.all.each do |byte| %>
+  <li id = "byte_<%=byte.id%>" class = "byte" style="background-color:pink; border:1px solid #999999"><%= byte.name %></li>
 <% end %>
 </ul>
 
-<h2>Sequence:</h2>
-<p><%= @sequence %></p>
-
-<h2>Insert a part:</h2>
-<% form_for :part, :url => {:action => :insert_part, :id => @construct.id } do |f| %>
-
-  <p>BioByte: <%= select("part", "bio_byte_id", 
-                    BioByte.all.map {|u| [u.name, u.id]}) %></p>
-
-  <p>Position: <%= select("part", "part_order", @pos )%></p>
-                    
-  <p><%= submit_tag 'Insert' %></p>
-<% end %>
-
-
 <%=link_to "Back", {:action => :index} %>
-</body>

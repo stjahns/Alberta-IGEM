@@ -15,6 +15,7 @@ class ConstructController < ApplicationController
       @sequence << BioByte.find(part.bio_byte_id).sequence.upcase
     end
 
+    #for dropdown box -> Should this go in a helper?
     @pos = @order.map{|p| p.part_order} #get positions of all parts already in there
     if @pos != []
       @pos = @pos.push(@pos[-1]+1)
@@ -86,5 +87,49 @@ class ConstructController < ApplicationController
     redirect_to :action => :edit, :id => @construct.id
 
   end 
+
+  def sort_parts
+
+    construct = Construct.find(params[:id])
+    parts = construct.parts
+    parts.each do |part|
+      part.part_order = params['part'].index(part.id.to_s) + 1
+      part.save
+    end
+    
+    @sequence = ""
+    construct.part_order.each do |part|
+      @sequence << BioByte.find(part.bio_byte_id).sequence.upcase
+    end
+
+    puts @sequence
+#update sequence pane
+    render :partial => 'sequence', :object => @sequence
+
+  end
+
+  def new_part
+    construct = Construct.find(params[:id])
+  
+    byte = BioByte.find(:first, :conditions => {:name => params[:part]})
+
+    part = Part.new( :bio_byte => byte, :construct => construct )
+    
+    part.save
+
+    construct.parts << part
+    construct.part_order << part
+    construct.save
+    
+    @sequence = ""
+    construct.part_order.each do |p|
+      @sequence << BioByte.find(p.bio_byte_id).sequence.upcase
+    end
+
+    render :json => { :part_id => part.id, :name => part.bio_byte.name, :sequence => @sequence }
+
+  end
+   
+  #def getSequence
 
 end
