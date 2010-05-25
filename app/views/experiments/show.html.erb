@@ -32,5 +32,6 @@
 <% end %>
 
 <%= link_to 'Add_Step', new_experiment_step_path(@experiment) %> |
-<%= link_to 'Edit', edit_experiment_path(@experiment) %> |
-<%= link_to 'Back', experiments_path %>
+<%= link_to 'Edit Description', edit_experiment_path(@experiment) %> |
+<%= link_to 'Edit Steps', experiment_steps_path(@experiment) %> |
+<%= link_to 'List experiments', experiments_path %>

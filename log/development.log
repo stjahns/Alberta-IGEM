@@ -5816,3 +5816,947 @@ Rendering steps/index
   [4;35;1mStep Columns (2.3ms)[0m   [0mSHOW FIELDS FROM `steps`[0m
   [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM `experiments` WHERE (`experiments`.`id` = 5) [0m
 Completed in 88ms (View: 40, DB: 6) | 200 OK [http://localhost/experiments/5/steps]
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+  [4;35;1mSQL (114.2ms)[0m   [0mSHOW TABLES[0m
+  [4;36;1mSQL (0.6ms)[0m   [0;1mSELECT version FROM schema_migrations[0m
+  [4;35;1mExperiment Columns (1.8ms)[0m   [0mSHOW FIELDS FROM `experiments`[0m
+  [4;36;1mStep Columns (1.8ms)[0m   [0;1mSHOW FIELDS FROM `steps`[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing StepsController#index (for 127.0.0.1 at 2010-05-25 15:36:46) [GET]
+  Parameters: {"experiment_id"=>"5"}
+  [4;36;1mExperiment Columns (2.2ms)[0m   [0;1mSHOW FIELDS FROM `experiments`[0m
+  [4;35;1mExperiment Load (0.3ms)[0m   [0mSELECT * FROM `experiments` WHERE (`experiments`.`id` = 5) [0m
+  [4;36;1mStep Load (0.3ms)[0m   [0;1mSELECT * FROM `steps` WHERE (`steps`.experiment_id = 5) [0m
+Rendering template within layouts/steps
+Rendering steps/index
+  [4;35;1mStep Columns (1.7ms)[0m   [0mSHOW FIELDS FROM `steps`[0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM `experiments` WHERE (`experiments`.`id` = 5) [0m
+
+ActionView::TemplateError (experiment_url failed to generate from {:action=>"show", :controller=>"experiments"} - you may have ambiguous routes, or you may need to supply additional parameters for this route.  content_url has the following required parameters: ["experiments", :id] - are they all satisfied?) on line #25 of app/views/steps/index.html.erb:
+22: <br />
+23: 
+24: <%= link_to 'New step', new_experiment_step_path(@experiment) %>
+25: <%= link_to 'Finshed Editing', experiment_path %>
+
+    (eval):16:in `experiment_path'
+    app/views/steps/index.html.erb:25
+    app/controllers/steps_controller.rb:13:in `index'
+    /usr/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+    /usr/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+    /usr/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+    /usr/lib/ruby/1.8/webrick/server.rb:162:in `start'
+    /usr/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+    /usr/lib/ruby/1.8/webrick/server.rb:95:in `start'
+    /usr/lib/ruby/1.8/webrick/server.rb:92:in `each'
+    /usr/lib/ruby/1.8/webrick/server.rb:92:in `start'
+    /usr/lib/ruby/1.8/webrick/server.rb:23:in `start'
+    /usr/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendered rescues/_trace (190.5ms)
+Rendered rescues/_request_and_response (0.8ms)
+Rendering rescues/layout (internal_server_error)
+  [4;35;1mSQL (0.2ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing StepsController#index (for 127.0.0.1 at 2010-05-25 15:37:26) [GET]
+  Parameters: {"experiment_id"=>"5"}
+  [4;36;1mExperiment Columns (2.3ms)[0m   [0;1mSHOW FIELDS FROM `experiments`[0m
+  [4;35;1mExperiment Load (0.4ms)[0m   [0mSELECT * FROM `experiments` WHERE (`experiments`.`id` = 5) [0m
+  [4;36;1mStep Load (0.3ms)[0m   [0;1mSELECT * FROM `steps` WHERE (`steps`.experiment_id = 5) [0m
+Rendering template within layouts/steps
+Rendering steps/index
+  [4;35;1mStep Columns (2.4ms)[0m   [0mSHOW FIELDS FROM `steps`[0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM `experiments` WHERE (`experiments`.`id` = 5) [0m
+Completed in 104ms (View: 57, DB: 6) | 200 OK [http://localhost/experiments/5/steps]
+  [4;35;1mSQL (0.3ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing ExperimentsController#show (for 127.0.0.1 at 2010-05-25 15:37:29) [GET]
+  Parameters: {"id"=>"5"}
+  [4;36;1mExperiment Columns (1.9ms)[0m   [0;1mSHOW FIELDS FROM `experiments`[0m
+  [4;35;1mExperiment Load (0.3ms)[0m   [0mSELECT * FROM `experiments` WHERE (`experiments`.`id` = 5) [0m
+Rendering template within layouts/experiments
+Rendering experiments/show
+  [4;36;1mStep Columns (1.8ms)[0m   [0;1mSHOW FIELDS FROM `steps`[0m
+  [4;35;1mSQL (1.4ms)[0m   [0mSELECT count(*) AS count_all FROM `steps` WHERE (`steps`.experiment_id = 5) [0m
+  [4;36;1mStep Load (0.2ms)[0m   [0;1mSELECT * FROM `steps` WHERE (`steps`.experiment_id = 5) [0m
+Rendered experiments/_step (0.4ms)
+Completed in 67ms (View: 25, DB: 6) | 200 OK [http://localhost/experiments/5]
+  [4;35;1mSQL (0.3ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing ExperimentsController#edit (for 127.0.0.1 at 2010-05-25 15:37:32) [GET]
+  Parameters: {"id"=>"5"}
+  [4;36;1mExperiment Columns (2.2ms)[0m   [0;1mSHOW FIELDS FROM `experiments`[0m
+  [4;35;1mExperiment Load (0.3ms)[0m   [0mSELECT * FROM `experiments` WHERE (`experiments`.`id` = 5) [0m
+Rendering template within layouts/experiments
+Rendering experiments/edit
+Completed in 79ms (View: 49, DB: 3) | 200 OK [http://localhost/experiments/5/edit]
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing ExperimentsController#index (for 127.0.0.1 at 2010-05-25 15:37:39) [GET]
+  [4;35;1mExperiment Load (0.4ms)[0m   [0mSELECT * FROM `experiments` [0m
+Rendering template within layouts/experiments
+Rendering experiments/index
+  [4;36;1mExperiment Columns (2.2ms)[0m   [0;1mSHOW FIELDS FROM `experiments`[0m
+Completed in 194ms (View: 162, DB: 3) | 200 OK [http://localhost/experiments]
+  [4;35;1mSQL (0.3ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing ExperimentsController#edit (for 127.0.0.1 at 2010-05-25 15:37:46) [GET]
+  Parameters: {"id"=>"4"}
+  [4;36;1mExperiment Columns (2.2ms)[0m   [0;1mSHOW FIELDS FROM `experiments`[0m
+  [4;35;1mExperiment Load (0.3ms)[0m   [0mSELECT * FROM `experiments` WHERE (`experiments`.`id` = 4) [0m
+Rendering template within layouts/experiments
+Rendering experiments/edit
+Completed in 71ms (View: 39, DB: 3) | 200 OK [http://localhost/experiments/4/edit]
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing ExperimentsController#index (for 127.0.0.1 at 2010-05-25 15:37:57) [GET]
+  [4;35;1mExperiment Load (0.3ms)[0m   [0mSELECT * FROM `experiments` [0m
+Rendering template within layouts/experiments
+Rendering experiments/index
+  [4;36;1mExperiment Columns (2.1ms)[0m   [0;1mSHOW FIELDS FROM `experiments`[0m
+Completed in 192ms (View: 165, DB: 3) | 200 OK [http://localhost/experiments]
+  [4;35;1mSQL (0.3ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing ExperimentsController#show (for 127.0.0.1 at 2010-05-25 15:38:00) [GET]
+  Parameters: {"id"=>"4"}
+  [4;36;1mExperiment Columns (2.2ms)[0m   [0;1mSHOW FIELDS FROM `experiments`[0m
+  [4;35;1mExperiment Load (0.3ms)[0m   [0mSELECT * FROM `experiments` WHERE (`experiments`.`id` = 4) [0m
+Rendering template within layouts/experiments
+Rendering experiments/show
+  [4;36;1mStep Columns (1.7ms)[0m   [0;1mSHOW FIELDS FROM `steps`[0m
+  [4;35;1mSQL (0.6ms)[0m   [0mSELECT count(*) AS count_all FROM `steps` WHERE (`steps`.experiment_id = 4) [0m
+  [4;36;1mStep Load (0.8ms)[0m   [0;1mSELECT * FROM `steps` WHERE (`steps`.experiment_id = 4) [0m
+Rendered experiments/_step (0.3ms)
+Rendered experiments/_step (0.3ms)
+Rendered experiments/_step (0.3ms)
+Rendered experiments/_step (0.3ms)
+Rendered experiments/_step (0.3ms)
+Completed in 79ms (View: 29, DB: 6) | 200 OK [http://localhost/experiments/4]
+  [4;35;1mSQL (0.3ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing ExperimentsController#index (for 127.0.0.1 at 2010-05-25 15:40:05) [GET]
+  [4;36;1mExperiment Load (0.3ms)[0m   [0;1mSELECT * FROM `experiments` [0m
+Rendering template within layouts/experiments
+Rendering experiments/index
+  [4;35;1mExperiment Columns (2.3ms)[0m   [0mSHOW FIELDS FROM `experiments`[0m
+Completed in 109ms (View: 81, DB: 3) | 200 OK [http://localhost/experiments]
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing ExperimentsController#index (for 127.0.0.1 at 2010-05-25 15:42:26) [GET]
+  [4;35;1mExperiment Load (0.3ms)[0m   [0mSELECT * FROM `experiments` [0m
+Rendering template within layouts/experiments
+Rendering experiments/index
+  [4;36;1mExperiment Columns (2.2ms)[0m   [0;1mSHOW FIELDS FROM `experiments`[0m
+
+ActionView::TemplateError (undefined method `experiment_steps' for #<ActionView::Base:0xb7144b34>) on line #21 of app/views/experiments/index.html.erb:
+18:     <td><%=h experiment.image %></td>
+19:     <td><%= link_to 'Show', experiment %></td>
+20:     <td><%= link_to 'Edit Description', edit_experiment_path(experiment) %></td>
+21:     <td><%= link_to 'Edit Steps', experiment_steps(experiment) %></td>
+22:     <td><%= link_to 'Destroy', experiment, :confirm => 'Are you sure?', :method => :delete %></td>
+23:   </tr>
+24: <% end %>
+
+    app/views/experiments/index.html.erb:21
+    app/views/experiments/index.html.erb:12:in `each'
+    app/views/experiments/index.html.erb:12
+    app/controllers/experiments_controller.rb:7:in `index'
+    /usr/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+    /usr/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+    /usr/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+    /usr/lib/ruby/1.8/webrick/server.rb:162:in `start'
+    /usr/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+    /usr/lib/ruby/1.8/webrick/server.rb:95:in `start'
+    /usr/lib/ruby/1.8/webrick/server.rb:92:in `each'
+    /usr/lib/ruby/1.8/webrick/server.rb:92:in `start'
+    /usr/lib/ruby/1.8/webrick/server.rb:23:in `start'
+    /usr/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendered rescues/_trace (292.4ms)
+Rendered rescues/_request_and_response (0.8ms)
+Rendering rescues/layout (internal_server_error)
+  [4;35;1mSQL (0.3ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing ExperimentsController#index (for 127.0.0.1 at 2010-05-25 15:42:40) [GET]
+  [4;36;1mExperiment Load (0.3ms)[0m   [0;1mSELECT * FROM `experiments` [0m
+Rendering template within layouts/experiments
+Rendering experiments/index
+  [4;35;1mExperiment Columns (2.1ms)[0m   [0mSHOW FIELDS FROM `experiments`[0m
+Completed in 124ms (View: 96, DB: 3) | 200 OK [http://localhost/experiments]
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing StepsController#index (for 127.0.0.1 at 2010-05-25 15:42:43) [GET]
+  Parameters: {"experiment_id"=>"4"}
+  [4;35;1mExperiment Columns (2.2ms)[0m   [0mSHOW FIELDS FROM `experiments`[0m
+  [4;36;1mExperiment Load (0.3ms)[0m   [0;1mSELECT * FROM `experiments` WHERE (`experiments`.`id` = 4) [0m
+  [4;35;1mStep Load (0.3ms)[0m   [0mSELECT * FROM `steps` WHERE (`steps`.experiment_id = 4) [0m
+Rendering template within layouts/steps
+Rendering steps/index
+  [4;36;1mStep Columns (1.7ms)[0m   [0;1mSHOW FIELDS FROM `steps`[0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM `experiments` WHERE (`experiments`.`id` = 4) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM `experiments` WHERE (`experiments`.`id` = 4) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM `experiments` WHERE (`experiments`.`id` = 4) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM `experiments` WHERE (`experiments`.`id` = 4) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM `experiments` WHERE (`experiments`.`id` = 4) [0m
+Completed in 287ms (View: 230, DB: 5) | 200 OK [http://localhost/experiments/4/steps]
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing ExperimentsController#show (for 127.0.0.1 at 2010-05-25 15:42:47) [GET]
+  Parameters: {"id"=>"4"}
+  [4;35;1mExperiment Columns (2.6ms)[0m   [0mSHOW FIELDS FROM `experiments`[0m
+  [4;36;1mExperiment Load (0.3ms)[0m   [0;1mSELECT * FROM `experiments` WHERE (`experiments`.`id` = 4) [0m
+Rendering template within layouts/experiments
+Rendering experiments/show
+  [4;35;1mStep Columns (2.4ms)[0m   [0mSHOW FIELDS FROM `steps`[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSELECT count(*) AS count_all FROM `steps` WHERE (`steps`.experiment_id = 4) [0m
+  [4;35;1mStep Load (0.2ms)[0m   [0mSELECT * FROM `steps` WHERE (`steps`.experiment_id = 4) [0m
+Rendered experiments/_step (0.4ms)
+Rendered experiments/_step (0.3ms)
+Rendered experiments/_step (0.3ms)
+Rendered experiments/_step (0.3ms)
+Rendered experiments/_step (0.3ms)
+Completed in 79ms (View: 30, DB: 6) | 200 OK [http://localhost/experiments/4]
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing ExperimentsController#index (for 127.0.0.1 at 2010-05-25 15:42:54) [GET]
+  [4;35;1mExperiment Load (0.3ms)[0m   [0mSELECT * FROM `experiments` [0m
+Rendering template within layouts/experiments
+Rendering experiments/index
+  [4;36;1mExperiment Columns (2.5ms)[0m   [0;1mSHOW FIELDS FROM `experiments`[0m
+Completed in 106ms (View: 78, DB: 3) | 200 OK [http://localhost/experiments]
+  [4;35;1mSQL (0.5ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing ExperimentsController#show (for 127.0.0.1 at 2010-05-25 15:43:05) [GET]
+  Parameters: {"id"=>"4"}
+  [4;36;1mExperiment Columns (2.4ms)[0m   [0;1mSHOW FIELDS FROM `experiments`[0m
+  [4;35;1mExperiment Load (0.3ms)[0m   [0mSELECT * FROM `experiments` WHERE (`experiments`.`id` = 4) [0m
+Rendering template within layouts/experiments
+Rendering experiments/show
+  [4;36;1mStep Columns (2.2ms)[0m   [0;1mSHOW FIELDS FROM `steps`[0m
+  [4;35;1mSQL (0.3ms)[0m   [0mSELECT count(*) AS count_all FROM `steps` WHERE (`steps`.experiment_id = 4) [0m
+  [4;36;1mStep Load (0.3ms)[0m   [0;1mSELECT * FROM `steps` WHERE (`steps`.experiment_id = 4) [0m
+Rendered experiments/_step (0.6ms)
+Rendered experiments/_step (0.4ms)
+Rendered experiments/_step (0.3ms)
+Rendered experiments/_step (0.3ms)
+Rendered experiments/_step (0.3ms)
+Completed in 78ms (View: 31, DB: 6) | 200 OK [http://localhost/experiments/4]
+  [4;35;1mSQL (0.3ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing ExperimentsController#edit (for 127.0.0.1 at 2010-05-25 15:43:08) [GET]
+  Parameters: {"id"=>"4"}
+  [4;36;1mExperiment Columns (2.1ms)[0m   [0;1mSHOW FIELDS FROM `experiments`[0m
+  [4;35;1mExperiment Load (0.3ms)[0m   [0mSELECT * FROM `experiments` WHERE (`experiments`.`id` = 4) [0m
+Rendering template within layouts/experiments
+Rendering experiments/edit
+Completed in 75ms (View: 45, DB: 3) | 200 OK [http://localhost/experiments/4/edit]
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing ExperimentsController#show (for 127.0.0.1 at 2010-05-25 15:46:31) [GET]
+  Parameters: {"id"=>"4"}
+  [4;35;1mExperiment Columns (1.9ms)[0m   [0mSHOW FIELDS FROM `experiments`[0m
+  [4;36;1mExperiment Load (0.3ms)[0m   [0;1mSELECT * FROM `experiments` WHERE (`experiments`.`id` = 4) [0m
+Rendering template within layouts/experiments
+Rendering experiments/show
+  [4;35;1mStep Columns (1.7ms)[0m   [0mSHOW FIELDS FROM `steps`[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSELECT count(*) AS count_all FROM `steps` WHERE (`steps`.experiment_id = 4) [0m
+  [4;35;1mStep Load (0.3ms)[0m   [0mSELECT * FROM `steps` WHERE (`steps`.experiment_id = 4) [0m
+Rendered experiments/_step (0.4ms)
+Rendered experiments/_step (0.3ms)
+Rendered experiments/_step (0.3ms)
+Rendered experiments/_step (0.3ms)
+Rendered experiments/_step (0.3ms)
+Completed in 88ms (View: 45, DB: 5) | 200 OK [http://localhost/experiments/4]
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing StepsController#index (for 127.0.0.1 at 2010-05-25 15:46:36) [GET]
+  Parameters: {"experiment_id"=>"4"}
+  [4;35;1mExperiment Columns (2.2ms)[0m   [0mSHOW FIELDS FROM `experiments`[0m
+  [4;36;1mExperiment Load (0.3ms)[0m   [0;1mSELECT * FROM `experiments` WHERE (`experiments`.`id` = 4) [0m
+  [4;35;1mStep Load (0.3ms)[0m   [0mSELECT * FROM `steps` WHERE (`steps`.experiment_id = 4) [0m
+Rendering template within layouts/steps
+Rendering steps/index
+  [4;36;1mStep Columns (2.3ms)[0m   [0;1mSHOW FIELDS FROM `steps`[0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM `experiments` WHERE (`experiments`.`id` = 4) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM `experiments` WHERE (`experiments`.`id` = 4) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM `experiments` WHERE (`experiments`.`id` = 4) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM `experiments` WHERE (`experiments`.`id` = 4) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM `experiments` WHERE (`experiments`.`id` = 4) [0m
+Completed in 174ms (View: 125, DB: 5) | 200 OK [http://localhost/experiments/4/steps]
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing ExperimentsController#show (for 127.0.0.1 at 2010-05-25 15:46:40) [GET]
+  Parameters: {"id"=>"4"}
+  [4;35;1mExperiment Columns (2.2ms)[0m   [0mSHOW FIELDS FROM `experiments`[0m
+  [4;36;1mExperiment Load (0.4ms)[0m   [0;1mSELECT * FROM `experiments` WHERE (`experiments`.`id` = 4) [0m
+Rendering template within layouts/experiments
+Rendering experiments/show
+  [4;35;1mStep Columns (2.1ms)[0m   [0mSHOW FIELDS FROM `steps`[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSELECT count(*) AS count_all FROM `steps` WHERE (`steps`.experiment_id = 4) [0m
+  [4;35;1mStep Load (0.3ms)[0m   [0mSELECT * FROM `steps` WHERE (`steps`.experiment_id = 4) [0m
+Rendered experiments/_step (0.3ms)
+Rendered experiments/_step (0.3ms)
+Rendered experiments/_step (0.3ms)
+Rendered experiments/_step (0.3ms)
+Rendered experiments/_step (0.3ms)
+Completed in 78ms (View: 32, DB: 5) | 200 OK [http://localhost/experiments/4]
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing ExperimentsController#edit (for 127.0.0.1 at 2010-05-25 15:46:42) [GET]
+  Parameters: {"id"=>"4"}
+  [4;35;1mExperiment Columns (2.3ms)[0m   [0mSHOW FIELDS FROM `experiments`[0m
+  [4;36;1mExperiment Load (0.3ms)[0m   [0;1mSELECT * FROM `experiments` WHERE (`experiments`.`id` = 4) [0m
+Rendering template within layouts/experiments
+Rendering experiments/edit
+Completed in 74ms (View: 46, DB: 3) | 200 OK [http://localhost/experiments/4/edit]
+  [4;35;1mSQL (0.3ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing ExperimentsController#index (for 127.0.0.1 at 2010-05-25 15:46:47) [GET]
+  [4;36;1mExperiment Load (0.3ms)[0m   [0;1mSELECT * FROM `experiments` [0m
+Rendering template within layouts/experiments
+Rendering experiments/index
+  [4;35;1mExperiment Columns (1.8ms)[0m   [0mSHOW FIELDS FROM `experiments`[0m
+Completed in 101ms (View: 77, DB: 2) | 200 OK [http://localhost/experiments]
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing ExperimentsController#edit (for 127.0.0.1 at 2010-05-25 15:46:58) [GET]
+  Parameters: {"id"=>"4"}
+  [4;35;1mExperiment Columns (2.3ms)[0m   [0mSHOW FIELDS FROM `experiments`[0m
+  [4;36;1mExperiment Load (0.3ms)[0m   [0;1mSELECT * FROM `experiments` WHERE (`experiments`.`id` = 4) [0m
+Rendering template within layouts/experiments
+Rendering experiments/edit
+Completed in 75ms (View: 45, DB: 3) | 200 OK [http://localhost/experiments/4/edit]
+  [4;35;1mSQL (0.2ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing ExperimentsController#index (for 127.0.0.1 at 2010-05-25 15:52:15) [GET]
+  [4;36;1mExperiment Load (0.3ms)[0m   [0;1mSELECT * FROM `experiments` [0m
+Rendering template within layouts/experiments
+Rendering experiments/index
+  [4;35;1mExperiment Columns (2.3ms)[0m   [0mSHOW FIELDS FROM `experiments`[0m
+Completed in 111ms (View: 83, DB: 3) | 200 OK [http://localhost/experiments]
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing StepsController#index (for 127.0.0.1 at 2010-05-25 15:52:22) [GET]
+  Parameters: {"experiment_id"=>"4"}
+  [4;35;1mExperiment Columns (2.3ms)[0m   [0mSHOW FIELDS FROM `experiments`[0m
+  [4;36;1mExperiment Load (0.3ms)[0m   [0;1mSELECT * FROM `experiments` WHERE (`experiments`.`id` = 4) [0m
+  [4;35;1mStep Load (0.3ms)[0m   [0mSELECT * FROM `steps` WHERE (`steps`.experiment_id = 4) [0m
+Rendering template within layouts/steps
+Rendering steps/index
+  [4;36;1mStep Columns (2.5ms)[0m   [0;1mSHOW FIELDS FROM `steps`[0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM `experiments` WHERE (`experiments`.`id` = 4) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM `experiments` WHERE (`experiments`.`id` = 4) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM `experiments` WHERE (`experiments`.`id` = 4) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM `experiments` WHERE (`experiments`.`id` = 4) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM `experiments` WHERE (`experiments`.`id` = 4) [0m
+Completed in 266ms (View: 218, DB: 6) | 200 OK [http://localhost/experiments/4/steps]
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing ExperimentsController#show (for 127.0.0.1 at 2010-05-25 15:52:26) [GET]
+  Parameters: {"id"=>"4"}
+  [4;35;1mExperiment Columns (2.3ms)[0m   [0mSHOW FIELDS FROM `experiments`[0m
+  [4;36;1mExperiment Load (0.3ms)[0m   [0;1mSELECT * FROM `experiments` WHERE (`experiments`.`id` = 4) [0m
+Rendering template within layouts/experiments
+Rendering experiments/show
+  [4;35;1mStep Columns (2.2ms)[0m   [0mSHOW FIELDS FROM `steps`[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSELECT count(*) AS count_all FROM `steps` WHERE (`steps`.experiment_id = 4) [0m
+  [4;35;1mStep Load (0.3ms)[0m   [0mSELECT * FROM `steps` WHERE (`steps`.experiment_id = 4) [0m
+Rendered experiments/_step (0.3ms)
+Rendered experiments/_step (0.3ms)
+Rendered experiments/_step (0.3ms)
+Rendered experiments/_step (0.3ms)
+Rendered experiments/_step (0.3ms)
+Completed in 80ms (View: 32, DB: 6) | 200 OK [http://localhost/experiments/4]
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing StepsController#edit (for 127.0.0.1 at 2010-05-25 15:55:46) [GET]
+  Parameters: {"experiment_id"=>"4", "id"=>"1"}
+  [4;35;1mExperiment Columns (2.2ms)[0m   [0mSHOW FIELDS FROM `experiments`[0m
+  [4;36;1mExperiment Load (0.4ms)[0m   [0;1mSELECT * FROM `experiments` WHERE (`experiments`.`id` = 4) [0m
+  [4;35;1mStep Columns (2.1ms)[0m   [0mSHOW FIELDS FROM `steps`[0m
+  [4;36;1mStep Load (0.8ms)[0m   [0;1mSELECT * FROM `steps` WHERE (`steps`.`id` = 1 AND (`steps`.experiment_id = 4)) [0m
+Rendering template within layouts/steps
+Rendering steps/edit
+
+ActionView::TemplateError (undefined method `step_path' for #<ActionView::Base:0xb71e9f58>) on line #23 of app/views/steps/edit.html.erb:
+20:   </p>
+21: <% end %>
+22: 
+23: <%= link_to 'Show', @step %> |
+24: <%= link_to 'Back', experiment_steps_path(@experiment) h%i
+
+    app/views/steps/edit.html.erb:23
+    /usr/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+    /usr/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+    /usr/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+    /usr/lib/ruby/1.8/webrick/server.rb:162:in `start'
+    /usr/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+    /usr/lib/ruby/1.8/webrick/server.rb:95:in `start'
+    /usr/lib/ruby/1.8/webrick/server.rb:92:in `each'
+    /usr/lib/ruby/1.8/webrick/server.rb:92:in `start'
+    /usr/lib/ruby/1.8/webrick/server.rb:23:in `start'
+    /usr/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendered rescues/_trace (262.8ms)
+Rendered rescues/_request_and_response (0.9ms)
+Rendering rescues/layout (internal_server_error)
+  [4;35;1mSQL (0.3ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing StepsController#edit (for 127.0.0.1 at 2010-05-25 15:56:06) [GET]
+  Parameters: {"experiment_id"=>"4", "id"=>"10"}
+  [4;36;1mExperiment Columns (2.2ms)[0m   [0;1mSHOW FIELDS FROM `experiments`[0m
+  [4;35;1mExperiment Load (0.3ms)[0m   [0mSELECT * FROM `experiments` WHERE (`experiments`.`id` = 4) [0m
+  [4;36;1mStep Columns (2.1ms)[0m   [0;1mSHOW FIELDS FROM `steps`[0m
+  [4;35;1mStep Load (0.8ms)[0m   [0mSELECT * FROM `steps` WHERE (`steps`.`id` = 10 AND (`steps`.experiment_id = 4)) [0m
+Rendering template within layouts/steps
+Rendering steps/edit
+
+ActionView::TemplateError (undefined method `step_path' for #<ActionView::Base:0xb72fa0a0>) on line #23 of app/views/steps/edit.html.erb:
+20:   </p>
+21: <% end %>
+22: 
+23: <%= link_to 'Show', @step %> |
+24: <%= link_to 'Back', experiment_steps_path(@experiment) h%i
+
+    app/views/steps/edit.html.erb:23
+    /usr/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+    /usr/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+    /usr/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+    /usr/lib/ruby/1.8/webrick/server.rb:162:in `start'
+    /usr/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+    /usr/lib/ruby/1.8/webrick/server.rb:95:in `start'
+    /usr/lib/ruby/1.8/webrick/server.rb:92:in `each'
+    /usr/lib/ruby/1.8/webrick/server.rb:92:in `start'
+    /usr/lib/ruby/1.8/webrick/server.rb:23:in `start'
+    /usr/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendered rescues/_trace (165.5ms)
+Rendered rescues/_request_and_response (0.9ms)
+Rendering rescues/layout (internal_server_error)
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing StepsController#index (for 127.0.0.1 at 2010-05-25 15:57:03) [GET]
+  Parameters: {"experiment_id"=>"4"}
+  [4;35;1mExperiment Columns (2.2ms)[0m   [0mSHOW FIELDS FROM `experiments`[0m
+  [4;36;1mExperiment Load (0.3ms)[0m   [0;1mSELECT * FROM `experiments` WHERE (`experiments`.`id` = 4) [0m
+  [4;35;1mStep Load (0.3ms)[0m   [0mSELECT * FROM `steps` WHERE (`steps`.experiment_id = 4) [0m
+Rendering template within layouts/steps
+Rendering steps/index
+  [4;36;1mStep Columns (1.9ms)[0m   [0;1mSHOW FIELDS FROM `steps`[0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM `experiments` WHERE (`experiments`.`id` = 4) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM `experiments` WHERE (`experiments`.`id` = 4) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM `experiments` WHERE (`experiments`.`id` = 4) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM `experiments` WHERE (`experiments`.`id` = 4) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM `experiments` WHERE (`experiments`.`id` = 4) [0m
+Completed in 301ms (View: 254, DB: 5) | 200 OK [http://localhost/experiments/4/steps]
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing ExperimentsController#index (for 127.0.0.1 at 2010-05-25 15:57:06) [GET]
+  [4;35;1mExperiment Load (0.3ms)[0m   [0mSELECT * FROM `experiments` [0m
+Rendering template within layouts/experiments
+Rendering experiments/index
+  [4;36;1mExperiment Columns (2.2ms)[0m   [0;1mSHOW FIELDS FROM `experiments`[0m
+Completed in 105ms (View: 78, DB: 3) | 200 OK [http://localhost/experiments]
+  [4;35;1mSQL (0.2ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing ExperimentsController#edit (for 127.0.0.1 at 2010-05-25 15:57:09) [GET]
+  Parameters: {"id"=>"4"}
+  [4;36;1mExperiment Columns (2.1ms)[0m   [0;1mSHOW FIELDS FROM `experiments`[0m
+  [4;35;1mExperiment Load (0.3ms)[0m   [0mSELECT * FROM `experiments` WHERE (`experiments`.`id` = 4) [0m
+Rendering template within layouts/experiments
+Rendering experiments/edit
+Completed in 75ms (View: 46, DB: 3) | 200 OK [http://localhost/experiments/4/edit]
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing ExperimentsController#update (for 127.0.0.1 at 2010-05-25 15:57:16) [PUT]
+  Parameters: {"commit"=>"Update", "authenticity_token"=>"w7rhwscLP/5aPacc9ErGn1+ercOtxL6AXcnoF7LG12c=", "id"=>"4", "experiment"=>{"title"=>"First Experiment", "published"=>"1", "authour"=>"mike", "description"=>"this is the first test experiment.", "image"=>"nothing to see here"}}
+  [4;35;1mExperiment Columns (4.5ms)[0m   [0mSHOW FIELDS FROM `experiments`[0m
+  [4;36;1mExperiment Load (0.3ms)[0m   [0;1mSELECT * FROM `experiments` WHERE (`experiments`.`id` = 4) [0m
+  [4;35;1mSQL (0.2ms)[0m   [0mBEGIN[0m
+  [4;36;1mExperiment Update (0.9ms)[0m   [0;1mUPDATE `experiments` SET `updated_at` = '2010-05-25 21:57:16', `description` = 'this is the first test experiment.' WHERE `id` = 4[0m
+  [4;35;1mSQL (40.8ms)[0m   [0mCOMMIT[0m
+Redirected to http://localhost:3000/experiments/4
+Completed in 93ms (DB: 47) | 302 Found [http://localhost/experiments/4]
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing ExperimentsController#show (for 127.0.0.1 at 2010-05-25 15:57:16) [GET]
+  Parameters: {"id"=>"4"}
+  [4;35;1mExperiment Columns (2.7ms)[0m   [0mSHOW FIELDS FROM `experiments`[0m
+  [4;36;1mExperiment Load (0.7ms)[0m   [0;1mSELECT * FROM `experiments` WHERE (`experiments`.`id` = 4) [0m
+Rendering template within layouts/experiments
+Rendering experiments/show
+  [4;35;1mStep Columns (2.4ms)[0m   [0mSHOW FIELDS FROM `steps`[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSELECT count(*) AS count_all FROM `steps` WHERE (`steps`.experiment_id = 4) [0m
+  [4;35;1mStep Load (0.3ms)[0m   [0mSELECT * FROM `steps` WHERE (`steps`.experiment_id = 4) [0m
+Rendered experiments/_step (0.5ms)
+Rendered experiments/_step (0.5ms)
+Rendered experiments/_step (0.4ms)
+Rendered experiments/_step (0.4ms)
+Rendered experiments/_step (0.5ms)
+Completed in 100ms (View: 41, DB: 7) | 200 OK [http://localhost/experiments/4]
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing StepsController#index (for 127.0.0.1 at 2010-05-25 15:57:29) [GET]
+  Parameters: {"experiment_id"=>"4"}
+  [4;35;1mExperiment Columns (2.2ms)[0m   [0mSHOW FIELDS FROM `experiments`[0m
+  [4;36;1mExperiment Load (0.4ms)[0m   [0;1mSELECT * FROM `experiments` WHERE (`experiments`.`id` = 4) [0m
+  [4;35;1mStep Load (0.3ms)[0m   [0mSELECT * FROM `steps` WHERE (`steps`.experiment_id = 4) [0m
+Rendering template within layouts/steps
+Rendering steps/index
+  [4;36;1mStep Columns (2.4ms)[0m   [0;1mSHOW FIELDS FROM `steps`[0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM `experiments` WHERE (`experiments`.`id` = 4) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM `experiments` WHERE (`experiments`.`id` = 4) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM `experiments` WHERE (`experiments`.`id` = 4) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM `experiments` WHERE (`experiments`.`id` = 4) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM `experiments` WHERE (`experiments`.`id` = 4) [0m
+Completed in 182ms (View: 132, DB: 6) | 200 OK [http://localhost/experiments/4/steps]
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing StepsController#show (for 127.0.0.1 at 2010-05-25 15:57:41) [GET]
+  Parameters: {"experiment_id"=>"4", "id"=>"1"}
+  [4;35;1mExperiment Columns (1.6ms)[0m   [0mSHOW FIELDS FROM `experiments`[0m
+  [4;36;1mExperiment Load (0.3ms)[0m   [0;1mSELECT * FROM `experiments` WHERE (`experiments`.`id` = 4) [0m
+  [4;35;1mStep Columns (1.7ms)[0m   [0mSHOW FIELDS FROM `steps`[0m
+  [4;36;1mStep Load (0.3ms)[0m   [0;1mSELECT * FROM `steps` WHERE (`steps`.`id` = 1 AND (`steps`.experiment_id = 4)) [0m
+Rendering template within layouts/steps
+Rendering steps/show
+Completed in 64ms (View: 14, DB: 4) | 200 OK [http://localhost/experiments/4/steps/1]
+  [4;35;1mSQL (0.3ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing StepsController#index (for 127.0.0.1 at 2010-05-25 15:57:44) [GET]
+  Parameters: {"experiment_id"=>"4"}
+  [4;36;1mExperiment Columns (2.2ms)[0m   [0;1mSHOW FIELDS FROM `experiments`[0m
+  [4;35;1mExperiment Load (0.3ms)[0m   [0mSELECT * FROM `experiments` WHERE (`experiments`.`id` = 4) [0m
+  [4;36;1mStep Load (0.3ms)[0m   [0;1mSELECT * FROM `steps` WHERE (`steps`.experiment_id = 4) [0m
+Rendering template within layouts/steps
+Rendering steps/index
+  [4;35;1mStep Columns (2.1ms)[0m   [0mSHOW FIELDS FROM `steps`[0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM `experiments` WHERE (`experiments`.`id` = 4) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM `experiments` WHERE (`experiments`.`id` = 4) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM `experiments` WHERE (`experiments`.`id` = 4) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM `experiments` WHERE (`experiments`.`id` = 4) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM `experiments` WHERE (`experiments`.`id` = 4) [0m
+Completed in 263ms (View: 214, DB: 5) | 200 OK [http://localhost/experiments/4/steps]
+  [4;35;1mSQL (0.3ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing ExperimentsController#index (for 127.0.0.1 at 2010-05-25 15:57:50) [GET]
+  [4;36;1mExperiment Load (0.9ms)[0m   [0;1mSELECT * FROM `experiments` [0m
+Rendering template within layouts/experiments
+Rendering experiments/index
+  [4;35;1mExperiment Columns (2.2ms)[0m   [0mSHOW FIELDS FROM `experiments`[0m
+Completed in 110ms (View: 81, DB: 3) | 200 OK [http://localhost/experiments]
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing StepsController#index (for 127.0.0.1 at 2010-05-25 15:58:07) [GET]
+  Parameters: {"experiment_id"=>"4"}
+  [4;35;1mExperiment Columns (2.2ms)[0m   [0mSHOW FIELDS FROM `experiments`[0m
+  [4;36;1mExperiment Load (0.3ms)[0m   [0;1mSELECT * FROM `experiments` WHERE (`experiments`.`id` = 4) [0m
+  [4;35;1mStep Load (0.3ms)[0m   [0mSELECT * FROM `steps` WHERE (`steps`.experiment_id = 4) [0m
+Rendering template within layouts/steps
+Rendering steps/index
+  [4;36;1mStep Columns (2.2ms)[0m   [0;1mSHOW FIELDS FROM `steps`[0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM `experiments` WHERE (`experiments`.`id` = 4) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM `experiments` WHERE (`experiments`.`id` = 4) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM `experiments` WHERE (`experiments`.`id` = 4) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM `experiments` WHERE (`experiments`.`id` = 4) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM `experiments` WHERE (`experiments`.`id` = 4) [0m
+Completed in 177ms (View: 127, DB: 5) | 200 OK [http://localhost/experiments/4/steps]
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing StepsController#destroy (for 127.0.0.1 at 2010-05-25 15:58:17) [DELETE]
+  Parameters: {"experiment_id"=>"4", "authenticity_token"=>"w7rhwscLP/5aPacc9ErGn1+ercOtxL6AXcnoF7LG12c=", "id"=>"10"}
+  [4;35;1mExperiment Columns (2.2ms)[0m   [0mSHOW FIELDS FROM `experiments`[0m
+  [4;36;1mExperiment Load (0.3ms)[0m   [0;1mSELECT * FROM `experiments` WHERE (`experiments`.`id` = 4) [0m
+  [4;35;1mStep Columns (2.4ms)[0m   [0mSHOW FIELDS FROM `steps`[0m
+  [4;36;1mStep Load (4.3ms)[0m   [0;1mSELECT * FROM `steps` WHERE (`steps`.`id` = 10 AND (`steps`.experiment_id = 4)) [0m
+  [4;35;1mSQL (0.2ms)[0m   [0mBEGIN[0m
+  [4;36;1mStep Destroy (0.7ms)[0m   [0;1mDELETE FROM `steps` WHERE `id` = 10[0m
+  [4;35;1mSQL (63.6ms)[0m   [0mCOMMIT[0m
+Redirected to http://localhost:3000/experiments/4/steps
+Completed in 272ms (DB: 74) | 302 Found [http://localhost/experiments/4/steps/10]
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing StepsController#index (for 127.0.0.1 at 2010-05-25 15:58:17) [GET]
+  Parameters: {"experiment_id"=>"4"}
+  [4;35;1mExperiment Columns (1.7ms)[0m   [0mSHOW FIELDS FROM `experiments`[0m
+  [4;36;1mExperiment Load (0.3ms)[0m   [0;1mSELECT * FROM `experiments` WHERE (`experiments`.`id` = 4) [0m
+  [4;35;1mStep Load (0.9ms)[0m   [0mSELECT * FROM `steps` WHERE (`steps`.experiment_id = 4) [0m
+Rendering template within layouts/steps
+Rendering steps/index
+  [4;36;1mStep Columns (2.4ms)[0m   [0;1mSHOW FIELDS FROM `steps`[0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM `experiments` WHERE (`experiments`.`id` = 4) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM `experiments` WHERE (`experiments`.`id` = 4) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM `experiments` WHERE (`experiments`.`id` = 4) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM `experiments` WHERE (`experiments`.`id` = 4) [0m
+Completed in 185ms (View: 132, DB: 6) | 200 OK [http://localhost/experiments/4/steps]
+  [4;35;1mSQL (0.3ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing ExperimentsController#show (for 127.0.0.1 at 2010-05-25 15:58:21) [GET]
+  Parameters: {"id"=>"4"}
+  [4;36;1mExperiment Columns (2.1ms)[0m   [0;1mSHOW FIELDS FROM `experiments`[0m
+  [4;35;1mExperiment Load (0.3ms)[0m   [0mSELECT * FROM `experiments` WHERE (`experiments`.`id` = 4) [0m
+Rendering template within layouts/experiments
+Rendering experiments/show
+  [4;36;1mStep Columns (4.3ms)[0m   [0;1mSHOW FIELDS FROM `steps`[0m
+  [4;35;1mSQL (0.7ms)[0m   [0mSELECT count(*) AS count_all FROM `steps` WHERE (`steps`.experiment_id = 4) [0m
+  [4;36;1mStep Load (0.3ms)[0m   [0;1mSELECT * FROM `steps` WHERE (`steps`.experiment_id = 4) [0m
+Rendered experiments/_step (0.3ms)
+Rendered experiments/_step (0.3ms)
+Rendered experiments/_step (0.3ms)
+Rendered experiments/_step (0.3ms)
+Completed in 80ms (View: 29, DB: 8) | 200 OK [http://localhost/experiments/4]
+  [4;35;1mSQL (0.3ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing ExperimentsController#index (for 127.0.0.1 at 2010-05-25 15:58:27) [GET]
+  [4;36;1mExperiment Load (0.3ms)[0m   [0;1mSELECT * FROM `experiments` [0m
+Rendering template within layouts/experiments
+Rendering experiments/index
+  [4;35;1mExperiment Columns (2.6ms)[0m   [0mSHOW FIELDS FROM `experiments`[0m
+Completed in 106ms (View: 78, DB: 3) | 200 OK [http://localhost/experiments]
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing StepsController#index (for 127.0.0.1 at 2010-05-25 15:58:35) [GET]
+  Parameters: {"experiment_id"=>"4"}
+  [4;35;1mExperiment Columns (2.2ms)[0m   [0mSHOW FIELDS FROM `experiments`[0m
+  [4;36;1mExperiment Load (0.4ms)[0m   [0;1mSELECT * FROM `experiments` WHERE (`experiments`.`id` = 4) [0m
+  [4;35;1mStep Load (0.3ms)[0m   [0mSELECT * FROM `steps` WHERE (`steps`.experiment_id = 4) [0m
+Rendering template within layouts/steps
+Rendering steps/index
+  [4;36;1mStep Columns (1.8ms)[0m   [0;1mSHOW FIELDS FROM `steps`[0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM `experiments` WHERE (`experiments`.`id` = 4) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM `experiments` WHERE (`experiments`.`id` = 4) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM `experiments` WHERE (`experiments`.`id` = 4) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM `experiments` WHERE (`experiments`.`id` = 4) [0m
+Completed in 247ms (View: 107, DB: 5) | 200 OK [http://localhost/experiments/4/steps]
+  [4;35;1mSQL (0.3ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing ExperimentsController#show (for 127.0.0.1 at 2010-05-25 15:59:59) [GET]
+  Parameters: {"id"=>"4"}
+  [4;36;1mExperiment Columns (2.2ms)[0m   [0;1mSHOW FIELDS FROM `experiments`[0m
+  [4;35;1mExperiment Load (0.3ms)[0m   [0mSELECT * FROM `experiments` WHERE (`experiments`.`id` = 4) [0m
+Rendering template within layouts/experiments
+Rendering experiments/show
+  [4;36;1mStep Columns (1.8ms)[0m   [0;1mSHOW FIELDS FROM `steps`[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mSELECT count(*) AS count_all FROM `steps` WHERE (`steps`.experiment_id = 4) [0m
+  [4;36;1mStep Load (0.3ms)[0m   [0;1mSELECT * FROM `steps` WHERE (`steps`.experiment_id = 4) [0m
+Rendered experiments/_step (0.3ms)
+Rendered experiments/_step (0.3ms)
+Rendered experiments/_step (0.5ms)
+Rendered experiments/_step (0.5ms)
+Completed in 96ms (View: 48, DB: 5) | 200 OK [http://localhost/experiments/4]
+  [4;35;1mSQL (0.2ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing ExperimentsController#index (for 127.0.0.1 at 2010-05-25 16:00:00) [GET]
+  [4;36;1mExperiment Load (0.3ms)[0m   [0;1mSELECT * FROM `experiments` [0m
+Rendering template within layouts/experiments
+Rendering experiments/index
+  [4;35;1mExperiment Columns (3.6ms)[0m   [0mSHOW FIELDS FROM `experiments`[0m
+Completed in 110ms (View: 81, DB: 4) | 200 OK [http://localhost/experiments]
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing ExperimentsController#edit (for 127.0.0.1 at 2010-05-25 16:00:05) [GET]
+  Parameters: {"id"=>"4"}
+  [4;35;1mExperiment Columns (1.8ms)[0m   [0mSHOW FIELDS FROM `experiments`[0m
+  [4;36;1mExperiment Load (0.4ms)[0m   [0;1mSELECT * FROM `experiments` WHERE (`experiments`.`id` = 4) [0m
+Rendering template within layouts/experiments
+Rendering experiments/edit
+Completed in 74ms (View: 46, DB: 2) | 200 OK [http://localhost/experiments/4/edit]
+  [4;35;1mSQL (0.3ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing ExperimentsController#index (for 127.0.0.1 at 2010-05-25 16:00:11) [GET]
+  [4;36;1mExperiment Load (0.4ms)[0m   [0;1mSELECT * FROM `experiments` [0m
+Rendering template within layouts/experiments
+Rendering experiments/index
+  [4;35;1mExperiment Columns (1.8ms)[0m   [0mSHOW FIELDS FROM `experiments`[0m
+Completed in 104ms (View: 75, DB: 2) | 200 OK [http://localhost/experiments]
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing ExperimentsController#show (for 127.0.0.1 at 2010-05-25 16:02:38) [GET]
+  Parameters: {"id"=>"4"}
+  [4;35;1mExperiment Columns (4.5ms)[0m   [0mSHOW FIELDS FROM `experiments`[0m
+  [4;36;1mExperiment Load (0.3ms)[0m   [0;1mSELECT * FROM `experiments` WHERE (`experiments`.`id` = 4) [0m
+Rendering template within layouts/experiments
+Rendering experiments/show
+  [4;35;1mStep Columns (2.3ms)[0m   [0mSHOW FIELDS FROM `steps`[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSELECT count(*) AS count_all FROM `steps` WHERE (`steps`.experiment_id = 4) [0m
+  [4;35;1mStep Load (0.2ms)[0m   [0mSELECT * FROM `steps` WHERE (`steps`.experiment_id = 4) [0m
+Rendered experiments/_step (0.4ms)
+Rendered experiments/_step (0.3ms)
+Rendered experiments/_step (0.3ms)
+Rendered experiments/_step (0.3ms)
+Completed in 81ms (View: 31, DB: 8) | 200 OK [http://localhost/experiments/4]
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing StepsController#new (for 127.0.0.1 at 2010-05-25 16:02:42) [GET]
+  Parameters: {"experiment_id"=>"4"}
+  [4;35;1mExperiment Columns (2.2ms)[0m   [0mSHOW FIELDS FROM `experiments`[0m
+  [4;36;1mExperiment Load (0.3ms)[0m   [0;1mSELECT * FROM `experiments` WHERE (`experiments`.`id` = 4) [0m
+  [4;35;1mStep Columns (2.0ms)[0m   [0mSHOW FIELDS FROM `steps`[0m
+Rendering template within layouts/steps
+Rendering steps/new
+Completed in 79ms (View: 25, DB: 5) | 200 OK [http://localhost/experiments/4/steps/new]
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing StepsController#create (for 127.0.0.1 at 2010-05-25 16:02:54) [POST]
+  Parameters: {"experiment_id"=>"4", "step"=>{"title"=>"new step", "description"=>"This is a new step", "image"=>"new"}, "commit"=>"Create", "authenticity_token"=>"w7rhwscLP/5aPacc9ErGn1+ercOtxL6AXcnoF7LG12c="}
+  [4;35;1mExperiment Columns (2.2ms)[0m   [0mSHOW FIELDS FROM `experiments`[0m
+  [4;36;1mExperiment Load (0.3ms)[0m   [0;1mSELECT * FROM `experiments` WHERE (`experiments`.`id` = 4) [0m
+  [4;35;1mStep Columns (2.4ms)[0m   [0mSHOW FIELDS FROM `steps`[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mStep Create (0.7ms)[0m   [0mINSERT INTO `steps` (`experiment_id`, `created_at`, `title`, `updated_at`, `description`, `image`) VALUES(4, '2010-05-25 22:02:54', 'new step', '2010-05-25 22:02:54', 'This is a new step', 'new')[0m
+  [4;36;1mSQL (115.0ms)[0m   [0;1mCOMMIT[0m
+Redirected to http://localhost:3000/experiments/4/steps/12
+Completed in 188ms (DB: 121) | 302 Found [http://localhost/experiments/4/steps]
+  [4;35;1mSQL (0.3ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing StepsController#show (for 127.0.0.1 at 2010-05-25 16:02:55) [GET]
+  Parameters: {"experiment_id"=>"4", "id"=>"12"}
+  [4;36;1mExperiment Columns (1.9ms)[0m   [0;1mSHOW FIELDS FROM `experiments`[0m
+  [4;35;1mExperiment Load (0.3ms)[0m   [0mSELECT * FROM `experiments` WHERE (`experiments`.`id` = 4) [0m
+  [4;36;1mStep Columns (1.6ms)[0m   [0;1mSHOW FIELDS FROM `steps`[0m
+  [4;35;1mStep Load (0.9ms)[0m   [0mSELECT * FROM `steps` WHERE (`steps`.`id` = 12 AND (`steps`.experiment_id = 4)) [0m
+Rendering template within layouts/steps
+Rendering steps/show
+Completed in 52ms (View: 11, DB: 5) | 200 OK [http://localhost/experiments/4/steps/12]
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing StepsController#index (for 127.0.0.1 at 2010-05-25 16:03:04) [GET]
+  Parameters: {"experiment_id"=>"4"}
+  [4;35;1mExperiment Columns (1.9ms)[0m   [0mSHOW FIELDS FROM `experiments`[0m
+  [4;36;1mExperiment Load (0.3ms)[0m   [0;1mSELECT * FROM `experiments` WHERE (`experiments`.`id` = 4) [0m
+  [4;35;1mStep Load (0.7ms)[0m   [0mSELECT * FROM `steps` WHERE (`steps`.experiment_id = 4) [0m
+Rendering template within layouts/steps
+Rendering steps/index
+  [4;36;1mStep Columns (1.6ms)[0m   [0;1mSHOW FIELDS FROM `steps`[0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM `experiments` WHERE (`experiments`.`id` = 4) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM `experiments` WHERE (`experiments`.`id` = 4) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM `experiments` WHERE (`experiments`.`id` = 4) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM `experiments` WHERE (`experiments`.`id` = 4) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM `experiments` WHERE (`experiments`.`id` = 4) [0m
+Completed in 176ms (View: 133, DB: 5) | 200 OK [http://localhost/experiments/4/steps]
+  [4;36;1mSQL (0.4ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing ExperimentsController#show (for 127.0.0.1 at 2010-05-25 16:03:14) [GET]
+  Parameters: {"id"=>"4"}
+  [4;35;1mExperiment Columns (2.2ms)[0m   [0mSHOW FIELDS FROM `experiments`[0m
+  [4;36;1mExperiment Load (0.3ms)[0m   [0;1mSELECT * FROM `experiments` WHERE (`experiments`.`id` = 4) [0m
+Rendering template within layouts/experiments
+Rendering experiments/show
+  [4;35;1mStep Columns (2.2ms)[0m   [0mSHOW FIELDS FROM `steps`[0m
+  [4;36;1mSQL (0.8ms)[0m   [0;1mSELECT count(*) AS count_all FROM `steps` WHERE (`steps`.experiment_id = 4) [0m
+  [4;35;1mStep Load (0.3ms)[0m   [0mSELECT * FROM `steps` WHERE (`steps`.experiment_id = 4) [0m
+Rendered experiments/_step (0.4ms)
+Rendered experiments/_step (0.3ms)
+Rendered experiments/_step (0.3ms)
+Rendered experiments/_step (0.3ms)
+Rendered experiments/_step (0.3ms)
+Completed in 79ms (View: 32, DB: 6) | 200 OK [http://localhost/experiments/4]
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing ExperimentsController#index (for 127.0.0.1 at 2010-05-25 16:03:49) [GET]
+  [4;35;1mExperiment Load (0.3ms)[0m   [0mSELECT * FROM `experiments` [0m
+Rendering template within layouts/experiments
+Rendering experiments/index
+  [4;36;1mExperiment Columns (2.4ms)[0m   [0;1mSHOW FIELDS FROM `experiments`[0m
+Completed in 106ms (View: 79, DB: 3) | 200 OK [http://localhost/experiments]
+  [4;35;1mSQL (0.3ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing ExperimentsController#index (for 127.0.0.1 at 2010-05-25 16:03:59) [GET]
+  [4;36;1mExperiment Load (0.3ms)[0m   [0;1mSELECT * FROM `experiments` [0m
+Rendering template within layouts/experiments
+Rendering experiments/index
+  [4;35;1mExperiment Columns (2.5ms)[0m   [0mSHOW FIELDS FROM `experiments`[0m
+Completed in 196ms (View: 168, DB: 3) | 200 OK [http://localhost/experiments]
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing ExperimentsController#new (for 127.0.0.1 at 2010-05-25 16:04:43) [GET]
+  [4;35;1mExperiment Columns (2.2ms)[0m   [0mSHOW FIELDS FROM `experiments`[0m
+Rendering template within layouts/experiments
+Rendering experiments/new
+Completed in 103ms (View: 73, DB: 2) | 200 OK [http://localhost/experiments/new]
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing ExperimentsController#create (for 127.0.0.1 at 2010-05-25 16:05:11) [POST]
+  Parameters: {"commit"=>"Create", "authenticity_token"=>"w7rhwscLP/5aPacc9ErGn1+ercOtxL6AXcnoF7LG12c=", "experiment"=>{"title"=>"adding a new one", "published"=>"1", "authour"=>"here it is ", "description"=>"wowee", "image"=>"okee"}}
+  [4;35;1mExperiment Columns (2.2ms)[0m   [0mSHOW FIELDS FROM `experiments`[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mExperiment Create (88.9ms)[0m   [0mINSERT INTO `experiments` (`created_at`, `title`, `published`, `updated_at`, `authour`, `description`, `image`) VALUES('2010-05-25 22:05:11', 'adding a new one', 1, '2010-05-25 22:05:11', 'here it is ', 'wowee', 'okee')[0m
+  [4;36;1mSQL (72.1ms)[0m   [0;1mCOMMIT[0m
+Redirected to http://localhost:3000/experiments/7
+Completed in 207ms (DB: 164) | 302 Found [http://localhost/experiments]
+  [4;35;1mSQL (0.2ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing ExperimentsController#show (for 127.0.0.1 at 2010-05-25 16:05:11) [GET]
+  Parameters: {"id"=>"7"}
+  [4;36;1mExperiment Columns (1.9ms)[0m   [0;1mSHOW FIELDS FROM `experiments`[0m
+  [4;35;1mExperiment Load (0.7ms)[0m   [0mSELECT * FROM `experiments` WHERE (`experiments`.`id` = 7) [0m
+Rendering template within layouts/experiments
+Rendering experiments/show
+  [4;36;1mStep Columns (2.3ms)[0m   [0;1mSHOW FIELDS FROM `steps`[0m
+  [4;35;1mSQL (0.7ms)[0m   [0mSELECT count(*) AS count_all FROM `steps` WHERE (`steps`.experiment_id = 7) [0m
+Completed in 57ms (View: 17, DB: 6) | 200 OK [http://localhost/experiments/7]
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing ExperimentsController#index (for 127.0.0.1 at 2010-05-25 16:05:20) [GET]
+  [4;35;1mExperiment Load (0.7ms)[0m   [0mSELECT * FROM `experiments` [0m
+Rendering template within layouts/experiments
+Rendering experiments/index
+  [4;36;1mExperiment Columns (1.7ms)[0m   [0;1mSHOW FIELDS FROM `experiments`[0m
+Completed in 213ms (View: 185, DB: 3) | 200 OK [http://localhost/experiments]
+  [4;35;1mSQL (0.3ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing StepsController#index (for 127.0.0.1 at 2010-05-25 16:05:29) [GET]
+  Parameters: {"experiment_id"=>"7"}
+  [4;36;1mExperiment Columns (2.2ms)[0m   [0;1mSHOW FIELDS FROM `experiments`[0m
+  [4;35;1mExperiment Load (0.3ms)[0m   [0mSELECT * FROM `experiments` WHERE (`experiments`.`id` = 7) [0m
+  [4;36;1mStep Load (0.8ms)[0m   [0;1mSELECT * FROM `steps` WHERE (`steps`.experiment_id = 7) [0m
+Rendering template within layouts/steps
+Rendering steps/index
+Completed in 58ms (View: 10, DB: 4) | 200 OK [http://localhost/experiments/7/steps]
+  [4;35;1mSQL (0.3ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing StepsController#new (for 127.0.0.1 at 2010-05-25 16:05:32) [GET]
+  Parameters: {"experiment_id"=>"7"}
+  [4;36;1mExperiment Columns (2.4ms)[0m   [0;1mSHOW FIELDS FROM `experiments`[0m
+  [4;35;1mExperiment Load (0.3ms)[0m   [0mSELECT * FROM `experiments` WHERE (`experiments`.`id` = 7) [0m
+  [4;36;1mStep Columns (2.0ms)[0m   [0;1mSHOW FIELDS FROM `steps`[0m
+Rendering template within layouts/steps
+Rendering steps/new
+Completed in 81ms (View: 24, DB: 5) | 200 OK [http://localhost/experiments/7/steps/new]
+  [4;35;1mSQL (0.3ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing StepsController#create (for 127.0.0.1 at 2010-05-25 16:05:45) [POST]
+  Parameters: {"experiment_id"=>"7", "step"=>{"title"=>"here we go", "description"=>"adding a step", "image"=>"a new step"}, "commit"=>"Create", "authenticity_token"=>"w7rhwscLP/5aPacc9ErGn1+ercOtxL6AXcnoF7LG12c="}
+  [4;36;1mExperiment Columns (2.2ms)[0m   [0;1mSHOW FIELDS FROM `experiments`[0m
+  [4;35;1mExperiment Load (0.3ms)[0m   [0mSELECT * FROM `experiments` WHERE (`experiments`.`id` = 7) [0m
+  [4;36;1mStep Columns (2.3ms)[0m   [0;1mSHOW FIELDS FROM `steps`[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mBEGIN[0m
+  [4;36;1mStep Create (104.0ms)[0m   [0;1mINSERT INTO `steps` (`experiment_id`, `created_at`, `title`, `updated_at`, `description`, `image`) VALUES(7, '2010-05-25 22:05:45', 'here we go', '2010-05-25 22:05:45', 'adding a step', 'a new step')[0m
+  [4;35;1mSQL (59.0ms)[0m   [0mCOMMIT[0m
+Redirected to http://localhost:3000/experiments/7/steps/13
+Completed in 233ms (DB: 168) | 302 Found [http://localhost/experiments/7/steps]
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing StepsController#show (for 127.0.0.1 at 2010-05-25 16:05:45) [GET]
+  Parameters: {"experiment_id"=>"7", "id"=>"13"}
+  [4;35;1mExperiment Columns (1.7ms)[0m   [0mSHOW FIELDS FROM `experiments`[0m
+  [4;36;1mExperiment Load (0.3ms)[0m   [0;1mSELECT * FROM `experiments` WHERE (`experiments`.`id` = 7) [0m
+  [4;35;1mStep Columns (1.6ms)[0m   [0mSHOW FIELDS FROM `steps`[0m
+  [4;36;1mStep Load (0.7ms)[0m   [0;1mSELECT * FROM `steps` WHERE (`steps`.`id` = 13 AND (`steps`.experiment_id = 7)) [0m
+Rendering template within layouts/steps
+Rendering steps/show
+Completed in 57ms (View: 12, DB: 5) | 200 OK [http://localhost/experiments/7/steps/13]
+  [4;35;1mSQL (0.2ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing StepsController#index (for 127.0.0.1 at 2010-05-25 16:05:51) [GET]
+  Parameters: {"experiment_id"=>"7"}
+  [4;36;1mExperiment Columns (2.2ms)[0m   [0;1mSHOW FIELDS FROM `experiments`[0m
+  [4;35;1mExperiment Load (0.3ms)[0m   [0mSELECT * FROM `experiments` WHERE (`experiments`.`id` = 7) [0m
+  [4;36;1mStep Load (0.8ms)[0m   [0;1mSELECT * FROM `steps` WHERE (`steps`.experiment_id = 7) [0m
+Rendering template within layouts/steps
+Rendering steps/index
+  [4;35;1mStep Columns (2.3ms)[0m   [0mSHOW FIELDS FROM `steps`[0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM `experiments` WHERE (`experiments`.`id` = 7) [0m
+Completed in 88ms (View: 39, DB: 6) | 200 OK [http://localhost/experiments/7/steps]
+  [4;35;1mSQL (0.3ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing StepsController#show (for 127.0.0.1 at 2010-05-25 16:06:02) [GET]
+  Parameters: {"experiment_id"=>"7", "id"=>"13"}
+  [4;36;1mExperiment Columns (1.9ms)[0m   [0;1mSHOW FIELDS FROM `experiments`[0m
+  [4;35;1mExperiment Load (0.3ms)[0m   [0mSELECT * FROM `experiments` WHERE (`experiments`.`id` = 7) [0m
+  [4;36;1mStep Columns (1.8ms)[0m   [0;1mSHOW FIELDS FROM `steps`[0m
+  [4;35;1mStep Load (0.3ms)[0m   [0mSELECT * FROM `steps` WHERE (`steps`.`id` = 13 AND (`steps`.experiment_id = 7)) [0m
+Rendering template within layouts/steps
+Rendering steps/show
+Completed in 56ms (View: 12, DB: 5) | 200 OK [http://localhost/experiments/7/steps/13]
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing StepsController#index (for 127.0.0.1 at 2010-05-25 16:06:08) [GET]
+  Parameters: {"experiment_id"=>"7"}
+  [4;35;1mExperiment Columns (2.2ms)[0m   [0mSHOW FIELDS FROM `experiments`[0m
+  [4;36;1mExperiment Load (0.3ms)[0m   [0;1mSELECT * FROM `experiments` WHERE (`experiments`.`id` = 7) [0m
+  [4;35;1mStep Load (5.4ms)[0m   [0mSELECT * FROM `steps` WHERE (`steps`.experiment_id = 7) [0m
+Rendering template within layouts/steps
+Rendering steps/index
+  [4;36;1mStep Columns (1.6ms)[0m   [0;1mSHOW FIELDS FROM `steps`[0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM `experiments` WHERE (`experiments`.`id` = 7) [0m
+Completed in 92ms (View: 37, DB: 10) | 200 OK [http://localhost/experiments/7/steps]
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing ExperimentsController#show (for 127.0.0.1 at 2010-05-25 16:06:10) [GET]
+  Parameters: {"id"=>"7"}
+  [4;35;1mExperiment Columns (2.2ms)[0m   [0mSHOW FIELDS FROM `experiments`[0m
+  [4;36;1mExperiment Load (0.3ms)[0m   [0;1mSELECT * FROM `experiments` WHERE (`experiments`.`id` = 7) [0m
+Rendering template within layouts/experiments
+Rendering experiments/show
+  [4;35;1mStep Columns (2.1ms)[0m   [0mSHOW FIELDS FROM `steps`[0m
+  [4;36;1mSQL (0.8ms)[0m   [0;1mSELECT count(*) AS count_all FROM `steps` WHERE (`steps`.experiment_id = 7) [0m
+  [4;35;1mStep Load (0.3ms)[0m   [0mSELECT * FROM `steps` WHERE (`steps`.experiment_id = 7) [0m
+Rendered experiments/_step (0.5ms)
+Completed in 76ms (View: 29, DB: 6) | 200 OK [http://localhost/experiments/7]
