@@ -13,6 +13,6 @@
 #
 
 class Step < ActiveRecord::Base
-  attr_accessible :title, :description, :image, :experiment_id
+  attr_accessible :title, :description, :image, :experiment_id, :order
   belongs_to :experiment
 end
