@@ -1,14 +1,15 @@
 # == Schema Information
-# Schema version: 20100520175910
+# Schema version: 20100520201543
 #
 # Table name: steps
 #
-#  id          :integer(4)      not null, primary key
-#  description :text
-#  title       :string(255)
-#  image       :string(255)
-#  created_at  :datetime
-#  updated_at  :datetime
+#  id            :integer(4)      not null, primary key
+#  description   :text
+#  title         :string(255)
+#  image         :string(255)
+#  created_at    :datetime
+#  updated_at    :datetime
+#  experiment_id :integer(4)
 #
 
 class Step < ActiveRecord::Base

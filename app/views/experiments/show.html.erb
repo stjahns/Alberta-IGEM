@@ -23,6 +23,14 @@
   <%=h @experiment.image %>
 </p>
 
+<% unless @experiment.steps.empty? %>
+    
+  <p> 
+    <b>Steps:</b>
+    <%= render :partial => "step", :collection => @steps %>
+  </p>
+<% end %>
 
+<%= link_to 'Add_Step', new_experiment_step_path(@experiment) %> |
 <%= link_to 'Edit', edit_experiment_path(@experiment) %> |
 <%= link_to 'Back', experiments_path %>

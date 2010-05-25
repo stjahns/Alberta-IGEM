@@ -12,13 +12,13 @@
     <td><%=h step.description %></td>
     <td><%=h step.title %></td>
     <td><%=h step.image %></td>
-    <td><%= link_to 'Show', step %></td>
-    <td><%= link_to 'Edit', edit_step_path(step) %></td>
-    <td><%= link_to 'Destroy', step, :confirm => 'Are you sure?', :method => :delete %></td>
+    <td><%= link_to 'Show', experiment_step_path( step.experiment, step ) %></td>
+    <td><%= link_to 'Edit', edit_experiment_step_path(step.experiment, step) %></td>
+    <td><%= link_to 'Destroy', experiment_step_path( step.experiment, step ), :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>
 <% end %>
 </table>
 
 <br />
 
-<%= link_to 'New step', new_step_path %>
+<%= link_to 'New step', new_experiment_step_path(@experiment) %>

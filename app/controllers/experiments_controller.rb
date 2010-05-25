@@ -14,12 +14,13 @@ class ExperimentsController < ApplicationController
   # GET /experiments/1.xml
   def show
     @experiment = Experiment.find(params[:id])
+    @steps = @experiment.steps;
 
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @experiment }
     end
-  end
+  end 
 
   # GET /experiments/new
   # GET /experiments/new.xml
@@ -36,6 +37,17 @@ class ExperimentsController < ApplicationController
   def edit
     @experiment = Experiment.find(params[:id])
   end
+
+  # GET /experiments/add_step/1
+  def add_step
+    @experiment = Experiment.find(params[:id])
+    @step = Step.create(:experiment_id => @experiment)
+    
+
+    render 'steps/edit'
+
+  end
+
 
   # POST /experiments
   # POST /experiments.xml

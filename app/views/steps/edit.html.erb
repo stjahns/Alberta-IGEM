@@ -1,6 +1,6 @@
 <h1>Editing step</h1>
 
-<% form_for(@step) do |f| %>
+<% form_for([ @experiment,  @step ]) do |f| %>
   <%= f.error_messages %>
 
   <p>
@@ -21,4 +21,4 @@
 <% end %>
 
 <%= link_to 'Show', @step %> |
-<%= link_to 'Back', steps_path %>
+<%= link_to 'Back', experiment_steps_path(@experiment) h%i
