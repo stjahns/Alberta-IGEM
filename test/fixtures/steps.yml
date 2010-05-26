@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20100520201543
+# Schema version: 20100525224456
 #
 # Table name: steps
 #
@@ -10,6 +10,7 @@
 #  created_at    :datetime
 #  updated_at    :datetime
 #  experiment_id :integer(4)
+#  order         :integer(4)
 #
 
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
