@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20100525224456
+# Schema version: 20100526205252
 #
 # Table name: steps
 #
@@ -10,7 +10,7 @@
 #  created_at    :datetime
 #  updated_at    :datetime
 #  experiment_id :integer(4)
-#  order         :integer(4)
+#  step_order    :integer(4)
 #
 
 class Step < ActiveRecord::Base
