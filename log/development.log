@@ -7863,3 +7863,67 @@ Rendering template within layouts/experiments
 Rendering experiments/index
   [4;36;1mExperiment Columns (2.4ms)[0m   [0;1mSHOW FIELDS FROM `experiments`[0m
 Completed in 225ms (View: 196, DB: 3) | 200 OK [http://localhost/experiments]
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mBEGIN[0m
+  [4;36;1mSQL (27.8ms)[0m   [0;1mSHOW TABLES[0m
+  [4;35;1mExperiment Columns (1.7ms)[0m   [0mSHOW FIELDS FROM `experiments`[0m
+  [4;36;1mExperiment Load (0.7ms)[0m   [0;1mSELECT * FROM `experiments` LIMIT 1[0m
+  [4;35;1mStep Load (1.1ms)[0m   [0mSELECT * FROM `steps` WHERE (`steps`.experiment_id = 4) [0m
+  [4;36;1mStep Columns (2.7ms)[0m   [0;1mSHOW FIELDS FROM `steps`[0m
+  [4;35;1mStep Load (1.1ms)[0m   [0mSELECT * FROM `steps` WHERE (`steps`.experiment_id = 4) ORDER BY description[0m
+  [4;36;1mStep Load (0.2ms)[0m   [0;1mSELECT * FROM `steps` WHERE (`steps`.experiment_id = 4) [0m
+  [4;35;1mStep Load (0.2ms)[0m   [0mSELECT * FROM `steps` WHERE (`steps`.experiment_id = 4) ORDER BY description[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mROLLBACK[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+  [4;35;1mExperiment Load (1.8ms)[0m   [0mSELECT * FROM `experiments` LIMIT 1[0m
+  [4;36;1mExperiment Columns (2.6ms)[0m   [0;1mSHOW FIELDS FROM `experiments`[0m
+  [4;35;1mStep Load (0.3ms)[0m   [0mSELECT * FROM `steps` WHERE (`steps`.experiment_id = 4) [0m
+  [4;36;1mStep Columns (4.4ms)[0m   [0;1mSHOW FIELDS FROM `steps`[0m
+  [4;35;1mStep Load (0.0ms)[0m   [0mMysql::Error: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'order' at line 1: SELECT * FROM `steps` WHERE (`steps`.experiment_id = 4) ORDER BY order[0m
+  [4;36;1mStep Load (0.0ms)[0m   [0;1mMysql::Error: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'order' at line 1: SELECT * FROM `steps` WHERE (`steps`.experiment_id = 4) ORDER BY order[0m
+  [4;35;1mStep Load (0.0ms)[0m   [0mMysql::Error: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'order' at line 1: SELECT * FROM `steps` WHERE (`steps`.experiment_id = 4) ORDER BY order[0m
+  [4;36;1mStep Load (0.5ms)[0m   [0;1mSELECT * FROM `steps` WHERE (`steps`.experiment_id = 4) [0m
+  [4;35;1mStep Load (1.0ms)[0m   [0mSELECT * FROM `steps` WHERE (`steps`.experiment_id = 4) [0m
+  [4;36;1mStep Load (2.4ms)[0m   [0;1mSELECT * FROM `steps` WHERE (`steps`.experiment_id = 4) ORDER BY description[0m
+  [4;35;1mStep Load (0.3ms)[0m   [0mSELECT * FROM `steps` WHERE (`steps`.experiment_id = 4) [0m
+  [4;36;1mStep Load (0.2ms)[0m   [0;1mSELECT * FROM `steps` WHERE (`steps`.experiment_id = 4) [0m
+  [4;35;1mStep Load (0.2ms)[0m   [0mSELECT * FROM `steps` WHERE (`steps`.experiment_id = 4) [0m
+  [4;36;1mStep Load (0.3ms)[0m   [0;1mSELECT * FROM `steps` WHERE (`steps`.experiment_id = 4) [0m
+  [4;35;1mStep Load (0.3ms)[0m   [0mSELECT * FROM `steps` WHERE (`steps`.experiment_id = 4) [0m
+  [4;36;1mStep Load (0.3ms)[0m   [0;1mSELECT * FROM `steps` WHERE (`steps`.experiment_id = 4) [0m
+  [4;35;1mStep Load (1.0ms)[0m   [0mSELECT * FROM `steps` WHERE (`steps`.experiment_id = 4) [0m
+  [4;36;1mStep Load (0.3ms)[0m   [0;1mSELECT * FROM `steps` WHERE (`steps`.experiment_id = 4) [0m
+  [4;35;1mStep Load (0.3ms)[0m   [0mSELECT * FROM `steps` WHERE (`steps`.experiment_id = 4) [0m
+  [4;36;1mStep Load (0.3ms)[0m   [0;1mSELECT * FROM `steps` WHERE (`steps`.experiment_id = 4) [0m
+  [4;35;1mStep Load (0.2ms)[0m   [0mSELECT * FROM `steps` WHERE (`steps`.experiment_id = 4) [0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+  [4;35;1mExperiment Load (0.4ms)[0m   [0mSELECT * FROM `experiments` LIMIT 1[0m
+  [4;36;1mExperiment Columns (2.5ms)[0m   [0;1mSHOW FIELDS FROM `experiments`[0m
+  [4;35;1mStep Load (0.7ms)[0m   [0mSELECT * FROM `steps` WHERE (`steps`.experiment_id = 4) LIMIT 1[0m
+  [4;36;1mStep Columns (1.7ms)[0m   [0;1mSHOW FIELDS FROM `steps`[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+  [4;35;1mSQL (1.2ms)[0m   [0mSHOW TABLES[0m
+  [4;36;1mSQL (0.7ms)[0m   [0;1mSELECT version FROM schema_migrations[0m
+Migrating to CreateExperiments (20100519212344)
+Migrating to CreateSteps (20100520175910)
+Migrating to AddExperimentIdToSteps (20100520201543)
+Migrating to AddOrderToSteps (20100525224456)
+Migrating to AddStepOrderToSteps (20100526205252)
+  [4;35;1mSQL (1.9ms)[0m   [0mSHOW FIELDS FROM `steps`[0m
+  [4;36;1mSQL (1.5ms)[0m   [0;1mSHOW COLUMNS FROM `steps` LIKE 'order'[0m
+  [4;35;1mSQL (101.3ms)[0m   [0mALTER TABLE `steps` CHANGE `order` `step_order` int(11) DEFAULT NULL[0m
+  [4;36;1mSQL (55.1ms)[0m   [0;1mINSERT INTO schema_migrations (version) VALUES ('20100526205252')[0m
+  [4;35;1mSQL (0.9ms)[0m   [0mSHOW TABLES[0m
+  [4;36;1mSQL (0.7ms)[0m   [0;1mSELECT version FROM schema_migrations[0m
+  [4;35;1mSQL (0.9ms)[0m   [0mSHOW TABLES[0m
+  [4;36;1mSQL (2.6ms)[0m   [0;1mSHOW FIELDS FROM `experiments`[0m
+  [4;35;1mSQL (2.8ms)[0m   [0mdescribe `experiments`[0m
+  [4;36;1mSQL (0.9ms)[0m   [0;1mSHOW KEYS FROM `experiments`[0m
+  [4;35;1mSQL (2.5ms)[0m   [0mSHOW FIELDS FROM `steps`[0m
+  [4;36;1mSQL (2.5ms)[0m   [0;1mdescribe `steps`[0m
+  [4;35;1mSQL (0.9ms)[0m   [0mSHOW KEYS FROM `steps`[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+  [4;35;1mExperiment Load (0.4ms)[0m   [0mSELECT * FROM `experiments` LIMIT 1[0m
+  [4;36;1mExperiment Columns (2.5ms)[0m   [0;1mSHOW FIELDS FROM `experiments`[0m
+  [4;35;1mStep Load (0.9ms)[0m   [0mSELECT * FROM `steps` WHERE (`steps`.experiment_id = 4) LIMIT 1[0m
+  [4;36;1mStep Columns (1.7ms)[0m   [0;1mSHOW FIELDS FROM `steps`[0m

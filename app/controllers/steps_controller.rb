@@ -8,8 +8,11 @@ class StepsController < ApplicationController
   # GET /steps
   # GET /steps.xml
   def index
-    @steps = @experiment.steps.find(:all)
+    #@steps = @experiment.steps.all( :order => "order" )
+    #@steps = @experiment.steps.find( :all )
+     @steps = @experiment.steps.all( :order => "step_order" )
 
+   
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @steps }

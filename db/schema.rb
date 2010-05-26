@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100525224456) do
+ActiveRecord::Schema.define(:version => 20100526205252) do
 
   create_table "experiments", :force => true do |t|
     t.string   "title"
@@ -28,7 +28,7 @@ ActiveRecord::Schema.define(:version => 20100525224456) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "experiment_id"
-    t.integer  "order"
+    t.integer  "step_order"
   end
 
 end
