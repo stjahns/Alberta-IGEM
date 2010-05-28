@@ -1,0 +1,55 @@
+body {
+  font-family:  "sans-serif";
+}
+
+
+
+h1#title {
+  position:         absolute;
+  top:              8px;
+  left:             8px;
+  width:            1058px;
+  text-align:       center;
+  background-color: #EEEEEE;
+  border: 1px solid #CCCCCC;
+}
+
+div#parts_list{
+  position:         absolute;
+  top:              53px;
+  left:             266px;
+  height:           300px;
+  width:            800px;
+  border:           1px solid #AAA;
+}
+
+div#parts_bin{
+  position:         absolute;
+  top:              53px;
+  left:             8px;
+  height:           500px;
+  width:            250px;
+  border:           1px solid #AAA;
+}
+
+div#sequence_box {
+  position:         absolute;
+  top:              360px;
+  left:             266px;
+  height:           193px;
+  width:            800px;
+  border:           1px solid #AAA;
+}
+div#sequence {
+  font-family:      'monospace';
+}
+
+div#nav {
+  position:         absolute;
+  top:              18px;
+  left:             50px;
+}
+
+div#trash {
+  border:           1px solid #888;
+}
