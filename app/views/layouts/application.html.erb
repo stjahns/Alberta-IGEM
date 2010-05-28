@@ -6,11 +6,12 @@
 
 <%= javascript_tag "var AUTH_TOKEN = #{form_authenticity_token.inspect};" if protect_against_forgery? %>
 
+<%= stylesheet_link_tag 'parts_designer' %>
 </head>  
 
 <body>
 
-<h1>Construct Designer v.0.3</h1>
+<h1 id="title">Construct Designer v.0.3</h1>
 
 <%= yield %>
 

@@ -53,7 +53,7 @@ class BioBytesController < ApplicationController
   #add code to delete old byte and create new byte if type is changed
     @byte = BioByte.find(params[:id])
 
-    if params[:byte][:type] != @byte.type
+    if params[:byte][:type].constantize != @byte.class
       BioByte.find(params[:id]).destroy
       @byte = params[:byte][:type].constantize.new(params[:byte])
     end

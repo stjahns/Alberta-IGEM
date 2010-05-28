@@ -1,25 +1,88 @@
-<h1>Editing <%= @construct.name %></h1>
+<!--
+The main construct designer view.
+TODO - unobtrusive javascript
 
+Making ajax calls every 20 seconds is kinda shitty, 
+  let's load all the data it needs up front,
+  let you play around and save
+  1 request to load, 1 request to save
+
+  -What data do we need
+    -all biobytes in database -sequence, name, pic ids
+
+  -What data will we submit?
+    -array of parts in order (bio byte id's?)
+
+-->
 <script>
+
+  // global variables
+
+  var orfs;
+  var linkers;
+
+  //if any changes made..
+  var changes = false;
+
   $(document).ready(function() {
 
-      $("#parts_list").sortable({
 
-        axis: 'y',
+      //ajax call to load data
+      $.ajax({
+        type: 'get',
+        dataType: 'json',
+        url: '/construct/get_data',
+        success: function(data){
+          orfs = data.orfs;
+          linkers = data.linkers;
+        }
+      })
+
+      //save button
+      $("a#save").click(function() {
+
+        //submit to server
+        $.ajax({
+          type: 'put',
+          dataType: 'json',
+          data: $('ol#parts_list').sortable('serialize', {attribute: 'part_id'}) + '&'
+                + $('ol#parts_list').sortable('serialize', {attribute: 'byte_id'}) + '&'
+                + 'id=<%= @construct.id %>',
+
+          url: '/construct/save',
+          success: function(data){
+            $("li.part").each(function(index) {
+              $(this).attr('part_id', "part_"+data.part_ids[index]);
+            })
+          }
+            
+
+          
+        })
+      })
+    
+
+      $("ol#parts_list").sortable({
 
         update: function(){
-          
+
+          changes=true;
+
+          $("#sequence").text(groupBases(getSequence()))
+
+          /*
           $.ajax({
             type: 'post',
-            data: $('#parts_list').sortable('serialize') + '&id=<%= @construct.id %>', 
-                                                              <!-- this looks kinda bad -->
+            data: $('ol#parts_list').sortable('serialize') + '&id=<%= @construct.id %>', 
             dataType: 'script',
             url: '/construct/sort_parts',
             
             success: function(html){
               //update sequence
+              html = groupBases(html); //group by 10
               $("#sequence").html(html);} 
             })
+          */
           
         }
       
@@ -27,13 +90,21 @@
         
         accept: ":not(.ui-sortable-helper)",
         drop: function(event, ui) {
+          changes = true;
           $(this).find("#placeholder").remove();
 
-          $("<li id='part_new'></li>").html(function(){
+          $("<li id=part_"+ $(ui.draggable).attr('id') + "_0 class=part "
+              +"byte_id=byte_" + $(ui.draggable).attr('id') + " "
+              +"part_id=part_new " 
+              +"></li>").html(function(){
+
             //ui.draggable.text()
-            return "New Part"
+            return ui.draggable.text(); 
             }).prependTo(this);
 
+            
+          $("#sequence").text(groupBases(getSequence()));
+       /* 
           $.ajax({
             type: 'post',
             data: '&part=' + ui.draggable.text() + '&id=<%= @construct.id %>',
@@ -41,8 +112,8 @@
             url: '/construct/new_part',
             success: function(data){
               //get part id #, part name, etc.
-              $("#part_new").attr("style", "background-color:pink; border:1px solid #999999");
               $("#part_new").attr("id", "part_" + data.part_id);
+              //add class for css TODO
               $("#part_" + data.part_id).html( 
               
                 data.name
@@ -51,26 +122,40 @@
                 + "'>Delete</a>"
 
                 );
-              $("#sequence").text(data.sequence);
+
+              $("#sequence").text(groupBases(data.sequence));
               }
           })  
+          */
              
 
         }
       });
 
       $("#parts_list").disableSelection();
-
+      
+      
       $(".byte").draggable({
-        axis: 'y',
         helper: "clone"
 
       });
+
+      $("#trash").droppable({
+        accepts: ":not(.byte)",
+        //Highlight?
+        drop: function(event, ui) {
+          alert("Trashed!");
+        }
+      }); 
       
 
     });
 </script>
 
+
+<div id="parts_list">
+
+<h1>Editing <%= @construct.name %></h1>
 
 <!-- The sortable parts list.. -->
 <ol id="parts_list">
@@ -80,7 +165,7 @@
 
 <% else %>
 <% @order.each do |part| %>
-  <li id = "part_<%=part.id%>" class = "part" style="background-color:pink; border:1px solid #999999"><%= part.bio_byte.name %> | 
+  <li id = "part_<%=part.bio_byte_id%>_<%=part.id%>" class = "part" byte_id="byte_<%=part.bio_byte_id%>" part_id="part_<%=part.id%>"><%= part.bio_byte.name %> | 
       <%= link_to  "Delete", {:action => :delete_part,
                                  :id => @construct.id, 
                                  :part_id => part.id } %>
@@ -89,20 +174,35 @@
 <% end %>
 <% end %>
 </ol>
+</div>
 
+<div id="sequence_box">
 <!-- Sequence box -->
 <h2>Sequence:</h2>
 <div id = "sequence">
-  <%= @sequence %>
+  <script type="text/javascript"> 
+    document.write(groupBases("<%= @sequence %>"));
+  </script>
+</div>
 </div>
 
+<div id="parts_bin">
 <!-- Parts Bin -->
 <h2>Parts Bin:</h2>
 
 <ul id="parts_bin">
 <% BioByte.all.each do |byte| %>
-  <li id = "byte_<%=byte.id%>" class = "byte" style="background-color:pink; border:1px solid #999999"><%= byte.name %></li>
+  <li id = "<%=byte.id%>" class = "byte"><%= byte.name %></li>
 <% end %>
 </ul>
 
+<div id="trash">
+<p>Trash</p>
+</div>
+
+</div>
+
+<div id="nav">
 <%=link_to "Back", {:action => :index} %>
+<a href="#", id="save">Save</a>
+</div>

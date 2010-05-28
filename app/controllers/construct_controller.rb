@@ -7,7 +7,7 @@ class ConstructController < ApplicationController
   def edit
     @construct = Construct.find(params[:id])
     @order = @construct.part_order
-    @part =  Part.new() #for new part to be added
+    @part =  Part.new() #for new part to be added OLD
 
     #get sequence
     @sequence = ""
@@ -130,6 +130,50 @@ class ConstructController < ApplicationController
 
   end
    
-  #def getSequence
+  def get_data
+    
+    orfs = ORF.find(:all)
+    linkers = Linker.find(:all)
+    ActiveRecord::Base.include_root_in_json = false
+    render :json => { :orfs => orfs, :linkers => linkers}
 
+  end
+
+  def save
+
+    #TODO delete parts from db
+    
+    partids = params[:part]
+    byteids = params[:byte]
+    construct = Construct.find(params[:id])
+    
+    i=0
+    partids.each do |part|
+      #Who needs a new db entry?
+      if part == "new"
+        p = Part.new( :bio_byte => BioByte.find(byteids[i]), 
+                      :construct => construct )
+        p.save
+        partids[i] = p.id
+        construct.parts << p
+      end
+      i+=1
+    end
+
+    parts = construct.parts
+
+    n=0 
+    partids.each do |id|
+      p=Part.find(id) 
+      p.part_order = n 
+      p.save
+      n+=1
+    end
+
+    #gotta return the ids of new parts
+    
+    render :json => { :part_ids => partids }
+
+  end
+   
 end
