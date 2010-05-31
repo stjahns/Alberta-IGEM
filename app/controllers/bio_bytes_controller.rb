@@ -2,9 +2,6 @@
 =begin
 Purpose - controller for user-editing of BioBytes parts db
 
-#TODO -> Avoid/warn about deleting/changing parts that already exist in some construct
-
-
 =end
 ###############################################
 
@@ -45,7 +42,13 @@ class BioBytesController < ApplicationController
   end
 
   def delete
-    BioByte.find(params[:id]).destroy
+    #TODO test this
+    unless Part.find(:first, :condition => {:bio_byte_id => params[:id]})
+      BioByte.find(params[:id]).destroy
+    else
+      #flash error - part exists in some construct
+    end
+
     redirect_to :action => 'index'
   end
 

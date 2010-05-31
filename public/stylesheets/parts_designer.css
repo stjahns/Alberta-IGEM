@@ -14,13 +14,60 @@ h1#title {
   border: 1px solid #CCCCCC;
 }
 
-div#parts_list{
+div#construct{
   position:         absolute;
   top:              53px;
   left:             266px;
   height:           300px;
   width:            800px;
   border:           1px solid #AAA;
+  text-align:       center;
+}
+
+div#parts_box{
+  overflow:         scroll;
+  border:           1px solid #999;
+  margin:           2;
+  height:           214px;
+}
+ol#parts_list{
+  list-style-type:  none;
+  height:           100;
+  width:            5000;
+  padding:          50 0 0 10;
+}
+
+#parts_list li{
+  margin:           3px 3px 3px 0;
+  padding:          1px;
+  float:            left;
+  width:            100px;
+  height:           40px;
+  text-align:       center;
+  background-color: #CCC;
+  border:           1px solid #999;
+}
+
+
+
+ul#parts_bin{
+  list-style-type:  none;
+  margin:           2;
+  padding:          0;
+  height:           350;
+  overflow:         scroll;
+  border:           1px solid #999;
+
+}
+
+ul#parts_bin li{
+  margin:           3px 3px 3px 70px;
+  padding:          1px;
+  width:            100px;
+  height:           40px;
+  text-align:       center;
+  background-color: #CCC;
+  border:           1px solid #999
 }
 
 div#parts_bin{
@@ -30,10 +77,13 @@ div#parts_bin{
   height:           500px;
   width:            250px;
   border:           1px solid #AAA;
+  text-align:       center;
 }
+
 
 div#sequence_box {
   position:         absolute;
+  text-align:       center;
   top:              360px;
   left:             266px;
   height:           193px;
@@ -41,7 +91,13 @@ div#sequence_box {
   border:           1px solid #AAA;
 }
 div#sequence {
+  text-align:       left;
+  overflow:         scroll;
   font-family:      'monospace';
+  height:           128px;
+  width:            794px;
+  margin:           2;
+  border:           1px solid #999;
 }
 
 div#nav {
@@ -52,4 +108,7 @@ div#nav {
 
 div#trash {
   border:           1px solid #888;
+  height:           70;
+  margin:           2;
+  text-align:       center;
 }
