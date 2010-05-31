@@ -1,9 +1,22 @@
-body { background-color: #fff; color: #333; }
+#container {
+	width: 750px;
+	margin-left: auto;
+	margin-right: auto;
+}
+body {
+	background-image: url(http://www.webdesignerforum.co.uk/tutorials/css/drop-shadow-tutorial/images/background.jpg);
+	background-repeat: repeat-y;
+	background-position: center;
+	background-color: #f7f4ee;
+}
+
+body {  color: #333; }
 
 body, p, ol, ul, td {
   font-family: verdana, arial, helvetica, sans-serif;
   font-size:   13px;
   line-height: 18px;
+  text-align: left;
 }
 
 pre {
