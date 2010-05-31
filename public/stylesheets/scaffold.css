@@ -4,7 +4,7 @@
 	margin-right: auto;
 }
 body {
-	background-image: url(http://www.webdesignerforum.co.uk/tutorials/css/drop-shadow-tutorial/images/background.jpg);
+	background-image: url(../images/background.jpg);
 	background-repeat: repeat-y;
 	background-position: center;
 	background-color: #f7f4ee;

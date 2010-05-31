@@ -10,11 +10,11 @@
   <%= javascript_include_tag 'jquery-ui' %>
   <%= javascript_include_tag 'jrails' %>
 </head>
-<body>
-
-<p style="color: green"><%= flash[:notice] %></p>
-
-<%= yield %>
+<body.background>
+	<div id= 'container'>
+	<p style="color: green"><%= flash[:notice] %></p>
+	<%= yield %>
+	</div
 
 </body>
 </html>
