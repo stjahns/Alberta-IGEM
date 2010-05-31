@@ -1,2 +1,6 @@
 <h1>Hello, World!</h1>
 <p>You are running Ruby on Rails.</p>
+<div id = 'content'>
+  <h2><%= flash[:notice]%></h2>
+    <%=yield%>
+</div>
