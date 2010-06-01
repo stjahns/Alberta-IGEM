@@ -74,11 +74,33 @@ class StepsController < ApplicationController
         format.html { redirect_to([ @experiment, @step ]) }
         format.xml  { head :ok }
       else
-        format.html { render :action => "edit" }
-        format.xml  { render :xml => @step.errors, :status => :unprocessable_entity }
+       format.html { render :action => "edit" }
+      format.xml  { render :xml => @step.errors, :status => :unprocessable_entity }
       end
-    end
+   end
   end
+
+  # called after editing an item
+  # PUT /items/1
+  # PUT /items/1.xml
+#  def update
+ #   @item = @experiment.steps.find(params[:id])
+  #  dc_ds = params[:item][:dc_ds]
+#    #read and write the DC datastream...
+ #   @dc_ds = DC_datastream.new(:id => params[:item][:id])
+  #  puts 'params update:'
+   # pp params
+
+  #  keys = params[:dc_datastream_solr].keys
+  #  k = keys.first
+    #params[:dc_datastream_solr].each_key do |k|
+  #    @dc_ds.send k.to_s+'=',params[:dc_datastream_solr][k]
+    #end    
+
+ #   @dc_ds.save_to_fedora
+
+  #  render :text => params[:dc_datastream_solr][k]
+#  end
 
   # DELETE /steps/1
   # DELETE /steps/1.xml

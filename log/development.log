@@ -8038,3 +8038,843 @@ Rendering rescues/layout (not_found)
   [4;36;1mSQL (59.6ms)[0m   [0;1mSELECT version FROM schema_migrations[0m
   [4;35;1mExperiment Columns (2.6ms)[0m   [0mSHOW FIELDS FROM `experiments`[0m
   [4;36;1mStep Columns (2.2ms)[0m   [0;1mSHOW FIELDS FROM `steps`[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mSHOW TABLES[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSELECT version FROM schema_migrations[0m
+  [4;35;1mExperiment Columns (2.7ms)[0m   [0mSHOW FIELDS FROM `experiments`[0m
+  [4;36;1mStep Columns (2.4ms)[0m   [0;1mSHOW FIELDS FROM `steps`[0m
+  [4;36;1mSQL (0.4ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing ExperimentsController#index (for 127.0.0.1 at 2010-05-31 15:39:56) [GET]
+  [4;35;1mExperiment Load (0.3ms)[0m   [0mSELECT * FROM `experiments` [0m
+Rendering template within layouts/experiments
+Rendering experiments/index
+  [4;36;1mExperiment Columns (1.7ms)[0m   [0;1mSHOW FIELDS FROM `experiments`[0m
+Completed in 316ms (View: 194, DB: 2) | 200 OK [http://localhost/experiments/]
+  [4;35;1mSQL (0.2ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing ExperimentsController#show (for 127.0.0.1 at 2010-05-31 15:40:01) [GET]
+  Parameters: {"id"=>"5"}
+  [4;36;1mExperiment Columns (2.4ms)[0m   [0;1mSHOW FIELDS FROM `experiments`[0m
+  [4;35;1mExperiment Load (0.3ms)[0m   [0mSELECT * FROM `experiments` WHERE (`experiments`.`id` = 5) [0m
+Rendering template within layouts/experiments
+Rendering experiments/show
+  [4;36;1mStep Columns (2.3ms)[0m   [0;1mSHOW FIELDS FROM `steps`[0m
+  [4;35;1mSQL (0.3ms)[0m   [0mSELECT count(*) AS count_all FROM `steps` WHERE (`steps`.experiment_id = 5) [0m
+  [4;36;1mStep Load (0.3ms)[0m   [0;1mSELECT * FROM `steps` WHERE (`steps`.experiment_id = 5) [0m
+Rendered experiments/_step (3.1ms)
+Rendered experiments/_step (0.5ms)
+Completed in 115ms (View: 65, DB: 6) | 200 OK [http://localhost/experiments/5]
+  [4;35;1mSQL (0.3ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing StepsController#index (for 127.0.0.1 at 2010-05-31 15:40:09) [GET]
+  Parameters: {"experiment_id"=>"5"}
+  [4;36;1mExperiment Columns (2.4ms)[0m   [0;1mSHOW FIELDS FROM `experiments`[0m
+  [4;35;1mExperiment Load (0.3ms)[0m   [0mSELECT * FROM `experiments` WHERE (`experiments`.`id` = 5) [0m
+  [4;36;1mStep Load (0.3ms)[0m   [0;1mSELECT * FROM `steps` WHERE (`steps`.experiment_id = 5) ORDER BY step_order[0m
+Rendering template within layouts/steps
+Rendering steps/index
+  [4;35;1mStep Columns (2.7ms)[0m   [0mSHOW FIELDS FROM `steps`[0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM `experiments` WHERE (`experiments`.`id` = 5) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM `experiments` WHERE (`experiments`.`id` = 5) [0m
+Completed in 166ms (View: 113, DB: 6) | 200 OK [http://localhost/experiments/5/steps]
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-05-31 15:40:10) [GET]
+
+ActionController::RoutingError (No route matches "/javascripts/jquery-ui.js" with {:method=>:get}):
+  /usr/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+  /usr/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+  /usr/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+  /usr/lib/ruby/1.8/webrick/server.rb:162:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+  /usr/lib/ruby/1.8/webrick/server.rb:95:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:92:in `each'
+  /usr/lib/ruby/1.8/webrick/server.rb:92:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:23:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendering rescues/layout (not_found)
+  [4;35;1mSQL (0.3ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-05-31 15:40:10) [GET]
+
+ActionController::RoutingError (No route matches "/javascripts/jrails.js" with {:method=>:get}):
+  /usr/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+  /usr/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+  /usr/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+  /usr/lib/ruby/1.8/webrick/server.rb:162:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+  /usr/lib/ruby/1.8/webrick/server.rb:95:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:92:in `each'
+  /usr/lib/ruby/1.8/webrick/server.rb:92:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:23:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendering rescues/layout (not_found)
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-05-31 15:40:10) [GET]
+
+ActionController::RoutingError (No route matches "/javascripts/jquery-ui.js" with {:method=>:get}):
+  /usr/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+  /usr/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+  /usr/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+  /usr/lib/ruby/1.8/webrick/server.rb:162:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+  /usr/lib/ruby/1.8/webrick/server.rb:95:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:92:in `each'
+  /usr/lib/ruby/1.8/webrick/server.rb:92:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:23:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendering rescues/layout (not_found)
+  [4;35;1mSQL (0.2ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-05-31 15:40:10) [GET]
+
+ActionController::RoutingError (No route matches "/javascripts/jrails.js" with {:method=>:get}):
+  /usr/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+  /usr/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+  /usr/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+  /usr/lib/ruby/1.8/webrick/server.rb:162:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+  /usr/lib/ruby/1.8/webrick/server.rb:95:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:92:in `each'
+  /usr/lib/ruby/1.8/webrick/server.rb:92:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:23:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendering rescues/layout (not_found)
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing StepsController#edit (for 127.0.0.1 at 2010-05-31 15:40:13) [GET]
+  Parameters: {"experiment_id"=>"5", "id"=>"11"}
+  [4;35;1mExperiment Columns (2.2ms)[0m   [0mSHOW FIELDS FROM `experiments`[0m
+  [4;36;1mExperiment Load (0.4ms)[0m   [0;1mSELECT * FROM `experiments` WHERE (`experiments`.`id` = 5) [0m
+  [4;35;1mStep Columns (2.3ms)[0m   [0mSHOW FIELDS FROM `steps`[0m
+  [4;36;1mStep Load (0.3ms)[0m   [0;1mSELECT * FROM `steps` WHERE (`steps`.`id` = 11 AND (`steps`.experiment_id = 5)) [0m
+Rendering template within layouts/steps
+Rendering steps/edit
+Completed in 117ms (View: 67, DB: 5) | 200 OK [http://localhost/experiments/5/steps/11/edit]
+  [4;35;1mSQL (0.3ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-05-31 15:40:14) [GET]
+
+ActionController::RoutingError (No route matches "/javascripts/jquery-ui.js" with {:method=>:get}):
+  /usr/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+  /usr/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+  /usr/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+  /usr/lib/ruby/1.8/webrick/server.rb:162:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+  /usr/lib/ruby/1.8/webrick/server.rb:95:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:92:in `each'
+  /usr/lib/ruby/1.8/webrick/server.rb:92:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:23:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendering rescues/layout (not_found)
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-05-31 15:40:14) [GET]
+
+ActionController::RoutingError (No route matches "/javascripts/jrails.js" with {:method=>:get}):
+  /usr/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+  /usr/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+  /usr/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+  /usr/lib/ruby/1.8/webrick/server.rb:162:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+  /usr/lib/ruby/1.8/webrick/server.rb:95:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:92:in `each'
+  /usr/lib/ruby/1.8/webrick/server.rb:92:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:23:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendering rescues/layout (not_found)
+  [4;35;1mSQL (0.3ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-05-31 15:40:15) [GET]
+
+ActionController::RoutingError (No route matches "/javascripts/jquery-ui.js" with {:method=>:get}):
+  /usr/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+  /usr/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+  /usr/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+  /usr/lib/ruby/1.8/webrick/server.rb:162:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+  /usr/lib/ruby/1.8/webrick/server.rb:95:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:92:in `each'
+  /usr/lib/ruby/1.8/webrick/server.rb:92:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:23:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendering rescues/layout (not_found)
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-05-31 15:40:15) [GET]
+
+ActionController::RoutingError (No route matches "/javascripts/jrails.js" with {:method=>:get}):
+  /usr/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+  /usr/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+  /usr/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+  /usr/lib/ruby/1.8/webrick/server.rb:162:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+  /usr/lib/ruby/1.8/webrick/server.rb:95:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:92:in `each'
+  /usr/lib/ruby/1.8/webrick/server.rb:92:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:23:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendering rescues/layout (not_found)
+  [4;35;1mSQL (0.3ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing ExperimentsController#index (for 127.0.0.1 at 2010-05-31 15:43:08) [GET]
+  [4;36;1mExperiment Load (0.3ms)[0m   [0;1mSELECT * FROM `experiments` [0m
+Rendering template within layouts/experiments
+Rendering experiments/index
+  [4;35;1mExperiment Columns (2.5ms)[0m   [0mSHOW FIELDS FROM `experiments`[0m
+Completed in 124ms (View: 93, DB: 3) | 200 OK [http://localhost/experiments/]
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing ExperimentsController#show (for 127.0.0.1 at 2010-05-31 15:43:13) [GET]
+  Parameters: {"id"=>"5"}
+  [4;35;1mExperiment Columns (2.3ms)[0m   [0mSHOW FIELDS FROM `experiments`[0m
+  [4;36;1mExperiment Load (0.3ms)[0m   [0;1mSELECT * FROM `experiments` WHERE (`experiments`.`id` = 5) [0m
+Rendering template within layouts/experiments
+Rendering experiments/show
+  [4;35;1mStep Columns (2.4ms)[0m   [0mSHOW FIELDS FROM `steps`[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSELECT count(*) AS count_all FROM `steps` WHERE (`steps`.experiment_id = 5) [0m
+  [4;35;1mStep Load (0.3ms)[0m   [0mSELECT * FROM `steps` WHERE (`steps`.experiment_id = 5) [0m
+Rendered experiments/_step (0.5ms)
+Rendered experiments/_step (0.4ms)
+Completed in 80ms (View: 29, DB: 6) | 200 OK [http://localhost/experiments/5]
+  [4;36;1mSQL (0.4ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing ExperimentsController#show (for 127.0.0.1 at 2010-05-31 16:12:38) [GET]
+  Parameters: {"id"=>"5"}
+  [4;35;1mExperiment Columns (2.3ms)[0m   [0mSHOW FIELDS FROM `experiments`[0m
+  [4;36;1mExperiment Load (0.3ms)[0m   [0;1mSELECT * FROM `experiments` WHERE (`experiments`.`id` = 5) [0m
+Rendering template within layouts/experiments
+Rendering experiments/show
+  [4;35;1mStep Columns (2.4ms)[0m   [0mSHOW FIELDS FROM `steps`[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSELECT count(*) AS count_all FROM `steps` WHERE (`steps`.experiment_id = 5) [0m
+  [4;35;1mStep Load (0.3ms)[0m   [0mSELECT * FROM `steps` WHERE (`steps`.experiment_id = 5) [0m
+Rendered experiments/_step (2.6ms)
+Rendered experiments/_step (0.5ms)
+Completed in 93ms (View: 45, DB: 6) | 200 OK [http://localhost/experiments/5]
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing ExperimentsController#show (for 127.0.0.1 at 2010-05-31 16:13:33) [GET]
+  Parameters: {"id"=>"5"}
+  [4;35;1mExperiment Columns (2.3ms)[0m   [0mSHOW FIELDS FROM `experiments`[0m
+  [4;36;1mExperiment Load (0.3ms)[0m   [0;1mSELECT * FROM `experiments` WHERE (`experiments`.`id` = 5) [0m
+Rendering template within layouts/experiments
+Rendering experiments/show
+  [4;35;1mStep Columns (2.2ms)[0m   [0mSHOW FIELDS FROM `steps`[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSELECT count(*) AS count_all FROM `steps` WHERE (`steps`.experiment_id = 5) [0m
+  [4;35;1mStep Load (0.3ms)[0m   [0mSELECT * FROM `steps` WHERE (`steps`.experiment_id = 5) [0m
+Rendered experiments/_step (2.6ms)
+Rendered experiments/_step (0.5ms)
+Completed in 91ms (View: 45, DB: 6) | 200 OK [http://localhost/experiments/5]
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing ExperimentsController#show (for 127.0.0.1 at 2010-05-31 16:15:55) [GET]
+  Parameters: {"id"=>"5"}
+  [4;35;1mExperiment Columns (2.2ms)[0m   [0mSHOW FIELDS FROM `experiments`[0m
+  [4;36;1mExperiment Load (0.3ms)[0m   [0;1mSELECT * FROM `experiments` WHERE (`experiments`.`id` = 5) [0m
+Rendering template within layouts/experiments
+Rendering experiments/show
+  [4;35;1mStep Columns (2.2ms)[0m   [0mSHOW FIELDS FROM `steps`[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSELECT count(*) AS count_all FROM `steps` WHERE (`steps`.experiment_id = 5) [0m
+  [4;35;1mStep Load (0.3ms)[0m   [0mSELECT * FROM `steps` WHERE (`steps`.experiment_id = 5) [0m
+Rendered experiments/_step (2.7ms)
+Rendered experiments/_step (0.5ms)
+Completed in 91ms (View: 45, DB: 5) | 200 OK [http://localhost/experiments/5]
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing ExperimentsController#show (for 127.0.0.1 at 2010-05-31 16:18:32) [GET]
+  Parameters: {"id"=>"5"}
+  [4;35;1mExperiment Columns (2.7ms)[0m   [0mSHOW FIELDS FROM `experiments`[0m
+  [4;36;1mExperiment Load (0.3ms)[0m   [0;1mSELECT * FROM `experiments` WHERE (`experiments`.`id` = 5) [0m
+Rendering template within layouts/experiments
+Rendering experiments/show
+  [4;35;1mStep Columns (2.7ms)[0m   [0mSHOW FIELDS FROM `steps`[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSELECT count(*) AS count_all FROM `steps` WHERE (`steps`.experiment_id = 5) [0m
+  [4;35;1mStep Load (0.3ms)[0m   [0mSELECT * FROM `steps` WHERE (`steps`.experiment_id = 5) [0m
+Rendered experiments/_step (3.3ms)
+Rendered experiments/_step (0.6ms)
+Completed in 376ms (View: 125, DB: 7) | 200 OK [http://localhost/experiments/5]
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing ExperimentsController#show (for 127.0.0.1 at 2010-05-31 16:19:43) [GET]
+  Parameters: {"id"=>"5"}
+  [4;35;1mExperiment Columns (2.3ms)[0m   [0mSHOW FIELDS FROM `experiments`[0m
+  [4;36;1mExperiment Load (0.3ms)[0m   [0;1mSELECT * FROM `experiments` WHERE (`experiments`.`id` = 5) [0m
+Rendering template within layouts/experiments
+Rendering experiments/show
+  [4;35;1mStep Columns (2.2ms)[0m   [0mSHOW FIELDS FROM `steps`[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSELECT count(*) AS count_all FROM `steps` WHERE (`steps`.experiment_id = 5) [0m
+  [4;35;1mStep Load (0.3ms)[0m   [0mSELECT * FROM `steps` WHERE (`steps`.experiment_id = 5) [0m
+Rendered experiments/_step (2.5ms)
+Rendered experiments/_step (0.4ms)
+Completed in 92ms (View: 45, DB: 6) | 200 OK [http://localhost/experiments/5]
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing ExperimentsController#show (for 127.0.0.1 at 2010-05-31 16:22:21) [GET]
+  Parameters: {"id"=>"5"}
+  [4;35;1mExperiment Columns (2.2ms)[0m   [0mSHOW FIELDS FROM `experiments`[0m
+  [4;36;1mExperiment Load (0.3ms)[0m   [0;1mSELECT * FROM `experiments` WHERE (`experiments`.`id` = 5) [0m
+Rendering template within layouts/experiments
+Rendering experiments/show
+  [4;35;1mStep Columns (2.3ms)[0m   [0mSHOW FIELDS FROM `steps`[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSELECT count(*) AS count_all FROM `steps` WHERE (`steps`.experiment_id = 5) [0m
+  [4;35;1mStep Load (0.3ms)[0m   [0mSELECT * FROM `steps` WHERE (`steps`.experiment_id = 5) [0m
+Rendered experiments/_step (0.6ms)
+Rendered experiments/_step (0.4ms)
+Completed in 77ms (View: 29, DB: 6) | 200 OK [http://localhost/experiments/5]
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing ExperimentsController#show (for 127.0.0.1 at 2010-05-31 16:25:16) [GET]
+  Parameters: {"id"=>"5"}
+  [4;35;1mExperiment Columns (2.3ms)[0m   [0mSHOW FIELDS FROM `experiments`[0m
+  [4;36;1mExperiment Load (0.3ms)[0m   [0;1mSELECT * FROM `experiments` WHERE (`experiments`.`id` = 5) [0m
+Rendering template within layouts/experiments
+Rendering experiments/show
+  [4;35;1mStep Columns (2.2ms)[0m   [0mSHOW FIELDS FROM `steps`[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSELECT count(*) AS count_all FROM `steps` WHERE (`steps`.experiment_id = 5) [0m
+  [4;35;1mStep Load (0.3ms)[0m   [0mSELECT * FROM `steps` WHERE (`steps`.experiment_id = 5) [0m
+Rendered experiments/_step (5.7ms)
+Rendered experiments/_step (2.6ms)
+Completed in 102ms (View: 55, DB: 6) | 200 OK [http://localhost/experiments/5]
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing ExperimentsController#show (for 127.0.0.1 at 2010-05-31 16:27:00) [GET]
+  Parameters: {"id"=>"5"}
+  [4;35;1mExperiment Columns (1.7ms)[0m   [0mSHOW FIELDS FROM `experiments`[0m
+  [4;36;1mExperiment Load (0.3ms)[0m   [0;1mSELECT * FROM `experiments` WHERE (`experiments`.`id` = 5) [0m
+Rendering template within layouts/experiments
+Rendering experiments/show
+  [4;35;1mStep Columns (3.5ms)[0m   [0mSHOW FIELDS FROM `steps`[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSELECT count(*) AS count_all FROM `steps` WHERE (`steps`.experiment_id = 5) [0m
+  [4;35;1mStep Load (0.3ms)[0m   [0mSELECT * FROM `steps` WHERE (`steps`.experiment_id = 5) [0m
+Rendered experiments/_step (12.9ms)
+Rendered experiments/_step (2.4ms)
+Completed in 256ms (View: 197, DB: 6) | 200 OK [http://localhost/experiments/5]
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing ExperimentsController#show (for 127.0.0.1 at 2010-05-31 16:29:02) [GET]
+  Parameters: {"id"=>"5"}
+  [4;35;1mExperiment Columns (2.3ms)[0m   [0mSHOW FIELDS FROM `experiments`[0m
+  [4;36;1mExperiment Load (0.3ms)[0m   [0;1mSELECT * FROM `experiments` WHERE (`experiments`.`id` = 5) [0m
+Rendering template within layouts/experiments
+Rendering experiments/show
+  [4;35;1mStep Columns (2.2ms)[0m   [0mSHOW FIELDS FROM `steps`[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSELECT count(*) AS count_all FROM `steps` WHERE (`steps`.experiment_id = 5) [0m
+  [4;35;1mStep Load (0.3ms)[0m   [0mSELECT * FROM `steps` WHERE (`steps`.experiment_id = 5) [0m
+Rendered experiments/_step (7.4ms)
+Rendered experiments/_step (2.9ms)
+Completed in 105ms (View: 58, DB: 6) | 200 OK [http://localhost/experiments/5]
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing ExperimentsController#show (for 127.0.0.1 at 2010-05-31 16:31:13) [GET]
+  Parameters: {"id"=>"5"}
+  [4;35;1mExperiment Columns (2.3ms)[0m   [0mSHOW FIELDS FROM `experiments`[0m
+  [4;36;1mExperiment Load (0.3ms)[0m   [0;1mSELECT * FROM `experiments` WHERE (`experiments`.`id` = 5) [0m
+Rendering template within layouts/experiments
+Rendering experiments/show
+  [4;35;1mStep Columns (2.2ms)[0m   [0mSHOW FIELDS FROM `steps`[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSELECT count(*) AS count_all FROM `steps` WHERE (`steps`.experiment_id = 5) [0m
+  [4;35;1mStep Load (0.3ms)[0m   [0mSELECT * FROM `steps` WHERE (`steps`.experiment_id = 5) [0m
+Rendered experiments/_step (6.8ms)
+Rendered experiments/_step (2.8ms)
+Completed in 97ms (View: 50, DB: 6) | 200 OK [http://localhost/experiments/5]
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing ExperimentsController#show (for 127.0.0.1 at 2010-05-31 16:32:47) [GET]
+  Parameters: {"id"=>"5"}
+  [4;35;1mExperiment Columns (2.4ms)[0m   [0mSHOW FIELDS FROM `experiments`[0m
+  [4;36;1mExperiment Load (0.3ms)[0m   [0;1mSELECT * FROM `experiments` WHERE (`experiments`.`id` = 5) [0m
+Rendering template within layouts/experiments
+Rendering experiments/show
+  [4;35;1mStep Columns (2.3ms)[0m   [0mSHOW FIELDS FROM `steps`[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSELECT count(*) AS count_all FROM `steps` WHERE (`steps`.experiment_id = 5) [0m
+  [4;35;1mStep Load (0.3ms)[0m   [0mSELECT * FROM `steps` WHERE (`steps`.experiment_id = 5) [0m
+Rendered experiments/_step (6.7ms)
+Rendered experiments/_step (3.0ms)
+Completed in 100ms (View: 50, DB: 6) | 200 OK [http://localhost/experiments/5]
+  [4;36;1mSQL (0.4ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing ExperimentsController#show (for 127.0.0.1 at 2010-05-31 16:33:13) [GET]
+  Parameters: {"id"=>"5"}
+  [4;35;1mExperiment Columns (2.7ms)[0m   [0mSHOW FIELDS FROM `experiments`[0m
+  [4;36;1mExperiment Load (0.3ms)[0m   [0;1mSELECT * FROM `experiments` WHERE (`experiments`.`id` = 5) [0m
+Rendering template within layouts/experiments
+Rendering experiments/show
+  [4;35;1mStep Columns (2.2ms)[0m   [0mSHOW FIELDS FROM `steps`[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSELECT count(*) AS count_all FROM `steps` WHERE (`steps`.experiment_id = 5) [0m
+  [4;35;1mStep Load (0.3ms)[0m   [0mSELECT * FROM `steps` WHERE (`steps`.experiment_id = 5) [0m
+Rendered experiments/_step (4.0ms)
+Rendered experiments/_step (2.7ms)
+Completed in 82ms (View: 34, DB: 6) | 200 OK [http://localhost/experiments/5]
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing ExperimentsController#show (for 127.0.0.1 at 2010-05-31 16:38:45) [GET]
+  Parameters: {"id"=>"5"}
+  [4;35;1mExperiment Columns (1.7ms)[0m   [0mSHOW FIELDS FROM `experiments`[0m
+  [4;36;1mExperiment Load (1.2ms)[0m   [0;1mSELECT * FROM `experiments` WHERE (`experiments`.`id` = 5) [0m
+Rendering template within layouts/experiments
+Rendering experiments/show
+  [4;35;1mStep Columns (2.4ms)[0m   [0mSHOW FIELDS FROM `steps`[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSELECT count(*) AS count_all FROM `steps` WHERE (`steps`.experiment_id = 5) [0m
+  [4;35;1mStep Load (0.3ms)[0m   [0mSELECT * FROM `steps` WHERE (`steps`.experiment_id = 5) [0m
+Rendered experiments/_step (8.1ms)
+Rendered experiments/_step (3.2ms)
+Completed in 117ms (View: 59, DB: 6) | 200 OK [http://localhost/experiments/5]
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing ExperimentsController#show (for 127.0.0.1 at 2010-05-31 16:41:36) [GET]
+  Parameters: {"id"=>"5"}
+  [4;35;1mExperiment Columns (2.2ms)[0m   [0mSHOW FIELDS FROM `experiments`[0m
+  [4;36;1mExperiment Load (0.3ms)[0m   [0;1mSELECT * FROM `experiments` WHERE (`experiments`.`id` = 5) [0m
+Rendering template within layouts/experiments
+Rendering experiments/show
+  [4;35;1mStep Columns (2.3ms)[0m   [0mSHOW FIELDS FROM `steps`[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSELECT count(*) AS count_all FROM `steps` WHERE (`steps`.experiment_id = 5) [0m
+  [4;35;1mStep Load (0.3ms)[0m   [0mSELECT * FROM `steps` WHERE (`steps`.experiment_id = 5) [0m
+Rendered experiments/_step (7.1ms)
+Rendered experiments/_step (2.8ms)
+Completed in 98ms (View: 51, DB: 6) | 200 OK [http://localhost/experiments/5]
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing ExperimentsController#show (for 127.0.0.1 at 2010-05-31 16:47:48) [GET]
+  Parameters: {"id"=>"5"}
+  [4;35;1mExperiment Columns (2.3ms)[0m   [0mSHOW FIELDS FROM `experiments`[0m
+  [4;36;1mExperiment Load (0.4ms)[0m   [0;1mSELECT * FROM `experiments` WHERE (`experiments`.`id` = 5) [0m
+Rendering template within layouts/experiments
+Rendering experiments/show
+  [4;35;1mStep Columns (2.2ms)[0m   [0mSHOW FIELDS FROM `steps`[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSELECT count(*) AS count_all FROM `steps` WHERE (`steps`.experiment_id = 5) [0m
+  [4;35;1mStep Load (0.3ms)[0m   [0mSELECT * FROM `steps` WHERE (`steps`.experiment_id = 5) [0m
+Rendered experiments/_step (7.1ms)
+Rendered experiments/_step (2.7ms)
+Completed in 97ms (View: 51, DB: 6) | 200 OK [http://localhost/experiments/5]
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing StepsController#index (for 127.0.0.1 at 2010-05-31 16:47:54) [GET]
+  Parameters: {"experiment_id"=>"5"}
+  [4;35;1mExperiment Columns (2.3ms)[0m   [0mSHOW FIELDS FROM `experiments`[0m
+  [4;36;1mExperiment Load (0.3ms)[0m   [0;1mSELECT * FROM `experiments` WHERE (`experiments`.`id` = 5) [0m
+  [4;35;1mStep Load (0.3ms)[0m   [0mSELECT * FROM `steps` WHERE (`steps`.experiment_id = 5) ORDER BY step_order[0m
+Rendering template within layouts/steps
+Rendering steps/index
+  [4;36;1mStep Columns (2.2ms)[0m   [0;1mSHOW FIELDS FROM `steps`[0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM `experiments` WHERE (`experiments`.`id` = 5) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM `experiments` WHERE (`experiments`.`id` = 5) [0m
+Completed in 179ms (View: 131, DB: 5) | 200 OK [http://localhost/experiments/5/steps]
+  [4;35;1mSQL (0.3ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-05-31 16:47:54) [GET]
+
+ActionController::RoutingError (No route matches "/javascripts/jquery-ui.js" with {:method=>:get}):
+  /usr/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+  /usr/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+  /usr/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+  /usr/lib/ruby/1.8/webrick/server.rb:162:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+  /usr/lib/ruby/1.8/webrick/server.rb:95:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:92:in `each'
+  /usr/lib/ruby/1.8/webrick/server.rb:92:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:23:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendering rescues/layout (not_found)
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-05-31 16:47:55) [GET]
+
+ActionController::RoutingError (No route matches "/javascripts/jrails.js" with {:method=>:get}):
+  /usr/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+  /usr/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+  /usr/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+  /usr/lib/ruby/1.8/webrick/server.rb:162:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+  /usr/lib/ruby/1.8/webrick/server.rb:95:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:92:in `each'
+  /usr/lib/ruby/1.8/webrick/server.rb:92:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:23:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendering rescues/layout (not_found)
+  [4;35;1mSQL (0.3ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-05-31 16:47:55) [GET]
+
+ActionController::RoutingError (No route matches "/javascripts/jquery-ui.js" with {:method=>:get}):
+  /usr/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+  /usr/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+  /usr/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+  /usr/lib/ruby/1.8/webrick/server.rb:162:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+  /usr/lib/ruby/1.8/webrick/server.rb:95:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:92:in `each'
+  /usr/lib/ruby/1.8/webrick/server.rb:92:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:23:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendering rescues/layout (not_found)
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-05-31 16:47:55) [GET]
+
+ActionController::RoutingError (No route matches "/javascripts/jrails.js" with {:method=>:get}):
+  /usr/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+  /usr/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+  /usr/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+  /usr/lib/ruby/1.8/webrick/server.rb:162:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+  /usr/lib/ruby/1.8/webrick/server.rb:95:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:92:in `each'
+  /usr/lib/ruby/1.8/webrick/server.rb:92:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:23:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendering rescues/layout (not_found)
+  [4;35;1mSQL (0.3ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing StepsController#edit (for 127.0.0.1 at 2010-05-31 16:47:59) [GET]
+  Parameters: {"experiment_id"=>"5", "id"=>"11"}
+  [4;36;1mExperiment Columns (2.3ms)[0m   [0;1mSHOW FIELDS FROM `experiments`[0m
+  [4;35;1mExperiment Load (0.3ms)[0m   [0mSELECT * FROM `experiments` WHERE (`experiments`.`id` = 5) [0m
+  [4;36;1mStep Columns (2.2ms)[0m   [0;1mSHOW FIELDS FROM `steps`[0m
+  [4;35;1mStep Load (0.3ms)[0m   [0mSELECT * FROM `steps` WHERE (`steps`.`id` = 11 AND (`steps`.experiment_id = 5)) [0m
+Rendering template within layouts/steps
+Rendering steps/edit
+Completed in 116ms (View: 63, DB: 5) | 200 OK [http://localhost/experiments/5/steps/11/edit]
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-05-31 16:47:59) [GET]
+
+ActionController::RoutingError (No route matches "/javascripts/jquery-ui.js" with {:method=>:get}):
+  /usr/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+  /usr/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+  /usr/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+  /usr/lib/ruby/1.8/webrick/server.rb:162:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+  /usr/lib/ruby/1.8/webrick/server.rb:95:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:92:in `each'
+  /usr/lib/ruby/1.8/webrick/server.rb:92:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:23:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendering rescues/layout (not_found)
+  [4;35;1mSQL (0.4ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-05-31 16:47:59) [GET]
+
+ActionController::RoutingError (No route matches "/javascripts/jrails.js" with {:method=>:get}):
+  /usr/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+  /usr/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+  /usr/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+  /usr/lib/ruby/1.8/webrick/server.rb:162:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+  /usr/lib/ruby/1.8/webrick/server.rb:95:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:92:in `each'
+  /usr/lib/ruby/1.8/webrick/server.rb:92:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:23:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendering rescues/layout (not_found)
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-05-31 16:48:00) [GET]
+
+ActionController::RoutingError (No route matches "/javascripts/jquery-ui.js" with {:method=>:get}):
+  /usr/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+  /usr/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+  /usr/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+  /usr/lib/ruby/1.8/webrick/server.rb:162:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+  /usr/lib/ruby/1.8/webrick/server.rb:95:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:92:in `each'
+  /usr/lib/ruby/1.8/webrick/server.rb:92:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:23:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendering rescues/layout (not_found)
+  [4;35;1mSQL (0.3ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-05-31 16:48:00) [GET]
+
+ActionController::RoutingError (No route matches "/javascripts/jrails.js" with {:method=>:get}):
+  /usr/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+  /usr/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+  /usr/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+  /usr/lib/ruby/1.8/webrick/server.rb:162:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+  /usr/lib/ruby/1.8/webrick/server.rb:95:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:92:in `each'
+  /usr/lib/ruby/1.8/webrick/server.rb:92:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:23:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendering rescues/layout (not_found)
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing StepsController#update (for 127.0.0.1 at 2010-05-31 16:48:11) [PUT]
+  Parameters: {"experiment_id"=>"5", "step"=>{"title"=>"this is the title", "description"=>"i had no steps now i do", "step_order"=>"", "image"=>""}, "commit"=>"Update", "authenticity_token"=>"gx8D/fzoNsvegQnoa046+2Sla5OMkpo678wlFS6ciU4=", "id"=>"11"}
+  [4;35;1mExperiment Columns (2.8ms)[0m   [0mSHOW FIELDS FROM `experiments`[0m
+  [4;36;1mExperiment Load (0.3ms)[0m   [0;1mSELECT * FROM `experiments` WHERE (`experiments`.`id` = 5) [0m
+  [4;35;1mStep Columns (2.3ms)[0m   [0mSHOW FIELDS FROM `steps`[0m
+  [4;36;1mStep Load (0.3ms)[0m   [0;1mSELECT * FROM `steps` WHERE (`steps`.`id` = 11 AND (`steps`.experiment_id = 5)) [0m
+
+NoMethodError (You have a nil object when you didn't expect it!
+You might have expected an instance of ActiveRecord::Base.
+The error occurred while evaluating nil.[]):
+  app/controllers/steps_controller.rb:88:in `update'
+  /usr/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+  /usr/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+  /usr/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+  /usr/lib/ruby/1.8/webrick/server.rb:162:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+  /usr/lib/ruby/1.8/webrick/server.rb:95:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:92:in `each'
+  /usr/lib/ruby/1.8/webrick/server.rb:92:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:23:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendered rescues/_trace (180.5ms)
+Rendered rescues/_request_and_response (4.3ms)
+Rendering rescues/layout (internal_server_error)
+  [4;35;1mSQL (0.3ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing StepsController#update (for 127.0.0.1 at 2010-05-31 16:49:30) [PUT]
+  Parameters: {"experiment_id"=>"5", "step"=>{"title"=>"this is the title", "description"=>"i had no steps now i do", "step_order"=>"", "image"=>""}, "commit"=>"Update", "authenticity_token"=>"gx8D/fzoNsvegQnoa046+2Sla5OMkpo678wlFS6ciU4=", "id"=>"11"}
+  [4;36;1mExperiment Columns (2.5ms)[0m   [0;1mSHOW FIELDS FROM `experiments`[0m
+  [4;35;1mExperiment Load (0.3ms)[0m   [0mSELECT * FROM `experiments` WHERE (`experiments`.`id` = 5) [0m
+  [4;36;1mStep Columns (2.5ms)[0m   [0;1mSHOW FIELDS FROM `steps`[0m
+  [4;35;1mStep Load (0.3ms)[0m   [0mSELECT * FROM `steps` WHERE (`steps`.`id` = 11 AND (`steps`.experiment_id = 5)) [0m
+WARNING: Can't mass-assign these protected attributes: step_order
+  [4;36;1mSQL (0.2ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mStep Update (0.8ms)[0m   [0mUPDATE `steps` SET `updated_at` = '2010-05-31 22:49:30', `description` = 'i had no steps now i do' WHERE `id` = 11[0m
+  [4;36;1mSQL (72.6ms)[0m   [0;1mCOMMIT[0m
+Redirected to http://localhost:3003/experiments/5/steps/11
+Completed in 164ms (DB: 80) | 302 Found [http://localhost/experiments/5/steps/11]
+  [4;35;1mSQL (0.5ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing StepsController#show (for 127.0.0.1 at 2010-05-31 16:49:31) [GET]
+  Parameters: {"experiment_id"=>"5", "id"=>"11"}
+  [4;36;1mExperiment Columns (2.6ms)[0m   [0;1mSHOW FIELDS FROM `experiments`[0m
+  [4;35;1mExperiment Load (0.3ms)[0m   [0mSELECT * FROM `experiments` WHERE (`experiments`.`id` = 5) [0m
+  [4;36;1mStep Columns (2.7ms)[0m   [0;1mSHOW FIELDS FROM `steps`[0m
+  [4;35;1mStep Load (0.7ms)[0m   [0mSELECT * FROM `steps` WHERE (`steps`.`id` = 11 AND (`steps`.experiment_id = 5)) [0m
+Rendering template within layouts/steps
+Rendering steps/show
+Completed in 88ms (View: 33, DB: 7) | 200 OK [http://localhost/experiments/5/steps/11]
+  [4;36;1mSQL (0.4ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-05-31 16:49:31) [GET]
+
+ActionController::RoutingError (No route matches "/javascripts/jquery-ui.js" with {:method=>:get}):
+  /usr/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+  /usr/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+  /usr/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+  /usr/lib/ruby/1.8/webrick/server.rb:162:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+  /usr/lib/ruby/1.8/webrick/server.rb:95:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:92:in `each'
+  /usr/lib/ruby/1.8/webrick/server.rb:92:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:23:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendering rescues/layout (not_found)
+  [4;35;1mSQL (0.3ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-05-31 16:49:32) [GET]
+
+ActionController::RoutingError (No route matches "/javascripts/jrails.js" with {:method=>:get}):
+  /usr/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+  /usr/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+  /usr/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+  /usr/lib/ruby/1.8/webrick/server.rb:162:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+  /usr/lib/ruby/1.8/webrick/server.rb:95:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:92:in `each'
+  /usr/lib/ruby/1.8/webrick/server.rb:92:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:23:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendering rescues/layout (not_found)
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-05-31 16:49:32) [GET]
+
+ActionController::RoutingError (No route matches "/javascripts/jquery-ui.js" with {:method=>:get}):
+  /usr/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+  /usr/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+  /usr/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+  /usr/lib/ruby/1.8/webrick/server.rb:162:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+  /usr/lib/ruby/1.8/webrick/server.rb:95:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:92:in `each'
+  /usr/lib/ruby/1.8/webrick/server.rb:92:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:23:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendering rescues/layout (not_found)
+  [4;35;1mSQL (0.2ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-05-31 16:49:32) [GET]
+
+ActionController::RoutingError (No route matches "/javascripts/jrails.js" with {:method=>:get}):
+  /usr/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+  /usr/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+  /usr/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+  /usr/lib/ruby/1.8/webrick/server.rb:162:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+  /usr/lib/ruby/1.8/webrick/server.rb:95:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:92:in `each'
+  /usr/lib/ruby/1.8/webrick/server.rb:92:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:23:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendering rescues/layout (not_found)
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing StepsController#index (for 127.0.0.1 at 2010-05-31 18:14:57) [GET]
+  Parameters: {"experiment_id"=>"5"}
+  [4;35;1mExperiment Columns (2.3ms)[0m   [0mSHOW FIELDS FROM `experiments`[0m
+  [4;36;1mExperiment Load (0.3ms)[0m   [0;1mSELECT * FROM `experiments` WHERE (`experiments`.`id` = 5) [0m
+  [4;35;1mStep Load (0.9ms)[0m   [0mSELECT * FROM `steps` WHERE (`steps`.experiment_id = 5) ORDER BY step_order[0m
+Rendering template within layouts/steps
+Rendering steps/index
+  [4;36;1mStep Columns (2.2ms)[0m   [0;1mSHOW FIELDS FROM `steps`[0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM `experiments` WHERE (`experiments`.`id` = 5) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM `experiments` WHERE (`experiments`.`id` = 5) [0m
+Completed in 129ms (View: 79, DB: 6) | 200 OK [http://localhost/experiments/5/steps]
+  [4;35;1mSQL (0.3ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-05-31 18:14:58) [GET]
+
+ActionController::RoutingError (No route matches "/javascripts/jquery-ui.js" with {:method=>:get}):
+  /usr/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+  /usr/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+  /usr/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+  /usr/lib/ruby/1.8/webrick/server.rb:162:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+  /usr/lib/ruby/1.8/webrick/server.rb:95:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:92:in `each'
+  /usr/lib/ruby/1.8/webrick/server.rb:92:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:23:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendering rescues/layout (not_found)
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-05-31 18:14:58) [GET]
+
+ActionController::RoutingError (No route matches "/javascripts/jrails.js" with {:method=>:get}):
+  /usr/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+  /usr/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+  /usr/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+  /usr/lib/ruby/1.8/webrick/server.rb:162:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+  /usr/lib/ruby/1.8/webrick/server.rb:95:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:92:in `each'
+  /usr/lib/ruby/1.8/webrick/server.rb:92:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:23:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendering rescues/layout (not_found)
+  [4;35;1mSQL (0.2ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-05-31 18:14:58) [GET]
+
+ActionController::RoutingError (No route matches "/javascripts/jquery-ui.js" with {:method=>:get}):
+  /usr/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+  /usr/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+  /usr/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+  /usr/lib/ruby/1.8/webrick/server.rb:162:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+  /usr/lib/ruby/1.8/webrick/server.rb:95:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:92:in `each'
+  /usr/lib/ruby/1.8/webrick/server.rb:92:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:23:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendering rescues/layout (not_found)
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-05-31 18:14:59) [GET]
+
+ActionController::RoutingError (No route matches "/javascripts/jrails.js" with {:method=>:get}):
+  /usr/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+  /usr/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+  /usr/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+  /usr/lib/ruby/1.8/webrick/server.rb:162:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+  /usr/lib/ruby/1.8/webrick/server.rb:95:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:92:in `each'
+  /usr/lib/ruby/1.8/webrick/server.rb:92:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:23:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendering rescues/layout (not_found)
+  [4;35;1mSQL (0.2ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing ExperimentsController#index (for 127.0.0.1 at 2010-05-31 18:26:44) [GET]
+  [4;36;1mExperiment Load (0.4ms)[0m   [0;1mSELECT * FROM `experiments` [0m
+Rendering template within layouts/experiments
+Rendering experiments/index
+  [4;35;1mExperiment Columns (2.2ms)[0m   [0mSHOW FIELDS FROM `experiments`[0m
+Completed in 99ms (View: 74, DB: 3) | 200 OK [http://localhost/experiments]
