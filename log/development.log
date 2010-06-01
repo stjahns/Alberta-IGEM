@@ -8878,3 +8878,8 @@ Rendering template within layouts/experiments
 Rendering experiments/index
   [4;35;1mExperiment Columns (2.2ms)[0m   [0mSHOW FIELDS FROM `experiments`[0m
 Completed in 99ms (View: 74, DB: 3) | 200 OK [http://localhost/experiments]
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+  [4;35;1mSQL (76.8ms)[0m   [0mSHOW TABLES[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSELECT version FROM schema_migrations[0m
+  [4;35;1mExperiment Columns (2.0ms)[0m   [0mSHOW FIELDS FROM `experiments`[0m
+  [4;36;1mStep Columns (2.0ms)[0m   [0;1mSHOW FIELDS FROM `steps`[0m
