@@ -71,8 +71,13 @@ class StepsController < ApplicationController
     respond_to do |format|
       if @step.update_attributes(params[:step])
         flash[:notice] = 'Step was successfully updated.'
+	#format.js { render :partial => 'experiment/step', :layout => false and return  } 
         format.html { redirect_to([ @experiment, @step ]) }
-        format.xml  { head :ok }
+	#format.html { render :text => @step.description }
+        #format.xml  { head :ok }
+	format.xml  { render :xml => @step }
+	ActiveRecord::Base.include_root_in_json = false
+	format.js { render :json => @step }
       else
        format.html { render :action => "edit" }
       format.xml  { render :xml => @step.errors, :status => :unprocessable_entity }
