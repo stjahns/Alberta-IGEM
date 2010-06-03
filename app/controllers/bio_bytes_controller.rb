@@ -43,7 +43,7 @@ class BioBytesController < ApplicationController
 
   def delete
     #TODO test this
-    unless Part.find(:first, :condition => {:bio_byte_id => params[:id]})
+    unless Part.find(:first, :conditions => {:bio_byte_id => params[:id]})
       BioByte.find(params[:id]).destroy
     else
       #flash error - part exists in some construct
