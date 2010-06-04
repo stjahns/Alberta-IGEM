@@ -17,4 +17,30 @@
 
 </table>
 
-<%= link_to 'Back', {:action => 'index'} %>
+<h3>Annotations:</h3>
+<table>
+<tr><th>Name</th><th>Start</th><th>Stop</th></tr>
+<% @byte.annotations.each do |ann| %>
+<tr><td><%= ann.name %></td>
+    <td><%= ann.start %></td>
+    <td><%= ann.stop %></td>
+    <td><%= link_to "Edit", {:controller=> :annotations,
+                             :action=> :edit,
+                             :ann_id=> ann.id,
+                             :byte_id=> @byte.id} %><td>
+
+    <td><%= link_to "Delete", {:controller => :annotations,
+                               :action => :delete,
+                               :ann_id => ann.id,
+                               :byte_id => @byte.id} %></td>
+</tr>
+<% end %>
+<tr><td><%= link_to 'New', {:controller => :annotations,
+                            :action => 'new',
+                            :id => @byte.id} %></td></tr>
+</table>
+
+
+
+
+<p><%= link_to 'Back', {:action => 'index'} %></p>

@@ -1,4 +1,4 @@
-//get html formatted sequence with feature annotations
+//get html formatted sequence with feature partcoords
 function getFormattedSequence(){
   var seq = getSequence().toUpperCase();
   // need to figureout endpoint coordinates of each part
@@ -6,13 +6,13 @@ function getFormattedSequence(){
   var done = false;
   var index = 0;
   var outstring = '';
-  var line = 1;
+  var line = 4; //1=parts 2=forward 3= reverse 4=annotations
   var annindex = 0;
   
   outstring += "<table class=seqtable>";
   while (done == false){
     if (index < length){
-      // annotations
+      // partcoords
       if (line == 2){ // forward strand
 
 
@@ -52,7 +52,7 @@ function getFormattedSequence(){
         }
         outstring += reverse;
         outstring += "</td></tr>";
-        line = 1;
+        line = 4;
       }
       else if (line==1){ // part id labels
         var width=0;
@@ -63,11 +63,11 @@ function getFormattedSequence(){
 
         var lineparts = []; //the parts in the line
 
-        for (x in annotations){
-          var id = annotations[x][0];
-          var srt = annotations[x][1];
-          var stp = annotations[x][2];
-          var type = annotations[x][3];
+        for (x in partcoords){
+          var id = partcoords[x][0];
+          var srt = partcoords[x][1];
+          var stp = partcoords[x][2];
+          var type = partcoords[x][3];
 
           if (srt >= start && srt <= stop){
             //chunk starts on this line
@@ -123,6 +123,113 @@ function getFormattedSequence(){
         forward = '';
         annindex = stop;
       }
+      else if (line == 4){ //annotations
+      //NB must add spacer div if 2 parts not touching on same line
+
+        var width=0;
+        outstring += "<tr><td></td><td>";
+
+        var start = annindex;
+        var stop = annindex + 100; 
+
+        var lineparts = []; //the parts in the line ---> [3] is OFFSET
+
+        for (x in partcoords){
+          var id = partcoords[x][0];
+          var srt = partcoords[x][1];
+          var stp = partcoords[x][2];
+          // old var type = partcoords[x][3];
+          var byte_id = partcoords[x][4];
+
+          if (srt >= start && srt <= stop){
+            //chunk starts on this line
+            //stops?
+            if (stp < stop){
+              //stops before end
+              lineparts.push([id, srt, stp, 0, byte_id]);
+            }
+            else{
+              //goes to end
+              lineparts.push([id, srt, stop, 0, byte_id]);
+            }
+          }
+          else if (stp >= start && stp <= stop){//these next two guys need offset information
+            //chunk goes from before start of line to somewhere in the middle
+            var offset = start - srt; // amount of part already displayd
+            lineparts.push([id, start, stp, offset, byte_id]);
+          }
+          else if (stp > stop && srt < start){
+            //chunk takes up whole line
+            var offset = start - srt;
+            lineparts.push([id, start, stop, offset, byte_id]);
+          }
+          else{
+            // part isn't on this line
+          }
+        }
+          
+        var annprint = []; // 
+        //loop for each part on line
+        for (i in lineparts){
+          //iterate for each annotation of the part(biobyte)
+          //lineparts[i][0] is the name of the biobyte -need id, got it in lineparts[i][4]
+          //look for byte_id in annotations
+          for(a in annotations){
+            if (annotations[a].bio_byte_id == lineparts[i][4]){
+              var offset = lineparts[i][1]-lineparts[i][3];
+              //Does annotation start on this line?
+              if(annotations[a].start+offset > annindex && 
+                 annotations[a].start+offset < annindex + 100) {
+                //does it also stop?
+                if(annotations[a].stop+offset > annindex &&
+                    annotations[a].stop+offset < annindex + 100){ //starts and stops on this line
+                  outstring += "<div class='annotation' style='position:relative;"
+                            +  "left:" + (annotations[a].start+offset-annindex) + "ex;"
+                            +  "width:" + (annotations[a].stop-annotations[a].start)  + "ex;"
+                            +  "background-color:" + (annotations[a].colour) + ";"
+                            +  "border:1px solid #333'><div class='ann_label'>" + annotations[a].name + "</div></div>";
+                }
+                else{ //starts, flows over line
+                  outstring += "<div class='annotation' style='position:relative;"
+                            +  "left:" + (annotations[a].start+offset-annindex) + "ex;"
+                            +  "width:" + (100-(annotations[a].start+offset-annindex)) + "ex;"
+                            +  "background-color:" + (annotations[a].colour) + ";"
+                            +  "border:1px solid #333'><div class='ann_label'>" + annotations[a].name + "</div></div>";
+                }
+              }
+              //Does annotation not start, but does stop on this line?
+              else if(annotations[a].stop+offset > annindex &&
+                annotations[a].stop+offset < annindex + 100) {
+                outstring += "<div class='annotation' style='position:relative;"
+                            +  "left:" + 0 + "ex;"
+                            +  "width:" + (annotations[a].stop+offset - annindex) + "ex;"
+                            +  "background-color:" + (annotations[a].colour) + ";"
+                            +  "border:1px solid #333'><div class='ann_label'>" + annotations[a].name + "</div></div>";
+              }
+              //does annotation blow through the line?
+              if(annotations[a].start+offset < annindex &&
+                annotations[a].stop+offset > annindex + 100) {
+                //easy to deal with assuming no overlap...
+                outstring += "<div class='annotation' style='width:100ex;background-color:"
+                              + annotations[a].colour + ";border:1px solid #333'><div class='ann_label'>"
+                              + annotations[a].name + "</div></div>";
+              }
+
+            }
+          }
+
+        }
+
+        //loop back?
+        outstring += "&nbsp</td></tr>";         
+        line = 1;
+        forward = '';
+        annindex = start;//change
+      }
+
+
+
+      
     }
     else{
       done = true;
@@ -161,7 +268,7 @@ function getFormattedSequence(){
 function getSequence(){
 
   var seq = '';
-  annotations = [];
+  partcoords = [];
   var parts = $('ol#parts_list').sortable('toArray');
   //have array of part_id strings
   //need to get the byte id numbers isolated (middle)
@@ -172,7 +279,7 @@ function getSequence(){
   }
   //ok, now get sequence corresponding to each byte 
   //and add to sequence string
-  // TODO this is some really fucking shitty code
+  // TODO fix this 
   for (i in parts){
     for (j in orfs){
       if (parts[i]==orfs[j].id){
@@ -180,7 +287,8 @@ function getSequence(){
         seq += orfs[j].sequence;
         var second = seq.length;
         var id = orfs[j].name;
-        annotations.push( [id, first, second, "orf"]);
+        var byte_id = orfs[j].id;
+        partcoords.push( [id, first, second, "orf", byte_id]);
       }
     }
     for (j in linkers){
@@ -189,7 +297,8 @@ function getSequence(){
         seq += linkers[j].sequence;
         var second = seq.length;
         var id = linkers[j].name;
-        annotations.push( [id, first, second, "linker"]);
+        var byte_id = linkers[j].id;
+        partcoords.push( [id, first, second, "linker", byte_id]);
       }
     }
   }

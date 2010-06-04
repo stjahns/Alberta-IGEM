@@ -9,7 +9,21 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100517155109) do
+ActiveRecord::Schema.define(:version => 20100603151147) do
+
+  create_table "annotations", :force => true do |t|
+    t.string   "name"
+    t.integer  "bio_byte_id"
+    t.string   "description"
+    t.string   "img_file_name"
+    t.string   "colour"
+    t.integer  "start"
+    t.integer  "stop"
+    t.integer  "strand"
+    t.string   "author"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "bio_bytes", :force => true do |t|
     t.string   "type"

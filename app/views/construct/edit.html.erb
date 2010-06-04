@@ -9,7 +9,7 @@ TODO - Sequence annotation
 
   var orfs;
   var linkers;
-  var annotations=[]; //needed for getFormattedSequence() to store annotation info
+  var partcoords=[]; //needed for getFormattedSequence() to store annotation info
                    //2d array [ [start, stop, name, type], [... ]]
   //if any changes made..
   var changes = false;
@@ -25,6 +25,7 @@ TODO - Sequence annotation
         success: function(data){
           orfs = data.orfs;
           linkers = data.linkers;
+          annotations = data.annotations;
           $("#sequence").html(getFormattedSequence());
         }
       })

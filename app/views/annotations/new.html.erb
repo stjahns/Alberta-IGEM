@@ -1,0 +1,25 @@
+<h1>New Annotation for <%=@byte.name%></h1>
+
+<% form_tag :action => 'create', :byte_id => @byte.id do %>
+  <p><label for="annotation_name">Name</label>
+  <%= text_field 'annotation', 'name' %></p>
+  <p><label for="annotation_description">Description</label>
+  <%= text_field 'annotation', 'description' %></p>
+  <p><label for="annotation_strand">Strand</label>
+  <select name="annotation[strand]">
+    <option value=1>Forward</option>
+    <option value=0>Reverse</option>
+  </select></p>
+  <p><label for="annotation_start">Start</label>
+  <%= text_field 'annotation', 'start' %></p>
+  <p><label for="annotation_stop">Stop</label>
+  <%= text_field 'annotation', 'stop' %></p>
+  <p><label for="annotation_author">Author</label>
+  <%= text_field 'annotation', 'author' %></p>
+  <p><label for="annotation_colour">Colour</label>
+  <%= text_field 'annotation', 'colour' %></p>
+
+  <%= submit_tag "Create" %>
+<% end %>
+
+<%= link_to 'Back', {:controller => :bio_bytes, :action => 'edit', :id =>@byte.id } %>
