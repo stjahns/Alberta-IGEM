@@ -1,12 +1,17 @@
 class ConstructController < ApplicationController
 
+  before_filter :login_required, :except => :index
+  before_filter :is_owner?, :only => [:edit, :delete]
+
   def index
     @constructs = Construct.find(:all)
   end
 
   def edit
+    #do you have permission?
     @construct = Construct.find(params[:id])
     @order = @construct.part_order
+
   end
 
   def delete
@@ -20,6 +25,7 @@ class ConstructController < ApplicationController
 
   def create
     @construct = Construct.new(params[:construct])
+    @construct.author = current_user.login
 #TODO add validation
     if @construct.save
       redirect_to :action => :index
@@ -28,21 +34,6 @@ class ConstructController < ApplicationController
     end
   end
 
-#TODO plan to deprecate
-  def delete_part
-
-    @construct = Construct.find(params[:id])
-    
-    @part = Part.find(params[:part_id])
-    @part.destroy
-    
-    @construct.part_order
-    @construct.save
-    
-    redirect_to :action => :edit, :id => @construct.id
-
-  end 
-  
   def get_data
     
     orfs = ORF.find(:all)
@@ -100,6 +91,15 @@ class ConstructController < ApplicationController
     #gotta return the ids of new parts
     render :json => { :part_ids => partids }
 
+  end
+
+  private
+
+  def is_owner?
+    construct = Construct.find(params[:id])
+    unless current_user.login == construct.author
+      redirect_to :controller => :construct, :action => :index
+    end
   end
   
    

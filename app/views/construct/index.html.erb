@@ -2,9 +2,12 @@
 
 <ul>
 <% @constructs.each do |const| %>
-  <li><%=const.name %> | 
+  <li><%=const.name  %>
+  <% if can_modify(const) %> 
+      | 
       <%= link_to "Edit", {:action => :edit, :id => const.id} %> | 
       <%= link_to "Delete", {:action => :delete, :id => const.id} %> 
+  <%end%>
 <% end %>
 </ul>
 
