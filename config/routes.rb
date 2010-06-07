@@ -12,7 +12,7 @@ ActionController::Routing::Routes.draw do |map|
   map.connect 'experiments/:experiment_id/steps/:id', :controller => 'steps', :action => 'upload', :upload => :post
 
   # make steps send image dat
-  map.connect 'experiments/:experiment_id/steps/:id', :controller => 'steps', :action => 'image', :image => :get
+  map.step_image 'experiments/:experiment_id/steps/:id', :controller => 'steps', :action => 'image', :image => :get
 
 
   # The priority is based upon order of creation: first created -> highest priority.

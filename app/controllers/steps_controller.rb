@@ -1,6 +1,7 @@
 class StepsController < ApplicationController
   before_filter :get_event
 
+
   def get_event
     @experiment = Experiment.find(params[:experiment_id])
   end
@@ -88,15 +89,28 @@ class StepsController < ApplicationController
   require 'fileutils'
   def upload
     @step = @experiment.steps.find(params[:id])
-    #@image = ImageFile.new
-    @image = ImageFile.save(params[:file])
-    @step.image = @image 
+    @image = ImageFile.new(params[:file])
+    
+    if @image.save 
+	params[:file].original_filename
+    	@step.image = photo_url(@image) 
+    	redirect_to_photo_url(@image)
+    else
+	    flash[:notice] = 'your photo did not save!'
+	    render :action => 'new'
+    end
+
+  
+#    @step = @experiment.steps.find(params[:id])
+#    #@image = ImageFile.new
+#    @image = ImageFile.save(params[:file])
+#    @step.image = @image 
 
 #    respond_to do |format|
 #        format.js {} 
 #    end
 #    ImageFile.save(params[:upload])
-    render :text => "File has been uploaded succesfully"
+#    render :text => "File has been uploaded succesfully"
   end
 
   # make a path that will send image data for an image

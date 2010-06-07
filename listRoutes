@@ -16,4 +16,5 @@ edit_experiment_step GET    /experiments/:experiment_id/steps/:id/edit(.:format)
                 root        /                                                    {:action=>"index", :controller=>"home"}
                             /:controller/:action/:id                             
                             /:controller/:action/:id(.:format)                   
-                            /experiments/:experiment_id/steps/:id                {:action=>"upload", :controller=>"steps"}
+                            /experiments/:experiment_id/steps/:id                {:upload=>:post, :action=>"upload", :controller=>"steps"}
+          stepImages        /experiments/:experiment_id/steps/:id                {:action=>"image", :image=>:get, :controller=>"steps"}
