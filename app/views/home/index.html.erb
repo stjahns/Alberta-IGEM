@@ -5,5 +5,9 @@
   <body>
   <p><%= link_to "Parts Bin", {:controller=>:bio_bytes} %></p>
   <p><%= link_to "Construct Designer", {:controller => :construct} %></p>
+  <div id = 'content'>
+    <h2><%= flash[:notice]%></h2>
+    <%=yield%>
+  </div>
   </body>
 </html>
