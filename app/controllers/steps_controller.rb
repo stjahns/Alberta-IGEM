@@ -85,28 +85,36 @@ class StepsController < ApplicationController
    end
   end
 
-  # called after editing an item
-  # PUT /items/1
-  # PUT /items/1.xml
-#  def update
- #   @item = @experiment.steps.find(params[:id])
-  #  dc_ds = params[:item][:dc_ds]
-#    #read and write the DC datastream...
- #   @dc_ds = DC_datastream.new(:id => params[:item][:id])
-  #  puts 'params update:'
-   # pp params
+  require 'fileutils'
+  def upload
+    @step = @experiment.steps.find(params[:id])
+    #@image = ImageFile.new
+    @image = ImageFile.save(params[:file])
+    @step.image = @image 
 
-  #  keys = params[:dc_datastream_solr].keys
-  #  k = keys.first
-    #params[:dc_datastream_solr].each_key do |k|
-  #    @dc_ds.send k.to_s+'=',params[:dc_datastream_solr][k]
-    #end    
+#    respond_to do |format|
+#        format.js {} 
+#    end
+#    ImageFile.save(params[:upload])
+    render :text => "File has been uploaded succesfully"
+  end
 
- #   @dc_ds.save_to_fedora
+  # make a path that will send image data for an image
+  def image
+    @step = @experiment.steps.find(params[:id])
+    if @image = ImageFile.find_by_file_name(@step.image)
+      send_data(
+        @image.file_data, 
+        :type => @image.content_type,
+        :filename => @image.file_name,
+        :disposition => 'inline'
+      )
+    else
+      render :file => "#{RAILS_ROOT}/public/404.html", :status => 404
+    end
+  end
 
-  #  render :text => params[:dc_datastream_solr][k]
-#  end
-
+  
   # DELETE /steps/1
   # DELETE /steps/1.xml
   def destroy

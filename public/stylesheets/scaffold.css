@@ -75,12 +75,14 @@ a:hover { color: #fff; background-color:#000; }
   color: #fff;
 }
 
-div.stepView
-{
+div.step {
 width:400px;
 padding:10px;
 border:5px solid gray;
 margin:0px;
 }
 
-
+textarea {
+  rows:4;
+  cols:80;
+}

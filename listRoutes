@@ -1,0 +1,19 @@
+(in /home/mike/Alberta-IGEM)
+    experiment_steps GET    /experiments/:experiment_id/steps(.:format)          {:action=>"index", :controller=>"steps"}
+                     POST   /experiments/:experiment_id/steps(.:format)          {:action=>"create", :controller=>"steps"}
+ new_experiment_step GET    /experiments/:experiment_id/steps/new(.:format)      {:action=>"new", :controller=>"steps"}
+edit_experiment_step GET    /experiments/:experiment_id/steps/:id/edit(.:format) {:action=>"edit", :controller=>"steps"}
+     experiment_step GET    /experiments/:experiment_id/steps/:id(.:format)      {:action=>"show", :controller=>"steps"}
+                     PUT    /experiments/:experiment_id/steps/:id(.:format)      {:action=>"update", :controller=>"steps"}
+                     DELETE /experiments/:experiment_id/steps/:id(.:format)      {:action=>"destroy", :controller=>"steps"}
+         experiments GET    /experiments(.:format)                               {:action=>"index", :controller=>"experiments"}
+                     POST   /experiments(.:format)                               {:action=>"create", :controller=>"experiments"}
+      new_experiment GET    /experiments/new(.:format)                           {:action=>"new", :controller=>"experiments"}
+     edit_experiment GET    /experiments/:id/edit(.:format)                      {:action=>"edit", :controller=>"experiments"}
+          experiment GET    /experiments/:id(.:format)                           {:action=>"show", :controller=>"experiments"}
+                     PUT    /experiments/:id(.:format)                           {:action=>"update", :controller=>"experiments"}
+                     DELETE /experiments/:id(.:format)                           {:action=>"destroy", :controller=>"experiments"}
+                root        /                                                    {:action=>"index", :controller=>"home"}
+                            /:controller/:action/:id                             
+                            /:controller/:action/:id(.:format)                   
+                            /experiments/:experiment_id/steps/:id                {:action=>"upload", :controller=>"steps"}
