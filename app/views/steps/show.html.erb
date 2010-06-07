@@ -1,0 +1,24 @@
+<p>
+  <b>Description:</b>
+  <%=h @step.description %>
+</p>
+
+<p>
+  <b>Title:</b>
+  <%=h @step.title %>
+</p>
+
+<p>
+  <b>Image:</b>
+  <%=h @step.image %>
+  <img src= <%="image" %> alt = "i am an image">  
+</p>
+<p>
+  <b>Experiment:</b>
+  <%=h @step.experiment_id %>
+</p>
+
+
+
+<%= link_to 'Edit', edit_experiment_step_path(@experiment) %> |
+<%= link_to 'Back', experiment_steps_path(@experiment) %>

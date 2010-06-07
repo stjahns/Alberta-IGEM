@@ -1,0 +1,29 @@
+<h1>Editing step</h1>
+
+<% form_for([ @experiment,  @step ]) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :title %><br />
+    <%= f.text_field :title %>
+  </p>
+  <p>
+    <%= f.label :description %><br />
+    <%= f.text_area :description %>
+  </p>
+  <p>
+    <%= f.label :step_order %><br />
+    <%= f.text_field :step_order %>
+  </p> 
+  <p>
+    <%= f.submit 'Update' %>
+  </p>
+<% end %>
+
+<% form_tag experiment_step_path(@experiment,@step),:action => 'upload', :multipart => "true", :html => {:method => 'put'} do  %>
+	<p><%= file_field_tag("file") %></p>
+	<p><%= submit_tag 'Upload' %></p>
+<% end %>
+
+<%= link_to 'Show', experiment_step_path( @experiment, @step ) %> |
+<%= link_to 'Back', experiment_steps_path( @experiment ) %>

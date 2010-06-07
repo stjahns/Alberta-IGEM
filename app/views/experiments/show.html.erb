@@ -1,0 +1,37 @@
+<p>
+  <b>Title:</b>
+  <%=h @experiment.title %>
+</p>
+
+<p>
+  <b>Authour:</b>
+  <%=h @experiment.authour %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%=h @experiment.description %>
+</p>
+
+<p>
+  <b>Published:</b>
+  <%=h @experiment.published %>
+</p>
+
+<p>
+  <b>Image:</b>
+  <%=h @experiment.image %>
+</p>
+
+<% unless @experiment.steps.empty? %>
+    
+  <p> 
+    <b>Steps:</b>
+    <%= render :partial => "step", :collection => @steps %>
+  </p>
+<% end %>
+
+<%= link_to 'Add_Step', new_experiment_step_path(@experiment) %> |
+<%= link_to 'Edit Description', edit_experiment_path(@experiment) %> |
+<%= link_to 'Edit Steps', experiment_steps_path(@experiment) %> |
+<%= link_to 'List experiments', experiments_path %>

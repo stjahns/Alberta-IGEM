@@ -8,6 +8,21 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :users
 
   map.resource :session
+  #map.resources :steps
+
+  map.resources :experiments, :has_many => :steps
+
+  map.root :controller => "home"
+
+  map.connect ':controller/:action/:id'
+  map.connect ':controller/:action/:id.:format'
+  
+  # image upload route to steps 
+  map.connect 'experiments/:experiment_id/steps/:id', :controller => 'steps', :action => 'upload', :upload => :post
+
+  # make steps send image dat
+  map.step_image 'experiments/:experiment_id/steps/:id', :controller => 'steps', :action => 'image', :image => :get
+
 
   # The priority is based upon order of creation: first created -> highest priority.
 
@@ -48,10 +63,4 @@ ActionController::Routing::Routes.draw do |map|
   # Install the default routes as the lowest priority.
   # Note: These default routes make all actions in every controller accessible via GET requests. You should
   # consider removing or commenting them out if you're using named routes and resources.
-
-  map.root :controller => "home"
-
-  map.connect ':controller/:action'
-  map.connect ':controller/:action/:id'
-  map.connect ':controller/:action/:id.:format'
 end

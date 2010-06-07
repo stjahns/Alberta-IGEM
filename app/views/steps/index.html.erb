@@ -1,0 +1,25 @@
+<h1>Listing steps</h1>
+
+<table>
+  <tr>
+    <th>Description</th>
+    <th>Title</th>
+    <th>Image</th>
+  </tr>
+
+<% @steps.each do |step| %>
+  <tr>
+    <td><%=h step.description %></td>
+    <td><%=h step.title %></td>
+    <td><%=h step.image %></td>
+    <td><%= link_to 'Show', experiment_step_path( step.experiment, step ) %></td>
+    <td><%= link_to 'Edit', edit_experiment_step_path(step.experiment, step) %></td>
+    <td><%= link_to 'Destroy', experiment_step_path( step.experiment, step ), :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+<%= link_to 'New step', new_experiment_step_path(@experiment) %> | 
+<%= link_to 'Finshed Editing', experiment_path(@experiment) %> |
+<%= link_to 'List experiments', experiments_path %>
