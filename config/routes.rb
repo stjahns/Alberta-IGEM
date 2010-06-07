@@ -12,7 +12,7 @@ ActionController::Routing::Routes.draw do |map|
 
   map.resources :experiments, :has_many => :steps
 
-  map.root :controller => "home"
+  map.root   
 
   map.connect ':controller/:action/:id'
   map.connect ':controller/:action/:id.:format'
