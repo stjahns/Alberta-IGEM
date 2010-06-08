@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20100526205252
+# Schema version: 20100608193844
 #
 # Table name: steps
 #
@@ -11,6 +11,7 @@
 #  updated_at    :datetime
 #  experiment_id :integer(4)
 #  step_order    :integer(4)
+#  image_file_id :integer(4)
 #
 
 class Step < ActiveRecord::Base

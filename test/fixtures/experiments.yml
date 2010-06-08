@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20100526205252
+# Schema version: 20100608193844
 #
 # Table name: experiments
 #

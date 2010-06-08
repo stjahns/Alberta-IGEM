@@ -1,0 +1,9 @@
+# app/views/show.jpg.flexi
+@image.operate do |image|
+  image.resize '640x480'
+ # image.border :size => 10, :color => 'green'
+ # image.text 'I like Cheese'
+ # image.unsharp_mask  
+ # image.shadow
+end
+
