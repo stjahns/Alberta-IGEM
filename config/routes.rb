@@ -1,4 +1,6 @@
 ActionController::Routing::Routes.draw do |map|
+  map.resources :images
+
   #map.resources :steps
 
   map.resources :experiments, :has_many => :steps
@@ -11,7 +13,7 @@ ActionController::Routing::Routes.draw do |map|
   # image upload route to steps 
   map.connect 'experiments/:experiment_id/steps/:id', :controller => 'steps', :action => 'upload', :upload => :post
 
-  # make steps send image dat
+  # make steps send image data
   map.step_image 'experiments/:experiment_id/steps/:id', :controller => 'steps', :action => 'image', :image => :get
 
 

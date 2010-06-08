@@ -92,8 +92,8 @@ class StepsController < ApplicationController
     @image = ImageFile.new(params[:file])
     
     if @image.save 
-	params[:file].original_filename
-    	@step.image = photo_url(@image) 
+	#params[:file].original_filename
+    	@step.image_file_id = @image.id 
     	redirect_to_photo_url(@image)
     else
 	    flash[:notice] = 'your photo did not save!'
