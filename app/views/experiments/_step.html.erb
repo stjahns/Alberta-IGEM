@@ -2,6 +2,7 @@
   <span class="step_view">
 	  <p><b>Step <%=h " #{ step.step_order }" %>  :</b></br> 
 	  <%= step.title %></p>
+	  <p><%= image_tag step_image_path( step.image ) %></p>
 	  <p class= 'description'  ><%=h step.description %>
 	  </p>
   </span>

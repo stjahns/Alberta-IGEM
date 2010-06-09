@@ -80,8 +80,8 @@ class StepsController < ApplicationController
 	ActiveRecord::Base.include_root_in_json = false
 	format.js { render :json => @step }
       else
-       format.html { render :action => "edit" }
-      format.xml  { render :xml => @step.errors, :status => :unprocessable_entity }
+        format.html { render :action => "edit" }
+        format.xml  { render :xml => @step.errors, :status => :unprocessable_entity }
       end
    end
   end
@@ -89,44 +89,32 @@ class StepsController < ApplicationController
   require 'fileutils'
   def upload
     @step = @experiment.steps.find(params[:id])
-    @image = ImageFile.new(params[:file])
+    
+    unless @step.image.blank?
+	 @step.image.destroy
+    end
+    @image = Image.create(:step_id => @step, :image_file => params[:file])
+
     
     if @image.save 
 	#params[:file].original_filename
-    	@step.image_file_id = @image.id 
-    	redirect_to_photo_url(@image)
+    	@step.image = @image 
+    	redirect_to([@experiment,@step])
     else
 	    flash[:notice] = 'your photo did not save!'
 	    render :action => 'new'
     end
-
-  
-#    @step = @experiment.steps.find(params[:id])
-#    #@image = ImageFile.new
-#    @image = ImageFile.save(params[:file])
-#    @step.image = @image 
-
-#    respond_to do |format|
-#        format.js {} 
-#    end
-#    ImageFile.save(params[:upload])
-#    render :text => "File has been uploaded succesfully"
   end
 
   # make a path that will send image data for an image
-  def image
-    @step = @experiment.steps.find(params[:id])
-    if @image = ImageFile.find_by_file_name(@step.image)
-      send_data(
-        @image.file_data, 
-        :type => @image.content_type,
-        :filename => @image.file_name,
-        :disposition => 'inline'
-      )
-    else
-      render :file => "#{RAILS_ROOT}/public/404.html", :status => 404
-    end
-  end
+  #def image
+  #  @step = @experiment.steps.find(params[:id])
+  #  if @image = @step.image
+  #    redirect_to( @image, :format => 'jpg' )
+  #  else
+  #    render :file => "#{RAILS_ROOT}/public/404.html", :status => 404
+  #  end
+  #end
 
   
   # DELETE /steps/1

@@ -14,7 +14,14 @@ edit_experiment_step GET    /experiments/:experiment_id/steps/:id/edit(.:format)
                      PUT    /experiments/:id(.:format)                           {:action=>"update", :controller=>"experiments"}
                      DELETE /experiments/:id(.:format)                           {:action=>"destroy", :controller=>"experiments"}
                 root        /                                                    {:action=>"index", :controller=>"home"}
+              images GET    /images(.:format)                                    {:action=>"index", :controller=>"images"}
+                     POST   /images(.:format)                                    {:action=>"create", :controller=>"images"}
+           new_image GET    /images/new(.:format)                                {:action=>"new", :controller=>"images"}
+          edit_image GET    /images/:id/edit(.:format)                           {:action=>"edit", :controller=>"images"}
+               image GET    /images/:id(.:format)                                {:action=>"show", :controller=>"images"}
+                     PUT    /images/:id(.:format)                                {:action=>"update", :controller=>"images"}
+                     DELETE /images/:id(.:format)                                {:action=>"destroy", :controller=>"images"}
+               thumb        /images/thumb/:id                                    {:action=>"thumb", :controller=>"images"}
+          step_image        /images/step/:id                                     {:action=>"step", :controller=>"images"}
                             /:controller/:action/:id                             
                             /:controller/:action/:id(.:format)                   
-                            /experiments/:experiment_id/steps/:id                {:upload=>:post, :action=>"upload", :controller=>"steps"}
-          stepImages        /experiments/:experiment_id/steps/:id                {:action=>"image", :image=>:get, :controller=>"steps"}

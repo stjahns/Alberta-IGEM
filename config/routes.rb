@@ -1,21 +1,35 @@
 ActionController::Routing::Routes.draw do |map|
-  map.resources :images
-
+  
+ 
   #map.resources :steps
-
   map.resources :experiments, :has_many => :steps
+
+ 
+############ various routes i was trying out
+  # map.resources :experiments do |e|
+ #	  e.resources :has_many => :steps , :member => { :upload => :post }
+ # end
+#  map.resources :steps, :member => { :upload => :post }
+############
 
   map.root :controller => "home"
 
+  # routes for images
+  map.resources :images
+  #map.resources :images, :member => {:thumb => :get, :step => 'get' }
+  map.thumb 'images/thumb/:id', :controller => 'images', :action => 'thumb' 
+  map.step_image 'images/step/:id', :controller => 'images', :action => 'step'
+
+  # image upload route to steps 
+ # map.connect 'experiments/:experiment_id/steps/:id', :controller => 'steps', :action => 'upload', :upload => :post
+
+  # make steps send image data
+#  map.step_image 'experiments/:experiment_id/steps/:id', :controller => 'steps', :action => 'image', :image => :get
+ 
+  # default routes
   map.connect ':controller/:action/:id'
   map.connect ':controller/:action/:id.:format'
   
-  # image upload route to steps 
-  map.connect 'experiments/:experiment_id/steps/:id', :controller => 'steps', :action => 'upload', :upload => :post
-
-  # make steps send image data
-  map.step_image 'experiments/:experiment_id/steps/:id', :controller => 'steps', :action => 'image', :image => :get
-
 
   # The priority is based upon order of creation: first created -> highest priority.
 

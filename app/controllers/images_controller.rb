@@ -1,5 +1,21 @@
 class ImagesController < ApplicationController
-  # GET /images
+
+### added image return types
+  # Get /images/1/thumb
+  def thumb
+    @image = Image.find(params[:id])
+    render :inline => "@image.operate {|p| p.resize '100x100'}", :type => :flexi
+  end
+  
+  # GET /images/1/step
+  def step
+    @image = Image.find(params[:id])
+    render :inline => "@image.operate {|p| p.resize '300x300'}", :type => :flexi
+  end
+###################################3
+
+# regular actions 
+ # GET /images
   # GET /images.xml
   def index
     @images = Image.all
@@ -16,7 +32,7 @@ class ImagesController < ApplicationController
     @image = Image.find(params[:id])
 
     respond_to do |format|
-      format.jpg   # show.jpg.flexi (http://mysite.com/photos/123.jpg)
+      format.jpg   # show.jpg.flexi 
       format.html # show.html.erb
       format.xml  { render :xml => @image }
     end

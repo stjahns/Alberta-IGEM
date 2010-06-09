@@ -1,7 +1,3 @@
-<p>
-  <b>Description:</b>
-  <%=h @step.description %>
-</p>
 
 <p>
   <b>Title:</b>
@@ -9,10 +5,21 @@
 </p>
 
 <p>
-  <b>Image:</b>
-  <%=h @step.image %>
-  <img src="<%='images/' + @step.image %>" alt = "i am an image">  
+  <b>Description:</b>
+  <%=h @step.description %>
 </p>
+
+
+<%  if !@step.image.blank? %>
+	<p><%= image_tag image_path(@step.image, :jpg ) %></p>
+	<p><%= image_tag thumb_path(@step.image ) %></p>
+<% else %>
+  <p>
+    There is no image.
+    <%= link_to 'Upload one now!', edit_experiment_step_path(@experiment,@step) %>
+ </p>
+<% end %>
+
 <p>
   <b>Experiment:</b>
   <%=h @step.experiment_id %>

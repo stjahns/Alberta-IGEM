@@ -17,4 +17,5 @@
 class Step < ActiveRecord::Base
   attr_accessible :title, :description, :image, :experiment_id, :order
   belongs_to :experiment
+  has_one :image
 end

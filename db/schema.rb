@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100608193844) do
+ActiveRecord::Schema.define(:version => 20100608222653) do
 
   create_table "experiments", :force => true do |t|
     t.string   "title"
@@ -37,17 +37,17 @@ ActiveRecord::Schema.define(:version => 20100608193844) do
     t.integer  "image_height"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "step_id"
   end
 
   create_table "steps", :force => true do |t|
     t.text     "description"
     t.string   "title"
-    t.string   "image"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "experiment_id"
     t.integer  "step_order"
-    t.integer  "image_file_id"
+    t.integer  "image_id"
   end
 
 end
