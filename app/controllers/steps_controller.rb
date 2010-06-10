@@ -152,8 +152,8 @@ class StepsController < ApplicationController
     unless @step.image.blank?
 	 @step.image.destroy
     end
-    @image = Image.create(:step_id => @step, :image_file => params[:file])
-
+    @image = Image.new(params[:step])
+    @image.step_id = @step.id
     
     if @image.save 
 	#params[:file].original_filename
@@ -161,7 +161,7 @@ class StepsController < ApplicationController
     	redirect_to([@experiment,@step])
     else
 	    flash[:notice] = 'your photo did not save!'
-	    render :action => 'new'
+	    render :action => 'edit'
     end
   end
   

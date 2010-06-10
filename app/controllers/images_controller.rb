@@ -12,7 +12,7 @@ class ImagesController < ApplicationController
     @image = Image.find(params[:id])
     render :inline => "@image.operate {|p| p.resize '300x300'}", :type => :flexi
   end
-###################################3
+###################################
 
 # regular actions 
  # GET /images
