@@ -14,7 +14,7 @@
     <td><% if step.image.blank? %>
 	    <%= 'no image' %>
     <% else %>
-    	    <%= image_tag thumb_path( step.image ) %>
+    	    <%= image_tag thumb_image_path( step.image ) %>
     <% end %></td>
     <td><%= link_to 'Show', experiment_step_path( step.experiment, step ) %></td>
     <td><%= link_to 'Edit', edit_experiment_step_path(step.experiment, step) %></td>

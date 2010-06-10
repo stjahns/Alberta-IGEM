@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20100608193844
+# Schema version: 20100608222653
 #
 # Table name: experiments
 #
@@ -14,6 +14,6 @@
 #
 
 class Experiment < ActiveRecord::Base
-  attr_accessible :title, :authour, :description, :published, :image
+  attr_accessible :title, :authour, :description, :published
   has_many :steps  
 end

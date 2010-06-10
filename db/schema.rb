@@ -9,14 +9,13 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100608222653) do
+ActiveRecord::Schema.define(:version => 20100609213516) do
 
   create_table "experiments", :force => true do |t|
     t.string   "title"
     t.string   "authour"
     t.text     "description"
     t.boolean  "published"
-    t.string   "image"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

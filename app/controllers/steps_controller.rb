@@ -85,7 +85,8 @@ class StepsController < ApplicationController
       end
    end
   end
-
+  
+  # action for uploading images to a step
   require 'fileutils'
   def upload
     @step = @experiment.steps.find(params[:id])
@@ -105,17 +106,7 @@ class StepsController < ApplicationController
 	    render :action => 'new'
     end
   end
-
-  # make a path that will send image data for an image
-  #def image
-  #  @step = @experiment.steps.find(params[:id])
-  #  if @image = @step.image
-  #    redirect_to( @image, :format => 'jpg' )
-  #  else
-  #    render :file => "#{RAILS_ROOT}/public/404.html", :status => 404
-  #  end
-  #end
-
+  
   
   # DELETE /steps/1
   # DELETE /steps/1.xml

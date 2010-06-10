@@ -1,4 +1,13 @@
 class ExperimentsController < ApplicationController
+  # action for displaying print template
+  def print
+    @experiment = Experiment.find(params[:id])
+    @steps = @experiment.steps
+    
+    # renders the print template without the normal layout
+    render :layout => false;
+  end
+      
   # GET /experiments
   # GET /experiments.xml
   def index
@@ -14,7 +23,7 @@ class ExperimentsController < ApplicationController
   # GET /experiments/1.xml
   def show
     @experiment = Experiment.find(params[:id])
-    @steps = @experiment.steps;
+    @steps = @experiment.steps
 
     respond_to do |format|
       format.html # show.html.erb

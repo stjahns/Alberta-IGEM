@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20100608193844
+# Schema version: 20100608222653
 #
 # Table name: images
 #
@@ -11,6 +11,7 @@
 #  image_height   :integer(4)
 #  created_at     :datetime
 #  updated_at     :datetime
+#  step_id        :integer(4)
 #
 
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
