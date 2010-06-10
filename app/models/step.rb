@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20100608222653
+# Schema version: 20100609213516
 #
 # Table name: steps
 #
@@ -14,7 +14,7 @@
 #
 
 class Step < ActiveRecord::Base
-  attr_accessible :title, :description, :image, :experiment_id, :order
+  attr_accessible :title, :description, :image, :experiment_id, :step_order
   belongs_to :experiment
   has_one :image
 end

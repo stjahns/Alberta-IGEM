@@ -1,8 +1,16 @@
 ActionController::Routing::Routes.draw do |map|
   # map steps as nested resource of experiments
   map.resources :experiments, :member => { :print => :get } do |experiments|
-     experiments.resources :steps, :member => { :upload => :post } 
+     experiments.resources :steps, 
+	     :member => { :upload => :post, 
+	     		  :up => :put,
+    			  :down => :put } 
   end 
+
+  # some shorthand for routes
+  map.move_step_up 'experiments/:experiment_id/steps/:id/up' , :controller => :steps, :action =>:up
+  map.move_step_down 'experiments/:experiment_id/steps/:id/down', :controller => :steps, :action =>:down
+
 
   map.root :controller => "home"
 

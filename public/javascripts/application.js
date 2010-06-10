@@ -15,7 +15,7 @@ $(document).ready(function() {
 	}
 
 	// submit the edits for steps with ajaX
-	$('.edit_step').submit( function() {
+	$('.inplace_edit_step').submit( function() {
 		$(this).ajaxForm(step_options);
 		$(this).parent().prev().show( "slow" );
 		$(this).parent().hide( "slow" );	

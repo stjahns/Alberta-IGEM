@@ -19,7 +19,9 @@
     <td><%= link_to 'Show', experiment_step_path( step.experiment, step ) %></td>
     <td><%= link_to 'Edit', edit_experiment_step_path(step.experiment, step) %></td>
     <td><%= link_to 'Destroy', experiment_step_path( step.experiment, step ), :confirm => 'Are you sure?', :method => :delete %></td>
-  </tr>
+    <td><%= link_to 'Move Up', move_step_up_path( step.experiment, step ), :method => :put %></td>
+     <td><%= link_to 'Move Down', move_step_down_path( step.experiment, step ), :method => :put %></td>
+ </tr>
 <% end %>
 </table>
 

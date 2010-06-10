@@ -12,7 +12,7 @@
 
   <!-- trying out differen for m -->
   <span class="step_form" style="display: none">
-	  <% form_for([@experiment, step],:html => { :method => :put, :id => "stepForm" , :multipart => true} ) do |f| %>
+	  <% form_for([@experiment, step],:html => { :method => :put, :id => "stepForm" , :multipart => true, :class => "inplace_edit_step"} ) do |f| %>
 	<%= f.error_messages %>
 	<p>Description:</p> 
 	<p><%= f.text_area :description %></p>

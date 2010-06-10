@@ -9,9 +9,7 @@ class StepsController < ApplicationController
   # GET /steps
   # GET /steps.xml
   def index
-    #@steps = @experiment.steps.all( :order => "order" )
-    #@steps = @experiment.steps.find( :all )
-     @steps = @experiment.steps.all( :order => "step_order" )
+    @steps = @experiment.steps.all( :order => "step_order" )
 
    
     respond_to do |format|
@@ -50,8 +48,16 @@ class StepsController < ApplicationController
   # POST /steps
   # POST /steps.xml
   def create
-    @step = @experiment.steps.new(params[:step])
+    # check to see if this experiment has any steps already
+    i = 1  # if it doen't this is step one
+    unless @experiment.steps.empty? 
+      # if it does, this increment the step by one
+      i = @experiment.steps.last( :order => 'step_order' ).step_order + 1
+    end
 
+    @step = @experiment.steps.new(params[:step])
+    @step.step_order = i 
+    
     respond_to do |format|
       if @step.save
         flash[:notice] = 'Step was successfully created.'
@@ -72,9 +78,7 @@ class StepsController < ApplicationController
     respond_to do |format|
       if @step.update_attributes(params[:step])
         flash[:notice] = 'Step was successfully updated.'
-	#format.js { render :partial => 'experiment/step', :layout => false and return  } 
         format.html { redirect_to([ @experiment, @step ]) }
-	#format.html { render :text => @step.description }
         #format.xml  { head :ok }
 	format.xml  { render :xml => @step }
 	ActiveRecord::Base.include_root_in_json = false
@@ -86,6 +90,60 @@ class StepsController < ApplicationController
    end
   end
   
+  # action for reordering steps
+  def up
+    #move up the list	  
+    @step = @experiment.steps.find(params[:id])
+    
+    #get current order of step
+    i = @step.step_order
+    save = false
+
+    unless i == 1 
+      # increment the order of the previous step
+      other_step = @experiment.steps.find_by_step_order(i - 1)    
+      other_step.step_order = i
+      @step.step_order = i - 1
+      save = true
+     
+    end
+    respond_to do |format|
+         if save && other_step.save && @step.save
+	     flash[:notice] = 'Order updated'
+	     format.html { redirect_to experiment_steps_path(@experiment) }
+         else
+	     flash[:notice] = 'The step could not be reordered'
+             format.html { redirect_to experiment_steps_path(@experiment) }
+
+         end
+       end  
+  end
+
+  def down
+    # move step down the list	  
+    @step = @experiment.steps.find(params[:id])
+    
+    # get current order of step
+    i = @step.step_order
+    save = false
+    unless i == @experiment.steps.length 
+      # decrement the order of the following step
+      other_step = @experiment.steps.find_by_step_order(i + 1)
+      other_step.step_order = i
+      @step.step_order = i + 1
+      save = true
+    end
+    respond_to do |format|
+      if save && other_step.save && @step.save
+         flash[:notice] = 'Order updated'
+         format.html { redirect_to experiment_steps_path(@experiment) }
+      else
+         flash[:notice] = 'The step could not be reordered'
+         format.html { redirect_to experiment_steps_path(@experiment) }
+       end
+    end 
+  end
+
   # action for uploading images to a step
   require 'fileutils'
   def upload
@@ -106,6 +164,7 @@ class StepsController < ApplicationController
 	    render :action => 'new'
     end
   end
+  
   
   
   # DELETE /steps/1
