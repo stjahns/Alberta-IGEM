@@ -11,8 +11,9 @@ ActionController::Routing::Routes.draw do |map|
   #map.resources :steps
 
   map.resources :experiments, :has_many => :steps
+  map.resources :experiments, :has_many => :constructs
 
-  map.root   
+  map.root :controller => :home 
 
   map.connect ':controller/:action/:id'
   map.connect ':controller/:action/:id.:format'

@@ -1,0 +1,13 @@
+<h1>Constructs for <%= @experiment.title %>:</h1>
+
+<ul>
+<% @constructs.each do |const| %>
+  <li><%=const.name  %>
+      | 
+      <%= link_to "Edit", {:action => :edit, :id => const.id} %> | 
+      <%= link_to "Delete", experiment_construct_path( const.experiment, const), :confirm => 'Are you sure?', :method => :delete %>
+<% end %>
+</ul>
+
+<p><%= link_to "Add New Construct", new_experiment_construct_path(@experiment)  %></p>
+<p><%= link_to "Back", experiment_path(@experiment) %></p>

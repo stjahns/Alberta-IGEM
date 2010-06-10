@@ -5,6 +5,7 @@
   <body>
   <p><%= link_to "Parts Bin", {:controller=>:bio_bytes} %></p>
   <p><%= link_to "Construct Designer", {:controller => :construct} %></p>
+  <p><%= link_to "Experiments", {:controller=>:experiments} %></p>
 
   <% if current_user %>
     <p><%= link_to "Log out", {:controller => :sessions, :action => :destroy} %></p>

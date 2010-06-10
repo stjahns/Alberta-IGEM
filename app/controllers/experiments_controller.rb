@@ -66,6 +66,18 @@ class ExperimentsController < ApplicationController
     end
   end
 
+  def clone
+    #TODO put cloning code here dawg.
+    @experiment = Experiment.find(params[:id])
+    new_exp = @experiment.clone_experiment
+    #set author?
+    respond_to do |format|
+      format.html { redirect_to(experiments_url) }
+      format.xml  { head :ok }
+    end
+  end
+
+
   # PUT /experiments/1
   # PUT /experiments/1.xml
   def update

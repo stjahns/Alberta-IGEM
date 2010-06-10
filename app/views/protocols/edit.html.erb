@@ -1,0 +1,15 @@
+<h1>Editing StepGenerator template</h1>
+
+<% form_tag :action => 'update', :id => @step do %>
+  <p><label for="step_subprotocol">Sub-protocol</label>
+  <%= text_field 'step', 'subprotocol' %></p>
+  <p><label for="step_sub_order">Sub-order</label>
+  <%= text_field 'step', 'sub_order' %></p>
+  <p><label for="step_title">Title</label>
+  <%= text_field 'step', 'title' %></p>
+  <p><label for="step_description">Description</label>
+  <%= text_field 'step', 'description' %></p>
+  <%= submit_tag "Update" %>
+<% end %>
+
+<%= link_to 'Back', {:action => 'index'} %>
