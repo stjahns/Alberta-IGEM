@@ -1,6 +1,9 @@
 class ExperimentsController < ApplicationController
   # GET /experiments
   # GET /experiments.xml
+  
+  before_filter :login_required, :except => [:index, :show]
+
   def index
     @experiments = Experiment.all
 
@@ -70,7 +73,9 @@ class ExperimentsController < ApplicationController
     #TODO put cloning code here dawg.
     @experiment = Experiment.find(params[:id])
     new_exp = @experiment.clone_experiment
-    #set author?
+    new_exp.authour = current_user.login
+    new_exp.published = false
+    new_exp.save
     respond_to do |format|
       format.html { redirect_to(experiments_url) }
       format.xml  { head :ok }

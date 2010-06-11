@@ -143,6 +143,7 @@ div#trash {
   margin:           -1px;
   text-align:       center;
   float:            left;
+  white-space:      nowrap;
 }
 
 .ann_label{

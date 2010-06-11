@@ -1,5 +1,6 @@
 class StepsController < ApplicationController
   before_filter :get_event
+  before_filter :login_required
 
 
   def get_event

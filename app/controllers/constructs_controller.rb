@@ -1,5 +1,6 @@
 class ConstructsController < ApplicationController
   before_filter :get_exp, :except => :get_data
+  before_filter :login_required
   
   def get_exp
     @experiment = Experiment.find(params[:experiment_id])
