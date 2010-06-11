@@ -27,8 +27,8 @@ $(document).ready(function(){
 
 	// options for editing steps with ajax form
 	var step_options = {
-		//target:       '.description', 
-//		beforeSubmit: showRequest,
+		//target:       '', 
+                //beforeSubmit: showRequest,
 		//success:      showResponse,
 		success:      processStep,
 		dataType:     'json',
@@ -37,58 +37,45 @@ $(document).ready(function(){
 	}
 
 	// submit the edits for steps with ajaX
-	//$("#stepForm").ajaxForm(step_options);
-	//$(".step_form").each( function() {
-	//	$(this).ajaxForm(step_options);
-	//});
-	//$(this).ajaxForm(step_options);
-	$('#stepForm').submit( function() {
-		$(this).ajaxSubmit(step_options);
-		$(this).prev('.step_view' ).show( "slow" );
-	//	$(this).hide( "slow" );	
+	$('.inplace_edit_step').submit( function() {
+		$(this).ajaxForm(step_options);
+		$(this).parent().prev().show( "slow" );
+		$(this).parent().hide( "slow" );	
 		return false;
 	});
-
-
-
-	// hide step forms on page load
-	$(".step_form").hide();
-	// hide step form after submit and display step
-//	$(".step_form").submit( function() {
-//		$(this).prev().show( "slow" );
-//		$(this).slideUp( "slow" );	
-//	});
 
 	// replace step with edit form on click
 	$(".step_view").click( function() {
 		$(this).next().slideDown( "slow" );
-	   	$(this).slideUp( "slow" );
-		//$(this).replaceWith($(this).next())
-		
+	   	$(this).slideUp( "slow" );	
 	});
 
-   $('#uploadForm input').change(function(){
-    $(this).parent().ajaxSubmit({
-     beforeSubmit: function(a,f,o) {
-     o.dataType = 'json';
-    },
-    complete: function(XMLHttpRequest, textStatus) {
+  // $('#uploadForm input').change(function(){
+  //  $(this).parent().ajaxSubmit({
+  //   beforeSubmit: function(a,f,o) {
+  //   o.dataType = 'json';
+  //  },
+  //  complete: function(XMLHttpRequest, textStatus) {
    // XMLHttpRequest.responseText will contain the URL of the uploaded image.
    // Put it in an image element you create, or do with it what you will.
    // For example, if you have an image elemtn with id "my_image", then
    //  $('#my_image').attr('src', XMLHttpRequest.responseText);
    // Will set that image tag to display the uploaded image.
-    },
-   });
-});
+   // },
+   //});
+//});
 
 });	
 
 	
 // process the JSON data returned after submitting a step
 function processStep(data){
-    // 'data' is the json object returned from the server
-    alert(data.description);
+   //var stepId = '.step'+ data.id.toString();
+
+   //var whatDidIFind = $(stepId).html(); 
+	   
+    // 'data' is the json object returned from the server 
+    alert(whatDidIFind);
 }
 
 // pre-submit callback 

@@ -1,18 +1,40 @@
 <div class="step">
-  <span class="step_view">
+	<span class="step_view" id=step<%= step.id  %>  >
 	  <p><b>Step <%=h " #{ step.step_order }" %>  :</b></br> 
 	  <%= step.title %></p>
+	  <% unless step.image.blank? %>
+	  <p><%= image_tag step_image_path( step.image ) %></p>
+          <% end %> 
 	  <p class= 'description'  ><%=h step.description %>
 	  </p>
   </span>
+
+
   <!-- trying out differen for m -->
-  <span class="step_form">
-	  <% remote_form_for([@experiment, step],:url=>{:controller => experiment_step_path(@experiment,step) }, :html => { :method => :put, :id => "stepForm" , :multipart => true} ) do |f| %>
+  <span class="step_form" style="display: none">
+    <% form_for([@experiment, step],:html => { :method => :put, :id => "stepForm" , :multipart => true, :class => "inplace_edit_step"} ) do |f| %>
 	<%= f.error_messages %>
-	<p>Description:</p> 
-	<p><%= f.text_area :description %></p>
+	<p>
+	    <%= f.label :title %><br />
+	    <%= f.text_field :title %>
+	</p>
+	<p>
+	    <%= f.label :description %><br />
+	    <%= f.text_area :description %>
+	</p>
+	<p>
+	    <%= f.label :step_order %><br />
+	    <%= f.text_field :step_order %>
+	</p>
 	<p><%= f.submit 'Update' %></p>
     <% end %>
+
+  </span>
+  <span>
+	  <% form_for [@experiment,step],:url => upload_experiment_step_path(@experiment,step), :html => { :multipart => true, :method => 'post'} do |f| %>
+	<p><%= f.file_field :image_file %></p>
+	<p><%= f.submit 'Upload' %></p>
+     <% end %>  
   </span>
 </div>
 

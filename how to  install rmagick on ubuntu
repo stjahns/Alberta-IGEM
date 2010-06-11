@@ -1,2 +1,16 @@
+Install:
+    *  FreeType
+    * Ghostscript fonts
+    * JPEG
+    * PNG
+    * WMF
+and install ruby headers
+
+then 
+
 sudo apt-get install libmagickcore-dev
 sudo apt-get install libmagickwand-dev
+
+then 
+
+sudo gem install rmagick

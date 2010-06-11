@@ -10,20 +10,29 @@ ActionController::Routing::Routes.draw do |map|
   map.resource :session
   #map.resources :steps
 
-  map.resources :experiments, :has_many => :steps
-  map.resources :experiments, :has_many => :constructs
+  # map steps as nested resource of experiments
+  map.resources :experiments, :member => { :print => :get } do |experiments|
+     experiments.resources :steps, 
+	     :member => { :upload => :post, 
+	     		  :up => :put,
+    			  :down => :put } 
+    experiments.resources :constructs 
+  end 
+
+  # some shorthand for routes
+  map.move_step_up 'experiments/:experiment_id/steps/:id/up' , :controller => :steps, :action =>:up
+  map.move_step_down 'experiments/:experiment_id/steps/:id/down', :controller => :steps, :action =>:down
+
 
   map.root :controller => :home 
 
-  map.connect ':controller/:action/:id'
-  map.connect ':controller/:action/:id.:format'
+  # routes for images
+  map.resources :images, :member => { :thumb => :get, :step => :get  }
   
-  # image upload route to steps 
-  map.connect 'experiments/:experiment_id/steps/:id', :controller => 'steps', :action => 'upload', :upload => :post
-
-  # make steps send image dat
-  map.step_image 'experiments/:experiment_id/steps/:id', :controller => 'steps', :action => 'image', :image => :get
-
+  # default routes
+  #map.connect ':controller/:action/:id'
+  #map.connect ':controller/:action/:id.:format'
+  
 
   # The priority is based upon order of creation: first created -> highest priority.
 

@@ -20,9 +20,9 @@
   </p>
 <% end %>
 
-<% form_tag experiment_step_path(@experiment,@step),:action => 'upload', :multipart => "true", :html => {:method => 'put'} do  %>
-	<p><%= file_field_tag("file") %></p>
-	<p><%= submit_tag 'Upload' %></p>
+<% form_for [@experiment,@step], :url =>{ :action => :upload },:html => { :multipart => true, :method => 'post'} do |f| %>
+	<p><%= f.file_field :image_file %></p>
+	<p><%= f.submit 'Upload' %></p>
 <% end %>
 
 <%= link_to 'Show', experiment_step_path( @experiment, @step ) %> |
