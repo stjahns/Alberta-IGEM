@@ -1,0 +1,13 @@
+<p>
+  <b>Term:</b>
+  <%=h @glossary.term %>
+</p>
+
+<p>
+  <b>Definition:</b>
+  <%=h @glossary.definition %>
+</p>
+
+
+<%= link_to 'Edit', edit_glossary_path(@glossary) %> |
+<%= link_to 'Back', glossaries_path %>

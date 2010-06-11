@@ -1,18 +1,15 @@
+
 #container {
 	width: 750px;
 	margin-left: auto;
 	margin-right: auto;
 }
-body {
+
+body, p, ol, ul, td {
 	background-image: url(../images/background.jpg);
 	background-repeat: repeat-y;
 	background-position: center;
 	background-color: #f7f4ee;
-}
-
-body {  color: #333; }
-
-body, p, ol, ul, td {
   font-family: verdana, arial, helvetica, sans-serif;
   font-size:   13px;
   line-height: 18px;

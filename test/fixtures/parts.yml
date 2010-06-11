@@ -1,0 +1,20 @@
+# == Schema Information
+# Schema version: 20100609172527
+#
+# Table name: parts
+#
+#  id           :integer(4)      not null, primary key
+#  construct_id :integer(4)
+#  bio_byte_id  :integer(4)
+#  part_order   :integer(4)
+#  created_at   :datetime
+#  updated_at   :datetime
+#
+
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+# one:
+#   column: value
+#
+# two:
+#   column: value

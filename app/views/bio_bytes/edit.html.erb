@@ -1,0 +1,46 @@
+<h1>Editing <%= @byte.name %></h1>
+<table>
+
+<%  form_tag :action => 'update', :id => @byte do %>
+  <tr><td><label for="byte_name">Name:</label></td>
+      <td><%= text_field 'byte', 'name'%></td></tr>
+  <tr><td><label for="byte_type">Type</label></td>
+      <td><%= select("byte", "type", ["ORF", "Linker"]) %> </td>
+  <tr><td><label for="byte_description">Description:</label></td>
+      <td><%= text_field 'byte', 'description' %></td></tr>
+  <tr><td><label for="byte_author">Author:</label></td>
+      <td><%= text_field 'byte', 'author' %></td></tr>
+  <tr><td><label for="byte_sequence">Sequence:</label></td>
+      <td><%= text_field 'byte', 'sequence' %></td></tr>
+  <tr><td><%= submit_tag 'Update' %></td></tr>
+<% end %>
+
+</table>
+
+<h3>Annotations:</h3>
+<table>
+<tr><th>Name</th><th>Start</th><th>Stop</th></tr>
+<% @byte.annotations.each do |ann| %>
+<tr><td><%= ann.name %></td>
+    <td><%= ann.start %></td>
+    <td><%= ann.stop %></td>
+    <td><%= link_to "Edit", {:controller=> :annotations,
+                             :action=> :edit,
+                             :ann_id=> ann.id,
+                             :byte_id=> @byte.id} %><td>
+
+    <td><%= link_to "Delete", {:controller => :annotations,
+                               :action => :delete,
+                               :ann_id => ann.id,
+                               :byte_id => @byte.id} %></td>
+</tr>
+<% end %>
+<tr><td><%= link_to 'New', {:controller => :annotations,
+                            :action => 'new',
+                            :id => @byte.id} %></td></tr>
+</table>
+
+
+
+
+<p><%= link_to 'Back', {:action => 'index'} %></p>

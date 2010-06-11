@@ -1,0 +1,151 @@
+body {
+  font-family:  "sans-serif";
+}
+
+
+
+h1#title {
+  position:         absolute;
+  top:              -12px;
+  left:             8px;
+  width:            1158px;
+  text-align:       center;
+  background-color: #EEEEEE;
+  border: 1px solid #CCCCCC;
+}
+
+div#construct{
+  position:         absolute;
+  top:              53px;
+  left:             266px;
+  height:           200px;
+  width:            900px;
+  border:           1px solid #AAA;
+  text-align:       center;
+}
+
+div#parts_box{
+  overflow:         scroll;
+  border:           1px solid #999;
+  margin:           2;
+  height:           114px;
+}
+ol#parts_list{
+  list-style-type:  none;
+  height:           50;
+  width:            5000;
+  padding:          10 0 0 10;
+}
+
+#parts_list li{
+  margin:           3px 3px 3px 0;
+  padding:          1px;
+  float:            left;
+  width:            100px;
+  height:           40px;
+  text-align:       center;
+}
+.ui-state-hover{
+  background-color: #999;
+  color:            white;
+}
+.ui-state-active{
+  background-color: #333; 
+  color:            white;
+}
+
+
+/* TODO Scroll bars screw with zooming, address this!*/
+ul.parts_bin{
+  list-style-type:  none;
+  margin:           2;
+  padding:          0;
+  height:           350;
+  overflow:         scroll;
+  border:           1px solid #999;
+  float:            left;
+
+}
+
+ul.parts_bin li{
+  margin:           3px
+  padding:          1px;
+  width:            100px;
+  height:           40px;
+  text-align:       center;
+  border:           1px solid #555;
+}
+
+.orf{
+  background-color: #333;
+  color:            white;
+  border:           1px solid black;
+}
+.linker{
+  background-color: #BBB;
+  border:           1px solid black;
+}
+
+
+div#parts_bin{
+  position:         absolute;
+  top:              53px;
+  left:             8px;
+  height:           500px;
+  width:            255px;
+  border:           1px solid #AAA;
+  text-align:       center;
+}
+
+
+div#sequence_box {
+  position:         absolute;
+  text-align:       center;
+  top:              260px;
+  left:             266px;
+  height:           293px;
+  width:            900px;
+  border:           1px solid #AAA;
+}
+div#sequence {
+  text-align:       left;
+  white-space:      nowrap;
+  overflow:         scroll;
+  font-family:      'monospace';
+  height:           228px;
+  width:            894px;
+  margin:           2;
+  border:           1px solid #999;
+}
+
+div#nav {
+  position:         absolute;
+  top:              18px;
+  left:             50px;
+}
+
+div#trash {
+  padding:          22 0 0 0;
+  position:         absolute;
+  top:              422px;
+  border:           1px solid #888;
+  height:           50;
+  width:            248;
+  margin:           2;
+  text-align:       center;
+}
+
+.seqtable{
+  font-size:        10pt;
+}
+
+.annotation{
+  margin:           -1px;
+  text-align:       center;
+  float:            left;
+  white-space:      nowrap;
+}
+
+.ann_label{
+  font-size:        8pt;
+}

@@ -1,2 +1,21 @@
-<h1>Hello, World!</h1>
-<p>You are running Ruby on Rails.</p>
+<html>
+  <head>
+  </head>
+
+  <body>
+  <p><%= link_to "Parts Bin", {:controller=>:bio_bytes} %></p>
+  <p><%= link_to "Construct Designer", {:controller => :construct} %></p>
+  <p><%= link_to "Experiments", {:controller=>:experiments} %></p>
+
+  <% if current_user %>
+    <p><%= link_to "Log out", {:controller => :sessions, :action => :destroy} %></p>
+  <% else %>
+    <p><%= link_to "Log in", {:controller => :sessions, :action => :new } %></p>
+  <% end %>
+
+  <div id = 'content'>
+    <h2><%= flash[:notice]%></h2>
+    <%=yield%>
+  </div>
+  </body>
+</html>

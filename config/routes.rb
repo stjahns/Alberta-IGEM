@@ -1,10 +1,22 @@
 ActionController::Routing::Routes.draw do |map|
+  map.resources :glossaries
+
+  map.logout '/logout', :controller => 'sessions', :action => 'destroy'
+  map.login '/login', :controller => 'sessions', :action => 'new'
+  map.register '/register', :controller => 'users', :action => 'create'
+  map.signup '/signup', :controller => 'users', :action => 'new'
+  map.resources :users
+
+  map.resource :session
+  #map.resources :steps
+
   # map steps as nested resource of experiments
   map.resources :experiments, :member => { :print => :get } do |experiments|
      experiments.resources :steps, 
 	     :member => { :upload => :post, 
 	     		  :up => :put,
     			  :down => :put } 
+    experiments.resources :constructs 
   end 
 
   # some shorthand for routes
@@ -12,14 +24,14 @@ ActionController::Routing::Routes.draw do |map|
   map.move_step_down 'experiments/:experiment_id/steps/:id/down', :controller => :steps, :action =>:down
 
 
-  map.root :controller => "home"
+  map.root :controller => :home 
 
   # routes for images
   map.resources :images, :member => { :thumb => :get, :step => :get  }
   
   # default routes
-  #map.connect ':controller/:action/:id'
-  #map.connect ':controller/:action/:id.:format'
+  map.connect ':controller/:action/:id'
+  map.connect ':controller/:action/:id.:format'
   
 
   # The priority is based upon order of creation: first created -> highest priority.

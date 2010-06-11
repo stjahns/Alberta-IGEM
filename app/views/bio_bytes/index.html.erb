@@ -1,0 +1,17 @@
+<h1>BioBytes Listing:</h1>
+<table>
+<% @bytes.each do |byte| %>
+  <tr>
+    <td><%=byte.name%>
+    <td><%=link_to "Show", {:action => :show, :id => byte.id} %>
+    
+    <% if current_user and current_user.login == "admin" %>
+      <td><%=link_to "Edit", {:action => :edit, :id => byte.id} %>
+      <td><%=link_to "Delete", {:action => :delete, :id => byte.id} %> 
+    <% end %>
+
+  </tr>
+<% end %>
+</table>
+<p><%= link_to "New", {:action => 'new'} %></p>
+<p><%= link_to "Home", {:controller => 'home'} %></p>
