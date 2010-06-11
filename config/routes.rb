@@ -30,8 +30,8 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :images, :member => { :thumb => :get, :step => :get  }
   
   # default routes
-  #map.connect ':controller/:action/:id'
-  #map.connect ':controller/:action/:id.:format'
+  map.connect ':controller/:action/:id'
+  map.connect ':controller/:action/:id.:format'
   
 
   # The priority is based upon order of creation: first created -> highest priority.
