@@ -1,31 +1,66 @@
 (in /home/mike/Alberta-IGEM)
-      experiment_steps GET    /experiments/:experiment_id/steps(.:format)            {:action=>"index", :controller=>"steps"}
-                       POST   /experiments/:experiment_id/steps(.:format)            {:action=>"create", :controller=>"steps"}
-   new_experiment_step GET    /experiments/:experiment_id/steps/new(.:format)        {:action=>"new", :controller=>"steps"}
-  edit_experiment_step GET    /experiments/:experiment_id/steps/:id/edit(.:format)   {:action=>"edit", :controller=>"steps"}
-    up_experiment_step PUT    /experiments/:experiment_id/steps/:id/up(.:format)     {:action=>"up", :controller=>"steps"}
-  down_experiment_step PUT    /experiments/:experiment_id/steps/:id/down(.:format)   {:action=>"down", :controller=>"steps"}
-upload_experiment_step POST   /experiments/:experiment_id/steps/:id/upload(.:format) {:action=>"upload", :controller=>"steps"}
-       experiment_step GET    /experiments/:experiment_id/steps/:id(.:format)        {:action=>"show", :controller=>"steps"}
-                       PUT    /experiments/:experiment_id/steps/:id(.:format)        {:action=>"update", :controller=>"steps"}
-                       DELETE /experiments/:experiment_id/steps/:id(.:format)        {:action=>"destroy", :controller=>"steps"}
-           experiments GET    /experiments(.:format)                                 {:action=>"index", :controller=>"experiments"}
-                       POST   /experiments(.:format)                                 {:action=>"create", :controller=>"experiments"}
-        new_experiment GET    /experiments/new(.:format)                             {:action=>"new", :controller=>"experiments"}
-       edit_experiment GET    /experiments/:id/edit(.:format)                        {:action=>"edit", :controller=>"experiments"}
-      print_experiment GET    /experiments/:id/print(.:format)                       {:action=>"print", :controller=>"experiments"}
-            experiment GET    /experiments/:id(.:format)                             {:action=>"show", :controller=>"experiments"}
-                       PUT    /experiments/:id(.:format)                             {:action=>"update", :controller=>"experiments"}
-                       DELETE /experiments/:id(.:format)                             {:action=>"destroy", :controller=>"experiments"}
-          move_step_up        /experiments/:experiment_id/steps/:id/up               {:action=>"up", :controller=>"steps"}
-        move_step_down        /experiments/:experiment_id/steps/:id/down             {:action=>"down", :controller=>"steps"}
-                  root        /                                                      {:action=>"index", :controller=>"home"}
-                images GET    /images(.:format)                                      {:action=>"index", :controller=>"images"}
-                       POST   /images(.:format)                                      {:action=>"create", :controller=>"images"}
-             new_image GET    /images/new(.:format)                                  {:action=>"new", :controller=>"images"}
-            edit_image GET    /images/:id/edit(.:format)                             {:action=>"edit", :controller=>"images"}
-            step_image GET    /images/:id/step(.:format)                             {:action=>"step", :controller=>"images"}
-           thumb_image GET    /images/:id/thumb(.:format)                            {:action=>"thumb", :controller=>"images"}
-                 image GET    /images/:id(.:format)                                  {:action=>"show", :controller=>"images"}
-                       PUT    /images/:id(.:format)                                  {:action=>"update", :controller=>"images"}
-                       DELETE /images/:id(.:format)                                  {:action=>"destroy", :controller=>"images"}
+                   glossaries GET    /glossaries(.:format)                                         {:action=>"index", :controller=>"glossaries"}
+                              POST   /glossaries(.:format)                                         {:action=>"create", :controller=>"glossaries"}
+                 new_glossary GET    /glossaries/new(.:format)                                     {:action=>"new", :controller=>"glossaries"}
+                edit_glossary GET    /glossaries/:id/edit(.:format)                                {:action=>"edit", :controller=>"glossaries"}
+                     glossary GET    /glossaries/:id(.:format)                                     {:action=>"show", :controller=>"glossaries"}
+                              PUT    /glossaries/:id(.:format)                                     {:action=>"update", :controller=>"glossaries"}
+                              DELETE /glossaries/:id(.:format)                                     {:action=>"destroy", :controller=>"glossaries"}
+                       logout        /logout                                                       {:action=>"destroy", :controller=>"sessions"}
+                        login        /login                                                        {:action=>"new", :controller=>"sessions"}
+                     register        /register                                                     {:action=>"create", :controller=>"users"}
+                       signup        /signup                                                       {:action=>"new", :controller=>"users"}
+                        users GET    /users(.:format)                                              {:action=>"index", :controller=>"users"}
+                              POST   /users(.:format)                                              {:action=>"create", :controller=>"users"}
+                     new_user GET    /users/new(.:format)                                          {:action=>"new", :controller=>"users"}
+                    edit_user GET    /users/:id/edit(.:format)                                     {:action=>"edit", :controller=>"users"}
+                         user GET    /users/:id(.:format)                                          {:action=>"show", :controller=>"users"}
+                              PUT    /users/:id(.:format)                                          {:action=>"update", :controller=>"users"}
+                              DELETE /users/:id(.:format)                                          {:action=>"destroy", :controller=>"users"}
+                  new_session GET    /session/new(.:format)                                        {:action=>"new", :controller=>"sessions"}
+                 edit_session GET    /session/edit(.:format)                                       {:action=>"edit", :controller=>"sessions"}
+                      session GET    /session(.:format)                                            {:action=>"show", :controller=>"sessions"}
+                              PUT    /session(.:format)                                            {:action=>"update", :controller=>"sessions"}
+                              DELETE /session(.:format)                                            {:action=>"destroy", :controller=>"sessions"}
+                              POST   /session(.:format)                                            {:action=>"create", :controller=>"sessions"}
+             experiment_steps GET    /experiments/:experiment_id/steps(.:format)                   {:action=>"index", :controller=>"steps"}
+                              POST   /experiments/:experiment_id/steps(.:format)                   {:action=>"create", :controller=>"steps"}
+          new_experiment_step GET    /experiments/:experiment_id/steps/new(.:format)               {:action=>"new", :controller=>"steps"}
+         edit_experiment_step GET    /experiments/:experiment_id/steps/:id/edit(.:format)          {:action=>"edit", :controller=>"steps"}
+       upload_experiment_step POST   /experiments/:experiment_id/steps/:id/upload(.:format)        {:action=>"upload", :controller=>"steps"}
+insert_before_experiment_step PUT    /experiments/:experiment_id/steps/:id/insert_before(.:format) {:action=>"insert_before", :controller=>"steps"}
+           up_experiment_step PUT    /experiments/:experiment_id/steps/:id/up(.:format)            {:action=>"up", :controller=>"steps"}
+         down_experiment_step PUT    /experiments/:experiment_id/steps/:id/down(.:format)          {:action=>"down", :controller=>"steps"}
+ insert_after_experiment_step PUT    /experiments/:experiment_id/steps/:id/insert_after(.:format)  {:action=>"insert_after", :controller=>"steps"}
+              experiment_step GET    /experiments/:experiment_id/steps/:id(.:format)               {:action=>"show", :controller=>"steps"}
+                              PUT    /experiments/:experiment_id/steps/:id(.:format)               {:action=>"update", :controller=>"steps"}
+                              DELETE /experiments/:experiment_id/steps/:id(.:format)               {:action=>"destroy", :controller=>"steps"}
+        experiment_constructs GET    /experiments/:experiment_id/constructs(.:format)              {:action=>"index", :controller=>"constructs"}
+                              POST   /experiments/:experiment_id/constructs(.:format)              {:action=>"create", :controller=>"constructs"}
+     new_experiment_construct GET    /experiments/:experiment_id/constructs/new(.:format)          {:action=>"new", :controller=>"constructs"}
+    edit_experiment_construct GET    /experiments/:experiment_id/constructs/:id/edit(.:format)     {:action=>"edit", :controller=>"constructs"}
+         experiment_construct GET    /experiments/:experiment_id/constructs/:id(.:format)          {:action=>"show", :controller=>"constructs"}
+                              PUT    /experiments/:experiment_id/constructs/:id(.:format)          {:action=>"update", :controller=>"constructs"}
+                              DELETE /experiments/:experiment_id/constructs/:id(.:format)          {:action=>"destroy", :controller=>"constructs"}
+                  experiments GET    /experiments(.:format)                                        {:action=>"index", :controller=>"experiments"}
+                              POST   /experiments(.:format)                                        {:action=>"create", :controller=>"experiments"}
+               new_experiment GET    /experiments/new(.:format)                                    {:action=>"new", :controller=>"experiments"}
+              edit_experiment GET    /experiments/:id/edit(.:format)                               {:action=>"edit", :controller=>"experiments"}
+             print_experiment GET    /experiments/:id/print(.:format)                              {:action=>"print", :controller=>"experiments"}
+                   experiment GET    /experiments/:id(.:format)                                    {:action=>"show", :controller=>"experiments"}
+                              PUT    /experiments/:id(.:format)                                    {:action=>"update", :controller=>"experiments"}
+                              DELETE /experiments/:id(.:format)                                    {:action=>"destroy", :controller=>"experiments"}
+                 move_step_up        /experiments/:experiment_id/steps/:id/up                      {:action=>"up", :controller=>"steps"}
+               move_step_down        /experiments/:experiment_id/steps/:id/down                    {:action=>"down", :controller=>"steps"}
+                         root        /                                                             {:action=>"index", :controller=>"home"}
+                       images GET    /images(.:format)                                             {:action=>"index", :controller=>"images"}
+                              POST   /images(.:format)                                             {:action=>"create", :controller=>"images"}
+                    new_image GET    /images/new(.:format)                                         {:action=>"new", :controller=>"images"}
+                   edit_image GET    /images/:id/edit(.:format)                                    {:action=>"edit", :controller=>"images"}
+                  thumb_image GET    /images/:id/thumb(.:format)                                   {:action=>"thumb", :controller=>"images"}
+                   step_image GET    /images/:id/step(.:format)                                    {:action=>"step", :controller=>"images"}
+                        image GET    /images/:id(.:format)                                         {:action=>"show", :controller=>"images"}
+                              PUT    /images/:id(.:format)                                         {:action=>"update", :controller=>"images"}
+                              DELETE /images/:id(.:format)                                         {:action=>"destroy", :controller=>"images"}
+                                     /:controller/:action/:id                                      
+                                     /:controller/:action/:id(.:format)                            

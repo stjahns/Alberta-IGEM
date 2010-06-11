@@ -21,7 +21,9 @@
     <td><%= link_to 'Destroy', experiment_step_path( step.experiment, step ), :confirm => 'Are you sure?', :method => :delete %></td>
     <td><%= link_to 'Move Up', move_step_up_path( step.experiment, step ), :method => :put %></td>
      <td><%= link_to 'Move Down', move_step_down_path( step.experiment, step ), :method => :put %></td>
- </tr>
+     <td<%= link_to 'Insert after',  insert_after_experiment_step_path(step.experiment, step), :method => :put %></td>
+     <td<%= link_to 'Insert before',  insert_before_experiment_step_path(step.experiment, step), :method => :put %></td
+	     ></tr>
 <% end %>
 </table>
 

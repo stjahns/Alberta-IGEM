@@ -15,14 +15,15 @@ ActionController::Routing::Routes.draw do |map|
      experiments.resources :steps, 
 	     :member => { :upload => :post, 
 	     		  :up => :put,
-    			  :down => :put } 
+    			  :down => :put,
+    			  :insert_after => :put,
+                          :insert_before => :put } 
     experiments.resources :constructs 
   end 
 
   # some shorthand for routes
   map.move_step_up 'experiments/:experiment_id/steps/:id/up' , :controller => :steps, :action =>:up
   map.move_step_down 'experiments/:experiment_id/steps/:id/down', :controller => :steps, :action =>:down
-
 
   map.root :controller => :home 
 
