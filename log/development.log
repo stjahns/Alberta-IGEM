@@ -64376,3 +64376,1276 @@ Processing ImagesController#thumb (for 127.0.0.1 at 2010-06-10 15:48:36) [GET]
   [4;35;1mImage Columns (2.4ms)[0m   [0mSHOW FIELDS FROM `images`[0m
   [4;36;1mImage Load (0.3ms)[0m   [0;1mSELECT * FROM `images` WHERE (`images`.`id` = 23) [0m
 Completed in 314ms (View: 275, DB: 3) | 200 OK [http://localhost/images/23/thumb]
+  [4;36;1mSQL (0.6ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+  [4;35;1mSQL (1.4ms)[0m   [0mSHOW TABLES[0m
+  [4;36;1mSQL (0.6ms)[0m   [0;1mSELECT version FROM schema_migrations[0m
+  [4;35;1mExperiment Columns (1.8ms)[0m   [0mSHOW FIELDS FROM `experiments`[0m
+  [4;36;1mImage Columns (3.4ms)[0m   [0;1mSHOW FIELDS FROM `images`[0m
+  [4;35;1mStep Columns (3.3ms)[0m   [0mSHOW FIELDS FROM `steps`[0m
+  [4;36;1mImages Columns (3.4ms)[0m   [0;1mSHOW FIELDS FROM `images`[0m
+  [4;35;1mSQL (0.3ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing ExperimentsController#show (for 127.0.0.1 at 2010-06-10 16:54:39) [GET]
+  Parameters: {"id"=>"7"}
+  [4;36;1mExperiment Columns (2.2ms)[0m   [0;1mSHOW FIELDS FROM `experiments`[0m
+  [4;35;1mExperiment Load (0.3ms)[0m   [0mSELECT * FROM `experiments` WHERE (`experiments`.`id` = 7) [0m
+Rendering template within layouts/experiments
+Rendering experiments/show
+  [4;36;1mStep Columns (3.3ms)[0m   [0;1mSHOW FIELDS FROM `steps`[0m
+  [4;35;1mSQL (0.7ms)[0m   [0mSELECT count(*) AS count_all FROM `steps` WHERE (`steps`.experiment_id = 7) [0m
+  [4;36;1mStep Load (0.9ms)[0m   [0;1mSELECT * FROM `steps` WHERE (`steps`.experiment_id = 7) [0m
+  [4;35;1mImage Load (0.3ms)[0m   [0mSELECT * FROM `images` WHERE (`images`.step_id = 23) LIMIT 1[0m
+
+ActionView::TemplateError (Called id for nil, which would mistakenly be 4 -- if you really wanted the id of nil, use object_id) on line #34 of app/views/experiments/_step.html.erb:
+31: 
+32:   </span>
+33:   <span>
+34:     <% form_for [@experiment,@step], :url =>{ :action => 'upload' },:html => { :multipart => true, :method => 'post'} do |f| %>
+35: 	<p><%= f.file_field :image_file %></p>
+36: 	<p><%= f.submit 'Upload' %></p>
+37:      <% end %>  
+
+    app/views/experiments/_step.html.erb:34
+    app/views/experiments/show.html.erb:25
+    app/controllers/experiments_controller.rb:28:in `show'
+    /usr/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+    /usr/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+    /usr/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+    /usr/lib/ruby/1.8/webrick/server.rb:162:in `start'
+    /usr/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+    /usr/lib/ruby/1.8/webrick/server.rb:95:in `start'
+    /usr/lib/ruby/1.8/webrick/server.rb:92:in `each'
+    /usr/lib/ruby/1.8/webrick/server.rb:92:in `start'
+    /usr/lib/ruby/1.8/webrick/server.rb:23:in `start'
+    /usr/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendered rescues/_trace (378.8ms)
+Rendered rescues/_request_and_response (1.4ms)
+Rendering rescues/layout (internal_server_error)
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing ExperimentsController#show (for 127.0.0.1 at 2010-06-10 16:55:18) [GET]
+  Parameters: {"id"=>"7"}
+  [4;35;1mExperiment Columns (2.2ms)[0m   [0mSHOW FIELDS FROM `experiments`[0m
+  [4;36;1mExperiment Load (0.3ms)[0m   [0;1mSELECT * FROM `experiments` WHERE (`experiments`.`id` = 7) [0m
+Rendering template within layouts/experiments
+Rendering experiments/show
+  [4;35;1mStep Columns (2.2ms)[0m   [0mSHOW FIELDS FROM `steps`[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSELECT count(*) AS count_all FROM `steps` WHERE (`steps`.experiment_id = 7) [0m
+  [4;35;1mStep Load (0.3ms)[0m   [0mSELECT * FROM `steps` WHERE (`steps`.experiment_id = 7) [0m
+  [4;36;1mImage Load (0.3ms)[0m   [0;1mSELECT * FROM `images` WHERE (`images`.step_id = 23) LIMIT 1[0m
+
+ActionView::TemplateError (No route matches {:action=>"upload"}) on line #34 of app/views/experiments/_step.html.erb:
+31: 
+32:   </span>
+33:   <span>
+34:     <% form_for [@experiment,step], :url =>{ :action => 'upload' },:html => { :multipart => true, :method => 'post'} do |f| %>
+35: 	<p><%= f.file_field :image_file %></p>
+36: 	<p><%= f.submit 'Upload' %></p>
+37:      <% end %>  
+
+    /usr/lib/ruby/gems/1.8/gems/aws-s3-0.6.2/lib/aws/s3/extensions.rb:166:in `returning'
+    app/views/experiments/_step.html.erb:34
+    app/views/experiments/show.html.erb:25
+    app/controllers/experiments_controller.rb:28:in `show'
+    /usr/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+    /usr/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+    /usr/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+    /usr/lib/ruby/1.8/webrick/server.rb:162:in `start'
+    /usr/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+    /usr/lib/ruby/1.8/webrick/server.rb:95:in `start'
+    /usr/lib/ruby/1.8/webrick/server.rb:92:in `each'
+    /usr/lib/ruby/1.8/webrick/server.rb:92:in `start'
+    /usr/lib/ruby/1.8/webrick/server.rb:23:in `start'
+    /usr/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendered rescues/_trace (387.9ms)
+Rendered rescues/_request_and_response (0.8ms)
+Rendering rescues/layout (internal_server_error)
+  [4;35;1mSQL (0.2ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing ExperimentsController#show (for 127.0.0.1 at 2010-06-10 16:57:33) [GET]
+  Parameters: {"id"=>"7"}
+  [4;36;1mExperiment Columns (2.1ms)[0m   [0;1mSHOW FIELDS FROM `experiments`[0m
+  [4;35;1mExperiment Load (0.3ms)[0m   [0mSELECT * FROM `experiments` WHERE (`experiments`.`id` = 7) [0m
+Rendering template within layouts/experiments
+Rendering experiments/show
+  [4;36;1mStep Columns (2.4ms)[0m   [0;1mSHOW FIELDS FROM `steps`[0m
+  [4;35;1mSQL (0.3ms)[0m   [0mSELECT count(*) AS count_all FROM `steps` WHERE (`steps`.experiment_id = 7) [0m
+  [4;36;1mStep Load (0.3ms)[0m   [0;1mSELECT * FROM `steps` WHERE (`steps`.experiment_id = 7) [0m
+  [4;35;1mImage Load (0.3ms)[0m   [0mSELECT * FROM `images` WHERE (`images`.step_id = 23) LIMIT 1[0m
+
+ActionView::TemplateError (No route matches {:action=>"upload"}) on line #34 of app/views/experiments/_step.html.erb:
+31: 
+32:   </span>
+33:   <span>
+34:     <% form_for [@experiment,step], :url =>{ :action => 'upload' },:html => { :multipart => true, :method => 'post'} do |f| %>
+35: 	<p><%= f.file_field :image_file %></p>
+36: 	<p><%= f.submit 'Upload' %></p>
+37:      <% end %>  
+
+    /usr/lib/ruby/gems/1.8/gems/aws-s3-0.6.2/lib/aws/s3/extensions.rb:166:in `returning'
+    app/views/experiments/_step.html.erb:34
+    app/views/experiments/show.html.erb:25
+    app/controllers/experiments_controller.rb:28:in `show'
+    /usr/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+    /usr/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+    /usr/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+    /usr/lib/ruby/1.8/webrick/server.rb:162:in `start'
+    /usr/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+    /usr/lib/ruby/1.8/webrick/server.rb:95:in `start'
+    /usr/lib/ruby/1.8/webrick/server.rb:92:in `each'
+    /usr/lib/ruby/1.8/webrick/server.rb:92:in `start'
+    /usr/lib/ruby/1.8/webrick/server.rb:23:in `start'
+    /usr/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendered rescues/_trace (554.8ms)
+Rendered rescues/_request_and_response (1.4ms)
+Rendering rescues/layout (internal_server_error)
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing StepsController#edit (for 127.0.0.1 at 2010-06-10 16:58:46) [GET]
+  Parameters: {"experiment_id"=>"7", "id"=>"25"}
+  [4;35;1mExperiment Columns (1.6ms)[0m   [0mSHOW FIELDS FROM `experiments`[0m
+  [4;36;1mExperiment Load (2.0ms)[0m   [0;1mSELECT * FROM `experiments` WHERE (`experiments`.`id` = 7) [0m
+  [4;35;1mStep Columns (2.2ms)[0m   [0mSHOW FIELDS FROM `steps`[0m
+  [4;36;1mStep Load (0.9ms)[0m   [0;1mSELECT * FROM `steps` WHERE (`steps`.`id` = 25 AND (`steps`.experiment_id = 7)) [0m
+Rendering template within layouts/steps
+Rendering steps/edit
+Completed in 124ms (View: 69, DB: 7) | 200 OK [http://localhost/experiments/7/steps/25/edit]
+  [4;35;1mSQL (0.3ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-06-10 16:58:47) [GET]
+
+ActionController::RoutingError (No route matches "/javascripts/jquery-ui.js" with {:method=>:get}):
+  /usr/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+  /usr/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+  /usr/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+  /usr/lib/ruby/1.8/webrick/server.rb:162:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+  /usr/lib/ruby/1.8/webrick/server.rb:95:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:92:in `each'
+  /usr/lib/ruby/1.8/webrick/server.rb:92:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:23:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendering rescues/layout (not_found)
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-06-10 16:58:47) [GET]
+
+ActionController::RoutingError (No route matches "/javascripts/jrails.js" with {:method=>:get}):
+  /usr/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+  /usr/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+  /usr/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+  /usr/lib/ruby/1.8/webrick/server.rb:162:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+  /usr/lib/ruby/1.8/webrick/server.rb:95:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:92:in `each'
+  /usr/lib/ruby/1.8/webrick/server.rb:92:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:23:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendering rescues/layout (not_found)
+  [4;35;1mSQL (0.3ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-06-10 16:58:48) [GET]
+
+ActionController::RoutingError (No route matches "/javascripts/jquery-ui.js" with {:method=>:get}):
+  /usr/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+  /usr/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+  /usr/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+  /usr/lib/ruby/1.8/webrick/server.rb:162:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+  /usr/lib/ruby/1.8/webrick/server.rb:95:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:92:in `each'
+  /usr/lib/ruby/1.8/webrick/server.rb:92:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:23:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendering rescues/layout (not_found)
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-06-10 16:58:48) [GET]
+
+ActionController::RoutingError (No route matches "/javascripts/jrails.js" with {:method=>:get}):
+  /usr/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+  /usr/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+  /usr/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+  /usr/lib/ruby/1.8/webrick/server.rb:162:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+  /usr/lib/ruby/1.8/webrick/server.rb:95:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:92:in `each'
+  /usr/lib/ruby/1.8/webrick/server.rb:92:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:23:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendering rescues/layout (not_found)
+  [4;35;1mSQL (0.3ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing ExperimentsController#show (for 127.0.0.1 at 2010-06-10 16:59:25) [GET]
+  Parameters: {"id"=>"7"}
+  [4;36;1mExperiment Columns (1.6ms)[0m   [0;1mSHOW FIELDS FROM `experiments`[0m
+  [4;35;1mExperiment Load (0.3ms)[0m   [0mSELECT * FROM `experiments` WHERE (`experiments`.`id` = 7) [0m
+Rendering template within layouts/experiments
+Rendering experiments/show
+  [4;36;1mStep Columns (1.6ms)[0m   [0;1mSHOW FIELDS FROM `steps`[0m
+  [4;35;1mSQL (0.3ms)[0m   [0mSELECT count(*) AS count_all FROM `steps` WHERE (`steps`.experiment_id = 7) [0m
+  [4;36;1mStep Load (0.3ms)[0m   [0;1mSELECT * FROM `steps` WHERE (`steps`.experiment_id = 7) [0m
+  [4;35;1mImage Load (0.3ms)[0m   [0mSELECT * FROM `images` WHERE (`images`.step_id = 23) LIMIT 1[0m
+
+ActionView::TemplateError (No route matches {:action=>"upload"}) on line #34 of app/views/experiments/_step.html.erb:
+31: 
+32:   </span>
+33:   <span>
+34:     <% form_for [@experiment,step], :url =>{ :action => 'upload' },:html => { :multipart => true, :method => 'post'} do |f| %>
+35: 	<p><%= f.file_field :image_file %></p>
+36: 	<p><%= f.submit 'Upload' %></p>
+37:      <% end %>  
+
+    /usr/lib/ruby/gems/1.8/gems/aws-s3-0.6.2/lib/aws/s3/extensions.rb:166:in `returning'
+    app/views/experiments/_step.html.erb:34
+    app/views/experiments/show.html.erb:25
+    app/controllers/experiments_controller.rb:28:in `show'
+    /usr/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+    /usr/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+    /usr/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+    /usr/lib/ruby/1.8/webrick/server.rb:162:in `start'
+    /usr/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+    /usr/lib/ruby/1.8/webrick/server.rb:95:in `start'
+    /usr/lib/ruby/1.8/webrick/server.rb:92:in `each'
+    /usr/lib/ruby/1.8/webrick/server.rb:92:in `start'
+    /usr/lib/ruby/1.8/webrick/server.rb:23:in `start'
+    /usr/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendered rescues/_trace (575.9ms)
+Rendered rescues/_request_and_response (1.4ms)
+Rendering rescues/layout (internal_server_error)
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing ExperimentsController#show (for 127.0.0.1 at 2010-06-10 16:59:59) [GET]
+  Parameters: {"id"=>"7"}
+  [4;35;1mExperiment Columns (2.3ms)[0m   [0mSHOW FIELDS FROM `experiments`[0m
+  [4;36;1mExperiment Load (0.3ms)[0m   [0;1mSELECT * FROM `experiments` WHERE (`experiments`.`id` = 7) [0m
+Rendering template within layouts/experiments
+Rendering experiments/show
+  [4;35;1mStep Columns (3.4ms)[0m   [0mSHOW FIELDS FROM `steps`[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSELECT count(*) AS count_all FROM `steps` WHERE (`steps`.experiment_id = 7) [0m
+  [4;35;1mStep Load (0.3ms)[0m   [0mSELECT * FROM `steps` WHERE (`steps`.experiment_id = 7) [0m
+  [4;36;1mImage Load (1.6ms)[0m   [0;1mSELECT * FROM `images` WHERE (`images`.step_id = 23) LIMIT 1[0m
+
+ActionView::TemplateError (No route matches {:action=>"upload"}) on line #34 of app/views/experiments/_step.html.erb:
+31: 
+32:   </span>
+33:   <span>
+34:     <% form_for [@experiment,step], :url =>{ :action => 'upload' },:html => { :multipart => true, :method => 'post'} do |f| %>
+35: 	<p><%= f.file_field :image_file %></p>
+36: 	<p><%= f.submit 'Upload' %></p>
+37:      <% end %>  
+
+    /usr/lib/ruby/gems/1.8/gems/aws-s3-0.6.2/lib/aws/s3/extensions.rb:166:in `returning'
+    app/views/experiments/_step.html.erb:34
+    app/views/experiments/show.html.erb:25
+    app/controllers/experiments_controller.rb:28:in `show'
+    /usr/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+    /usr/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+    /usr/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+    /usr/lib/ruby/1.8/webrick/server.rb:162:in `start'
+    /usr/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+    /usr/lib/ruby/1.8/webrick/server.rb:95:in `start'
+    /usr/lib/ruby/1.8/webrick/server.rb:92:in `each'
+    /usr/lib/ruby/1.8/webrick/server.rb:92:in `start'
+    /usr/lib/ruby/1.8/webrick/server.rb:23:in `start'
+    /usr/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendered rescues/_trace (301.8ms)
+Rendered rescues/_request_and_response (0.8ms)
+Rendering rescues/layout (internal_server_error)
+  [4;35;1mSQL (0.3ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing ExperimentsController#show (for 127.0.0.1 at 2010-06-10 17:03:15) [GET]
+  Parameters: {"id"=>"7"}
+  [4;36;1mExperiment Columns (2.3ms)[0m   [0;1mSHOW FIELDS FROM `experiments`[0m
+  [4;35;1mExperiment Load (0.3ms)[0m   [0mSELECT * FROM `experiments` WHERE (`experiments`.`id` = 7) [0m
+Rendering template within layouts/experiments
+Rendering experiments/show
+  [4;36;1mStep Columns (2.2ms)[0m   [0;1mSHOW FIELDS FROM `steps`[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mSELECT count(*) AS count_all FROM `steps` WHERE (`steps`.experiment_id = 7) [0m
+  [4;36;1mStep Load (0.3ms)[0m   [0;1mSELECT * FROM `steps` WHERE (`steps`.experiment_id = 7) [0m
+  [4;35;1mImage Load (0.3ms)[0m   [0mSELECT * FROM `images` WHERE (`images`.step_id = 23) LIMIT 1[0m
+
+ActionView::TemplateError (No route matches {:controller=>"steps", :action=>"upload"}) on line #34 of app/views/experiments/_step.html.erb:
+31: 
+32:   </span>
+33:   <span>
+34: 	  <% form_for [@experiment,step], :url =>{ :action => 'upload', :controller => :steps },:html => { :multipart => true, :method => 'post'} do |f| %>
+35: 	<p><%= f.file_field :image_file %></p>
+36: 	<p><%= f.submit 'Upload' %></p>
+37:      <% end %>  
+
+    /usr/lib/ruby/gems/1.8/gems/aws-s3-0.6.2/lib/aws/s3/extensions.rb:166:in `returning'
+    app/views/experiments/_step.html.erb:34
+    app/views/experiments/show.html.erb:25
+    app/controllers/experiments_controller.rb:28:in `show'
+    /usr/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+    /usr/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+    /usr/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+    /usr/lib/ruby/1.8/webrick/server.rb:162:in `start'
+    /usr/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+    /usr/lib/ruby/1.8/webrick/server.rb:95:in `start'
+    /usr/lib/ruby/1.8/webrick/server.rb:92:in `each'
+    /usr/lib/ruby/1.8/webrick/server.rb:92:in `start'
+    /usr/lib/ruby/1.8/webrick/server.rb:23:in `start'
+    /usr/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendered rescues/_trace (328.2ms)
+Rendered rescues/_request_and_response (1.1ms)
+Rendering rescues/layout (internal_server_error)
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing ExperimentsController#show (for 127.0.0.1 at 2010-06-10 17:04:18) [GET]
+  Parameters: {"id"=>"7"}
+  [4;35;1mExperiment Columns (2.2ms)[0m   [0mSHOW FIELDS FROM `experiments`[0m
+  [4;36;1mExperiment Load (0.3ms)[0m   [0;1mSELECT * FROM `experiments` WHERE (`experiments`.`id` = 7) [0m
+Rendering template within layouts/experiments
+Rendering experiments/show
+  [4;35;1mStep Columns (2.2ms)[0m   [0mSHOW FIELDS FROM `steps`[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSELECT count(*) AS count_all FROM `steps` WHERE (`steps`.experiment_id = 7) [0m
+  [4;35;1mStep Load (0.3ms)[0m   [0mSELECT * FROM `steps` WHERE (`steps`.experiment_id = 7) [0m
+  [4;36;1mImage Load (0.3ms)[0m   [0;1mSELECT * FROM `images` WHERE (`images`.step_id = 23) LIMIT 1[0m
+
+ActionView::TemplateError (No route matches {:action=>"upload"}) on line #34 of app/views/experiments/_step.html.erb:
+31: 
+32:   </span>
+33:   <span>
+34: 	  <% form_for [@experiment,step.id], :url =>{ :action => 'upload' },:html => { :multipart => true, :method => 'post'} do |f| %>
+35: 	<p><%= f.file_field :image_file %></p>
+36: 	<p><%= f.submit 'Upload' %></p>
+37:      <% end %>  
+
+    /usr/lib/ruby/gems/1.8/gems/aws-s3-0.6.2/lib/aws/s3/extensions.rb:166:in `returning'
+    app/views/experiments/_step.html.erb:34
+    app/views/experiments/show.html.erb:25
+    app/controllers/experiments_controller.rb:28:in `show'
+    /usr/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+    /usr/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+    /usr/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+    /usr/lib/ruby/1.8/webrick/server.rb:162:in `start'
+    /usr/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+    /usr/lib/ruby/1.8/webrick/server.rb:95:in `start'
+    /usr/lib/ruby/1.8/webrick/server.rb:92:in `each'
+    /usr/lib/ruby/1.8/webrick/server.rb:92:in `start'
+    /usr/lib/ruby/1.8/webrick/server.rb:23:in `start'
+    /usr/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendered rescues/_trace (513.1ms)
+Rendered rescues/_request_and_response (0.8ms)
+Rendering rescues/layout (internal_server_error)
+  [4;35;1mSQL (0.3ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing ExperimentsController#show (for 127.0.0.1 at 2010-06-10 17:05:03) [GET]
+  Parameters: {"id"=>"7"}
+  [4;36;1mExperiment Columns (2.2ms)[0m   [0;1mSHOW FIELDS FROM `experiments`[0m
+  [4;35;1mExperiment Load (0.3ms)[0m   [0mSELECT * FROM `experiments` WHERE (`experiments`.`id` = 7) [0m
+Rendering template within layouts/experiments
+Rendering experiments/show
+  [4;36;1mStep Columns (2.3ms)[0m   [0;1mSHOW FIELDS FROM `steps`[0m
+  [4;35;1mSQL (0.3ms)[0m   [0mSELECT count(*) AS count_all FROM `steps` WHERE (`steps`.experiment_id = 7) [0m
+  [4;36;1mStep Load (1.4ms)[0m   [0;1mSELECT * FROM `steps` WHERE (`steps`.experiment_id = 7) [0m
+  [4;35;1mImage Load (0.3ms)[0m   [0mSELECT * FROM `images` WHERE (`images`.step_id = 23) LIMIT 1[0m
+
+ActionView::TemplateError (undefined method `experiment_fixnum_path' for #<ActionView::Base:0xb6d7b994>) on line #34 of app/views/experiments/_step.html.erb:
+31: 
+32:   </span>
+33:   <span>
+34: 	  <% form_for [@experiment,step.id],:html => { :multipart => true, :method => 'post'} do |f| %>
+35: 	<p><%= f.file_field :image_file %></p>
+36: 	<p><%= f.submit 'Upload' %></p>
+37:      <% end %>  
+
+    app/views/experiments/_step.html.erb:34
+    app/views/experiments/show.html.erb:25
+    app/controllers/experiments_controller.rb:28:in `show'
+    /usr/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+    /usr/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+    /usr/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+    /usr/lib/ruby/1.8/webrick/server.rb:162:in `start'
+    /usr/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+    /usr/lib/ruby/1.8/webrick/server.rb:95:in `start'
+    /usr/lib/ruby/1.8/webrick/server.rb:92:in `each'
+    /usr/lib/ruby/1.8/webrick/server.rb:92:in `start'
+    /usr/lib/ruby/1.8/webrick/server.rb:23:in `start'
+    /usr/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendered rescues/_trace (713.4ms)
+Rendered rescues/_request_and_response (1.8ms)
+Rendering rescues/layout (internal_server_error)
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing ExperimentsController#show (for 127.0.0.1 at 2010-06-10 17:05:30) [GET]
+  Parameters: {"id"=>"7"}
+  [4;35;1mExperiment Columns (2.2ms)[0m   [0mSHOW FIELDS FROM `experiments`[0m
+  [4;36;1mExperiment Load (0.3ms)[0m   [0;1mSELECT * FROM `experiments` WHERE (`experiments`.`id` = 7) [0m
+Rendering template within layouts/experiments
+Rendering experiments/show
+  [4;35;1mStep Columns (2.3ms)[0m   [0mSHOW FIELDS FROM `steps`[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSELECT count(*) AS count_all FROM `steps` WHERE (`steps`.experiment_id = 7) [0m
+  [4;35;1mStep Load (0.3ms)[0m   [0mSELECT * FROM `steps` WHERE (`steps`.experiment_id = 7) [0m
+  [4;36;1mImage Load (0.3ms)[0m   [0;1mSELECT * FROM `images` WHERE (`images`.step_id = 23) LIMIT 1[0m
+Rendered experiments/_step (76.7ms)
+  [4;35;1mImage Load (0.3ms)[0m   [0mSELECT * FROM `images` WHERE (`images`.step_id = 24) LIMIT 1[0m
+  [4;36;1mImage Columns (2.4ms)[0m   [0;1mSHOW FIELDS FROM `images`[0m
+Rendered experiments/_step (101.1ms)
+  [4;35;1mImage Load (0.4ms)[0m   [0mSELECT * FROM `images` WHERE (`images`.step_id = 25) LIMIT 1[0m
+Rendered experiments/_step (81.8ms)
+Completed in 378ms (View: 319, DB: 9) | 200 OK [http://localhost/experiments/7]
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-06-10 17:05:32) [GET]
+
+ActionController::RoutingError (No route matches "/javascripts/jquery-ui.js" with {:method=>:get}):
+  /usr/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+  /usr/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+  /usr/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+  /usr/lib/ruby/1.8/webrick/server.rb:162:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+  /usr/lib/ruby/1.8/webrick/server.rb:95:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:92:in `each'
+  /usr/lib/ruby/1.8/webrick/server.rb:92:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:23:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendering rescues/layout (not_found)
+  [4;35;1mSQL (0.2ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-06-10 17:05:32) [GET]
+
+ActionController::RoutingError (No route matches "/javascripts/jrails.js" with {:method=>:get}):
+  /usr/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+  /usr/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+  /usr/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+  /usr/lib/ruby/1.8/webrick/server.rb:162:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+  /usr/lib/ruby/1.8/webrick/server.rb:95:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:92:in `each'
+  /usr/lib/ruby/1.8/webrick/server.rb:92:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:23:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendering rescues/layout (not_found)
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing ImagesController#step (for 127.0.0.1 at 2010-06-10 17:05:32) [GET]
+  Parameters: {"id"=>"23"}
+  [4;35;1mImage Columns (2.5ms)[0m   [0mSHOW FIELDS FROM `images`[0m
+  [4;36;1mImage Load (0.3ms)[0m   [0;1mSELECT * FROM `images` WHERE (`images`.`id` = 23) [0m
+Completed in 327ms (View: 294, DB: 3) | 200 OK [http://localhost/images/23/step]
+  [4;35;1mSQL (0.3ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing ImagesController#step (for 127.0.0.1 at 2010-06-10 17:05:33) [GET]
+  Parameters: {"id"=>"22"}
+  [4;36;1mImage Columns (3.5ms)[0m   [0;1mSHOW FIELDS FROM `images`[0m
+  [4;35;1mImage Load (0.4ms)[0m   [0mSELECT * FROM `images` WHERE (`images`.`id` = 22) [0m
+Completed in 274ms (View: 227, DB: 4) | 200 OK [http://localhost/images/22/step]
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-06-10 17:05:34) [GET]
+
+ActionController::RoutingError (No route matches "/javascripts/jquery-ui.js" with {:method=>:get}):
+  /usr/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+  /usr/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+  /usr/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+  /usr/lib/ruby/1.8/webrick/server.rb:162:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+  /usr/lib/ruby/1.8/webrick/server.rb:95:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:92:in `each'
+  /usr/lib/ruby/1.8/webrick/server.rb:92:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:23:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendering rescues/layout (not_found)
+  [4;35;1mSQL (0.3ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-06-10 17:05:35) [GET]
+
+ActionController::RoutingError (No route matches "/javascripts/jrails.js" with {:method=>:get}):
+  /usr/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+  /usr/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+  /usr/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+  /usr/lib/ruby/1.8/webrick/server.rb:162:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+  /usr/lib/ruby/1.8/webrick/server.rb:95:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:92:in `each'
+  /usr/lib/ruby/1.8/webrick/server.rb:92:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:23:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendering rescues/layout (not_found)
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-06-10 17:08:47) [POST]
+  Parameters: {"step"=>{"image_file"=>#<File:/tmp/RackMultipart20100610-15438-9h7oi5-0>}, "commit"=>"Upload", "authenticity_token"=>"IMiEpLjlHeJd9XPoAusqJRko+4pVsYvBRU4iToTr66I="}
+
+ActionController::MethodNotAllowed (Only get, put, and delete requests are allowed.):
+  /usr/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+  /usr/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+  /usr/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+  /usr/lib/ruby/1.8/webrick/server.rb:162:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+  /usr/lib/ruby/1.8/webrick/server.rb:95:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:92:in `each'
+  /usr/lib/ruby/1.8/webrick/server.rb:92:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:23:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendered rescues/_trace (123.4ms)
+Rendered rescues/_request_and_response (1.9ms)
+Rendering rescues/layout (method_not_allowed)
+  [4;35;1mSQL (0.3ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing ExperimentsController#show (for 127.0.0.1 at 2010-06-10 17:09:28) [GET]
+  Parameters: {"id"=>"7"}
+  [4;36;1mExperiment Columns (2.4ms)[0m   [0;1mSHOW FIELDS FROM `experiments`[0m
+  [4;35;1mExperiment Load (0.3ms)[0m   [0mSELECT * FROM `experiments` WHERE (`experiments`.`id` = 7) [0m
+Rendering template within layouts/experiments
+Rendering experiments/show
+  [4;36;1mStep Columns (1.7ms)[0m   [0;1mSHOW FIELDS FROM `steps`[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mSELECT count(*) AS count_all FROM `steps` WHERE (`steps`.experiment_id = 7) [0m
+  [4;36;1mStep Load (0.3ms)[0m   [0;1mSELECT * FROM `steps` WHERE (`steps`.experiment_id = 7) [0m
+  [4;35;1mImage Load (0.3ms)[0m   [0mSELECT * FROM `images` WHERE (`images`.step_id = 23) LIMIT 1[0m
+
+ActionView::TemplateError (No route matches {:action=>"upload"}) on line #34 of app/views/experiments/_step.html.erb:
+31: 
+32:   </span>
+33:   <span>
+34: 	  <% form_for [@experiment,step],:url => { :action => 'upload' }, :html => { :multipart => true, :method => 'post'} do |f| %>
+35: 	<p><%= f.file_field :image_file %></p>
+36: 	<p><%= f.submit 'Upload' %></p>
+37:      <% end %>  
+
+    /usr/lib/ruby/gems/1.8/gems/aws-s3-0.6.2/lib/aws/s3/extensions.rb:166:in `returning'
+    app/views/experiments/_step.html.erb:34
+    app/views/experiments/show.html.erb:25
+    app/controllers/experiments_controller.rb:28:in `show'
+    /usr/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+    /usr/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+    /usr/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+    /usr/lib/ruby/1.8/webrick/server.rb:162:in `start'
+    /usr/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+    /usr/lib/ruby/1.8/webrick/server.rb:95:in `start'
+    /usr/lib/ruby/1.8/webrick/server.rb:92:in `each'
+    /usr/lib/ruby/1.8/webrick/server.rb:92:in `start'
+    /usr/lib/ruby/1.8/webrick/server.rb:23:in `start'
+    /usr/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendered rescues/_trace (460.9ms)
+Rendered rescues/_request_and_response (1.3ms)
+Rendering rescues/layout (internal_server_error)
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing ExperimentsController#show (for 127.0.0.1 at 2010-06-10 17:10:08) [GET]
+  Parameters: {"id"=>"7"}
+  [4;35;1mExperiment Columns (2.2ms)[0m   [0mSHOW FIELDS FROM `experiments`[0m
+  [4;36;1mExperiment Load (0.3ms)[0m   [0;1mSELECT * FROM `experiments` WHERE (`experiments`.`id` = 7) [0m
+Rendering template within layouts/experiments
+Rendering experiments/show
+  [4;35;1mStep Columns (2.2ms)[0m   [0mSHOW FIELDS FROM `steps`[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSELECT count(*) AS count_all FROM `steps` WHERE (`steps`.experiment_id = 7) [0m
+  [4;35;1mStep Load (0.4ms)[0m   [0mSELECT * FROM `steps` WHERE (`steps`.experiment_id = 7) [0m
+  [4;36;1mImage Load (0.3ms)[0m   [0;1mSELECT * FROM `images` WHERE (`images`.step_id = 23) LIMIT 1[0m
+Rendered experiments/_step (89.2ms)
+  [4;35;1mImage Load (0.3ms)[0m   [0mSELECT * FROM `images` WHERE (`images`.step_id = 24) LIMIT 1[0m
+  [4;36;1mImage Columns (2.8ms)[0m   [0;1mSHOW FIELDS FROM `images`[0m
+Rendered experiments/_step (59.6ms)
+  [4;35;1mImage Load (0.3ms)[0m   [0mSELECT * FROM `images` WHERE (`images`.step_id = 25) LIMIT 1[0m
+Rendered experiments/_step (53.5ms)
+Completed in 321ms (View: 267, DB: 9) | 200 OK [http://localhost/experiments/7]
+  [4;36;1mSQL (0.7ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-06-10 17:10:10) [GET]
+
+ActionController::RoutingError (No route matches "/javascripts/jquery-ui.js" with {:method=>:get}):
+  /usr/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+  /usr/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+  /usr/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+  /usr/lib/ruby/1.8/webrick/server.rb:162:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+  /usr/lib/ruby/1.8/webrick/server.rb:95:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:92:in `each'
+  /usr/lib/ruby/1.8/webrick/server.rb:92:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:23:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendering rescues/layout (not_found)
+  [4;35;1mSQL (0.3ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-06-10 17:10:10) [GET]
+
+ActionController::RoutingError (No route matches "/javascripts/jrails.js" with {:method=>:get}):
+  /usr/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+  /usr/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+  /usr/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+  /usr/lib/ruby/1.8/webrick/server.rb:162:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+  /usr/lib/ruby/1.8/webrick/server.rb:95:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:92:in `each'
+  /usr/lib/ruby/1.8/webrick/server.rb:92:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:23:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendering rescues/layout (not_found)
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing ImagesController#step (for 127.0.0.1 at 2010-06-10 17:10:10) [GET]
+  Parameters: {"id"=>"23"}
+  [4;35;1mImage Columns (4.3ms)[0m   [0mSHOW FIELDS FROM `images`[0m
+  [4;36;1mImage Load (0.4ms)[0m   [0;1mSELECT * FROM `images` WHERE (`images`.`id` = 23) [0m
+Completed in 278ms (View: 227, DB: 5) | 200 OK [http://localhost/images/23/step]
+  [4;35;1mSQL (0.3ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing ImagesController#step (for 127.0.0.1 at 2010-06-10 17:10:11) [GET]
+  Parameters: {"id"=>"22"}
+  [4;36;1mImage Columns (1.9ms)[0m   [0;1mSHOW FIELDS FROM `images`[0m
+  [4;35;1mImage Load (0.3ms)[0m   [0mSELECT * FROM `images` WHERE (`images`.`id` = 22) [0m
+Completed in 275ms (View: 227, DB: 3) | 200 OK [http://localhost/images/22/step]
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-06-10 17:10:12) [GET]
+
+ActionController::RoutingError (No route matches "/javascripts/jquery-ui.js" with {:method=>:get}):
+  /usr/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+  /usr/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+  /usr/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+  /usr/lib/ruby/1.8/webrick/server.rb:162:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+  /usr/lib/ruby/1.8/webrick/server.rb:95:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:92:in `each'
+  /usr/lib/ruby/1.8/webrick/server.rb:92:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:23:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendering rescues/layout (not_found)
+  [4;35;1mSQL (0.3ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-06-10 17:10:13) [GET]
+
+ActionController::RoutingError (No route matches "/javascripts/jrails.js" with {:method=>:get}):
+  /usr/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+  /usr/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+  /usr/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+  /usr/lib/ruby/1.8/webrick/server.rb:162:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+  /usr/lib/ruby/1.8/webrick/server.rb:95:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:92:in `each'
+  /usr/lib/ruby/1.8/webrick/server.rb:92:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:23:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendering rescues/layout (not_found)
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing ExperimentsController#show (for 127.0.0.1 at 2010-06-10 17:10:42) [GET]
+  Parameters: {"id"=>"7"}
+  [4;35;1mExperiment Columns (2.2ms)[0m   [0mSHOW FIELDS FROM `experiments`[0m
+  [4;36;1mExperiment Load (0.3ms)[0m   [0;1mSELECT * FROM `experiments` WHERE (`experiments`.`id` = 7) [0m
+Rendering template within layouts/experiments
+Rendering experiments/show
+  [4;35;1mStep Columns (2.3ms)[0m   [0mSHOW FIELDS FROM `steps`[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSELECT count(*) AS count_all FROM `steps` WHERE (`steps`.experiment_id = 7) [0m
+  [4;35;1mStep Load (0.3ms)[0m   [0mSELECT * FROM `steps` WHERE (`steps`.experiment_id = 7) [0m
+  [4;36;1mImage Load (0.3ms)[0m   [0;1mSELECT * FROM `images` WHERE (`images`.step_id = 23) LIMIT 1[0m
+
+ActionView::TemplateError (No route matches {:action=>"upload"}) on line #34 of app/views/experiments/_step.html.erb:
+31: 
+32:   </span>
+33:   <span>
+34: 	  <% form_for [@experiment,step],:url => { :action => 'upload' }, :html => { :multipart => true, :method => 'post'} do |f| %>
+35: 	<p><%= f.file_field :image_file %></p>
+36: 	<p><%= f.submit 'Upload' %></p>
+37:      <% end %>  
+
+    /usr/lib/ruby/gems/1.8/gems/aws-s3-0.6.2/lib/aws/s3/extensions.rb:166:in `returning'
+    app/views/experiments/_step.html.erb:34
+    app/views/experiments/show.html.erb:25
+    app/controllers/experiments_controller.rb:28:in `show'
+    /usr/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+    /usr/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+    /usr/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+    /usr/lib/ruby/1.8/webrick/server.rb:162:in `start'
+    /usr/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+    /usr/lib/ruby/1.8/webrick/server.rb:95:in `start'
+    /usr/lib/ruby/1.8/webrick/server.rb:92:in `each'
+    /usr/lib/ruby/1.8/webrick/server.rb:92:in `start'
+    /usr/lib/ruby/1.8/webrick/server.rb:23:in `start'
+    /usr/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendered rescues/_trace (504.7ms)
+Rendered rescues/_request_and_response (2.7ms)
+Rendering rescues/layout (internal_server_error)
+  [4;35;1mSQL (0.3ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing ExperimentsController#show (for 127.0.0.1 at 2010-06-10 17:24:56) [GET]
+  Parameters: {"id"=>"7"}
+  [4;36;1mExperiment Columns (2.3ms)[0m   [0;1mSHOW FIELDS FROM `experiments`[0m
+  [4;35;1mExperiment Load (0.3ms)[0m   [0mSELECT * FROM `experiments` WHERE (`experiments`.`id` = 7) [0m
+Rendering template within layouts/experiments
+Rendering experiments/show
+  [4;36;1mStep Columns (2.5ms)[0m   [0;1mSHOW FIELDS FROM `steps`[0m
+  [4;35;1mSQL (0.3ms)[0m   [0mSELECT count(*) AS count_all FROM `steps` WHERE (`steps`.experiment_id = 7) [0m
+  [4;36;1mStep Load (0.3ms)[0m   [0;1mSELECT * FROM `steps` WHERE (`steps`.experiment_id = 7) [0m
+  [4;35;1mImage Load (0.3ms)[0m   [0mSELECT * FROM `images` WHERE (`images`.step_id = 23) LIMIT 1[0m
+
+ActionView::TemplateError (undefined method `upload_experiment_path' for #<ActionView::Base:0xb6ec5980>) on line #34 of app/views/experiments/_step.html.erb:
+31: 
+32:   </span>
+33:   <span>
+34: 	  <% form_for [@experiment,step],:url => upload_experiment_path(@experiment,step), :html => { :multipart => true, :method => 'post'} do |f| %>
+35: 	<p><%= f.file_field :image_file %></p>
+36: 	<p><%= f.submit 'Upload' %></p>
+37:      <% end %>  
+
+    app/views/experiments/_step.html.erb:34
+    app/views/experiments/show.html.erb:25
+    app/controllers/experiments_controller.rb:28:in `show'
+    /usr/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+    /usr/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+    /usr/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+    /usr/lib/ruby/1.8/webrick/server.rb:162:in `start'
+    /usr/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+    /usr/lib/ruby/1.8/webrick/server.rb:95:in `start'
+    /usr/lib/ruby/1.8/webrick/server.rb:92:in `each'
+    /usr/lib/ruby/1.8/webrick/server.rb:92:in `start'
+    /usr/lib/ruby/1.8/webrick/server.rb:23:in `start'
+    /usr/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendered rescues/_trace (299.0ms)
+Rendered rescues/_request_and_response (1.3ms)
+Rendering rescues/layout (internal_server_error)
+  [4;36;1mSQL (0.7ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing ExperimentsController#show (for 127.0.0.1 at 2010-06-10 17:25:20) [GET]
+  Parameters: {"id"=>"7"}
+  [4;35;1mExperiment Columns (3.3ms)[0m   [0mSHOW FIELDS FROM `experiments`[0m
+  [4;36;1mExperiment Load (0.3ms)[0m   [0;1mSELECT * FROM `experiments` WHERE (`experiments`.`id` = 7) [0m
+Rendering template within layouts/experiments
+Rendering experiments/show
+  [4;35;1mStep Columns (2.2ms)[0m   [0mSHOW FIELDS FROM `steps`[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSELECT count(*) AS count_all FROM `steps` WHERE (`steps`.experiment_id = 7) [0m
+  [4;35;1mStep Load (0.3ms)[0m   [0mSELECT * FROM `steps` WHERE (`steps`.experiment_id = 7) [0m
+  [4;36;1mImage Load (0.2ms)[0m   [0;1mSELECT * FROM `images` WHERE (`images`.step_id = 23) LIMIT 1[0m
+Rendered experiments/_step (69.7ms)
+  [4;35;1mImage Load (0.3ms)[0m   [0mSELECT * FROM `images` WHERE (`images`.step_id = 24) LIMIT 1[0m
+  [4;36;1mImage Columns (2.1ms)[0m   [0;1mSHOW FIELDS FROM `images`[0m
+Rendered experiments/_step (63.6ms)
+  [4;35;1mImage Load (0.2ms)[0m   [0mSELECT * FROM `images` WHERE (`images`.step_id = 25) LIMIT 1[0m
+Rendered experiments/_step (46.7ms)
+Completed in 449ms (View: 392, DB: 10) | 200 OK [http://localhost/experiments/7]
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-06-10 17:25:22) [GET]
+
+ActionController::RoutingError (No route matches "/javascripts/jquery-ui.js" with {:method=>:get}):
+  /usr/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+  /usr/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+  /usr/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+  /usr/lib/ruby/1.8/webrick/server.rb:162:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+  /usr/lib/ruby/1.8/webrick/server.rb:95:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:92:in `each'
+  /usr/lib/ruby/1.8/webrick/server.rb:92:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:23:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendering rescues/layout (not_found)
+  [4;35;1mSQL (0.3ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-06-10 17:25:22) [GET]
+
+ActionController::RoutingError (No route matches "/javascripts/jrails.js" with {:method=>:get}):
+  /usr/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+  /usr/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+  /usr/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+  /usr/lib/ruby/1.8/webrick/server.rb:162:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+  /usr/lib/ruby/1.8/webrick/server.rb:95:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:92:in `each'
+  /usr/lib/ruby/1.8/webrick/server.rb:92:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:23:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendering rescues/layout (not_found)
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing ImagesController#step (for 127.0.0.1 at 2010-06-10 17:25:23) [GET]
+  Parameters: {"id"=>"23"}
+  [4;35;1mImage Columns (2.5ms)[0m   [0mSHOW FIELDS FROM `images`[0m
+  [4;36;1mImage Load (0.3ms)[0m   [0;1mSELECT * FROM `images` WHERE (`images`.`id` = 23) [0m
+Completed in 314ms (View: 275, DB: 3) | 200 OK [http://localhost/images/23/step]
+  [4;35;1mSQL (0.3ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing ImagesController#step (for 127.0.0.1 at 2010-06-10 17:25:23) [GET]
+  Parameters: {"id"=>"22"}
+  [4;36;1mImage Columns (2.8ms)[0m   [0;1mSHOW FIELDS FROM `images`[0m
+  [4;35;1mImage Load (0.4ms)[0m   [0mSELECT * FROM `images` WHERE (`images`.`id` = 22) [0m
+Completed in 254ms (View: 211, DB: 3) | 200 OK [http://localhost/images/22/step]
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-06-10 17:25:24) [GET]
+
+ActionController::RoutingError (No route matches "/javascripts/jquery-ui.js" with {:method=>:get}):
+  /usr/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+  /usr/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+  /usr/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+  /usr/lib/ruby/1.8/webrick/server.rb:162:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+  /usr/lib/ruby/1.8/webrick/server.rb:95:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:92:in `each'
+  /usr/lib/ruby/1.8/webrick/server.rb:92:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:23:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendering rescues/layout (not_found)
+  [4;35;1mSQL (0.3ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-06-10 17:25:25) [GET]
+
+ActionController::RoutingError (No route matches "/javascripts/jrails.js" with {:method=>:get}):
+  /usr/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+  /usr/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+  /usr/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+  /usr/lib/ruby/1.8/webrick/server.rb:162:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+  /usr/lib/ruby/1.8/webrick/server.rb:95:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:92:in `each'
+  /usr/lib/ruby/1.8/webrick/server.rb:92:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:23:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendering rescues/layout (not_found)
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing StepsController#upload (for 127.0.0.1 at 2010-06-10 17:25:29) [POST]
+  Parameters: {"experiment_id"=>"7", "step"=>{"image_file"=>#<File:/tmp/RackMultipart20100610-15438-1esddri-0>}, "commit"=>"Upload", "authenticity_token"=>"IMiEpLjlHeJd9XPoAusqJRko+4pVsYvBRU4iToTr66I=", "id"=>"23"}
+  [4;35;1mExperiment Columns (2.6ms)[0m   [0mSHOW FIELDS FROM `experiments`[0m
+  [4;36;1mExperiment Load (0.3ms)[0m   [0;1mSELECT * FROM `experiments` WHERE (`experiments`.`id` = 7) [0m
+  [4;35;1mStep Columns (2.2ms)[0m   [0mSHOW FIELDS FROM `steps`[0m
+  [4;36;1mStep Load (0.8ms)[0m   [0;1mSELECT * FROM `steps` WHERE (`steps`.`id` = 23 AND (`steps`.experiment_id = 7)) [0m
+  [4;35;1mImage Load (0.3ms)[0m   [0mSELECT * FROM `images` WHERE (`images`.step_id = 23) LIMIT 1[0m
+  [4;36;1mImage Columns (3.1ms)[0m   [0;1mSHOW FIELDS FROM `images`[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mBEGIN[0m
+  [4;36;1mImage Create (0.6ms)[0m   [0;1mINSERT INTO `images` (`image_height`, `created_at`, `image_filename`, `updated_at`, `owner_id`, `step_id`, `image_width`, `owner_type`) VALUES(231, '2010-06-10 23:25:29', 'octopus.jpg', '2010-06-10 23:25:29', NULL, 23, 300, NULL)[0m
+  [4;35;1mSQL (47.8ms)[0m   [0mCOMMIT[0m
+  [4;36;1mImage Load (0.8ms)[0m   [0;1mSELECT * FROM `images` WHERE (`images`.step_id = 23) LIMIT 1[0m
+  [4;35;1mSQL (0.5ms)[0m   [0mBEGIN[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mCOMMIT[0m
+Redirected to http://localhost:3000/experiments/7/steps/23
+Completed in 620ms (DB: 60) | 302 Found [http://localhost/experiments/7/steps/23/upload]
+  [4;35;1mSQL (0.3ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing StepsController#show (for 127.0.0.1 at 2010-06-10 17:25:30) [GET]
+  Parameters: {"experiment_id"=>"7", "id"=>"23"}
+  [4;36;1mExperiment Columns (3.2ms)[0m   [0;1mSHOW FIELDS FROM `experiments`[0m
+  [4;35;1mExperiment Load (0.4ms)[0m   [0mSELECT * FROM `experiments` WHERE (`experiments`.`id` = 7) [0m
+  [4;36;1mStep Columns (4.5ms)[0m   [0;1mSHOW FIELDS FROM `steps`[0m
+  [4;35;1mStep Load (0.3ms)[0m   [0mSELECT * FROM `steps` WHERE (`steps`.`id` = 23 AND (`steps`.experiment_id = 7)) [0m
+Rendering template within layouts/steps
+Rendering steps/show
+  [4;36;1mImage Load (0.3ms)[0m   [0;1mSELECT * FROM `images` WHERE (`images`.step_id = 23) LIMIT 1[0m
+  [4;35;1mImage Columns (1.9ms)[0m   [0mSHOW FIELDS FROM `images`[0m
+Completed in 158ms (View: 59, DB: 11) | 200 OK [http://localhost/experiments/7/steps/23]
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-06-10 17:25:32) [GET]
+
+ActionController::RoutingError (No route matches "/javascripts/jquery-ui.js" with {:method=>:get}):
+  /usr/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+  /usr/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+  /usr/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+  /usr/lib/ruby/1.8/webrick/server.rb:162:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+  /usr/lib/ruby/1.8/webrick/server.rb:95:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:92:in `each'
+  /usr/lib/ruby/1.8/webrick/server.rb:92:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:23:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendering rescues/layout (not_found)
+  [4;35;1mSQL (0.3ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-06-10 17:25:32) [GET]
+
+ActionController::RoutingError (No route matches "/javascripts/jrails.js" with {:method=>:get}):
+  /usr/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+  /usr/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+  /usr/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+  /usr/lib/ruby/1.8/webrick/server.rb:162:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+  /usr/lib/ruby/1.8/webrick/server.rb:95:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:92:in `each'
+  /usr/lib/ruby/1.8/webrick/server.rb:92:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:23:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendering rescues/layout (not_found)
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing ImagesController#show to jpg (for 127.0.0.1 at 2010-06-10 17:25:32) [GET]
+  Parameters: {"id"=>"24"}
+  [4;35;1mImage Columns (2.9ms)[0m   [0mSHOW FIELDS FROM `images`[0m
+  [4;36;1mImage Load (0.9ms)[0m   [0;1mSELECT * FROM `images` WHERE (`images`.`id` = 24) [0m
+Rendering images/show
+Completed in 300ms (View: 256, DB: 4) | 200 OK [http://localhost/images/24.jpg]
+  [4;35;1mSQL (0.3ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing ImagesController#thumb (for 127.0.0.1 at 2010-06-10 17:25:33) [GET]
+  Parameters: {"id"=>"24"}
+  [4;36;1mImage Columns (2.9ms)[0m   [0;1mSHOW FIELDS FROM `images`[0m
+  [4;35;1mImage Load (5.8ms)[0m   [0mSELECT * FROM `images` WHERE (`images`.`id` = 24) [0m
+Completed in 561ms (View: 465, DB: 9) | 200 OK [http://localhost/images/24/thumb]
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-06-10 17:25:34) [GET]
+
+ActionController::RoutingError (No route matches "/javascripts/jquery-ui.js" with {:method=>:get}):
+  /usr/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+  /usr/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+  /usr/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+  /usr/lib/ruby/1.8/webrick/server.rb:162:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+  /usr/lib/ruby/1.8/webrick/server.rb:95:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:92:in `each'
+  /usr/lib/ruby/1.8/webrick/server.rb:92:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:23:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendering rescues/layout (not_found)
+  [4;35;1mSQL (0.4ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-06-10 17:25:34) [GET]
+
+ActionController::RoutingError (No route matches "/javascripts/jrails.js" with {:method=>:get}):
+  /usr/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+  /usr/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+  /usr/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+  /usr/lib/ruby/1.8/webrick/server.rb:162:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+  /usr/lib/ruby/1.8/webrick/server.rb:95:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:92:in `each'
+  /usr/lib/ruby/1.8/webrick/server.rb:92:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:23:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendering rescues/layout (not_found)
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing ExperimentsController#show (for 127.0.0.1 at 2010-06-10 17:25:48) [GET]
+  Parameters: {"id"=>"7"}
+  [4;35;1mExperiment Columns (2.3ms)[0m   [0mSHOW FIELDS FROM `experiments`[0m
+  [4;36;1mExperiment Load (0.3ms)[0m   [0;1mSELECT * FROM `experiments` WHERE (`experiments`.`id` = 7) [0m
+Rendering template within layouts/experiments
+Rendering experiments/show
+  [4;35;1mStep Columns (2.3ms)[0m   [0mSHOW FIELDS FROM `steps`[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSELECT count(*) AS count_all FROM `steps` WHERE (`steps`.experiment_id = 7) [0m
+  [4;35;1mStep Load (0.4ms)[0m   [0mSELECT * FROM `steps` WHERE (`steps`.experiment_id = 7) [0m
+  [4;36;1mImage Load (0.3ms)[0m   [0;1mSELECT * FROM `images` WHERE (`images`.step_id = 23) LIMIT 1[0m
+  [4;35;1mImage Columns (2.8ms)[0m   [0mSHOW FIELDS FROM `images`[0m
+Rendered experiments/_step (82.3ms)
+  [4;36;1mImage Load (0.9ms)[0m   [0;1mSELECT * FROM `images` WHERE (`images`.step_id = 24) LIMIT 1[0m
+Rendered experiments/_step (39.9ms)
+  [4;35;1mImage Load (0.8ms)[0m   [0mSELECT * FROM `images` WHERE (`images`.step_id = 25) LIMIT 1[0m
+Rendered experiments/_step (41.5ms)
+Completed in 255ms (View: 199, DB: 11) | 200 OK [http://localhost/experiments/7]
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-06-10 17:25:49) [GET]
+
+ActionController::RoutingError (No route matches "/javascripts/jquery-ui.js" with {:method=>:get}):
+  /usr/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+  /usr/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+  /usr/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+  /usr/lib/ruby/1.8/webrick/server.rb:162:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+  /usr/lib/ruby/1.8/webrick/server.rb:95:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:92:in `each'
+  /usr/lib/ruby/1.8/webrick/server.rb:92:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:23:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendering rescues/layout (not_found)
+  [4;35;1mSQL (0.3ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-06-10 17:25:50) [GET]
+
+ActionController::RoutingError (No route matches "/javascripts/jrails.js" with {:method=>:get}):
+  /usr/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+  /usr/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+  /usr/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+  /usr/lib/ruby/1.8/webrick/server.rb:162:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+  /usr/lib/ruby/1.8/webrick/server.rb:95:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:92:in `each'
+  /usr/lib/ruby/1.8/webrick/server.rb:92:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:23:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendering rescues/layout (not_found)
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing ImagesController#step (for 127.0.0.1 at 2010-06-10 17:25:50) [GET]
+  Parameters: {"id"=>"24"}
+  [4;35;1mImage Columns (2.3ms)[0m   [0mSHOW FIELDS FROM `images`[0m
+  [4;36;1mImage Load (0.3ms)[0m   [0;1mSELECT * FROM `images` WHERE (`images`.`id` = 24) [0m
+Completed in 315ms (View: 281, DB: 3) | 200 OK [http://localhost/images/24/step]
+  [4;35;1mSQL (0.3ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-06-10 17:25:51) [GET]
+
+ActionController::RoutingError (No route matches "/javascripts/jquery-ui.js" with {:method=>:get}):
+  /usr/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+  /usr/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+  /usr/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+  /usr/lib/ruby/1.8/webrick/server.rb:162:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+  /usr/lib/ruby/1.8/webrick/server.rb:95:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:92:in `each'
+  /usr/lib/ruby/1.8/webrick/server.rb:92:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:23:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendering rescues/layout (not_found)
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-06-10 17:25:51) [GET]
+
+ActionController::RoutingError (No route matches "/javascripts/jrails.js" with {:method=>:get}):
+  /usr/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+  /usr/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+  /usr/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+  /usr/lib/ruby/1.8/webrick/server.rb:162:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+  /usr/lib/ruby/1.8/webrick/server.rb:95:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:92:in `each'
+  /usr/lib/ruby/1.8/webrick/server.rb:92:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:23:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendering rescues/layout (not_found)
+  [4;35;1mSQL (0.3ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing ImagesController#step (for 127.0.0.1 at 2010-06-10 17:25:52) [GET]
+  Parameters: {"id"=>"23"}
+  [4;36;1mImage Columns (3.8ms)[0m   [0;1mSHOW FIELDS FROM `images`[0m
+  [4;35;1mImage Load (0.9ms)[0m   [0mSELECT * FROM `images` WHERE (`images`.`id` = 23) [0m
+Completed in 301ms (View: 254, DB: 5) | 200 OK [http://localhost/images/23/step]
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing ImagesController#step (for 127.0.0.1 at 2010-06-10 17:25:52) [GET]
+  Parameters: {"id"=>"22"}
+  [4;35;1mImage Columns (3.2ms)[0m   [0mSHOW FIELDS FROM `images`[0m
+  [4;36;1mImage Load (0.9ms)[0m   [0;1mSELECT * FROM `images` WHERE (`images`.`id` = 22) [0m
+Completed in 253ms (View: 210, DB: 4) | 200 OK [http://localhost/images/22/step]
+  [4;35;1mSQL (0.3ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing ExperimentsController#index (for 127.0.0.1 at 2010-06-11 10:03:38) [GET]
+  [4;36;1mExperiment Load (0.3ms)[0m   [0;1mSELECT * FROM `experiments` [0m
+Rendering template within layouts/experiments
+Rendering experiments/index
+  [4;35;1mExperiment Columns (2.2ms)[0m   [0mSHOW FIELDS FROM `experiments`[0m
+Completed in 144ms (View: 113, DB: 3) | 200 OK [http://localhost/experiments/]
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-06-11 10:03:38) [GET]
+
+ActionController::RoutingError (No route matches "/javascripts/jquery-ui.js" with {:method=>:get}):
+  /usr/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+  /usr/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+  /usr/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+  /usr/lib/ruby/1.8/webrick/server.rb:162:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+  /usr/lib/ruby/1.8/webrick/server.rb:95:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:92:in `each'
+  /usr/lib/ruby/1.8/webrick/server.rb:92:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:23:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendering rescues/layout (not_found)
+  [4;35;1mSQL (0.2ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-06-11 10:03:39) [GET]
+
+ActionController::RoutingError (No route matches "/javascripts/jrails.js" with {:method=>:get}):
+  /usr/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+  /usr/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+  /usr/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+  /usr/lib/ruby/1.8/webrick/server.rb:162:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+  /usr/lib/ruby/1.8/webrick/server.rb:95:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:92:in `each'
+  /usr/lib/ruby/1.8/webrick/server.rb:92:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:23:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendering rescues/layout (not_found)
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-06-11 10:03:40) [GET]
+
+ActionController::RoutingError (No route matches "/javascripts/jrails.js" with {:method=>:get}):
+  /usr/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+  /usr/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+  /usr/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+  /usr/lib/ruby/1.8/webrick/server.rb:162:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+  /usr/lib/ruby/1.8/webrick/server.rb:95:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:92:in `each'
+  /usr/lib/ruby/1.8/webrick/server.rb:92:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:23:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendering rescues/layout (not_found)
+  [4;35;1mSQL (0.3ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing ExperimentsController#show (for 127.0.0.1 at 2010-06-11 10:03:44) [GET]
+  Parameters: {"id"=>"5"}
+  [4;36;1mExperiment Columns (2.2ms)[0m   [0;1mSHOW FIELDS FROM `experiments`[0m
+  [4;35;1mExperiment Load (0.4ms)[0m   [0mSELECT * FROM `experiments` WHERE (`experiments`.`id` = 5) [0m
+Rendering template within layouts/experiments
+Rendering experiments/show
+  [4;36;1mStep Columns (3.7ms)[0m   [0;1mSHOW FIELDS FROM `steps`[0m
+  [4;35;1mSQL (0.7ms)[0m   [0mSELECT count(*) AS count_all FROM `steps` WHERE (`steps`.experiment_id = 5) [0m
+  [4;36;1mStep Load (1.0ms)[0m   [0;1mSELECT * FROM `steps` WHERE (`steps`.experiment_id = 5) [0m
+  [4;35;1mImage Load (0.7ms)[0m   [0mSELECT * FROM `images` WHERE (`images`.step_id = 11) LIMIT 1[0m
+  [4;36;1mImage Columns (2.0ms)[0m   [0;1mSHOW FIELDS FROM `images`[0m
+Rendered experiments/_step (69.7ms)
+  [4;35;1mImage Load (0.9ms)[0m   [0mSELECT * FROM `images` WHERE (`images`.step_id = 20) LIMIT 1[0m
+Rendered experiments/_step (36.7ms)
+Completed in 203ms (View: 144, DB: 12) | 200 OK [http://localhost/experiments/5]
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-06-11 10:03:46) [GET]
+
+ActionController::RoutingError (No route matches "/javascripts/jquery-ui.js" with {:method=>:get}):
+  /usr/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+  /usr/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+  /usr/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+  /usr/lib/ruby/1.8/webrick/server.rb:162:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+  /usr/lib/ruby/1.8/webrick/server.rb:95:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:92:in `each'
+  /usr/lib/ruby/1.8/webrick/server.rb:92:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:23:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendering rescues/layout (not_found)
+  [4;35;1mSQL (0.2ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-06-11 10:03:46) [GET]
+
+ActionController::RoutingError (No route matches "/javascripts/jrails.js" with {:method=>:get}):
+  /usr/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+  /usr/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+  /usr/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+  /usr/lib/ruby/1.8/webrick/server.rb:162:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+  /usr/lib/ruby/1.8/webrick/server.rb:95:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:92:in `each'
+  /usr/lib/ruby/1.8/webrick/server.rb:92:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:23:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendering rescues/layout (not_found)
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing ImagesController#step (for 127.0.0.1 at 2010-06-11 10:03:46) [GET]
+  Parameters: {"id"=>"17"}
+  [4;35;1mImage Columns (3.1ms)[0m   [0mSHOW FIELDS FROM `images`[0m
+  [4;36;1mImage Load (0.9ms)[0m   [0;1mSELECT * FROM `images` WHERE (`images`.`id` = 17) [0m
+Completed in 1145ms (View: 1098, DB: 4) | 200 OK [http://localhost/images/17/step]
+  [4;35;1mSQL (0.3ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing ImagesController#step (for 127.0.0.1 at 2010-06-11 10:03:47) [GET]
+  Parameters: {"id"=>"12"}
+  [4;36;1mImage Columns (2.6ms)[0m   [0;1mSHOW FIELDS FROM `images`[0m
+  [4;35;1mImage Load (16.3ms)[0m   [0mSELECT * FROM `images` WHERE (`images`.`id` = 12) [0m
+Completed in 792ms (View: 694, DB: 19) | 200 OK [http://localhost/images/12/step]
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-06-11 10:03:48) [GET]
+
+ActionController::RoutingError (No route matches "/javascripts/jrails.js" with {:method=>:get}):
+  /usr/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+  /usr/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+  /usr/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+  /usr/lib/ruby/1.8/webrick/server.rb:162:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+  /usr/lib/ruby/1.8/webrick/server.rb:95:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:92:in `each'
+  /usr/lib/ruby/1.8/webrick/server.rb:92:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:23:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendering rescues/layout (not_found)

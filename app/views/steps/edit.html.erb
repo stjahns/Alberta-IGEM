@@ -20,7 +20,7 @@
   </p>
 <% end %>
 
-<% form_for [@experiment,@step], :url =>{ :action => 'upload' },:html => { :multipart => true, :method => 'post'} do |f| %>
+<% form_for [@experiment,@step], :url =>{ :action => :upload },:html => { :multipart => true, :method => 'post'} do |f| %>
 	<p><%= f.file_field :image_file %></p>
 	<p><%= f.submit 'Upload' %></p>
 <% end %>
