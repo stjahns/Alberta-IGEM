@@ -26,7 +26,7 @@ class ExperimentsController < ApplicationController
   # GET /experiments/1.xml
   def show
     @experiment = Experiment.find(params[:id])
-    @steps = @experiment.steps
+    @steps = @experiment.steps.all(:order => :step_order)
 
     respond_to do |format|
       format.html # show.html.erb
@@ -64,7 +64,10 @@ class ExperimentsController < ApplicationController
   # POST /experiments
   # POST /experiments.xml
   def create
-    @experiment = Experiment.new(params[:experiment])
+    # must pass user_id information since session id is not available 
+    # in the model
+    merged_params = params[:experiment].merge({ :user_id => current_user.id })
+    @experiment = Experiment.new( merged_params  )
 
     respond_to do |format|
       if @experiment.save

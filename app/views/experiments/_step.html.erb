@@ -1,18 +1,19 @@
 <div class="step">
-	<span class="step_view" id=step<%= step.id  %>  >
-	  <p><b>Step <%=h " #{ step.step_order }" %>  :</b></br> 
-	  <%= step.title %></p>
+   <div class="step_title" > 
+	<p><b>Step <%=h " #{ step.step_order }" %>  :</b></p> 
+   </div>
+   <span class="step_view" id=step<%= step.id  %>  > 
+	  <p><%= step.title %></p>
 	  <% unless step.image.blank? %>
-	  <p><%= image_tag step_image_path( step.image ) %></p>
+	     <p><%= image_tag step_image_path( step.image ) %></p>
           <% end %> 
-	  <p class= 'description'  ><%=h step.description %>
-	  </p>
+	  <p class= 'description'  ><%=h step.description %></p>
   </span>
 
 
-  <!-- trying out differen for m -->
-  <span class="step_form" style="display: none">
-    <% form_for([@experiment, step],:html => { :method => :put, :id => "stepForm" , :multipart => true, :class => "inplace_edit_step"} ) do |f| %>
+   
+  <span class="step_form" style="display: none;">
+	  <% form_for([@experiment, step],:html => { :method => :put,:multipart => true, :class => "inplace_edit_step"} ) do |f| %>
 	<%= f.error_messages %>
 	<p>
 	    <%= f.label :title %><br />
@@ -22,20 +23,22 @@
 	    <%= f.label :description %><br />
 	    <%= f.text_area :description %>
 	</p>
-	<p>
-	    <%= f.label :step_order %><br />
-	    <%= f.text_field :step_order %>
-	</p>
 	<p><%= f.submit 'Update' %></p>
     <% end %>
 
   </span>
-  <span>
-	  <% form_for [@experiment,step],:url => upload_experiment_step_path(@experiment,step), :html => { :multipart => true, :method => 'post'} do |f| %>
+
+  <span class="step_image_form" style="display: none;"  >
+	<% form_for [@experiment,step],:url => upload_experiment_step_path(@experiment,step), :html => { :multipart => true, :method => 'post'} do |f| %>
 	<p><%= f.file_field :image_file %></p>
 	<p><%= f.submit 'Upload' %></p>
      <% end %>  
   </span>
+
+    <div class="step_edit_slide" >
+		  <a class="btn-step-form  active" href"#">Edit</a>
+		  <a class="btn-step-image active" href"#">Image</a>
+    </div>
 </div>
 
 

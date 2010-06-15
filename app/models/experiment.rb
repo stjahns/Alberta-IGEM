@@ -13,10 +13,12 @@
 #
 
 class Experiment < ActiveRecord::Base
-  attr_accessible :title, :authour, :description, :published, :image
+  attr_accessible :title, :authour, :description, :published, :image, :user_id
   has_many :steps, :dependent => :destroy  
   has_many :constructs, :dependent => :destroy
+  belongs_to :users
 
+#  after_create :assign_owner  
 
   def clone_experiment
   #TODO should this code just be in the controller?
@@ -40,6 +42,14 @@ class Experiment < ActiveRecord::Base
     return new_experiment
 
   end
+
+  private
+  
+#  def assign_owner
+#    self.user_id = current_user.id
+#    self.save
+#  end
+
 
 end
 

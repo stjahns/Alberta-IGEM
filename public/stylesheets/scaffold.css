@@ -73,13 +73,13 @@ a:hover { color: #fff; background-color:#000; }
 }
 
 div.step {
-width:400px;
+width:600px;
 padding:10px;
-border:5px solid gray;
+border:2px solid gray;
 margin:0px;
 }
 
 textarea {
-  rows:4;
-  cols:80;
+  width:550px;
+  height:100px;
 }

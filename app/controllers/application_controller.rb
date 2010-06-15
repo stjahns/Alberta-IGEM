@@ -8,4 +8,22 @@ class ApplicationController < ActionController::Base
   include AuthenticatedSystem
   # Scrub sensitive parameters from your log
   # filter_parameter_logging :password
+  helper_method :is_admin?
+  def is_admin? 
+        if logged_in? && current_user.login == "admin"
+          true
+        else
+          false
+        end
+  end
+
+  helper_method :is_owner
+  def is_owner( user_id )
+	if logged_in? && ( current_user.login == 'admin' || current_user.id  == user_id ) 
+	  true
+	else
+	  false
+	end
+  end
+
 end

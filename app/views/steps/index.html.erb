@@ -2,6 +2,7 @@
 
 <table>
   <tr>
+    <th>#</th>
     <th>Title</th>
     <th>Description</th> 
     <th>Image</th>
@@ -9,6 +10,7 @@
 
 <% @steps.each do |step| %>
   <tr>
+	  <td><%=h step.step_order %></td>
     <td><%=h step.title %></td>
     <td><%=h step.description %></td>
     <td><% if step.image.blank? %>

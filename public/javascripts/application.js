@@ -10,16 +10,16 @@ $.ajaxSetup({
 $(document).ready(function(){
   // UJS authenticity token fix: add the authenticity_token parameter
   // expected by any Rails POST request 
-  $(document).ajaxSend(function(event, request, settings) {
+//  $(document).ajaxSend(function(event, request, settings) {
     // do nothing if this is a GET request. Rails doesn't need the 
     // authenticity token, and IE converts the request method 
     // to POST, just because
-    if (settings.type == 'GET') return;
-    if (typeof(AUTH_TOKEN) == "undefined") return;
-    settings.data = settings.data || "";
-    settings.data += (settings.data ? "&" : "") + "authenticity_token="
-      + encodeURIComponent(AUTH_TOKEN);
-    });
+//    if (settings.type == 'GET') return;
+//    if (typeof(AUTH_TOKEN) == "undefined") return;
+//    settings.data = settings.data || "";
+//    settings.data += (settings.data ? "&" : "") + "authenticity_token="
+//      + encodeURIComponent(AUTH_TOKEN);
+//    });
 
 //----------------------------------------------------------
 // TODO MOVE THIS INTO ANOTHER FILE
@@ -30,7 +30,7 @@ $(document).ready(function(){
 		//target:       '', 
                 //beforeSubmit: showRequest,
 		//success:      showResponse,
-		success:      processStep,
+	        //success:      processStep,
 		dataType:     'json',
 		//resetForm:  true
 
@@ -39,75 +39,46 @@ $(document).ready(function(){
 	// submit the edits for steps with ajaX
 	$('.inplace_edit_step').submit( function() {
 		$(this).ajaxForm(step_options);
-		$(this).parent().prev().show( "slow" );
+		$(this).parent().siblings('.step_view ' ).show( "slow" );
 		$(this).parent().hide( "slow" );	
 		return false;
 	});
 
-	// replace step with edit form on click
-	$(".step_view").click( function() {
-		$(this).next().slideDown( "slow" );
-	   	$(this).slideUp( "slow" );	
-	});
 
-  // $('#uploadForm input').change(function(){
-  //  $(this).parent().ajaxSubmit({
-  //   beforeSubmit: function(a,f,o) {
-  //   o.dataType = 'json';
-  //  },
-  //  complete: function(XMLHttpRequest, textStatus) {
-   // XMLHttpRequest.responseText will contain the URL of the uploaded image.
-   // Put it in an image element you create, or do with it what you will.
-   // For example, if you have an image elemtn with id "my_image", then
-   //  $('#my_image').attr('src', XMLHttpRequest.responseText);
-   // Will set that image tag to display the uploaded image.
-   // },
-   //});
-//});
+	// replace step with edit form on click
+	var editButton = function($toggler, $togglee) {
+
+		$($toggler).click( function() {
+			// only one active form at a time
+			$(this).siblings("a").removeClass("selected");
+			
+			// hide all visible parts
+			$(this).parent().siblings("span:visible")
+			.slideUp("slow");
+					
+			// show the togglee or the step	
+			
+			if( $(this).hasClass("selected") ){
+				$(this).parent().siblings('.step_view')
+				.slideDown("slow");
+			}
+			else{
+				
+				$(this).parent().siblings($togglee)
+				.slideDown("slow");
+			}	
+
+			$(this).toggleClass("selected");	
+			return false;
+			
+		});
+	};
+
+
+	editButton( '.btn-step-image',  ".step_image_form" );
+	editButton( ".btn-step-form", ".step_form" );
 
 });	
 
 	
-// process the JSON data returned after submitting a step
-function processStep(data){
-   //var stepId = '.step'+ data.id.toString();
-
-   //var whatDidIFind = $(stepId).html(); 
-	   
-    // 'data' is the json object returned from the server 
-    alert(whatDidIFind);
-}
-
-// pre-submit callback 
-function showRequest(formData, jqForm, options) { 
-    // formData is an array; here we use $.param to convert it to a string to display it 
-    // but the form plugin does this for you automatically when it submits the data 
-    var queryString = $.param(formData); 
  
-    // jqForm is a jQuery object encapsulating the form element.  To access the 
-    // DOM element for the form do this: 
-    // var formElement = jqForm[0]; 
- 
-    alert('About to submit: \n\n' + queryString); 
- 
-    // here we could return false to prevent the form from being submitted; 
-    // returning anything other than false will allow the form submit to continue 
-    return true; 
-} 
- 
-// post-submit callback 
-function showResponse(responseText, statusText, xhr, $form)  { 
-    // for normal html responses, the first argument to the success callback 
-    // is the XMLHttpRequest object's responseText property 
- 
-    // if the ajaxForm method was passed an Options Object with the dataType 
-    // property set to 'xml' then the first argument to the success callback 
-    // is the XMLHttpRequest object's responseXML property 
- 
-    // if the ajaxForm method was passed an Options Object with the dataType 
-    // property set to 'json' then the first argument to the success callback 
-    // is the json data object returned by the server 
- 
-    alert('status: ' + statusText + '\n\nresponseText: \n' + responseText + 
-        '\n\nThe output div should have already been updated with the responseText.'); 
-} 
