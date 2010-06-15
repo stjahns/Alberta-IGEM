@@ -16,6 +16,7 @@ class Experiment < ActiveRecord::Base
   attr_accessible :title, :authour, :description, :published, :image
   has_many :steps, :dependent => :destroy  
   has_many :constructs, :dependent => :destroy
+  belongs_to :user
 
 
   def clone_experiment

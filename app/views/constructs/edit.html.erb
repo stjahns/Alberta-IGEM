@@ -17,6 +17,7 @@ TODO - Sequence annotation
   $(document).ready(function() {
 
 
+
       //ajax call to load data
       $.ajax({
         type: 'get',
@@ -25,8 +26,20 @@ TODO - Sequence annotation
         success: function(data){
           orfs = data.orfs;
           linkers = data.linkers;
+          allparts= orfs.concat(linkers);
           annotations = data.annotations;
+          //get sequence
           $("#sequence").html(getFormattedSequence());
+          
+          //get images
+          $(".part, .byte").css('background-image', function(index, value){
+            for(i in allparts){
+              var byte_id = $(this).attr('byte_id');
+              if ( byte_id.split('_')[1] == allparts[i].id.toString()){
+                return 'url(/images/'+ allparts[i].img_file_name +'.png)';
+              }
+            }
+          });
         }
       })
 
@@ -35,6 +48,7 @@ TODO - Sequence annotation
         
         // TODO validation
         // sequence must be flanked by alpha and omega bytes - NEED A NEW DB COL FOR SPECIAL CLASS (ie ALPHA/OMEGA etc.)
+        // or leave validation for server side?
         // require an ori?
         // require selection?
 
@@ -80,7 +94,7 @@ TODO - Sequence annotation
           $("#sequence").html(getFormattedSequence());
 
         }
-
+  
       
       });
 
@@ -161,6 +175,6 @@ Trash Bin
 </div>
 
 <div id="nav">
-<%=link_to "Back", {:action => :index} %>
+<%=link_to "Back", experiment_path(@construct.experiment) %>
 <a href="#", id="save">Save</a>
 </div>

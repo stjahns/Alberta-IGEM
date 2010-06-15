@@ -125,6 +125,7 @@ function getFormattedSequence(){
       }
       else if (line == 4){ //annotations
       //NB must add spacer div if 2 parts not touching on same line
+        var usedoffset = 0; //offset for when multiple annotations on one line
 
         var width=0;
         outstring += "<tr><td></td><td>";
@@ -168,7 +169,6 @@ function getFormattedSequence(){
           }
         }
           
-        var annprint = []; // 
         //loop for each part on line
         for (i in lineparts){
           //iterate for each annotation of the part(biobyte)
@@ -178,20 +178,21 @@ function getFormattedSequence(){
             if (annotations[a].bio_byte_id == lineparts[i][4]){
               var offset = lineparts[i][1]-lineparts[i][3];
               //Does annotation start on this line?
-              if(annotations[a].start+offset > annindex && 
+              if(annotations[a].start+offset >= annindex && 
                  annotations[a].start+offset < annindex + 100) {
                 //does it also stop?
                 if(annotations[a].stop+offset > annindex &&
-                    annotations[a].stop+offset < annindex + 100){ //starts and stops on this line
+                    annotations[a].stop+offset <= annindex + 100){ //starts and stops on this line
                   outstring += "<div class='annotation' style='position:relative;"
-                            +  "left:" + (annotations[a].start+offset-annindex) + "ex;"
+                            +  "left:" + (annotations[a].start+offset-annindex-usedoffset) + "ex;"
                             +  "width:" + (annotations[a].stop-annotations[a].start)  + "ex;"
                             +  "background-color:" + (annotations[a].colour) + ";"
                             +  "border:1px solid #333'><div class='ann_label'>" + annotations[a].name + "</div></div>";
+                  usedoffset += annotations[a].stop-annotations[a].start;
                 }
                 else{ //starts, flows over line
                   outstring += "<div class='annotation' style='position:relative;"
-                            +  "left:" + (annotations[a].start+offset-annindex) + "ex;"
+                            +  "left:" + (annotations[a].start+offset-annindex-usedoffset) + "ex;"
                             +  "width:" + (100-(annotations[a].start+offset-annindex)) + "ex;"
                             +  "background-color:" + (annotations[a].colour) + ";"
                             +  "border:1px solid #333'><div class='ann_label'>" + annotations[a].name + "</div></div>";
@@ -205,6 +206,7 @@ function getFormattedSequence(){
                             +  "width:" + (annotations[a].stop+offset - annindex) + "ex;"
                             +  "background-color:" + (annotations[a].colour) + ";"
                             +  "border:1px solid #333'><div class='ann_label'>" + annotations[a].name + "</div></div>";
+                usedoffset += annotations[a].stop+offset - annindex;
               }
               //does annotation blow through the line?
               if(annotations[a].start+offset < annindex &&

@@ -18,6 +18,16 @@
   <%=h @experiment.published %>
 </p>
 
+<p>
+  <b>Constructs:</b>
+  <% unless @experiment.constructs.empty? %>
+    <%= render :partial => "construct", :collection => @experiment.constructs %>
+  <% end %>
+  <p>
+  <%= link_to "Add Construct", new_experiment_construct_path(@experiment) %>
+  </p>
+</p>
+
 <% unless @experiment.steps.empty? %>
     
   <p> 

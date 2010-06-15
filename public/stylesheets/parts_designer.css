@@ -39,7 +39,6 @@ ol#parts_list{
 
 #parts_list li{
   margin:           3px 3px 3px 0;
-  padding:          1px;
   float:            left;
   width:            100px;
   height:           40px;
@@ -82,7 +81,6 @@ ul.parts_bin li{
   border:           1px solid black;
 }
 .linker{
-  background-color: #BBB;
   border:           1px solid black;
 }
 
