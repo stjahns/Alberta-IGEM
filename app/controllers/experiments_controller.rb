@@ -12,6 +12,7 @@ class ExperimentsController < ApplicationController
   # GET /experiments.xml
   
   before_filter :login_required, :except => [:index, :show]
+  before_filter :verify_ownership, :except => [:index, :show, :clone, :new, :create ]
 
   def index
     @experiments = Experiment.all
@@ -47,12 +48,12 @@ class ExperimentsController < ApplicationController
 
   # GET /experiments/1/edit
   def edit
-    @experiment = Experiment.find(params[:id])
+   # @experiment = Experiment.find(params[:id])
   end
 
   # GET /experiments/add_step/1
   def add_step
-    @experiment = Experiment.find(params[:id])
+   # @experiment = Experiment.find(params[:id])
     @step = Step.create(:experiment_id => @experiment)
     
 
@@ -81,13 +82,10 @@ class ExperimentsController < ApplicationController
     end
   end
 
-  def clone
-    #TODO put cloning code here dawg.
-    @experiment = Experiment.find(params[:id])
-    new_exp = @experiment.clone_experiment
-    new_exp.authour = current_user.login
-    new_exp.published = false
-    new_exp.save
+  def clone 
+    old_exp = Experiment.find(params[:id])
+    @experiment = old_exp.clone_experiment( current_user )
+
     respond_to do |format|
       format.html { redirect_to(experiments_url) }
       format.xml  { head :ok }
@@ -98,29 +96,44 @@ class ExperimentsController < ApplicationController
   # PUT /experiments/1
   # PUT /experiments/1.xml
   def update
-    @experiment = Experiment.find(params[:id])
-
+    #@experiment = Experiment.find(params[:id])
     respond_to do |format|
       if @experiment.update_attributes(params[:experiment])
-        flash[:notice] = 'Experiment was successfully updated.'
-        format.html { redirect_to(@experiment) }
-        format.xml  { head :ok }
+	flash[:notice] = 'Experiment was successfully updated.'
+	format.html { redirect_to(@experiment) }
+	format.xml  { head :ok }
       else
-        format.html { render :action => "edit" }
-        format.xml  { render :xml => @experiment.errors, :status => :unprocessable_entity }
+	format.html { render :action => "edit" }
+	format.xml  { render :xml => @experiment.errors, :status => :unprocessable_entity }
       end
-    end
+   
+
+   end
   end
 
   # DELETE /experiments/1
   # DELETE /experiments/1.xml
   def destroy
-    @experiment = Experiment.find(params[:id])
+    #@experiment = Experiment.find(params[:id])
+    
     @experiment.destroy
 
     respond_to do |format|
       format.html { redirect_to(experiments_url) }
       format.xml  { head :ok }
     end
+
   end
+
+  private
+  def verify_ownership
+    @experiment = Experiment.find(params[:id])
+    is_owner_of( @experiment ) || permission_denied
+  end
+  
+  def permission_denied
+	flash[:notice] = "You don't have permission to do that!"
+	redirect_to :back
+  end
+
 end

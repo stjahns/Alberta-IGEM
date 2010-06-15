@@ -23,6 +23,7 @@
                               PUT    /session(.:format)                                            {:action=>"update", :controller=>"sessions"}
                               DELETE /session(.:format)                                            {:action=>"destroy", :controller=>"sessions"}
                               POST   /session(.:format)                                            {:action=>"create", :controller=>"sessions"}
+                      profile        /user/:login                                                  {:method=>"get", :action=>"profile", :controller=>"users"}
              experiment_steps GET    /experiments/:experiment_id/steps(.:format)                   {:action=>"index", :controller=>"steps"}
                               POST   /experiments/:experiment_id/steps(.:format)                   {:action=>"create", :controller=>"steps"}
           new_experiment_step GET    /experiments/:experiment_id/steps/new(.:format)               {:action=>"new", :controller=>"steps"}

@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   # Be sure to include AuthenticationSystem in Application Controller instead
   include AuthenticatedSystem
   
-  # render new.rhtml
+  # render new.html.erb
   def new
     @user = User.new
   end
@@ -23,5 +23,11 @@ class UsersController < ApplicationController
       flash[:error]  = "We couldn't set up that account, sorry.  Please try again, or contact an admin (link is above)."
       render :action => 'new'
     end
+  end
+
+  def profile
+    @user = User.find_by_login(params[:login])
+    @experiments = @user.experiments
+    #render profile.html.erb 
   end
 end

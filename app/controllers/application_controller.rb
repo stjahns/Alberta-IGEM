@@ -10,20 +10,12 @@ class ApplicationController < ActionController::Base
   # filter_parameter_logging :password
   helper_method :is_admin?
   def is_admin? 
-        if logged_in? && current_user.login == "admin"
-          true
-        else
-          false
-        end
+     logged_in? && current_user.login == "admin"
   end
 
-  helper_method :is_owner
-  def is_owner( user_id )
-	if logged_in? && ( current_user.login == 'admin' || current_user.id  == user_id ) 
-	  true
-	else
-	  false
-	end
+  helper_method :is_owner_of
+  def is_owner_of( object )
+	logged_in? && ( current_user.login == 'admin' || current_user.id  == object.user_id ) 
   end
 
 end

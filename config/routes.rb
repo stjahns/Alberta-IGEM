@@ -8,10 +8,14 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :users
 
   map.resource :session
-  #map.resources :steps
+
+
+  # non-restful routes for user profile pages
+  map.profile '/user/:login', :controller => 'users', :action => 'profile', :method => 'get' 
 
   # map steps as nested resource of experiments
-  map.resources :experiments, :member => { :print => :get } do |experiments|
+  map.resources :experiments, :member => {
+	  :print => :get, :clone => :get } do |experiments|
      experiments.resources :steps, 
 	     :member => { :upload => :post, 
 	     		  :up => :put,

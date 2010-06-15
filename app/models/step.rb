@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20100609213516
+# Schema version: 20100615162153
 #
 # Table name: steps
 #
@@ -63,16 +63,15 @@ class Step < ActiveRecord::Base
   def insert_new(position)
     experiment = self.experiment
     i = self.step_order
-    if position == 'after'
-      i = i + 1
-    end
-    
+    puts( "################ i = #{i} #############" )
+   
     # make new step
     new_step = experiment.steps.create
     
-    
+    i = i + 1 if position == 'after'
+
     n = experiment.steps.length
-    unless n  == 1 
+    unless n  == i && position == 'after' 
        # increment all the steps after
        
        steps_after = experiment.steps.find_all_by_step_order( i..n )
@@ -81,6 +80,7 @@ class Step < ActiveRecord::Base
 	 s.save
        end
     end
+   
     new_step.title = "inserted step"    
     new_step.step_order = i
     new_step.save
@@ -107,8 +107,11 @@ class Step < ActiveRecord::Base
   end
   
   def set_step_order
+    #debug 
     # sets the step_order to be the last in the list 
-    self.step_order = self.experiment.steps.length 
+    # had to do steps.all because steps was not returning a full
+    # list when cloning, weird bug
+    self.step_order = self.experiment.steps.all.length 
     self.save
   end
 end
