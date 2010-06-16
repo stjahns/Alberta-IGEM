@@ -1,0 +1,22 @@
+<h1>Listing encyclopaedias</h1>
+
+<table>
+  <tr>
+    <th>Title</th>
+    <th>Article</th>
+  </tr>
+
+<% @encyclopaedias.each do |encyclopaedia| %>
+  <tr>
+    <td><%=h encyclopaedia.title %></td>
+    <td><%=h encyclopaedia.article %></td>
+    <td><%= link_to 'Show', encyclopaedia %></td>
+    <td><%= link_to 'Edit', edit_encyclopaedia_path(encyclopaedia) %></td>
+    <td><%= link_to 'Destroy', encyclopaedia, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New encyclopaedia', new_encyclopaedia_path %>

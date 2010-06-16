@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100603151147) do
+ActiveRecord::Schema.define(:version => 20100616214017) do
 
   create_table "annotations", :force => true do |t|
     t.string   "name"
@@ -44,9 +44,22 @@ ActiveRecord::Schema.define(:version => 20100603151147) do
     t.datetime "updated_at"
   end
 
+  create_table "encyclopaedias", :force => true do |t|
+    t.string   "title"
+    t.text     "article"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "glossaries", :force => true do |t|
     t.string   "term"
     t.text     "definition"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "pages", :force => true do |t|
+    t.string   "title"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
