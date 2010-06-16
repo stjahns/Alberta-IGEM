@@ -1,0 +1,47 @@
+
+<% @def = @glossary.definition %>
+
+
+<% @terms = @terms.split(/,/) %>
+
+<% @found = "0" %>
+
+<% @terms.each do |term| %>
+
+  <%  @def_str = @def.to_s%>
+
+  <%  regex = Regexp.new(/#{term}/)%>
+  <%  matchdata = regex.match(@def_str)%>
+  <%  if matchdata%>
+
+    <%  @def = @def.to_s %>
+    <%  @def = @def.split(/#{term}/) %>
+
+    <%  if @found == "0"%>
+      <% @defar = @def.first+","%>
+      <% @found = term%>
+    <%  else%>
+      <%  @found << "," +term%>
+      <%  @defar << @def.first+","%>
+    <%  end%>
+
+    <%  @def.shift%>
+  <%  end%>
+  
+<% end%>
+
+
+<%  unless @found == "0"%>
+  <%  @found = @found.split(/,/)%>
+  <%  @defar = @defar.split(/,/)%>
+  <%  index = 0..(@defar.length - 1)%>
+
+  <%  index.each do |i|%>
+    <%  found = @found[i]%>
+    <%=  @defar[i]%>
+    <%=  link_to "#{found}", {:controller => :viewer, :action => :show, :term => "#{found}"}%>
+  <% end%>
+
+<%  else%>
+  <%= @def %>
+<% end%>
