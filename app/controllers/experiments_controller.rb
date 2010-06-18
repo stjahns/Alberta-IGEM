@@ -1,4 +1,8 @@
 class ExperimentsController < ApplicationController
+  
+  before_filter :login_required, :except => [:index, :show]
+  before_filter :owns_experiment?, :except => [:index, :show, :clone, :new, :create ]
+
   # action for displaying print template
   def print
     @experiment = Experiment.find(params[:id])
@@ -10,12 +14,10 @@ class ExperimentsController < ApplicationController
       
   # GET /experiments
   # GET /experiments.xml
-  
-  before_filter :login_required, :except => [:index, :show]
-  before_filter :verify_ownership, :except => [:index, :show, :clone, :new, :create ]
-
-  def index
-    @experiments = Experiment.all
+    def index
+    #TODO only the admin experiments here, the users experiments listed on profile
+     @experiments = Experiment.all
+   # @experiments = current_user.experiments
 
     respond_to do |format|
       format.html # index.html.erb
@@ -126,7 +128,7 @@ class ExperimentsController < ApplicationController
   end
 
   private
-  def verify_ownership
+  def owns_experiment? 
     @experiment = Experiment.find(params[:id])
     is_owner_of( @experiment ) || permission_denied
   end

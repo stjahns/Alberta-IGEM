@@ -1,0 +1,5 @@
+  <p><%= step.title %></p>
+  <% unless step.image.blank? %>
+     <p><%= image_tag step_image_path( step.image ) %></p>
+  <% end %> 
+  <p class= 'description'  ><%=h step.description %></p>

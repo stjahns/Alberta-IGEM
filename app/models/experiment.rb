@@ -17,7 +17,8 @@ class Experiment < ActiveRecord::Base
   attr_accessible :title, :authour, :description, :published, :image, :user_id
   has_many :steps, :dependent => :destroy  
   has_many :constructs, :dependent => :destroy
-  belongs_to :users
+  has_many :notes, :through => :steps
+  belongs_to :user
 
 #  after_create :assign_owner  
 
@@ -48,6 +49,11 @@ class Experiment < ActiveRecord::Base
     end
 
     return new_experiment
+  end
+
+  # find all the users notes for this experiment
+  def notes_for( user )
+    self.notes.all(:conditions => { :user_id =>  user.id } )
   end
 
   private

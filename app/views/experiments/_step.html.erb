@@ -1,18 +1,14 @@
 <div class="step">
-   <div class="step_title" > 
+   <div class="step_number" > 
 	<p><b>Step <%=h " #{ step.step_order }" %>  :</b></p> 
    </div>
+ 
+   <!-- view of the step -->
    <span class="step_view" id=step<%= step.id  %>  > 
-	  <p><%= step.title %></p>
-	  <% unless step.image.blank? %>
-	     <p><%= image_tag step_image_path( step.image ) %></p>
-          <% end %> 
-	  <p class= 'description'  ><%=h step.description %></p>
-  </span>
+     <%= render :partial => 'steps/step', :locals => {:step => step }  %>
+   </span>
 
-
-   
-  <span class="step_form" style="display: none;">
+   <span class="step_form" style="display: none;">
 	  <% form_for([@experiment, step],:html => { :method => :put,:multipart => true, :class => "inplace_edit_step"} ) do |f| %>
 	<%= f.error_messages %>
 	<p>
@@ -34,7 +30,21 @@
 	<p><%= f.submit 'Upload' %></p>
      <% end %>  
   </span>
-
+  <% if allowed_to_make_notes? %> 
+	  <% if step.note_for( current_user ) %>
+	    <span class="step_note_form" >
+		  <% form_for [step, step.note_for( current_user )], 
+		   :url => step_note_path( step, step.note_for( current_user ) ) do |f| %>
+		       <p><%= f.text_area :text %></p>
+		       <p><%= f.submit 'Save note' %></p>
+	       <% end %>
+	    </span>
+	  <% else %>
+		  <span >
+			  <%= link_to 'add a note', new_step_note_path(step) %>
+		  </span>
+	  <% end %>
+  <% end %>
     <div class="step_edit_slide" >
 		  <a class="btn-step-form  active" href"#">Edit</a>
 		  <a class="btn-step-image active" href"#">Image</a>

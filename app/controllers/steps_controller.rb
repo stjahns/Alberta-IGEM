@@ -4,7 +4,7 @@ class StepsController < ApplicationController
 
 
   def get_event
-    @experiment = Experiment.find(params[:experiment_id])
+    @experiment = Experiment.find(params[:experiment_id])   
   end
 
   # GET /steps
@@ -75,7 +75,7 @@ class StepsController < ApplicationController
         #format.xml  { head :ok }
 	format.xml  { render :xml => @step }
 	ActiveRecord::Base.include_root_in_json = false
-	format.js { render :json => @step }
+	format.js { render(:partial => 'step', :locals=>{ :step => @step} )  }
       else
         format.html { render :action => "edit" }
         format.xml  { render :xml => @step.errors, :status => :unprocessable_entity }
@@ -95,8 +95,44 @@ class StepsController < ApplicationController
     end
   end 
  
+  ############ actions for adding assests ##################
+   # action for uploading images to a step
+  require 'fileutils'
+  def upload
+    @step = @experiment.steps.find(params[:id])
+    
+    #TODO put this in model
+    unless @step.image.blank?
+	 @step.image.destroy
+    end
+    
+    @image = Image.new(params[:step])
+    @image.step_id = @step.id
+    
+    if @image.save 
+    	redirect_to([@experiment,@step])
+    else
+	    flash[:notice] = 'your photo did not save!'
+	    render :action => 'edit'
+    end
+  end
  
-  ###### added actions ####################
+  def note
+    #@step = @experiment.steps.find(params[:id])
+    merged_params = params[:note].merge( { :user_id => current_user.id } )
+    @note = @step.notes.new( merged_params )
+
+    if @note.save
+      respond_to do |format|
+	format.html redirect_to :back
+      end
+    else
+	flash[:notice] = 'There was an error saving your note'
+	redirect_to :back
+    end
+  end
+
+  ###### actions for repositioning  ####################
   
   def up
     #move up the list	  
@@ -129,27 +165,7 @@ class StepsController < ApplicationController
     end 
   end
 
-  # action for uploading images to a step
-  require 'fileutils'
-  def upload
-    @step = @experiment.steps.find(params[:id])
-    
-    unless @step.image.blank?
-	 @step.image.destroy
-    end
-    @image = Image.new(params[:step])
-    @image.step_id = @step.id
-    
-    if @image.save 
-	#params[:file].original_filename
-    	@step.image = @image 
-    	redirect_to([@experiment,@step])
-    else
-	    flash[:notice] = 'your photo did not save!'
-	    render :action => 'edit'
-    end
-  end
-  
+ 
   def insert_before
      @step = @experiment.steps.find(params[:id])
      
