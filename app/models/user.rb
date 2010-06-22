@@ -23,6 +23,7 @@ class User < ActiveRecord::Base
   include Authentication::ByCookieToken
 
   has_many :experiments, :dependent => :destroy
+  has_many :steps, :through => :experiments 
 
   validates_presence_of     :login
   validates_length_of       :login,    :within => 3..40

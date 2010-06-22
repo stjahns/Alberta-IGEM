@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20100615162153
+# Schema version: 20100616171637
 #
 # Table name: experiments
 #
@@ -22,7 +22,7 @@ class Experiment < ActiveRecord::Base
 
 #  after_create :assign_owner  
 
-  def clone_experiment( user )
+  def clone_experiment_for( user )
   #TODO should this code just be in the controller? no this is the right spot
     
     # user object has to be passed in because model does not have access to
@@ -51,10 +51,6 @@ class Experiment < ActiveRecord::Base
     return new_experiment
   end
 
-  # find all the users notes for this experiment
-  def notes_for( user )
-    self.notes.all(:conditions => { :user_id =>  user.id } )
-  end
 
   private
  

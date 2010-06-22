@@ -15,7 +15,7 @@ class ApplicationController < ActionController::Base
 
   helper_method :is_owner_of
   def is_owner_of( object )
-	logged_in? && ( current_user.login == 'admin' || current_user.id  == object.user_id ) 
+	logged_in? && ( current_user.login == 'admin' || current_user.id  == object.user.id ) 
   end
 
 end

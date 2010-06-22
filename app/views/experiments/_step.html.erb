@@ -8,8 +8,11 @@
      <%= render :partial => 'steps/step', :locals => {:step => step }  %>
    </span>
 
+   <% if is_owner_of( @experiment ) %>
    <span class="step_form" style="display: none;">
-	  <% form_for([@experiment, step],:html => { :method => :put,:multipart => true, :class => "inplace_edit_step"} ) do |f| %>
+     <% form_for([@experiment, step],
+	:html => { :method => :put,:multipart => true, 
+	  :class => "inplace_edit_step"} ) do |f| %>
 	<%= f.error_messages %>
 	<p>
 	    <%= f.label :title %><br />
@@ -25,30 +28,42 @@
   </span>
 
   <span class="step_image_form" style="display: none;"  >
-	<% form_for [@experiment,step],:url => upload_experiment_step_path(@experiment,step), :html => { :multipart => true, :method => 'post'} do |f| %>
+     <% form_for [@experiment,step],
+	     :url => upload_experiment_step_path(@experiment,step), 
+	     :html => { :multipart => true, :method => 'post',
+	       :class => 'inplace_upload_image'} do |f| %>
 	<p><%= f.file_field :image_file %></p>
 	<p><%= f.submit 'Upload' %></p>
      <% end %>  
   </span>
-  <% if allowed_to_make_notes? %> 
-	  <% if step.note_for( current_user ) %>
-	    <span class="step_note_form" >
-		  <% form_for [step, step.note_for( current_user )], 
-		   :url => step_note_path( step, step.note_for( current_user ) ) do |f| %>
-		       <p><%= f.text_area :text %></p>
-		       <p><%= f.submit 'Save note' %></p>
-	       <% end %>
-	    </span>
-	  <% else %>
-		  <span >
-			  <%= link_to 'add a note', new_step_note_path(step) %>
-		  </span>
-	  <% end %>
   <% end %>
+
+  <% if allowed_to_make_notes? %>
+	  <!-- hide this form, and only show if we click note tab and their is no note or we want to add a note --> 
+    <% if step.note %>
+       <span class="step_note_form" >
+         <% form_for [step, step.note], 
+	 :url => step_note_path( step, step.note ) do |f| %>
+	     <p><%= f.text_area :text %></p>
+	     <p><%= f.submit 'Save note' %></p>
+	  <% end %>
+        </span>
+    <% else %>
+        <span ><%= link_to 'add a note', new_step_note_path(step) %></span>
+    <% end %>
+    <div class= "step_note_button" >
+	    <a class="btn-step-note " href"#">Note</a>
+    </div>
+  <% end %>
+
+  <% if is_owner_of( @experiment ) %>
     <div class="step_edit_slide" >
 		  <a class="btn-step-form  active" href"#">Edit</a>
 		  <a class="btn-step-image active" href"#">Image</a>
+		   
     </div>
+    
+  <% end %>
 </div>
 
 

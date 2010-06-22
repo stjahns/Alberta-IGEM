@@ -74,7 +74,6 @@ class StepsController < ApplicationController
         format.html { redirect_to([ @experiment, @step ]) }
         #format.xml  { head :ok }
 	format.xml  { render :xml => @step }
-	ActiveRecord::Base.include_root_in_json = false
 	format.js { render(:partial => 'step', :locals=>{ :step => @step} )  }
       else
         format.html { render :action => "edit" }
@@ -105,15 +104,23 @@ class StepsController < ApplicationController
     unless @step.image.blank?
 	 @step.image.destroy
     end
-    
+     
     @image = Image.new(params[:step])
     @image.step_id = @step.id
+
+    respond_to do |format|
     
-    if @image.save 
-    	redirect_to([@experiment,@step])
-    else
-	    flash[:notice] = 'your photo did not save!'
-	    render :action => 'edit'
+      if @image.save 
+	# this is a hack to fix it quick, TODO fix it right
+      	@step.image = @image 
+	
+	format.html {redirect_to([@experiment,@step]) }
+	format.js { render(:partial => 'step', :locals=>{ :step => @step} )  }
+      else
+	flash[:notice] = 'your photo did not save!'
+	format.html {redirect_to([@experiment,@step]) }
+	format.js   {render(:partial => 'step', :locals=>{:step=>@step})}
+      end
     end
   end
  

@@ -17,7 +17,9 @@
 	    <td><%=h experiment.description %></td>
 	    <td><%=h experiment.published %></td>
 	    <td><%= link_to 'Show', experiment %></td>
-	    <td><%= link_to 'Clone', clone_experiment_path( experiment ) %></td>
+	    <% clone_button =  is_owner_of(experiment) ? 
+		    'Duplicate': 'Add to my experiments'%>
+	    <td><%= link_to clone_button, clone_experiment_path( experiment ) %></td>
 	    <% if is_owner_of( experiment ) %>
 	    <td><%= link_to 'Edit Description', edit_experiment_path(experiment) %></td>
 	    <td><%= link_to 'Edit Constructs',  experiment_constructs_path(experiment) %></td> 

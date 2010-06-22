@@ -69,8 +69,9 @@ class ExperimentsController < ApplicationController
   def create
     # must pass user_id information since session id is not available 
     # in the model
-    merged_params = params[:experiment].merge({ :user_id => current_user.id })
+    #merged_params = params[:experiment].merge({ :user_id => current_user.id })
     @experiment = Experiment.new( merged_params  )
+    @experiment.user = current_user
 
     respond_to do |format|
       if @experiment.save
@@ -86,7 +87,7 @@ class ExperimentsController < ApplicationController
 
   def clone 
     old_exp = Experiment.find(params[:id])
-    @experiment = old_exp.clone_experiment( current_user )
+    @experiment = old_exp.clone_experiment_for( current_user )
 
     respond_to do |format|
       format.html { redirect_to(experiments_url) }

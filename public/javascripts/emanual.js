@@ -9,33 +9,10 @@ $.ajaxSetup({
 // Define the entry point - when DOM is ready
   
 $(document).ready(function(){
-	// options for editing steps with ajax form
-	var step_options = {
-		//target:       '', 
-                //beforeSubmit: showRequest,
-		//success:      showResponse,
-	        //success:      processStep,
-		dataType:     'html',
-		//resetForm:  true
-
-	}
-
 	// submit the edits for steps with ajaX
-/*	$('.inplace_edit_step').submit( function() {
-		alert('About to submit')
-		$(this).ajaxForm( {
-			dataType: 'html',
-			target:	  '#' + $(this).parent().siblings('.step_view').attr('id')
-		});
-		$(this).parent().siblings('.step_view ' ).show( "slow" );
-		$(this).parent().hide( "slow" );	
-		return false;
-	});
-*/
-
 	$('.inplace_edit_step').each( function() {
 		var step = $(this).parent().siblings('.step_view');
-		var form = $(this)
+		var form = $(this).parent()
 		//alert( step.attr('id') )
 		$(this).ajaxForm( {
 			dataType: 'html',
@@ -50,7 +27,33 @@ $(document).ready(function(){
 			  }
 		});
 	});
-	// replace step with edit form on click
+	
+	// submit the edits for steps with ajaX
+	$('.inplace_upload_image').each( function() {
+		var step = $(this).parent().siblings('.step_view');
+		var form = $(this).parent();
+		//alert( step.attr('id') )
+		$(this).ajaxForm( {
+			dataType: 'html',
+			target:	  step,
+			//resetForm: true,
+		  	success: function(data) { 
+		  	  // remove the old content and insert new stuff
+			  data = unescapeHTML(data);	
+			  data = data.replace('<pre>','').replace('</pre>','');
+
+			  step.children().remove();
+			  step.append( data );
+			  step.show( "slow" );
+		          form.hide("slow");
+		        }
+		});
+	});
+	// slide up different forms to add content to the step
+	// use editButton to define buttons that toggle a form 
+	// TODO will have to use delegate or live for this if we
+	// want to add steps without a refresh, what about for forms
+	// loaded by ajax
 	var editButton = function($toggler, $togglee) {
 
 		$($toggler).click( function() {
@@ -59,34 +62,35 @@ $(document).ready(function(){
 			
 			// hide all visible parts
 			$(this).parent().siblings("span:visible")
-			.slideUp("slow");
+			  .hide("slow");
 					
 			// show the togglee or the step	
-			
 			if( $(this).hasClass("selected") ){
 				$(this).parent().siblings('.step_view')
-				.slideDown("slow");
+				  .show("slow");
+				$(this).removeClass('selected');
 			}
 			else{
-				
 				$(this).parent().siblings($togglee)
-				.slideDown("slow");
+				  .slideDown("slow");
+				$(this).addClass('selected');
 			}	
-
-			$(this).toggleClass("selected");	
 			return false;
-			
 		});
 	};
-
 
 	editButton( '.btn-step-image',  ".step_image_form" );
 	editButton( ".btn-step-form", ".step_form" );
 
+	// buttons to control notes
+        $('.step_note_button').click( function(){
+
+		
+	});	
 });	
 
-var replaceStep = function(step,data){
-	alert(data);
+function unescapeHTML(html) {
+	return $("<div />").html(html).text();
 }
 
 // when we ask for html we need rails to use respond to js so we need:
