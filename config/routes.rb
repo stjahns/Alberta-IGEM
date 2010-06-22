@@ -1,13 +1,16 @@
 ActionController::Routing::Routes.draw do |map|
-  map.resources :glossaries
-
   map.logout '/logout', :controller => 'sessions', :action => 'destroy'
   map.login '/login', :controller => 'sessions', :action => 'new'
   map.register '/register', :controller => 'users', :action => 'create'
+  map.activate '/activate/:activation_code', :controller => 'users', :action => 'activate'
   map.signup '/signup', :controller => 'users', :action => 'new'
   map.resources :users
 
+  map.resources :bio_bytes, :member => { :upload => :post, :update => :post }
+
   map.resource :session
+  map.resources :glossaries
+
   #map.resources :steps
 
   # map steps as nested resource of experiments

@@ -1,20 +1,3 @@
-# == Schema Information
-# Schema version: 20100609172527
-#
-# Table name: users
-#
-#  id                        :integer(4)      not null, primary key
-#  login                     :string(40)
-#  name                      :string(100)     default("")
-#  email                     :string(100)
-#  crypted_password          :string(40)
-#  salt                      :string(40)
-#  created_at                :datetime
-#  updated_at                :datetime
-#  remember_token            :string(40)
-#  remember_token_expires_at :datetime
-#
-
 require 'digest/sha1'
 
 class User < ActiveRecord::Base
@@ -37,7 +20,7 @@ class User < ActiveRecord::Base
   validates_uniqueness_of   :email
   validates_format_of       :email,    :with => Authentication.email_regex, :message => Authentication.bad_email_message
 
-  
+  before_create :make_activation_code 
 
   # HACK HACK HACK -- how to do attr_accessible from here?
   # prevents a user from submitting a crafted form that bypasses activation
@@ -45,6 +28,23 @@ class User < ActiveRecord::Base
   attr_accessible :login, :email, :name, :password, :password_confirmation
 
 
+  # Activates the user in the database.
+  def activate!
+    @activated = true
+    self.activated_at = Time.now.utc
+    self.activation_code = nil
+    save(false)
+  end
+
+  # Returns true if the user has just been activated.
+  def recently_activated?
+    @activated
+  end
+
+  def active?
+    # the existence of an activation code means they have not activated yet
+    activation_code.nil?
+  end
 
   # Authenticates a user by their login name and unencrypted password.  Returns the user or nil.
   #
@@ -54,7 +54,7 @@ class User < ActiveRecord::Base
   #
   def self.authenticate(login, password)
     return nil if login.blank? || password.blank?
-    u = find_by_login(login.downcase) # need to get the salt
+    u = find :first, :conditions => ['login = ? and activated_at IS NOT NULL', login] # need to get the salt
     u && u.authenticated?(password) ? u : nil
   end
 
@@ -68,6 +68,9 @@ class User < ActiveRecord::Base
 
   protected
     
+    def make_activation_code
+        self.activation_code = self.class.make_token
+    end
 
 
 end

@@ -1,3 +1,36 @@
+<script> //get part background image data
+
+  var orfs;
+  var linkers;
+  var allparts;
+
+  $(document).ready(function(){
+
+      $.ajax({
+        type: 'get',
+        dataType: 'json',
+        url: '/constructs/get_data',
+        success: function(data){
+          orfs = data.orfs;
+          linkers = data.linkers;
+          allparts= orfs.concat(linkers);
+          
+          //get images
+          $(".part, .byte").css('background-image', function(index, value){
+            for(i in allparts){
+              var byte_id = $(this).attr('byte_id');
+              if ( byte_id.split('_')[1] == allparts[i].id.toString()){
+                return 'url(/images/'+ allparts[i].image_id +'.png)';
+              }
+            }
+          });
+        }
+      })
+      
+  })
+
+</script>
+
 <p>
   <b>Title:</b>
   <%=h @experiment.title %>

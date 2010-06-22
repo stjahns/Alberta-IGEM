@@ -9,6 +9,7 @@ TODO - Sequence annotation
 
   var orfs;
   var linkers;
+  var allparts;
   var partcoords=[]; //needed for getFormattedSequence() to store annotation info
                    //2d array [ [start, stop, name, type], [... ]]
   //if any changes made..
@@ -36,7 +37,7 @@ TODO - Sequence annotation
             for(i in allparts){
               var byte_id = $(this).attr('byte_id');
               if ( byte_id.split('_')[1] == allparts[i].id.toString()){
-                return 'url(/images/'+ allparts[i].img_file_name +'.png)';
+                return 'url(/images/'+ allparts[i].image_id +'.png)';
               }
             }
           });

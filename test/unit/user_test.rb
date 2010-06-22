@@ -13,6 +13,12 @@ class UserTest < ActiveSupport::TestCase
     end
   end
 
+  def test_should_initialize_activation_code_upon_creation
+    user = create_user
+    user.reload
+    assert_not_nil user.activation_code
+  end
+
   def test_should_require_login
     assert_no_difference 'User.count' do
       u = create_user(:login => nil)

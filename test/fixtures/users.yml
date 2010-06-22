@@ -1,40 +1,27 @@
-# == Schema Information
-# Schema version: 20100609172527
-#
-# Table name: users
-#
-#  id                        :integer(4)      not null, primary key
-#  login                     :string(40)
-#  name                      :string(100)     default("")
-#  email                     :string(100)
-#  crypted_password          :string(40)
-#  salt                      :string(40)
-#  created_at                :datetime
-#  updated_at                :datetime
-#  remember_token            :string(40)
-#  remember_token_expires_at :datetime
-#
-
 
 quentin:
   id:                        1
   login:                     quentin
   email:                     quentin@example.com
-  salt:                      356a192b7913b04c54574d18c28d46e6395428ab # SHA1('0')
-  crypted_password:          aba6a4d3284f9a1dc683a2f6636f547e4eb48acb # 'monkey'
+  salt:                      ac3478d69a3c81fa62e60f5c3696165a4e5e6ac4 # SHA1('0')
+  crypted_password:          d96e6b639901630b4297db193cd90bf95c010d85 # 'monkey'
   created_at:                <%= 5.days.ago.to_s :db  %>
   remember_token_expires_at: <%= 1.days.from_now.to_s %>
-  remember_token:            77de68daecd823babbb58edb1c8e14d7106e83bb
+  remember_token:            902ba3cda1883801594b6e1b452790cc53948fda
+  activation_code:           
+  activated_at:              <%= 5.days.ago.to_s :db %>
       
 aaron:
   id:                        2
   login:                     aaron
   email:                     aaron@example.com
-  salt:                      da4b9237bacccdf19c0760cab7aec4a8359010b0 # SHA1('1')
-  crypted_password:          022186ff189b416cd0314ad2f970f8cc9e61c5e5 # 'monkey'
+  salt:                      c1dfd96eea8cc2b62785275bca38ac261256e278 # SHA1('1')
+  crypted_password:          c96459757c2a1bef579fde17385f0147a5ba183a # 'monkey'
   created_at:                <%= 1.days.ago.to_s :db %>
   remember_token_expires_at: 
   remember_token:            
+  activation_code:           fe5dbbcea5ce7e2988b8c69bcfdfde8904aabc1f
+  activated_at:              
 
 
 old_password_holder:
@@ -44,5 +31,8 @@ old_password_holder:
   salt:                      7e3041ebc2fc05a40c60028e2c4901a81035d3cd
   crypted_password:          00742970dc9e6319f8019fd54864d3ea740f04b1 # test
   created_at:                <%= 1.days.ago.to_s :db %>
+
+  activation_code:           
+  activated_at:              <%= 5.days.ago.to_s :db %>
 
 

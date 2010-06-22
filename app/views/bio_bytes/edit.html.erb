@@ -8,14 +8,24 @@
       <td><%= select("byte", "type", ["ORF", "Linker"]) %> </td>
   <tr><td><label for="byte_description">Description:</label></td>
       <td><%= text_field 'byte', 'description' %></td></tr>
-  <tr><td><label for="byte_img_file_name">Image Name:</label></td>
-      <td><%= text_field 'byte', 'img_file_name' %></td></tr>
   <tr><td><label for="byte_sequence">Sequence:</label></td>
       <td><%= text_field 'byte', 'sequence' %></td></tr>
   <tr><td><%= submit_tag 'Update' %></td></tr>
 <% end %>
 
 </table>
+
+<p>Image:</p>
+<% unless @byte.image %>
+  <p>[NONE]</p>
+<% else %>
+  <p><%= image_tag image_path(@byte.image) %></p> 
+<% end %>
+
+<% form_for @image, :url => upload_bio_byte_path(@byte), :html => { :multipart => true, :method => 'post'} do |f| %>
+  <p><%= f.file_field :image_file %></p>
+  <p><%= f.submit 'Upload' %></p>
+<% end %>  
 
 <h3>Annotations:</h3>
 <table>
