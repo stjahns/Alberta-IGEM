@@ -13,9 +13,10 @@ ActionController::Routing::Routes.draw do |map|
   # non-restful routes for user profile pages
   map.profile '/user/:login', :controller => 'users', :action => 'profile', :method => 'get' 
 
-  # nest notes in steps without nesting steps in experiment
-  map.resources :steps, :has_many => :notes
-
+  # nest note in steps without nesting steps in experiment
+  map.resources :steps do |steps|
+     steps.resource  :note, :member => { :upload => :post }
+  end
 
   # map steps as nested resource of experiments
   map.resources :experiments, :member => {

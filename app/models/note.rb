@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20100616171637
+# Schema version: 20100622212548
 #
 # Table name: notes
 #
@@ -12,20 +12,12 @@
 #
 
 class Note < ActiveRecord::Base
-	attr_accessible :text, :image_id
+	attr_accessible :text, :image_id, :step_id
         belongs_to :step
-
 	has_one :image
 
-        #only one note can exist for each step by each user
-        before_create :destroy_other_notes
 
 	private
 	
-	def destroy_other_notes
-          old_note = self.step.note_for( self.user )
-	  #puts( "#######################################\n #{old_note} ")
-	  old_note.destroy if old_note
-	end
 
 end

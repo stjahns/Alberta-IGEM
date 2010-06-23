@@ -9,6 +9,10 @@ $.ajaxSetup({
 // Define the entry point - when DOM is ready
   
 $(document).ready(function(){
+	
+	//TODO make these live
+	
+        /*********   ajaxify forms ************************************/
 	// submit the edits for steps with ajaX
 	$('.inplace_edit_step').each( function() {
 		var step = $(this).parent().siblings('.step_view');
@@ -28,7 +32,7 @@ $(document).ready(function(){
 		});
 	});
 	
-	// submit the edits for steps with ajaX
+	// submit an image for a step with ajaX
 	$('.inplace_upload_image').each( function() {
 		var step = $(this).parent().siblings('.step_view');
 		var form = $(this).parent();
@@ -49,6 +53,44 @@ $(document).ready(function(){
 		        }
 		});
 	});
+
+	// submit an update note for a step with ajaX
+	$('.edit_note').each( function() {
+		var form = $(this).parent();
+		var note = form.siblings('.step_note_view')
+		//alert( step.attr('id') )
+		$(this).ajaxForm( {
+			dataType: 'html',
+		  	success: function(data) { 
+		  	  // remove the old content and insert new stuff
+			  note.children().remove();
+			  note.append(data);
+			  note.show();
+		        }
+		});
+	});
+
+
+	// submit a new note for a step with Ajax
+	$('.new_note').each( function() {
+		var form = $(this);
+		var note = form.parent().siblings('.step_note_view')
+		$(this).ajaxForm( {
+			dataType: 'html',
+		  	success: function(data) { 
+		  	  // remove the old content and insert new stuff
+			  note.html(data);
+			  note.show();
+			  form.parent().hide();
+			  note.attr('note','true');
+			  var url = form.attr('action') + '/edit';
+			  $.get(url, function(newForm ){
+			  	form.parent().html(newForm);
+		    	  });
+		        }
+		});
+	});
+
 	// slide up different forms to add content to the step
 	// use editButton to define buttons that toggle a form 
 	// TODO will have to use delegate or live for this if we
@@ -56,10 +98,11 @@ $(document).ready(function(){
 	// loaded by ajax
 	var editButton = function($toggler, $togglee) {
 
-		$($toggler).click( function() {
+		//$($toggler).click( function() {
+		$($toggler).live( 'click', function() {
 			// only one active form at a time
 			$(this).siblings("a").removeClass("selected");
-			
+
 			// hide all visible parts
 			$(this).parent().siblings("span:visible")
 			  .hide("slow");
@@ -83,10 +126,39 @@ $(document).ready(function(){
 	editButton( ".btn-step-form", ".step_form" );
 
 	// buttons to control notes
-        $('.step_note_button').click( function(){
-
-		
+        $('.btn-step-note').click( function(){
+		var note_container = 
+			$(this).parent().siblings('.step_note_container');
+		var note = note_container.children('.step_note_view');
+		var form = note_container.children('.step_note_form');
+		if( $(this).hasClass('selected') ){
+			$(this).removeClass("selected");
+			note_container.slideUp("slow");
+		}
+		else{
+			// check if the note exists
+			if( note.attr('note') ){
+				note.show(); form.hide();
+			}
+			else{
+				note.hide(); form.show();
+			}
+			$(this).addClass("selected");
+			note_container.slideDown("slow");
+		}		
+		return false;
 	});	
+	$('.btn-note-edit').live('click',function(){
+		$(this).parent().hide()
+			.siblings('.step_note_form').show();
+		return false;
+	});
+	$('.btn-note-edit-cancel').live('click', function(){
+		$(this).parent().hide()
+			.siblings('.step_note_view').show();
+		return false;
+	});
+
 });	
 
 function unescapeHTML(html) {

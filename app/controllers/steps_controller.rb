@@ -37,6 +37,7 @@ class StepsController < ApplicationController
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @step }
+      format.js   { render( :partial => 'step_new', :locals =>{:step=>@step}) }
     end
   end
 
@@ -124,10 +125,10 @@ class StepsController < ApplicationController
     end
   end
  
+  # function for updating notes with ajax (is it necessary??) maybe not
   def note
-    #@step = @experiment.steps.find(params[:id])
-    merged_params = params[:note].merge( { :user_id => current_user.id } )
-    @note = @step.notes.new( merged_params )
+    @step = @experiment.steps.find(params[:id])
+    @note = @step.note
 
     if @note.save
       respond_to do |format|

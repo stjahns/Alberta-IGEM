@@ -4,66 +4,105 @@ class NotesController < ApplicationController
  
   #TODO remove show,new,edit and add image to note 
   def show
-    @notes = @step.note_for( current_user )
-  end  
-  
+    @notes = @step.note
+    respond_to do |format|
+       format.html
+       format.js { render( :partial => 'show', :locals=>{:note=>@note})}
+    end  
+  end
+
   def new
-    @note = @step.notes.new
+    @note = Note.new
+    respond_to do |format|
+      format.html
+      format.js { render( :partial => 'new', :locals=>{:step=>@step,:note=>@note})}
+    end
   end
 
   def edit
-    @note = @step.notes.find(params[:id])
+    @note = @step.note
+    respond_to do |format|
+      format.html
+      format.js { render( :partial => 'edit',:locals=>{:step=>@step,:note=>@note})}
+    end
   end
 
   def create
-    @note = @step.notes.new( params[:note] )
-    @note.user = current_user
+    @note = Note.new( params[:note] )
+    @note.step = @step
 
     respond_to do |format|
       if @note.save
          flash[:notice] = 'note saved'
 	 format.html { redirect_to experiment_step_path(@experiment,@step) }
+	 format.js { render(:partial=>'show',:locals=>{:step=>@step,:note=>@note}  )}
       else
 	 flash[:notice] = 'there was an error saving your note'
 	 format.html { redirect_to experiment_step_path(@experiment,@step) }
+	 format.js { render(:partial=>'show',:locals=>{:note=>@note}  )}
       end
     end
   end
 
   def update
-    @note = @step.notes.find(params[:id])
+    @note = @step.note
     
     respond_to do |format|
       if @note.update_attributes(params[:note])
         flash[:notice] = 'Note changed'
 	format.html { redirect_to :back }
+	format.js   { render(:partial => 'note_view', :locals=>{:note=>@note})}
       else
 	flash[:notice] = 'There was an error updating your note'
         format.html { redirect_to :back }
+	format.js   { render(:partial => 'note_view', :locals=>{:note=>@note})}
       end
     end
-
   end
   
   def destroy
-    @note = @step.notes.find(params[:id])
+    @note = @step.note.find(params[:id])
     @note.destroy
     
     respond_to do |format|
       format.html { redirect_to :back }
     end
-
   end
-  private
+  
+  ############ actions for adding assests ##################
+   # action for uploading images to a note
+  require 'fileutils'
+  def upload
+    @note = @step.note
+    
+    unless @note.image.blank?
+	 @note.image.destroy
+    end
+     
+    @image = Image.new(params[:step])
+    #@image.note_id = @note.id
+    @note.image = @image
+
+    respond_to do |format|
+      if @image.save 
+	# this is a hack to fix it quick, TODO fix it right
+    #  	@note.image = @image 
+	
+	format.html {redirect_to([@experiment,@step]) }
+	format.js { render(:partial => 'note_view', 
+			   :locals=>{ :note => @note})}
+      else
+	flash[:notice] = 'your photo did not save!'
+	format.html {redirect_to([@experiment,@step]) }
+	format.js   {render(:partial => 'note_view', :locals=>{:note => @note} )}
+      end
+    end
+  end
+private
 
   def get_step
     @step = Step.find(params[:step_id])
     @experiment = @step.experiment
   end
 
-#  def permission_denied
-#    flash[:notice] = 'You may only add notes to your own, or the default experiments'
-#    redirect_to :back
-#  end
-  
 end

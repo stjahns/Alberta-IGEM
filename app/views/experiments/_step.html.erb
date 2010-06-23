@@ -39,30 +39,41 @@
   <% end %>
 
   <% if allowed_to_make_notes? %>
-	  <!-- hide this form, and only show if we click note tab and their is no note or we want to add a note --> 
-    <% if step.note %>
-       <span class="step_note_form" >
-         <% form_for [step, step.note], 
-	 :url => step_note_path( step, step.note ) do |f| %>
-	     <p><%= f.text_area :text %></p>
-	     <p><%= f.submit 'Save note' %></p>
-	  <% end %>
-        </span>
-    <% else %>
-        <span ><%= link_to 'add a note', new_step_note_path(step) %></span>
-    <% end %>
-    <div class= "step_note_button" >
+   <div class= "step_note_button" >
 	    <a class="btn-step-note " href"#">Note</a>
     </div>
   <% end %>
 
   <% if is_owner_of( @experiment ) %>
     <div class="step_edit_slide" >
-		  <a class="btn-step-form  active" href"#">Edit</a>
-		  <a class="btn-step-image active" href"#">Image</a>
-		   
+	<a class="btn-step-form" href"#">Edit</a> |
+	<a class="btn-step-image" href"#">Image</a> |
+	<a class="btn-step-insert-after" href"#">Insert Step Below</a> |   
+	<a class="btn-step-insert-after" href"#">Insert Step Above</a> |   
     </div>
     
+  <% end %>
+  <% if allowed_to_make_notes? %>
+    <div class ="step_note_container" style="display: none;"  >
+    <!-- hide this form, and only show if we click note tab and their is no note or we want to add a note --> 
+      <div class= "step_note_form" >
+	    <% if step.note %>
+		    <%= render( :partial => 'notes/edit', 
+			       :locals=>{:step => step, :note => step.note}) %> 
+	    <% else %>
+		    <%= render( :partial => 'notes/new', 
+			       :locals=>{:step => step, :note => Note.new}) %>
+	    <% end %>
+      </div >
+
+      <div class= "step_note_view" note=<%=h step.note ? 'true' : '' %> >
+	   <% if step.note %>
+   		<%= render( :partial => 'notes/show', 
+				:locals=>{:step=>step, :note=>step.note}) %>
+	  <% end %>	
+      </div >
+ 
+   </div >
   <% end %>
 </div>
 
