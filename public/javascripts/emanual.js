@@ -20,8 +20,6 @@ $(document).ready(function(){
 		//alert( step.attr('id') )
 		$(this).ajaxForm( {
 			dataType: 'html',
-			target:	  step,
-			//resetForm: true,
 		  	success: function(data) { 
 		  	 // remove the old content and insert new stuff
 				step.children().remove();
@@ -39,8 +37,6 @@ $(document).ready(function(){
 		//alert( step.attr('id') )
 		$(this).ajaxForm( {
 			dataType: 'html',
-			target:	  step,
-			//resetForm: true,
 		  	success: function(data) { 
 		  	  // remove the old content and insert new stuff
 			  data = unescapeHTML(data);	
@@ -94,8 +90,7 @@ $(document).ready(function(){
 	// slide up different forms to add content to the step
 	// use editButton to define buttons that toggle a form 
 	// TODO will have to use delegate or live for this if we
-	// want to add steps without a refresh, what about for forms
-	// loaded by ajax
+	// TODO number steps with jquery after they're loaded
 	var editButton = function($toggler, $togglee) {
 
 		//$($toggler).click( function() {
@@ -124,6 +119,51 @@ $(document).ready(function(){
 
 	editButton( '.btn-step-image',  ".step_image_form" );
 	editButton( ".btn-step-form", ".step_form" );
+
+	// bind hidden submit form to links for insert step so
+	// appear normally in the edit toolbar 
+	$('.btn-step-insert-after').live( 'click', function(){
+		var step = $(this).parent().parent();
+		var btn = $(this).siblings('.hidden_insert_after')
+		  .children('.button-to');
+		btn.ajaxSubmit({
+			dataType: 'html',
+		  	success: function(data) { 
+		  	  // append a new step after 
+			  data = $(data).attr({style: "display: none;"});
+			  step.after(data).next().slideDown("slow");
+			}
+		});
+		return false;
+	});
+	$('.btn-step-insert-before').live( 'click', function(){
+		var step = $(this).parent().parent();
+		var btn = $(this).siblings('.hidden_insert_before')
+		  .children('.button-to');
+		btn.ajaxSubmit({
+			dataType: 'html',
+		  	success: function(data) { 
+		  	  // append a new step after 
+			  data = $(data).attr({style: "display: none;"});
+			  step.before(data).prev().slideDown("slow");
+			}
+		});
+		return false;
+	});
+	$('.btn-step-destroy').live( 'click', function(){
+		var step = $(this).parent().parent();
+		var btn = $(this).siblings('.hidden_delete_step')
+		  .children('.button-to');
+		btn.ajaxSubmit({
+			dataType: 'html',
+		  	success: function() { 
+			  step.slideUp("slow", function(){
+			  	step.remove();
+			  });
+			}
+		});
+		return false;
+	});
 
 	// buttons to control notes
         $('.btn-step-note').click( function(){

@@ -92,6 +92,7 @@ class StepsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to(experiment_steps_url( @experiment )) }
       format.xml  { head :ok }
+      format.js	  { head :ok }
     end
   end 
  
@@ -101,19 +102,18 @@ class StepsController < ApplicationController
   def upload
     @step = @experiment.steps.find(params[:id])
     
-    #TODO put this in model
     unless @step.image.blank?
 	 @step.image.destroy
     end
      
     @image = Image.new(params[:step])
-    @image.step_id = @step.id
-
+    @step.image = @image
+    
     respond_to do |format|
     
       if @image.save 
 	# this is a hack to fix it quick, TODO fix it right
-      	@step.image = @image 
+    #  	@step.image = @image 
 	
 	format.html {redirect_to([@experiment,@step]) }
 	format.js { render(:partial => 'step', :locals=>{ :step => @step} )  }
@@ -175,23 +175,28 @@ class StepsController < ApplicationController
 
  
   def insert_before
-     @step = @experiment.steps.find(params[:id])
-     
-     if @step.insert_new('before')
-       flash[:notice] = 'step inserted'
-     else
-       flash[:notice] = 'step not inseted'
-     end 
-     redirect_to experiment_steps_path(@experiment)
+    insert_step 'before'    
   end
   def insert_after
-      @step = @experiment.steps.find(params[:id])
-     
-     if @step.insert_new('after')
-       flash[:notice] = 'step inserted'
-     else
-       flash[:notice] = 'step not inseted'
-     end 
-     redirect_to experiment_steps_path(@experiment)
+    insert_step 'after'
   end
+
+  private
+
+  def insert_step(location)
+      pivot = @experiment.steps.find(params[:id])
+      @step = pivot.insert_new(location)
+     respond_to do |format| 
+	     if @step
+	       flash[:notice] = 'step inserted'
+	     else
+	       flash[:notice] = 'step not inseted'
+	       # TODO handle errors correctly
+	     end 
+	     format.html { redirect_to experiment_steps_path(@experiment) }
+	     format.js   { render( :partial=>'experiments/step', 
+		:locals=>{:step=>@step,:experiment=>@experiment} )}
+     end 
+  end
+
 end

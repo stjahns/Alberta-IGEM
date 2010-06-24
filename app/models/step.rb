@@ -79,13 +79,13 @@ class Step < ActiveRecord::Base
        steps_after.each do |s|
          s.step_order = s.step_order + 1
 	 s.save
-       end
+     end
     end
    
     new_step.title = "inserted step"    
     new_step.step_order = i
     new_step.save
-
+    new_step
   end  
  
   # CHANGED to has_one note intead and must clone experiments 

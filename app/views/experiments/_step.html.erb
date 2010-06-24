@@ -49,7 +49,23 @@
 	<a class="btn-step-form" href"#">Edit</a> |
 	<a class="btn-step-image" href"#">Image</a> |
 	<a class="btn-step-insert-after" href"#">Insert Step Below</a> |   
-	<a class="btn-step-insert-after" href"#">Insert Step Above</a> |   
+	<a class="btn-step-insert-before" href"#">Insert Step Above</a> |   
+	<a class="btn-step-destroy" href="#" >Delete</a>
+	<span class='hidden_insert_after' style=" display: none;" >
+	  <%= button_to "Insert Step Below",
+	    insert_after_experiment_step_path(@experiment,step),
+       	    :method=>:put %>
+        </span>
+	<span class='hidden_insert_before' style=" display: none;" >
+	  <%= button_to "Insert Step Above",
+	    insert_before_experiment_step_path(@experiment,step),
+       	    :method=>:put %>
+  	</span>	
+	<span class='hidden_delete_step' style=" display: none;" >
+	  <%= button_to "Delete Step",
+	    experiment_step_path(@experiment,step),
+       	    :method=>:delete %>
+  	</span>
     </div>
     
   <% end %>
