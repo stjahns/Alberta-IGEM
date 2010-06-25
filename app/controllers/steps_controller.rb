@@ -115,8 +115,10 @@ class StepsController < ApplicationController
 	# this is a hack to fix it quick, TODO fix it right
     #  	@step.image = @image 
 	
-	format.html {redirect_to([@experiment,@step]) }
+	#format.html { render(:partial => 'step', :locals=>{ :step => @step} )  }
+	format.xml { render(:partial => 'step', :locals=>{ :step => @step} )  }
 	format.js { render(:partial => 'step', :locals=>{ :step => @step} )  }
+	format.html {redirect_to([@experiment,@step]) }
       else
 	flash[:notice] = 'your photo did not save!'
 	format.html {redirect_to([@experiment,@step]) }

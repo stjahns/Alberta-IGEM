@@ -14,48 +14,60 @@ $(document).ready(function(){
 	
         /*********   ajaxify forms ************************************/
 	// submit the edits for steps with ajaX
-	$('.inplace_edit_step').each( function() {
+	//$('.inplace_edit_step').each( function() {
+	$('.inplace_edit_step').live('submit', function() {
 		var step = $(this).parent().siblings('.step_view');
-		var form = $(this).parent()
+		var form = $(this).parent();
 		//alert( step.attr('id') )
-		$(this).ajaxForm( {
+		$(this).ajaxSubmit( {
 			dataType: 'html',
+			//dataType: 'script',
+			//data:{"X_REQUESTED_WITH":"XMLHttpRequest"},
 		  	success: function(data) { 
 		  	 // remove the old content and insert new stuff
 				step.children().remove();
 				step.append( data );
-			        step.show( "slow" );
-				form.hide("slow");
+			        //step.show( "slow" );
+				//form.hide("slow");
+				$('.btn-step-edit',step.parent())
+				  .trigger('click');
+
 			  }
 		});
+		return false;
 	});
 	
+
 	// submit an image for a step with ajaX
-	$('.inplace_upload_image').each( function() {
+	$('.inplace_upload_image').live('submit', function() {
 		var step = $(this).parent().siblings('.step_view');
 		var form = $(this).parent();
-		//alert( step.attr('id') )
-		$(this).ajaxForm( {
+		var upload =$(this).children('.step-upload-notice');
+		$(this).ajaxSubmit( {
 			dataType: 'html',
-		  	success: function(data) { 
-		  	  // remove the old content and insert new stuff
-			  data = unescapeHTML(data);	
-			  data = data.replace('<pre>','').replace('</pre>','');
-
+			beforeSubmit: function(){
+				upload.show();
+			},
+			success: function(data) { 
+			  // have to unescape data because of iframe
+		          data = unescapeHTML(data);	
+			  upload.hide();
 			  step.children().remove();
 			  step.append( data );
-			  step.show( "slow" );
-		          form.hide("slow");
+			  //.show( "slow" );
+		          //form.hide("slow");
+			  $('.btn-step-image', step.parent()).trigger('click');
 		        }
 		});
+		return false;
 	});
 
 	// submit an update note for a step with ajaX
-	$('.edit_note').each( function() {
+	$('.edit_note').live('submit', function() {
 		var form = $(this).parent();
 		var note = form.siblings('.step_note_view')
 		//alert( step.attr('id') )
-		$(this).ajaxForm( {
+		$(this).ajaxSubmit( {
 			dataType: 'html',
 		  	success: function(data) { 
 		  	  // remove the old content and insert new stuff
@@ -64,14 +76,15 @@ $(document).ready(function(){
 			  note.show();
 		        }
 		});
+		return false;
 	});
 
 
 	// submit a new note for a step with Ajax
-	$('.new_note').each( function() {
+	$('.new_note').live('submit', function() {
 		var form = $(this);
 		var note = form.parent().siblings('.step_note_view')
-		$(this).ajaxForm( {
+		$(this).ajaxSubmit( {
 			dataType: 'html',
 		  	success: function(data) { 
 		  	  // remove the old content and insert new stuff
@@ -85,6 +98,7 @@ $(document).ready(function(){
 		    	  });
 		        }
 		});
+		return false;
 	});
 
 	// slide up different forms to add content to the step
@@ -132,6 +146,7 @@ $(document).ready(function(){
 		  	  // append a new step after 
 			  data = $(data).attr({style: "display: none;"});
 			  step.after(data).next().slideDown("slow");
+			  renumberSteps();
 			}
 		});
 		return false;
@@ -144,8 +159,10 @@ $(document).ready(function(){
 			dataType: 'html',
 		  	success: function(data) { 
 		  	  // append a new step after 
-			  data = $(data).attr({style: "display: none;"});
+// TODO figure out if this is an okay way to do it
+   	  		  data = $(data).attr({style: "display: none;"});
 			  step.before(data).prev().slideDown("slow");
+			  renumberSteps();
 			}
 		});
 		return false;
@@ -156,9 +173,19 @@ $(document).ready(function(){
 		  .children('.button-to');
 		btn.ajaxSubmit({
 			dataType: 'html',
+			beforeSubmit: function(){
+				if( confirm(
+				'Are you sure you want to delete this step?')){
+					return true;
+				 }
+				 else{
+				 	return false;
+				 }	
+			},
 		  	success: function() { 
 			  step.slideUp("slow", function(){
 			  	step.remove();
+				renumberSteps();
 			  });
 			}
 		});
@@ -202,7 +229,16 @@ $(document).ready(function(){
 });	
 
 function unescapeHTML(html) {
-	return $("<div />").html(html).text();
+	html = $("<div />").html(html).text();
+ 	return html.replace('<pre>','').replace('</pre>','');
+}
+
+function renumberSteps(){
+	var i = 1;
+	$(".step_number").each( function(){
+		$(this).html("<p><b>Step " + i + " :</b></p>");
+		i++;
+	});
 }
 
 // when we ask for html we need rails to use respond to js so we need:
