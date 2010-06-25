@@ -3,12 +3,30 @@
   <p>Hello World! I am a construct! My name is <%= construct.name %>.</p>
   <p>This is what I look like:</p>
   <% unless construct.parts.empty? %>
-  <ol class = "construct_parts">
-  <% construct.parts.each do |part| %>
-  <li id = "part_<%=part.bio_byte_id%>_<%=part.id%>" class = "<%=part.bio_byte.type %> part" byte_id="byte_<%=part.bio_byte_id%>" part_id="part_<%=part.id%>"><%= part.bio_byte.name %>
+
+  <div id= "parts_box"><div class='xscrollbuffer'>
+
+  <div id="plasmid-left">
+  </div>
+
+  <div id="plasmid-mid" style='width:<%= construct.parts.length * 100 %>px;'>
+
+  <ol id="parts_list">
+  <% construct.parts.all(:order => :part_order).each do |part| %>
+  <li id = "part_<%=part.bio_byte_id%>_<%=part.id%>" class = "<%=part.bio_byte.type %> part" byte_id="byte_<%=part.bio_byte_id%>" part_id="part_<%=part.id%>"
+   title="<b><%=part.bio_byte.name%></b>
+          <p><%=part.bio_byte.description%></p>
+          <p><a href='<%= bio_byte_path(part.bio_byte) %>'>More Info</a></p>">
   </li>
   <%end%>
   </ol>
+  </div>
+
+  <div id="plasmid-right">
+  </div>
+
+  </div></div>
+
   <%end%>
 
   <p>

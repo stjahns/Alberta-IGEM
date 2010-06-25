@@ -14,10 +14,11 @@ TODO - Sequence annotation
                    //2d array [ [start, stop, name, type], [... ]]
   //if any changes made..
   var changes = false;
+  var moving = false; //for sortable/tooltips
 
   $(document).ready(function() {
 
-
+      setPlasmidWidth(0);
 
       //ajax call to load data
       $.ajax({
@@ -88,9 +89,38 @@ TODO - Sequence annotation
 
         connectWith:  '#trash',
         tolerance: 'pointer',
+        start: function(){
+          $('.tooltip').hide();
+          moving = true;
+          //update plasmid width 
+          setPlasmidWidth(1);
+        },
+        stop: function(){
+          moving = false;
+          //update plasmid width 
+          setPlasmidWidth(0);
+
+        },
         update: function(){
 
-          changes=true;
+          //if dropped in a new part from bin
+          $('ol#parts_list > .byte').each(function(){
+            
+            $(this).attr('title', $(this).attr('popup'));
+            $(this).addClass('part').removeClass('byte').text('');
+            $(this).tooltip({
+              opacity: 0.9,
+              onShow: function(){
+                if (moving==true){
+                  this.hide(); // temp. disable
+                }
+              }
+           });
+
+          });
+
+          //changes=true; // for future "YOU've Neer saved yer changes!"
+          
 
           $("#sequence").html(getFormattedSequence());
 
@@ -102,7 +132,8 @@ TODO - Sequence annotation
       $("*").disableSelection();
       
       
-      $(".byte").draggable({
+      $(".byte").draggable({ 	
+
         connectToSortable: 'ol#parts_list',
         revert: 'invalid',
         helper: "clone"
@@ -121,8 +152,17 @@ TODO - Sequence annotation
           $("#parts_list").sortable('refresh');
         }
       }); 
-      
 
+      $(".part").tooltip({
+        opacity: 0.9, 
+        onShow: function(){
+          if (moving==true){
+            this.hide(); // temp. disable
+          }
+        }
+      });
+
+    
     });
 
 </script>
@@ -133,16 +173,24 @@ TODO - Sequence annotation
 
 <h1>Editing <%= @construct.name %>:</h1>
 
-<div id="parts_box">
+<div id="parts_box"><div class='xscrollbuffer'>
+  <div id="plasmid-left">
+  </div>
+  <div id="plasmid-mid">
 <!-- The sortable parts list.. -->
 <ol id="parts_list">
 <% @order.each do |part| %>
-  <li id = "part_<%=part.bio_byte_id%>_<%=part.id%>" class = "<%=part.bio_byte.type %> part" byte_id="byte_<%=part.bio_byte_id%>" part_id="part_<%=part.id%>"><%= part.bio_byte.name %>
+  <li id = "part_<%=part.bio_byte_id%>_<%=part.id%>" class = "<%=part.bio_byte.type %> part" byte_id="byte_<%=part.bio_byte_id%>" part_id="part_<%=part.id%>"
+   title="<b><%=part.bio_byte.name%></b>
+          <p><%=part.bio_byte.description%></p>
+          <p><a href='<%= bio_byte_path(part.bio_byte) %>'>More Info</a></p>">
   </li>
-  
 <% end %>
 </ol>
-</div>
+  </div>
+  <div id="plasmid-right">
+  </div>
+</div></div>
 </div>
 
 <div id="sequence_box">
@@ -159,13 +207,17 @@ TODO - Sequence annotation
 
 <ul id="orf_bin" class="parts_bin">
 <% ORF.all.each do |byte| %>
-  <li id = "part_<%=byte.id%>_0" part_id="part_new" byte_id="byte_<%=byte.id%>" class = "ORF byte"><%= byte.name %></li>
+  <li id = "part_<%=byte.id%>_0" part_id="part_new" byte_id="byte_<%=byte.id%>" class = "ORF byte" popup="<b><%=byte.name%></b>
+          <p><%=byte.description%></p>
+          <p><a href='<%= bio_byte_path(byte) %>'>More Info</a></p>"><%= byte.name %></li>
 <% end %>
 </ul>
 
 <ul id="linker_bin" class="parts_bin">
 <% Linker.all.each do |byte| %>
-  <li id = "part_<%=byte.id%>_0" part_id="part_new" byte_id="byte_<%=byte.id%>" class = "Linker byte"><%= byte.name %></li>
+  <li id = "part_<%=byte.id%>_0" part_id="part_new" byte_id="byte_<%=byte.id%>" class = "Linker byte"  popup="<b><%=byte.name%></b>
+          <p><%=byte.description%></p>
+          <p><a href='<%= bio_byte_path(byte) %>'>More Info</a></p>"><%= byte.name %></li>
 <% end %>
 </ul>
 
@@ -176,6 +228,6 @@ Trash Bin
 </div>
 
 <div id="nav">
-<%=link_to "Back", experiment_path(@construct.experiment) %>
+<%= link_to "Back", :back %>
 <a href="#", id="save">Save</a>
 </div>

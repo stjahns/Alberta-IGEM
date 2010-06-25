@@ -25,6 +25,6 @@ ActionMailer::Base.smtp_settings = {
   :port => 587,
   :domain => 'genomikon.ca',
   :authentication => :plain,
-  :user_name => 
-  :password => 
+  :user_name => 'xxxxx',
+  :password => 'xxxxx'
 }

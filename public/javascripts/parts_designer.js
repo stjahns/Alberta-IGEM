@@ -330,3 +330,15 @@ function validate(bytes){
   return valid;
 
 }
+
+function setPlasmidWidth(placeholders){
+
+  $('#plasmid-mid').css('width', function(){
+    var count = 0;
+    $('#parts_list>li').each(function(){
+      count+=1;
+      });
+    return 100*(count-placeholders);
+  });
+
+}
