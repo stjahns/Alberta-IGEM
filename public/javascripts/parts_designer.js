@@ -1,3 +1,172 @@
+// TODO Figure out how to sequester this in another file.
+// global variables
+
+  var orfs;
+  var linkers;
+  var allparts;
+  var partcoords=[]; //needed for getFormattedSequence() to store annotation info
+                   //2d array [ [start, stop, name, type], [... ]]
+  //if any changes made..
+  var changes = false;
+  var moving = false; //for sortable/tooltips
+  var experiment_id;
+  var construct_id;
+
+  $(document).ready(function() {
+
+      setPlasmidWidth(0);
+      //Get experiment + construct id's TODO this is lazy!!
+      var url = window.location.pathname.split('/');
+      experiment_id = url[2];
+      construct_id = url[4];
+      
+      
+
+      //ajax call to load data
+      $.ajax({
+        type: 'get',
+        dataType: 'json',
+        url: '/get_part_data',
+        success: function(data){
+          orfs = data.orfs;
+          linkers = data.linkers;
+          allparts= orfs.concat(linkers);
+          annotations = data.annotations;
+          //get sequence
+          $("#sequence").html(getFormattedSequence());
+          
+          //get images
+          $(".part, .byte").css('background-image', function(index, value){
+            for(i in allparts){
+              var byte_id = $(this).attr('byte_id');
+              if ( byte_id.split('_')[1] == allparts[i].id.toString()){
+                return 'url(/images/'+ allparts[i].image_id +'.png)';
+              }
+            }
+          });
+        }
+      })
+
+      //save button
+      $("a#save").click(function() {
+        
+        // TODO validation
+        // sequence must be flanked by alpha and omega bytes - NEED A NEW DB COL FOR SPECIAL CLASS (ie ALPHA/OMEGA etc.)
+        // or leave validation for server side?
+        // require an ori?
+        // require selection?
+
+        var bytes = $('#parts_list').sortable('toArray', {attribute: 'class'});
+         
+        if (validate(bytes)){
+
+          //submit to server
+         $.ajax({
+           type: 'put',
+           dataType: 'json',
+           data: $('#parts_list').sortable('serialize', {attribute: 'part_id'}) + '&'
+                + $('#parts_list').sortable('serialize', {attribute: 'byte_id'}) + '&'
+                + 'id=' + construct_id + '&'
+                + 'experiment_id=' + experiment_id,
+
+            url: '/save_construct',
+            success: function(data){
+              $("#parts_list > li").each(function(index) {
+                $(this).attr('part_id', "part_"+data.part_ids[index]);
+              })
+              alert("Saved!");
+            }
+            
+
+          
+          })
+        }
+        else{
+          alert("Construct is not valid!"); //todo: invalid message
+        }
+      })
+    
+
+      $("ol#parts_list").sortable({
+
+        connectWith:  '#trash',
+        tolerance: 'pointer',
+        start: function(){
+          $('.tooltip').hide();
+          moving = true;
+          //update plasmid width 
+          setPlasmidWidth(1);
+        },
+        stop: function(){
+          moving = false;
+          //update plasmid width 
+          setPlasmidWidth(0);
+
+        },
+        update: function(){
+
+          //if dropped in a new part from bin
+          $('ol#parts_list > .byte').each(function(){
+            
+            $(this).attr('title', $(this).attr('popup'));
+            $(this).addClass('part').removeClass('byte').text('');
+            $(this).tooltip({
+              opacity: 0.9,
+              onShow: function(){
+                if (moving==true){
+                  this.hide(); // temp. disable
+                }
+              }
+           });
+
+          });
+
+          //changes=true; // for future "YOU've Neer saved yer changes!"
+          
+
+          $("#sequence").html(getFormattedSequence());
+
+        }
+  
+      
+      });
+
+      $("*").disableSelection();
+      
+      
+      $(".byte").draggable({ 	
+
+        connectToSortable: 'ol#parts_list',
+        revert: 'invalid',
+        helper: "clone"
+
+      });
+
+      $("#trash").droppable({
+        //TODO something is fucked up with these css classes...
+        activeClass: 'ui-state-hover',
+        hoverClass: 'ui-state-active',
+        accept: '#parts_list > li',
+        tolerance: 'pointer',
+        drop: function(event, ui) {
+          ui.draggable.attr()
+          ui.draggable.remove();
+          $("#parts_list").sortable('refresh');
+        }
+      }); 
+
+      $(".part").tooltip({
+        opacity: 0.9, 
+        onShow: function(){
+          if (moving==true){
+            this.hide(); // temp. disable
+          }
+        }
+      });
+
+    
+  }); // END $(document).ready()
+
 //get html formatted sequence with feature partcoords
 function getFormattedSequence(){
   var seq = getSequence().toUpperCase();

@@ -1,5 +1,4 @@
 <div class="construct_preview_box">
-  <b>
   <p>Hello World! I am a construct! My name is <%= construct.name %>.</p>
   <p>This is what I look like:</p>
   <% unless construct.parts.empty? %>
@@ -34,5 +33,4 @@
   <%= link_to "Delete me?", experiment_construct_path( construct.experiment, construct), :confirm => 'Are you sure?', :method => :delete %>
   </p>
 
-  </b>
 </div>

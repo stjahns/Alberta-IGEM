@@ -34,23 +34,17 @@
 <tr><td><%= ann.name %></td>
     <td><%= ann.start %></td>
     <td><%= ann.stop %></td>
-    <td><%= link_to "Edit", {:controller=> :annotations,
-                             :action=> :edit,
-                             :ann_id=> ann.id,
-                             :byte_id=> @byte.id} %><td>
+    <td><%= link_to "Edit", edit_bio_byte_annotation_path( @byte, ann) %><td>
 
-    <td><%= link_to "Delete", {:controller => :annotations,
-                               :action => :delete,
-                               :ann_id => ann.id,
-                               :byte_id => @byte.id} %></td>
+    <td><%= link_to "Delete", bio_byte_annotation_path( @byte, ann),
+                              :confirm => "Are you sure?",
+                              :method => :delete %></td>
 </tr>
 <% end %>
-<tr><td><%= link_to 'New', {:controller => :annotations,
-                            :action => 'new',
-                            :id => @byte.id} %></td></tr>
+<tr><td><%= link_to 'New', new_bio_byte_annotation_path( @byte ) %></td></tr>
 </table>
 
 
 
 
-<p><%= link_to 'Back', {:action => 'index'} %></p>
+<p><%= link_to 'Back', bio_bytes_path %></p>

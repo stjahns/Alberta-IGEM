@@ -18,6 +18,6 @@
 #
 
 class Annotation < ActiveRecord::Base
-  belongs_to :biobyte
+  belongs_to :bio_byte
   
 end

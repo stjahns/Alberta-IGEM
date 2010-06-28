@@ -4,17 +4,23 @@ ActionController::Routing::Routes.draw do |map|
   map.register '/register', :controller => 'users', :action => 'create'
   map.activate '/activate/:activation_code', :controller => 'users', :action => 'activate'
   map.signup '/signup', :controller => 'users', :action => 'new'
+
   map.resources :users
 
-  map.resources :bio_bytes, :member => { :upload => :post, :update => :post }
+  #map annoations as nested resource of biobytes
+  map.resources :bio_bytes, :member => { :upload => :post, :update => :post } do |bytes|
+    bytes.resources :annotations
+  end
+
+  map.resources :orfs, :controller => :bio_bytes
+  map.resources :linkers, :controller => :bio_bytes
 
   map.resource :session
   map.resources :glossaries
 
-  #map.resources :steps
-
   # map steps as nested resource of experiments
-  map.resources :experiments, :member => { :print => :get } do |experiments|
+  map.resources :experiments, :member => { :print => :get,
+                                           :clone => :get } do |experiments|
      experiments.resources :steps, 
 	     :member => { :upload => :post, 
 	     		  :up => :put,
@@ -22,6 +28,9 @@ ActionController::Routing::Routes.draw do |map|
     experiments.resources :constructs 
   end 
 
+  # named route for getting part data for construct/experiment views
+  map.part_data '/get_part_data', :controller => :constructs, :action => :get_data
+  map.save_construct '/save_construct', :controller => :constructs, :action => :save
   # some shorthand for routes
   map.move_step_up 'experiments/:experiment_id/steps/:id/up' , :controller => :steps, :action =>:up
   map.move_step_down 'experiments/:experiment_id/steps/:id/down', :controller => :steps, :action =>:down
@@ -32,9 +41,10 @@ ActionController::Routing::Routes.draw do |map|
   # routes for images
   map.resources :images, :member => { :thumb => :get, :step => :get  }
   
+  
   # default routes
-  map.connect ':controller/:action/:id'
-  map.connect ':controller/:action/:id.:format'
+  #map.connect ':controller/:action/:id'
+  #map.connect ':controller/:action/:id.:format'
   
 
   # The priority is based upon order of creation: first created -> highest priority.
