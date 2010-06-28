@@ -1,5 +1,10 @@
 class ImagesController < ApplicationController
 
+# need image caching so we don't dynamically generate images every time
+# put all the actions that render an image here 
+  caches_page :thumb, :step, :show
+	
+
 ### added image return types
   # Get /images/1/thumb
   def thumb
@@ -74,6 +79,8 @@ class ImagesController < ApplicationController
   # PUT /images/1
   # PUT /images/1.xml
   def update
+   expire_page :action => :thumb, :action => :step ,:action => :show
+
     @image = Image.find(params[:id])
 
     respond_to do |format|
