@@ -105,7 +105,6 @@ class StepsController < ApplicationController
     unless @step.image.blank?
 	 @step.image.destroy
     end
-     
     @image = Image.new(params[:step])
     @step.image = @image
     
@@ -128,19 +127,19 @@ class StepsController < ApplicationController
   end
  
   # function for updating notes with ajax (is it necessary??) maybe not
-  def note
-    @step = @experiment.steps.find(params[:id])
-    @note = @step.note
+#  def note
+#    @step = @experiment.steps.find(params[:id])
+#    @note = @step.note
 
-    if @note.save
-      respond_to do |format|
-	format.html redirect_to :back
-      end
-    else
-	flash[:notice] = 'There was an error saving your note'
-	redirect_to :back
-    end
-  end
+#    if @note.save
+#      respond_to do |format|
+#	format.html redirect_to :back
+#      end
+#   else
+#	flash[:notice] = 'There was an error saving your note'
+#	redirect_to :back
+#    end
+#  end
 
   ###### actions for repositioning  ####################
   

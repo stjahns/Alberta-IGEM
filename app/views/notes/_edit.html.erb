@@ -10,12 +10,21 @@
   </p>
 <% end %>
 
-<p>attach an image</p>
-<% form_for [step,note],
-     :url => upload_step_note_path(step), 
+<p>
+<%=h note.image.blank? ? "change the image" : "attach an image" %>
+<%= image_tag( thumb_image_path(note.image)) unless note.image.blank? %>
+<% form_for [step, note],
+	:url => upload_step_note_path(step, :format => 'js' ), 
      :html => { :multipart => true, :method => 'post',
-       :class => 'inplace_upload_image'} do |f| %>
-<p><%= f.file_field :image_file %>  <%= f.submit 'Upload' %></p>
+       :class => 'attach_image_to_note'} do |f| %>
+ <%= f.file_field :image_file %>  <%= f.submit 'Upload' %>
 <% end %>
+<% unless note.image.blank? %>
+<%= button_to "Delete Image", image_path(note.image), :method=>:delete, :class=>'btn-delete-image-note' %>
+<% end %>
+</p>
 
 <a class="btn-note-edit-cancel " href"#">Cancel edit</a>
+<a class="btn-note-delete" href"#">Delete Note</a>
+<a class="btn-note-delele-image" href"#" >Delete Image</a>
+

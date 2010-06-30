@@ -10,7 +10,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resource :session
 
 
-  # non-restful routes for user profile pages
+  # pretty routes for user profile pages
   map.profile '/user/:login', :controller => 'users', :action => 'profile', :method => 'get' 
 
   # nest note in steps without nesting steps in experiment

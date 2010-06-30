@@ -7,7 +7,8 @@ class NotesController < ApplicationController
     @notes = @step.note
     respond_to do |format|
        format.html
-       format.js { render( :partial => 'show', :locals=>{:note=>@note})}
+       format.js { render( :partial => 'show', 
+			  :locals=>{:step=>@step, :note=>@note})}
     end  
   end
 
@@ -51,11 +52,13 @@ class NotesController < ApplicationController
       if @note.update_attributes(params[:note])
         flash[:notice] = 'Note changed'
 	format.html { redirect_to :back }
-	format.js   { render(:partial => 'note_view', :locals=>{:note=>@note})}
+	format.js   { render(:partial => 'show', 
+			     :locals=>{:step=>@step, :note=>@note})}
       else
 	flash[:notice] = 'There was an error updating your note'
         format.html { redirect_to :back }
-	format.js   { render(:partial => 'note_view', :locals=>{:note=>@note})}
+	format.js   { render(:partial => 'show', 
+			     :locals=>{:step=>@step, :note=>@note})}
       end
     end
   end
@@ -79,22 +82,19 @@ class NotesController < ApplicationController
 	 @note.image.destroy
     end
      
-    @image = Image.new(params[:step])
-    #@image.note_id = @note.id
+    @image = Image.new(params[:note])
     @note.image = @image
 
     respond_to do |format|
       if @image.save 
-	# this is a hack to fix it quick, TODO fix it right
-    #  	@note.image = @image 
-	
 	format.html {redirect_to([@experiment,@step]) }
-	format.js { render(:partial => 'note_view', 
-			   :locals=>{ :note => @note})}
+	format.js { render(:partial => 'show', 
+			   :locals=>{:step=>@step, :note => @note})}
       else
 	flash[:notice] = 'your photo did not save!'
 	format.html {redirect_to([@experiment,@step]) }
-	format.js   {render(:partial => 'note_view', :locals=>{:note => @note} )}
+	format.js   {render(:partial => 'show', 
+		:locals=>{:step=>@step, :note => @note} )}
       end
     end
   end

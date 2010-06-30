@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20100622212548
+# Schema version: 20100628162016
 #
 # Table name: annotations
 #

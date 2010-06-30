@@ -6,10 +6,11 @@
 }
 
 body, p, ol, ul, td {
-	background-image: url(../images/background.jpg);
+	background-image: url(../images/background.png);
 	background-repeat: repeat-y;
 	background-position: center;
-	background-color: #f7f4ee;
+/*background-color: #f7f4ee;*/
+	background-color:#efefef;
   font-family: verdana, arial, helvetica, sans-serif;
   font-size:   13px;
   line-height: 18px;

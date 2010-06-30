@@ -1,5 +1,8 @@
-<p>put image here</p>
-<p><%=h note.text %></p>
+<p>
+<%= image_tag( step_image_path( note.image ) ) unless note.image.blank? %>
+
+<%=h note.text %></p>
 <% if is_owner_of(step.experiment) %>
   <a class="btn-note-edit" href"#">Edit Note</a>
 <% end %>
+

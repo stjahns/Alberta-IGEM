@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20100622212548
+# Schema version: 20100628162016
 #
 # Table name: notes
 #
@@ -12,9 +12,9 @@
 #
 
 class Note < ActiveRecord::Base
-	attr_accessible :text, :image_id, :step_id
+	attr_accessible :text, :image 
         belongs_to :step
-	has_one :image
+	has_one :image, :dependent => :destroy
 
 
 	private

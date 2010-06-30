@@ -1,0 +1,9 @@
+<% form_for [step, note],
+     :url => upload_step_note_path(step, note, :format=>'js' ) , 
+    # :html => { :multipart => true, :method => 'post',
+     :html => { :method => 'post',
+     :class => '_upload_image'} do |f| %>
+<p><%= f.file_field :image_file %></p>
+<p><%= f.submit 'Upload' %></p>
+<% end %>  
+

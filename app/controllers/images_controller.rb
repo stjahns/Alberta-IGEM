@@ -1,4 +1,5 @@
 class ImagesController < ApplicationController
+  before_filter :login_required, :excep => [:thumb, :step, :show]
 
 # need image caching so we don't dynamically generate images every time
 # put all the actions that render an image here 
@@ -104,6 +105,7 @@ class ImagesController < ApplicationController
     respond_to do |format|
       format.html { redirect_to(images_url) }
       format.xml  { head :ok }
+      format.js	  { head :ok }
     end
   end
 end

@@ -82,6 +82,7 @@
 		    <%= render( :partial => 'notes/new', 
 			       :locals=>{:step => step, :note => Note.new}) %>
 	    <% end %>
+
       </div >
 
       <div class= "step_note_view" note=<%=h step.note ? 'true' : '' %> >

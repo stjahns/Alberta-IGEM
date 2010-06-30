@@ -10,7 +10,6 @@ $.ajaxSetup({
   
 $(document).ready(function(){
 	
-	//TODO make these live
 	
         /*********   ajaxify forms ************************************/
 	// submit the edits for steps with ajaX
@@ -18,19 +17,13 @@ $(document).ready(function(){
 	$('.inplace_edit_step').live('submit', function() {
 		var step = $(this).parent().siblings('.step_view');
 		var form = $(this).parent();
-		//alert( step.attr('id') )
 		$(this).ajaxSubmit( {
 			dataType: 'html',
-			//dataType: 'script',
-			//data:{"X_REQUESTED_WITH":"XMLHttpRequest"},
 		  	success: function(data) { 
 		  	 // remove the old content and insert new stuff
 				step.children().remove();
 				step.append( data );
-			        //step.show( "slow" );
-				//form.hide("slow");
-				$('.btn-step-edit',step.parent())
-				  .trigger('click');
+				$('.btn-step-edit',step.parent()).trigger('click');
 
 			  }
 		});
@@ -54,8 +47,6 @@ $(document).ready(function(){
 			  upload.hide();
 			  step.children().remove();
 			  step.append( data );
-			  //.show( "slow" );
-		          //form.hide("slow");
 			  $('.btn-step-image', step.parent()).trigger('click');
 		        }
 		});
@@ -66,14 +57,12 @@ $(document).ready(function(){
 	$('.edit_note').live('submit', function() {
 		var form = $(this).parent();
 		var note = form.siblings('.step_note_view')
-		//alert( step.attr('id') )
 		$(this).ajaxSubmit( {
 			dataType: 'html',
 		  	success: function(data) { 
 		  	  // remove the old content and insert new stuff
-			  note.children().remove();
-			  note.append(data);
-			  note.show();
+			  form.hide();
+			  note.html( data ).show();
 		        }
 		});
 		return false;
@@ -88,10 +77,8 @@ $(document).ready(function(){
 			dataType: 'html',
 		  	success: function(data) { 
 		  	  // remove the old content and insert new stuff
-			  note.html(data);
-			  note.show();
+			  note.html(data).show().attr('note','true');
 			  form.parent().hide();
-			  note.attr('note','true');
 			  var url = form.attr('action') + '/edit';
 			  $.get(url, function(newForm ){
 			  	form.parent().html(newForm);
@@ -101,10 +88,30 @@ $(document).ready(function(){
 		return false;
 	});
 
+	// submit an image for a note with ajaX
+	$('.attach_image_to_note').live('submit', function() {
+		form = $(this).parent();
+		$(this).ajaxSubmit( {
+			dataType: 'html',
+		/*	beforeSubmit: function(){
+				upload.show();
+			},
+		*/	success: function(data) { 
+			  // have to unescape data because of iframe
+		          data = unescapeHTML(data);	
+	//		  alert( data );
+			  form.hide();
+			  form.siblings(".step_note_view").html(data).show("slow");
+
+		//	  $('.btn-step-image', step.parent()).trigger('click');
+		        }
+		});
+		return false;
+	});
+
+
 	// slide up different forms to add content to the step
 	// use editButton to define buttons that toggle a form 
-	// TODO will have to use delegate or live for this if we
-	// TODO number steps with jquery after they're loaded
 	var editButton = function($toggler, $togglee) {
 
 		//$($toggler).click( function() {
@@ -159,7 +166,6 @@ $(document).ready(function(){
 			dataType: 'html',
 		  	success: function(data) { 
 		  	  // append a new step after 
-// TODO figure out if this is an okay way to do it
    	  		  data = $(data).attr({style: "display: none;"});
 			  step.before(data).prev().slideDown("slow");
 			  renumberSteps();
@@ -167,6 +173,7 @@ $(document).ready(function(){
 		});
 		return false;
 	});
+
 	$('.btn-step-destroy').live( 'click', function(){
 		var step = $(this).parent().parent();
 		var btn = $(this).siblings('.hidden_delete_step')
@@ -174,14 +181,8 @@ $(document).ready(function(){
 		btn.ajaxSubmit({
 			dataType: 'html',
 			beforeSubmit: function(){
-				if( confirm(
-				'Are you sure you want to delete this step?')){
-					return true;
-				 }
-				 else{
-				 	return false;
-				 }	
-			},
+			   return confirm(
+				'Are you sure you want to delete this step?');},
 		  	success: function() { 
 			  step.slideUp("slow", function(){
 			  	step.remove();
@@ -193,7 +194,7 @@ $(document).ready(function(){
 	});
 
 	// buttons to control notes
-        $('.btn-step-note').click( function(){
+        $('.btn-step-note').live( 'click', function(){
 		var note_container = 
 			$(this).parent().siblings('.step_note_container');
 		var note = note_container.children('.step_note_view');
@@ -224,6 +225,20 @@ $(document).ready(function(){
 		$(this).parent().hide()
 			.siblings('.step_note_view').show();
 		return false;
+	});
+	$('.btn-delete-image-note').live('submit', function(){
+		var form = $(this).parent().parent().parent();
+		var url = $(this).attr('action') + '/edit';
+		$(this).ajaxSubmit( {
+			dataType: 'html',
+			beforeSubmit: function(){
+				return confirm('Are you sure?');
+			},
+		  	success: function(data) { 
+		  	 // remove the old content and insert new stuff
+			 form.load(url);
+			 }
+		});
 	});
 
 });	
