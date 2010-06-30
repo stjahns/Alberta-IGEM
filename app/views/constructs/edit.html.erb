@@ -1,12 +1,10 @@
 <!--
 The main construct designer view.
-TODO - Split parts bin into ORFS and Linkers
-TODO - Sequence annotation
 -->
-
 
 <h1 id="title">Construct Designer v.0.6</h1>
 
+<!-- plasmid box -->
 <div id="construct">
 
 <h1>Editing <%= @construct.name %>:</h1>
@@ -15,7 +13,6 @@ TODO - Sequence annotation
   <div id="plasmid-left">
   </div>
   <div id="plasmid-mid">
-<!-- The sortable parts list.. -->
 <ol id="parts_list">
 <% @order.each do |part| %>
   <li id = "part_<%=part.bio_byte_id%>_<%=part.id%>" class = "<%=part.bio_byte.type %> part" byte_id="byte_<%=part.bio_byte_id%>" part_id="part_<%=part.id%>"
@@ -30,17 +27,19 @@ TODO - Sequence annotation
   </div>
 </div></div>
 </div>
+<!-- END plasmid box -->
 
+<!-- Sequence box -->
 <div id="sequence_box">
 <h3>Sequence</h3>
-<!-- Sequence box -->
 <div id = "sequence">
+<!-- content generated in parts_designer.js -->
 </div>
-
 </div>
+<!-- END sequence -->
 
-<div id="parts_bin">
 <!-- Parts Bin -->
+<div id="parts_bin">
 <h2>Parts Bin:</h2>
 
 <ul id="orf_bin" class="parts_bin">
@@ -58,14 +57,15 @@ TODO - Sequence annotation
           <p><a href='<%= bio_byte_path(byte) %>'>More Info</a></p>"><%= byte.name %></li>
 <% end %>
 </ul>
+<!-- END Parts Bin-->
 
 <div id="trash">
-Trash Bin
+  Trash Bin
 </div>
 
 </div>
 
 <div id="nav">
-<%= link_to "Back", :back %>
-<a href="#", id="save">Save</a>
+  <%= link_to "Back", :back %>
+  <a href="#", id="save">Save</a>
 </div>

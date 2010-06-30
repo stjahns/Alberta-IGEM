@@ -81,6 +81,10 @@ ul.parts_bin li{
 .annotation{
   border:           1px solid black;
 }
+.annotation.orf{
+  background-color: #333;
+  color:            #FFF;
+}
 
 
 div#parts_bin{
