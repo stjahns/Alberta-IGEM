@@ -1,4 +1,4 @@
-  <p><%= step.title %></p>
+  <h2><span class="step_number"><%=h step.step_order %></span> <%=h step.title %></h2>
   <% unless step.image.blank? %>
      <p><%= image_tag step_image_path( step.image ) %></p>
   <% end %> 

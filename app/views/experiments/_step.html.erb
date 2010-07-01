@@ -1,12 +1,12 @@
 <div class="step">
-   <div class="step_number" > 
-	<p><b>Step <%=h " #{ step.step_order }" %>  :</b></p> 
+  <!--- <div class="step_number" > 
+	<h1 class="step_number"><%=h " #{ step.step_order }" %></h1> 
    </div>
- 
+   -->
    <!-- view of the step -->
-   <span class="step_view" id=step<%= step.id  %>  > 
+   <div class="step_view" id=step<%= step.id  %>  > 
      <%= render :partial => 'steps/step', :locals => {:step => step }  %>
-   </span>
+   </div>
 
    <% if is_owner_of( @experiment ) %>
    <span class="step_form" style="display: none;">
@@ -40,19 +40,25 @@
   <div class="step-upload-notice" style= "display:none" ><%= image_tag "spinner.gif" %> </div>
   <% end %>
 
-  <% if allowed_to_make_notes? %>
-   <div class= "step_note_button" >
-	    <a class="btn-step-note " href"#">Note</a>
-    </div>
-  <% end %>
 
   <% if is_owner_of( @experiment ) %>
-    <div class="step_edit_slide" >
-	<a class="btn-step-form" href"#">Edit</a> |
-	<a class="btn-step-image" href"#">Image</a> |
-	<a class="btn-step-insert-after" href"#">Insert Step Below</a> |   
-	<a class="btn-step-insert-before" href"#">Insert Step Above</a> |   
-	<a class="btn-step-destroy" href="#" >Delete</a>
+    <div class="step-toolbar" >
+       <ul class="step-toolbar"  >
+	 <li class= "step-toolbar" >
+	 <a class="btn-step-form step-toolbar" href"#">Edit</a></li>
+	 <li class= "step-toolbar">
+	 <a class="btn-step-image step-toolbar " href"#">Image</a></li>
+	 <li class= "step-toolbar" >
+	 <a class="btn-step-insert-after step-toolbar " href"#">Insert Step Below</a></li>   
+	 <li class= "step-toolbar" >
+	 <a class="btn-step-insert-before step-toolbar " href"#">Insert Step Above</a></li>
+	 <li class= "step-toolbar" >
+	 <a class="btn-step-destroy step-toolbar " href="#" >Delete</a></li>
+  	 <% if allowed_to_make_notes? %>
+		 <li class= "step-toolbar btn-step-note ">
+		 <a class="btn-step-note step-toolbar " href"#">Note</a></li>
+        <% end %>
+        </ul> 
 	<span class='hidden_insert_after' style=" display: none;" >
 	  <%= button_to "Insert Step Below",
 	    insert_after_experiment_step_path(@experiment,step),
@@ -72,7 +78,7 @@
     
   <% end %>
   <% if allowed_to_make_notes? %>
-    <div class ="step_note_container" style="display: none;"  >
+    <div class= "step_note_container" style="display: none;"  >
     <!-- hide this form, and only show if we click note tab and their is no note or we want to add a note --> 
       <div class= "step_note_form" >
 	    <% if step.note %>

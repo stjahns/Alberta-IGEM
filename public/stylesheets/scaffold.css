@@ -1,3 +1,110 @@
+/*styling for experiment page*/
+/*title of experiment */
+#experiment-title {
+	width: 600px;
+	margin-left:auto;
+	margin-right:auto;
+}
+
+#experiment-title h1{
+	text-align: center;
+}
+/* authour of experiment*/
+#experiment-title h2{
+	text-align: center;
+	text-decoration: none;
+	font-weight: normal;
+	font-style: italic;
+}
+
+/*description of experiment*/
+#experiment-title p{
+	text-align: justify;
+}
+
+/* styling steps */
+#stepTitle p {
+  text-align: left;
+  font-weight: bold;
+  padding: 5px 5px 5px 15px;
+  font-size: 12px;
+  margin: -7px;
+  background-color: #c00;
+  color: #fff;
+}
+
+div.step {
+width:730px;
+padding:0px;
+border-bottom:0.25em solid #efefef ;
+margin:0px;
+margin-bottom:3em ;
+}
+
+p.step_note_container {
+	background:#efefef;
+	margin: 0;
+	padding-top: 1em; 
+	padding-bottom: 1em;
+}
+img.step_note_container {
+	float: left;
+	margin: 10px;
+}
+
+
+textarea {
+  width:550px;
+  height:100px;
+}
+
+
+span.step_number {
+	display:inline;
+	padding-left: 4px;
+	padding-right: 4px;
+	background-color: #000;
+	color: #efefef;
+}
+
+/*editing steps toolbar*/
+
+ul.step-toolbar {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;	
+	overflow: hidden;
+
+}
+li.step-toolbar {
+	float: left;
+}
+li.btn-step-note{
+	float: right;
+}
+
+
+
+a.step-toolbar:link, a.step-toolbar:visited {
+	display: block;
+	font-weight: normal;
+	padding: 4px;
+	background-color: #efefef;
+	text-decoration: none;
+	margin-right: 2px;
+}
+
+a.step-toolbar.selected {
+	background-color: white;
+}
+
+
+a.step-toolbar:hover {
+	background-color: #000000
+}
+a.btn-step-note.step-toolbar {
+	margin-right: 0;
+}
 
 #container {
 	width: 750px;
@@ -63,24 +170,4 @@ a:hover { color: #fff; background-color:#000; }
   list-style: square;
 }
 
-#stepTitle p {
-  text-align: left;
-  font-weight: bold;
-  padding: 5px 5px 5px 15px;
-  font-size: 12px;
-  margin: -7px;
-  background-color: #c00;
-  color: #fff;
-}
 
-div.step {
-width:600px;
-padding:10px;
-border:2px solid gray;
-margin:0px;
-}
-
-textarea {
-  width:550px;
-  height:100px;
-}

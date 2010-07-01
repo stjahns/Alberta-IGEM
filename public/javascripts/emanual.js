@@ -196,7 +196,8 @@ $(document).ready(function(){
 	// buttons to control notes
         $('.btn-step-note').live( 'click', function(){
 		var note_container = 
-			$(this).parent().siblings('.step_note_container');
+			$(this).parent().parent().parent()
+			.siblings('#step_note_container');
 		var note = note_container.children('.step_note_view');
 		var form = note_container.children('.step_note_form');
 		if( $(this).hasClass('selected') ){
@@ -251,7 +252,7 @@ function unescapeHTML(html) {
 function renumberSteps(){
 	var i = 1;
 	$(".step_number").each( function(){
-		$(this).html("<p><b>Step " + i + " :</b></p>");
+		$(this).html("<p>" + i + "</p>");
 		i++;
 	});
 }

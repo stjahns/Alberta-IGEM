@@ -1,12 +1,11 @@
 # == Schema Information
-# Schema version: 20100628162016
+# Schema version: 20100629180631
 #
 # Table name: notes
 #
 #  id         :integer(4)      not null, primary key
 #  step_id    :integer(4)
 #  text       :string(255)
-#  image_id   :integer(4)
 #  created_at :datetime
 #  updated_at :datetime
 #
