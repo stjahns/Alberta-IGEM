@@ -144,7 +144,7 @@ $(document).ready(function(){
 	// bind hidden submit form to links for insert step so
 	// appear normally in the edit toolbar 
 	$('.btn-step-insert-after').live( 'click', function(){
-		var step = $(this).parent().parent();
+		var step = $(this).parent().parent().parent().parent();
 		var btn = $(this).siblings('.hidden_insert_after')
 		  .children('.button-to');
 		btn.ajaxSubmit({
@@ -159,7 +159,7 @@ $(document).ready(function(){
 		return false;
 	});
 	$('.btn-step-insert-before').live( 'click', function(){
-		var step = $(this).parent().parent();
+		var step = $(this).parent().parent().parent().parent();
 		var btn = $(this).siblings('.hidden_insert_before')
 		  .children('.button-to');
 		btn.ajaxSubmit({
@@ -175,7 +175,7 @@ $(document).ready(function(){
 	});
 
 	$('.btn-step-destroy').live( 'click', function(){
-		var step = $(this).parent().parent();
+		var step = $(this).parent().parent().parent().parent();
 		var btn = $(this).siblings('.hidden_delete_step')
 		  .children('.button-to');
 		btn.ajaxSubmit({
@@ -197,7 +197,7 @@ $(document).ready(function(){
         $('.btn-step-note').live( 'click', function(){
 		var note_container = 
 			$(this).parent().parent().parent()
-			.siblings('#step_note_container');
+			.siblings('.step_note_container');
 		var note = note_container.children('.step_note_view');
 		var form = note_container.children('.step_note_form');
 		if( $(this).hasClass('selected') ){
@@ -252,10 +252,11 @@ function unescapeHTML(html) {
 function renumberSteps(){
 	var i = 1;
 	$(".step_number").each( function(){
-		$(this).html("<p>" + i + "</p>");
+		$(this).html( i );
 		i++;
 	});
 }
+
 
 // when we ask for html we need rails to use respond to js so we need:
 $.ajaxSettings.accepts.html = $.ajaxSettings.accepts.script; 

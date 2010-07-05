@@ -36,7 +36,6 @@
 div.step {
 width:730px;
 padding:0px;
-border-bottom:0.25em solid #efefef ;
 margin:0px;
 margin-bottom:3em ;
 }
@@ -44,12 +43,13 @@ margin-bottom:3em ;
 p.step_note_container {
 	background:#efefef;
 	margin: 0;
-	padding-top: 1em; 
-	padding-bottom: 1em;
+	padding:1em;
 }
-img.step_note_container {
-	float: left;
+
+img.step_view {
+	float: right;
 	margin: 10px;
+	margin-right: 0;
 }
 
 
@@ -68,7 +68,11 @@ span.step_number {
 }
 
 /*editing steps toolbar*/
-
+div.step-toolbar {
+	border-bottom:0.25em solid #efefef ;
+	clear:both;
+	margin-top: 0.25em;
+} 
 ul.step-toolbar {
 	list-style-type: none;
 	margin: 0;
@@ -104,6 +108,17 @@ a.step-toolbar:hover {
 }
 a.btn-step-note.step-toolbar {
 	margin-right: 0;
+}
+
+img.step_note {
+	float: left;
+	margin: 10px;
+	margin-left: 0;
+	margin-top: 0;
+}
+
+div.note-toolbar {
+	clear: both;
 }
 
 #container {

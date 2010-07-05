@@ -41,42 +41,51 @@
   <% end %>
 
 
-  <% if is_owner_of( @experiment ) %>
-    <div class="step-toolbar" >
+  
+  <div class="step-toolbar" >
+    <% if is_owner_of( @experiment ) %>
        <ul class="step-toolbar"  >
 	 <li class= "step-toolbar" >
 	 <a class="btn-step-form step-toolbar" href"#">Edit</a></li>
 	 <li class= "step-toolbar">
 	 <a class="btn-step-image step-toolbar " href"#">Image</a></li>
 	 <li class= "step-toolbar" >
-	 <a class="btn-step-insert-after step-toolbar " href"#">Insert Step Below</a></li>   
+	 <a class="btn-step-insert-after step-toolbar " href"#">Insert Step Below</a> 
+	<span class='hidden_insert_after' style=" display: none;" >	
+	
+	  <%= button_to "Insert Step Below",
+	    insert_after_experiment_step_path(@experiment,step),
+       	    :method=>:put %>
+        </span>
+	</li>
 	 <li class= "step-toolbar" >
-	 <a class="btn-step-insert-before step-toolbar " href"#">Insert Step Above</a></li>
+	 <a class="btn-step-insert-before step-toolbar " href"#">Insert Step Above</a>
+	 <span class='hidden_insert_before' style=" display: none;" >
+	  <%= button_to "Insert Step Above",
+	    insert_before_experiment_step_path(@experiment,step),
+       	    :method=>:put %>
+    	</span>
+    	</li>
 	 <li class= "step-toolbar" >
-	 <a class="btn-step-destroy step-toolbar " href="#" >Delete</a></li>
+	 <a class="btn-step-destroy step-toolbar" href="#" >Delete</a>
+	 <span class='hidden_delete_step' style=" display: none;" >
+	  <%= button_to "Delete Step",
+	    experiment_step_path(@experiment,step),
+       	    :method=>:delete %>
+  	</span>
+	 </li>
   	 <% if allowed_to_make_notes? %>
 		 <li class= "step-toolbar btn-step-note ">
 		 <a class="btn-step-note step-toolbar " href"#">Note</a></li>
         <% end %>
         </ul> 
-	<span class='hidden_insert_after' style=" display: none;" >
-	  <%= button_to "Insert Step Below",
-	    insert_after_experiment_step_path(@experiment,step),
-       	    :method=>:put %>
-        </span>
-	<span class='hidden_insert_before' style=" display: none;" >
-	  <%= button_to "Insert Step Above",
-	    insert_before_experiment_step_path(@experiment,step),
-       	    :method=>:put %>
-  	</span>	
-	<span class='hidden_delete_step' style=" display: none;" >
-	  <%= button_to "Delete Step",
-	    experiment_step_path(@experiment,step),
-       	    :method=>:delete %>
-  	</span>
-    </div>
+	
+		
+
+    <% end %>
+  </div>
     
-  <% end %>
+ 
   <% if allowed_to_make_notes? %>
     <div class= "step_note_container" style="display: none;"  >
     <!-- hide this form, and only show if we click note tab and their is no note or we want to add a note --> 

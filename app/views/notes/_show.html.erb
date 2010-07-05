@@ -1,8 +1,10 @@
 <p class= step_note_container >
-<%= image_tag( step_image_path( note.image ) ) unless note.image.blank? %>
+<%= image_tag( step_image_path( note.image ), :class => "step_note" ) unless note.image.blank? %>
 
 <%=h note.text %></p>
+<div class="note-toolbar" >
 <% if is_owner_of(step.experiment) %>
   <a class="btn-note-edit" href"#">Edit Note</a>
 <% end %>
+</div>
 
