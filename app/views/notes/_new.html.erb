@@ -1,13 +1,9 @@
-<h1>Create a new note</h1>
-
 <% form_for( [step, note], :url => step_note_path(step) ) do |f| %>
   <%= f.error_messages %>
 
-  <p>
-    <%= f.label :note %><br/>
-    <%= f.text_area :text %>
-  </p>
-  <p>
+  <p class="step_note_container">
+    <%= f.label "Create a new note:" %><br/>
+    <%= f.text_area :text %><br/>
     <%= f.submit 'Add note' %>
   </p>
 <% end %>

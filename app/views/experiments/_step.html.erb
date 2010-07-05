@@ -3,40 +3,35 @@
 	<h1 class="step_number"><%=h " #{ step.step_order }" %></h1> 
    </div>
    -->
-   <!-- view of the step -->
    <div class="step_view" id=step<%= step.id  %>  > 
      <%= render :partial => 'steps/step', :locals => {:step => step }  %>
    </div>
 
    <% if is_owner_of( @experiment ) %>
-   <span class="step_form" style="display: none;">
-     <% form_for([@experiment, step],
-	:html => { :method => :put,:multipart => true, 
-	  :class => "inplace_edit_step"} ) do |f| %>
-	<%= f.error_messages %>
-	<p>
-	    <%= f.label :title %><br />
-	    <%= f.text_field :title %>
-	</p>
-	<p>
-	    <%= f.label :description %><br />
-	    <%= f.text_area :description %>
-	</p>
-	<p><%= f.submit 'Update' %></p>
-    <% end %>
-
-  </span>
-
-  <span class="step_image_form" style="display: none;"  >
-     <% form_for [@experiment,step],
-	     :url => upload_experiment_step_path(@experiment,step, :format=>'js' ) , 
-	    # :html => { :multipart => true, :method => 'post',
-	     :html => { :method => 'post',
-	     :class => 'inplace_upload_image'} do |f| %>
-	<p><%= f.file_field :image_file %></p>
-	<p><%= f.submit 'Upload' %></p>
-     <% end %>  
-  </span>
+	   <span class="step_form" style="display: none;">
+		     <% form_for([@experiment, step],
+			:html => { :method => :put,:multipart => true, 
+			  :class => "inplace_edit_step"} ) do |f| %>
+				<%= f.error_messages %>
+				<h2><span class="edit_step_number"><%=h step.step_order %></span>
+					<%= f.text_field :title %>
+				</h2>
+				<p class= 'description' >
+				    <%= f.text_area :description %>
+				</p>
+				<p><%= f.submit 'Update' %>
+				</p>
+		    <% end %>
+ 
+		  <% form_for [@experiment,step],
+		     :url => upload_experiment_step_path(@experiment,step, :format=>'js' ) , 
+		    # :html => { :multipart => true, :method => 'post',
+		     :html => { :method => 'post',
+		     :class => 'inplace_upload_image'} do |f| %>
+			<p><%= f.file_field :image_file %></p>
+			<p><%= f.submit 'Upload' %></p>
+		<% end %>  
+  	</span>
   <div class="step-upload-notice" style= "display:none" ><%= image_tag "spinner.gif" %> </div>
   <% end %>
 
@@ -46,10 +41,8 @@
     <% if is_owner_of( @experiment ) %>
        <ul class="step-toolbar"  >
 	 <li class= "step-toolbar" >
-	 <a class="btn-step-form step-toolbar" href"#">Edit</a></li>
-	 <li class= "step-toolbar">
-	 <a class="btn-step-image step-toolbar " href"#">Image</a></li>
-	 <li class= "step-toolbar" >
+	 <a class="btn-step-form step-toolbar" href"#">Edit Step </a></li>
+	 <li class="step-toolbar" >
 	 <a class="btn-step-insert-after step-toolbar " href"#">Insert Step Below</a> 
 	<span class='hidden_insert_after' style=" display: none;" >	
 	

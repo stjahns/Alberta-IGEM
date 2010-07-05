@@ -40,16 +40,50 @@ margin:0px;
 margin-bottom:3em ;
 }
 
+
+.step_note_container {
+	background:#efefef;
+}
+
+form.new_note{
+	background:#efefef;
+}
+
 p.step_note_container {
 	background:#efefef;
 	margin: 0;
 	padding:1em;
 }
 
+div.note_thumb_container {
+	float: left;
+	margin: 1em;
+	width: 100px;
+	height: 100px;
+}
+
+div.loading {
+	background-image: url(../images/spinner.gif);
+	background-position: center;
+	background-repeat: no-repeat;
+
+}
+
+
+img.note_thumb {
+	float: left;
+/*	margin: 1em; */
+}
+
+div.note-edit-toolbar {
+	clear: both;
+}
+
 img.step_view {
 	float: right;
 	margin: 10px;
 	margin-right: 0;
+	margin-top: 0;
 }
 
 
@@ -60,6 +94,14 @@ textarea {
 
 
 span.step_number {
+	display:inline;
+	padding-left: 4px;
+	padding-right: 4px;
+	background-color: #000;
+	color: #efefef;
+}
+
+span.edit_step_number {
 	display:inline;
 	padding-left: 4px;
 	padding-right: 4px;
@@ -97,11 +139,11 @@ a.step-toolbar:link, a.step-toolbar:visited {
 	text-decoration: none;
 	margin-right: 2px;
 }
-
+/*
 a.step-toolbar.selected {
 	background-color: white;
 }
-
+*/
 
 a.step-toolbar:hover {
 	background-color: #000000

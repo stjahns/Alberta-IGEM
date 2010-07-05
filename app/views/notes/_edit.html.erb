@@ -1,30 +1,32 @@
 <% form_for( [step, note], :url => step_note_path(step) ) do |f| %>
   <%= f.error_messages %>
-
-  <p>
+  <p class="step_note_container" >
     <%= f.label :note %><br/>
-    <%= f.text_area :text %>
-  </p>
-  <p>
+    <%= f.text_area :text %><br/>
     <%= f.submit 'Update note' %>
   </p>
 <% end %>
 
-<p>
-<%=h note.image.blank? ? "change the image" : "attach an image" %>
-<%= image_tag( thumb_image_path(note.image)) unless note.image.blank? %>
+<div class= "note_thumb_container">
+	<%= image_tag( thumb_image_path(note.image), :class=>"note_thumb") unless note.image.blank? %>
+</div>
+
+<% image_label = note.image.blank? ? "attach an image" : "change the image" %>
 <% form_for [step, note],
 	:url => upload_step_note_path(step, :format => 'js' ), 
      :html => { :multipart => true, :method => 'post',
        :class => 'attach_image_to_note'} do |f| %>
- <%= f.file_field :image_file %>  <%= f.submit 'Upload' %>
+	<p class="step_note_container" >
+	       <%= f.label image_label %><br/> 
+	       <%= f.file_field :image_file %>  <%= f.submit 'Upload' %>
+	       </p>
 <% end %>
-<% unless note.image.blank? %>
-<%= button_to "Delete Image", image_path(note.image), :method=>:delete, :class=>'btn-delete-image-note' %>
-<% end %>
-</p>
+<div class= "note-edit-toolbar">
+	<% unless note.image.blank? %>
+	<%= button_to "Delete Image", image_path(note.image), :method=>:delete, :class=>'btn-delete-image-note' %>
+	<% end %>
 
-<a class="btn-note-edit-cancel " href"#">Cancel edit</a>
-<a class="btn-note-delete" href"#">Delete Note</a>
-<a class="btn-note-delele-image" href"#" >Delete Image</a>
-
+	<a class="btn-note-edit-cancel " href"#">Cancel edit</a>
+	<a class="btn-note-delete" href"#">Delete Note</a>
+	<a class="btn-note-delele-image" href"#" >Delete Image</a>
+</div>

@@ -21,9 +21,8 @@ $(document).ready(function(){
 			dataType: 'html',
 		  	success: function(data) { 
 		  	 // remove the old content and insert new stuff
-				step.children().remove();
-				step.append( data );
-				$('.btn-step-edit',step.parent()).trigger('click');
+				step.html(data);
+//				$('.btn-step-edit',step.siblings('.step-toolbar')).trigger('click');
 
 			  }
 		});
@@ -45,8 +44,9 @@ $(document).ready(function(){
 			  // have to unescape data because of iframe
 		          data = unescapeHTML(data);	
 			  upload.hide();
-			  step.children().remove();
-			  step.append( data );
+		//	  step.children().remove();
+		//	  step.append( data );
+			  step.html(data);
 			  $('.btn-step-image', step.parent()).trigger('click');
 		        }
 		});
@@ -91,20 +91,38 @@ $(document).ready(function(){
 	// submit an image for a note with ajaX
 	$('.attach_image_to_note').live('submit', function() {
 		form = $(this).parent();
+		image_container = $(this).siblings('.note_thumb_container');
+		image = image_container.children('.note_thumb');
+
 		$(this).ajaxSubmit( {
 			dataType: 'html',
-		/*	beforeSubmit: function(){
-				upload.show();
+			beforeSubmit: function(){
+				image_container.addClass('loading');
+				image.fadeOut("slow");
 			},
-		*/	success: function(data) { 
-			  // have to unescape data because of iframe
-		          data = unescapeHTML(data);	
-	//		  alert( data );
-			  form.hide();
-			  form.siblings(".step_note_view").html(data).show("slow");
-
-		//	  $('.btn-step-image', step.parent()).trigger('click');
-		        }
+			success: function(data) { 
+				  // have to unescape data because of iframe
+				  data = unescapeHTML(data);	
+				  //alert(data);
+				  var $r = $(data);	
+				  var source = $r.find('img').attr('src').replace("step","thumb");
+				
+				//get the new thumbnail and put in place of old one
+				var thumb = new Image();
+				  
+				$(thumb).load( function(){
+					$(this).hide().addClass('note_thumb');
+					
+					image_container.html(this);
+					$(this).fadeIn("slow", function(){
+						image_container.removeClass('loading')} 
+					);
+					
+				}).attr('src',source);
+			   
+				// replace note view	
+				form.siblings(".step_note_view").html(data);
+			}
 		});
 		return false;
 	});
@@ -138,8 +156,30 @@ $(document).ready(function(){
 		});
 	};
 
-	editButton( '.btn-step-image',  ".step_image_form" );
-	editButton( ".btn-step-form", ".step_form" );
+//	editButton( '.btn-step-image',  ".step_image_form" );
+//	editButton( ".btn-step-form", ".step_form" );
+
+	$(".btn-step-form").live( 'click', function() {
+			toolbar = $(this).parent().parent().parent();
+			step = toolbar.siblings(".step_view" );
+			form = toolbar.siblings(".step_form");
+			
+			//if not selected
+			if( $(this).hasClass("selected") ){
+				step.show();
+				form.hide();
+				$(this).removeClass("selected").html("Edit Step");
+
+			}
+			else{
+				// hide step and show forms
+				step.hide();
+				form.show();
+				$(this).addClass('selected').html("Show Step");
+			}		
+			return false;
+	});
+
 
 	// bind hidden submit form to links for insert step so
 	// appear normally in the edit toolbar 
@@ -218,7 +258,7 @@ $(document).ready(function(){
 		return false;
 	});	
 	$('.btn-note-edit').live('click',function(){
-		$(this).parent().hide()
+		$(this).parent().parent().hide()
 			.siblings('.step_note_form').show();
 		return false;
 	});
@@ -252,6 +292,11 @@ function unescapeHTML(html) {
 function renumberSteps(){
 	var i = 1;
 	$(".step_number").each( function(){
+		$(this).html( i );
+		i++;
+	});
+	i = 1;
+	$(".edit_step_number").each( function(){
 		$(this).html( i );
 		i++;
 	});
