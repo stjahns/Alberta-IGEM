@@ -8,14 +8,24 @@
       <td><%= select("byte", "type", ["ORF", "Linker"]) %> </td>
   <tr><td><label for="byte_description">Description:</label></td>
       <td><%= text_field 'byte', 'description' %></td></tr>
-  <tr><td><label for="byte_author">Author:</label></td>
-      <td><%= text_field 'byte', 'author' %></td></tr>
   <tr><td><label for="byte_sequence">Sequence:</label></td>
       <td><%= text_field 'byte', 'sequence' %></td></tr>
   <tr><td><%= submit_tag 'Update' %></td></tr>
 <% end %>
 
 </table>
+
+<p>Image:</p>
+<% unless @byte.image %>
+  <p>[NONE]</p>
+<% else %>
+  <p><%= image_tag image_path(@byte.image) %></p> 
+<% end %>
+
+<% form_for @image, :url => upload_bio_byte_path(@byte), :html => { :multipart => true, :method => 'post'} do |f| %>
+  <p><%= f.file_field :image_file %></p>
+  <p><%= f.submit 'Upload' %></p>
+<% end %>  
 
 <h3>Annotations:</h3>
 <table>
@@ -24,23 +34,17 @@
 <tr><td><%= ann.name %></td>
     <td><%= ann.start %></td>
     <td><%= ann.stop %></td>
-    <td><%= link_to "Edit", {:controller=> :annotations,
-                             :action=> :edit,
-                             :ann_id=> ann.id,
-                             :byte_id=> @byte.id} %><td>
+    <td><%= link_to "Edit", edit_bio_byte_annotation_path( @byte, ann) %><td>
 
-    <td><%= link_to "Delete", {:controller => :annotations,
-                               :action => :delete,
-                               :ann_id => ann.id,
-                               :byte_id => @byte.id} %></td>
+    <td><%= link_to "Delete", bio_byte_annotation_path( @byte, ann),
+                              :confirm => "Are you sure?",
+                              :method => :delete %></td>
 </tr>
 <% end %>
-<tr><td><%= link_to 'New', {:controller => :annotations,
-                            :action => 'new',
-                            :id => @byte.id} %></td></tr>
+<tr><td><%= link_to 'New', new_bio_byte_annotation_path( @byte ) %></td></tr>
 </table>
 
 
 
 
-<p><%= link_to 'Back', {:action => 'index'} %></p>
+<p><%= link_to 'Back', bio_bytes_path %></p>

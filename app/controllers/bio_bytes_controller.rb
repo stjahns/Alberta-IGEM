@@ -26,6 +26,7 @@ class BioBytesController < ApplicationController
   end
   
   def edit
+    @image = Image.new
     @byte = BioByte.find(params[:id])
   end
 
@@ -39,13 +40,13 @@ class BioBytesController < ApplicationController
     @byte.sequence = @byte.sequence.upcase
     #TODO exceptions
     if @byte.save
-      redirect_to :action => 'index'
+      redirect_to bio_bytes_path
     else
-      render :action => 'new'
+      render new_bio_byte_path
     end
   end
 
-  def delete
+  def destroy
     #TODO test this
     unless Part.find(:first, :conditions => {:bio_byte_id => params[:id]})
       BioByte.find(params[:id]).destroy
@@ -53,7 +54,7 @@ class BioBytesController < ApplicationController
       #flash error - part exists in some construct
     end
 
-    redirect_to :action => 'index'
+    redirect_to bio_bytes_path
   end
 
   def update
@@ -66,18 +67,33 @@ class BioBytesController < ApplicationController
     end
 
     if @byte.update_attributes(params[:byte])
-      redirect_to :action => 'show', :id => @byte
+      redirect_to bio_byte_path(@byte)
     else
-      render :action => 'edit'
+      render edit_bio_byte_path(@byte)
     end
   end
 
-end
+  def upload
+    @byte = BioByte.find(params[:id])
+
+    unless @byte.image.blank?
+      @byte.image.destroy
+    end
+    @image = Image.new(params[:image])
+    @image.save
+    @byte.image_id = @image.id
+    @byte.save
+
+    redirect_to edit_bio_byte_path(@byte)
+
+  end
 
   private
 
   def is_admin
     unless current_user.login == "admin"
-      redirect_to :action => :index 
+      redirect_to bio_bytes_path
     end
   end
+
+end

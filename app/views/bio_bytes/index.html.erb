@@ -3,15 +3,15 @@
 <% @bytes.each do |byte| %>
   <tr>
     <td><%=byte.name%>
-    <td><%=link_to "Show", {:action => :show, :id => byte.id} %>
+    <td><%=link_to "Show",  bio_byte_path(byte)%>
     
     <% if current_user and current_user.login == "admin" %>
-      <td><%=link_to "Edit", {:action => :edit, :id => byte.id} %>
-      <td><%=link_to "Delete", {:action => :delete, :id => byte.id} %> 
+      <td><%=link_to "Edit", edit_bio_byte_path(byte)%>
+      <td><%=link_to "Delete", byte, :confirm => "Are you sure?", :method => :delete %> 
     <% end %>
 
   </tr>
 <% end %>
 </table>
-<p><%= link_to "New", {:action => 'new'} %></p>
-<p><%= link_to "Home", {:controller => 'home'} %></p>
+<p><%= link_to "New", new_bio_byte_path %></p>
+<p><%= link_to "Home", :controller => :home %></p>

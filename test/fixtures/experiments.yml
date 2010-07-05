@@ -1,0 +1,30 @@
+# == Schema Information
+# Schema version: 20100609172527
+# Schema version: 20100609213516
+#
+# Table name: experiments
+#
+#  id          :integer(4)      not null, primary key
+#  title       :string(255)
+#  authour     :string(255)
+#  description :text
+#  published   :boolean(1)
+#  created_at  :datetime
+#  updated_at  :datetime
+#
+
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  title: MyString
+  authour: MyString
+  description: MyText
+  published: false
+  image: MyString
+
+two:
+  title: MyString
+  authour: MyString
+  description: MyText
+  published: false
+  image: MyString

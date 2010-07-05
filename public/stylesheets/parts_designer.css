@@ -25,7 +25,7 @@ div#construct{
 }
 
 div#parts_box{
-  overflow:         scroll;
+  overflow:         auto;
   border:           1px solid #999;
   margin:           2;
   height:           114px;
@@ -33,13 +33,15 @@ div#parts_box{
 ol#parts_list{
   list-style-type:  none;
   height:           50;
-  width:            5000;
-  padding:          10 0 0 10;
+  padding:          0;
+  margin:           0;
+}
+div.xscrollbuffer{
+  width: 5000px;
 }
 
 #parts_list li{
-  margin:           3px 3px 3px 0;
-  padding:          1px;
+  margin:           3px 0px 3px 0;
   float:            left;
   width:            100px;
   height:           40px;
@@ -61,7 +63,7 @@ ul.parts_bin{
   margin:           2;
   padding:          0;
   height:           350;
-  overflow:         scroll;
+  overflow-y:       scroll;
   border:           1px solid #999;
   float:            left;
 
@@ -76,14 +78,12 @@ ul.parts_bin li{
   border:           1px solid #555;
 }
 
-.orf{
-  background-color: #333;
-  color:            white;
+.annotation{
   border:           1px solid black;
 }
-.linker{
-  background-color: #BBB;
-  border:           1px solid black;
+.annotation.orf{
+  background-color: #333;
+  color:            #FFF;
 }
 
 
@@ -110,7 +110,7 @@ div#sequence_box {
 div#sequence {
   text-align:       left;
   white-space:      nowrap;
-  overflow:         scroll;
+  overflow:         auto;
   font-family:      'monospace';
   height:           228px;
   width:            894px;
@@ -143,8 +143,47 @@ div#trash {
   margin:           -1px;
   text-align:       center;
   float:            left;
+  white-space:      nowrap;
 }
 
 .ann_label{
   font-size:        8pt;
+}
+
+.byte{
+  background:       #333;
+  color:             #FFF;
+}
+
+.tooltip{
+  text-align:       center;
+  display:          none;
+  background:       #666;
+  border:           2px solid #333;
+  font-size:        10pt;
+  color:            #FFF;
+  padding:          10px;
+  margin:           -10 0 0 0px;
+}
+.tooltip a{
+  color:            #AAA;
+}
+
+#plasmid-left{
+  float:            left;
+  width:            100px;
+  height:           80px;
+  background-image: url('/images/plasmid-left.png');
+}
+#plasmid-mid{
+  float:            left;
+  width:            1000px;
+  height:           80px;
+  background-image: url('/images/plasmid-mid.png');
+}
+#plasmid-right{
+  float:            left;
+  width:            100px;
+  height:           80px;
+  background-image: url('/images/plasmid-right.png');
 }

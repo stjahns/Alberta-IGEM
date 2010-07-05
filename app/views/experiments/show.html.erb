@@ -1,0 +1,82 @@
+<script src="http://cdn.jquerytools.org/1.2.3/tiny/jquery.tools.min.js"></script>
+<script> //get part background image data
+
+  var orfs;
+  var linkers;
+  var allparts;
+
+  $(document).ready(function(){
+
+      $.ajax({
+        type: 'get',
+        dataType: 'json',
+        url: '/get_part_data',
+        success: function(data){
+          orfs = data.orfs;
+          linkers = data.linkers;
+          allparts= orfs.concat(linkers);
+          
+          //get images
+          $(".part, .byte").css('background-image', function(index, value){
+            for(i in allparts){
+              var byte_id = $(this).attr('byte_id');
+              if ( byte_id.split('_')[1] == allparts[i].id.toString()){
+                return 'url(/images/'+ allparts[i].image_id +'.png)';
+              }
+            }
+          });
+        }
+      })
+
+      //part tooltips
+      $('.part').tooltip({
+        opacity: 0.9,
+      });
+
+      
+  })
+
+</script>
+
+<p>
+  <b>Title:</b>
+  <%=h @experiment.title %>
+</p>
+
+<p>
+  <b>Authour:</b>
+  <%=h @experiment.authour %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%=h @experiment.description %>
+</p>
+
+<p>
+  <b>Published:</b>
+  <%=h @experiment.published %>
+</p>
+
+<p>
+  <b>Constructs:</b>
+  <% unless @experiment.constructs.empty? %>
+    <%= render :partial => "construct", :collection => @experiment.constructs %>
+  <% end %>
+  <p>
+  <%= link_to "Add Construct", new_experiment_construct_path(@experiment) %>
+  </p>
+</p>
+
+<% unless @experiment.steps.empty? %>
+    
+  <p> 
+    <b>Steps:</b>
+    <%= render :partial => "step", :collection => @steps %>
+  </p>
+<% end %>
+
+<%= link_to 'Add_Step', new_experiment_step_path(@experiment) %> |
+<%= link_to 'Edit Description', edit_experiment_path(@experiment) %> |
+<%= link_to 'Edit Steps', experiment_steps_path(@experiment) %> |
+<%= link_to 'List experiments', experiments_path %>

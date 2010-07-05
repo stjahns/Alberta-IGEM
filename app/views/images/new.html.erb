@@ -1,0 +1,21 @@
+<% form_for @image, :html => { :multipart => true } do |f| %>
+  <p>
+    <b>Owner</b><br />
+    <%= f.text_field :owner_id %>
+  </p>
+
+  <p>
+    <b>Owner Type</b><br />
+    <%= f.text_field :owner_type %>
+  </p>
+
+  <p>
+    <b>Upload Image</b><br />
+    <%= f.file_field :image_file %>
+  </p>
+
+  <p>
+    <%= f.submit "Create" %>
+  </p>
+<% end %>
+

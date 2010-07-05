@@ -1,6 +1,6 @@
 <h1>Editing <%=@annotation.name%> for <%=@byte.name%></h1>
 
-<% form_tag :action => 'update', :ann_id => @annotation, :byte_id => @byte.id do %>
+<% form_tag({:action => :update, :id => @annotation}, :method => :put) do %>
   <p><label for="annotation_name">Name</label>
   <%= text_field 'annotation', 'name' %></p>
   <p><label for="annotation_description">Description</label>
@@ -20,4 +20,4 @@
   <%= submit_tag "Update" %>
 <% end %>
 
-<%= link_to 'Back', {:controller => :bio_bytes, :action => 'edit', :id =>@byte.id } %>
+<%= link_to 'Back', edit_bio_byte_path(@byte) %>

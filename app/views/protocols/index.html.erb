@@ -1,0 +1,23 @@
+<table>
+  <th>Sub-protocol</th>
+  <th>Sub-order</th>
+  <th>Title</th>
+  <th>Description</th>
+<% @steps.each do |step| %>
+  <tr>
+    <td><%= step.subprotocol %></td>
+    <td><%= step.sub_order %></td>
+    <td><%= step.title %></td>
+    <td><%= step.description %></td>
+    <td><%= link_to "Edit",  {:action => :edit, :id => step.id } %></td>
+    <td><%= link_to "Destroy", {:action => :delete, :id => step.id},
+                    :confirm => 'Are you sure?',
+                    :method => :delete %></td> 
+  </tr>
+<% end %>
+</table>
+<p><%= link_to "New step template", {:action => :new} %></p>
+<p><%= link_to "Home", {:action => 'home'} %></p>
+ 
+
+
