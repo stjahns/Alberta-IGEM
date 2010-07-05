@@ -22,14 +22,20 @@
 				<p><%= f.submit 'Update' %>
 				</p>
 		    <% end %>
- 
+
+		    <div class= "upload_thumb_container">
+		    	<%= image_tag( thumb_image_path(step.image)) unless step.image.blank?  %>
+		    </div>  
+		    
+		    <% image_label = step.image.blank? ? "attach an image" : "change the image" %> 
 		  <% form_for [@experiment,step],
 		     :url => upload_experiment_step_path(@experiment,step, :format=>'js' ) , 
 		    # :html => { :multipart => true, :method => 'post',
 		     :html => { :method => 'post',
 		     :class => 'inplace_upload_image'} do |f| %>
-			<p><%= f.file_field :image_file %></p>
-			<p><%= f.submit 'Upload' %></p>
+			     <p><%= f.label image_label%><br/>
+			     <%= f.file_field :image_file %>
+			<%= f.submit 'Upload' %></p>
 		<% end %>  
   	</span>
   <div class="step-upload-notice" style= "display:none" ><%= image_tag "spinner.gif" %> </div>

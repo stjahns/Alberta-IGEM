@@ -7,8 +7,8 @@
   </p>
 <% end %>
 
-<div class= "note_thumb_container">
-	<%= image_tag( thumb_image_path(note.image), :class=>"note_thumb") unless note.image.blank? %>
+<div class= "upload_thumb_container">
+	<%= image_tag( thumb_image_path(note.image)) unless note.image.blank? %>
 </div>
 
 <% image_label = note.image.blank? ? "attach an image" : "change the image" %>

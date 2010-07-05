@@ -33,26 +33,41 @@ $(document).ready(function(){
 	// submit an image for a step with ajaX
 	$('.inplace_upload_image').live('submit', function() {
 		var step = $(this).parent().siblings('.step_view');
-		var form = $(this).parent();
-		var upload =$(this).children('.step-upload-notice');
+		var image_container = $(this).siblings('.upload_thumb_container');
+		var image = image_container.children('img');
+
 		$(this).ajaxSubmit( {
 			dataType: 'html',
 			beforeSubmit: function(){
-				upload.show();
+				image_container.addClass('loading');
+				image.fadeOut("slow");
 			},
 			success: function(data) { 
-			  // have to unescape data because of iframe
-		          data = unescapeHTML(data);	
-			  upload.hide();
-		//	  step.children().remove();
-		//	  step.append( data );
-			  step.html(data);
-			  $('.btn-step-image', step.parent()).trigger('click');
-		        }
+				  // have to unescape data because of iframe
+				  data = unescapeHTML(data);	
+				  var $r = $(data);	
+				  var source = $r.find('img').attr('src').replace("step","thumb");
+				
+				//get the new thumbnail and put in place of old one
+				var thumb = new Image();
+				  
+				$(thumb).load( function(){
+					$(this).hide();
+					
+					image_container.html(this);
+					$(this).fadeIn("slow", function(){
+						image_container.removeClass('loading')} 
+					);
+					
+				}).attr('src',source);
+			   
+				// replace step	
+				step.html(data);
+			}
 		});
 		return false;
 	});
-
+	
 	// submit an update note for a step with ajaX
 	$('.edit_note').live('submit', function() {
 		var form = $(this).parent();
@@ -90,9 +105,9 @@ $(document).ready(function(){
 
 	// submit an image for a note with ajaX
 	$('.attach_image_to_note').live('submit', function() {
-		form = $(this).parent();
-		image_container = $(this).siblings('.note_thumb_container');
-		image = image_container.children('.note_thumb');
+		var note = $(this).parent().siblings(".step_note_view");
+	 	var image_container = $(this).siblings('.upload_thumb_container');
+		var image = image_container.children('img');
 
 		$(this).ajaxSubmit( {
 			dataType: 'html',
@@ -121,43 +136,13 @@ $(document).ready(function(){
 				}).attr('src',source);
 			   
 				// replace note view	
-				form.siblings(".step_note_view").html(data);
+				note.html(data);
 			}
 		});
 		return false;
 	});
 
 
-	// slide up different forms to add content to the step
-	// use editButton to define buttons that toggle a form 
-	var editButton = function($toggler, $togglee) {
-
-		//$($toggler).click( function() {
-		$($toggler).live( 'click', function() {
-			// only one active form at a time
-			$(this).siblings("a").removeClass("selected");
-
-			// hide all visible parts
-			$(this).parent().siblings("span:visible")
-			  .hide("slow");
-					
-			// show the togglee or the step	
-			if( $(this).hasClass("selected") ){
-				$(this).parent().siblings('.step_view')
-				  .show("slow");
-				$(this).removeClass('selected');
-			}
-			else{
-				$(this).parent().siblings($togglee)
-				  .slideDown("slow");
-				$(this).addClass('selected');
-			}	
-			return false;
-		});
-	};
-
-//	editButton( '.btn-step-image',  ".step_image_form" );
-//	editButton( ".btn-step-form", ".step_form" );
 
 	$(".btn-step-form").live( 'click', function() {
 			toolbar = $(this).parent().parent().parent();
