@@ -1,6 +1,6 @@
 class GlossariesController < ApplicationController
 
-  before_filter :login_required
+  #before_filter :login_required
   # GET /glossaries
   # GET /glossaries.xml
   def index

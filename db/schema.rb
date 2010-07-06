@@ -9,8 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-
-ActiveRecord::Schema.define(:version => 20100622171024) do
+ActiveRecord::Schema.define(:version => 20100622174504) do
 
   create_table "annotations", :force => true do |t|
     t.string   "name"
@@ -32,6 +31,7 @@ ActiveRecord::Schema.define(:version => 20100622171024) do
     t.string   "description"
     t.string   "sequence"
     t.string   "author"
+    t.string   "img_file_name"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "image_id"
@@ -46,6 +46,13 @@ ActiveRecord::Schema.define(:version => 20100622171024) do
     t.integer  "experiment_id"
   end
 
+  create_table "encyclopaedias", :force => true do |t|
+    t.string   "title"
+    t.text     "article"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "experiments", :force => true do |t|
     t.string   "title"
     t.string   "authour"
@@ -56,13 +63,6 @@ ActiveRecord::Schema.define(:version => 20100622171024) do
     t.integer  "user_id"
   end
 
-  create_table "encyclopaedias", :force => true do |t|
-    t.string   "title"
-    t.text     "article"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "glossaries", :force => true do |t|
     t.string   "term"
     t.text     "definition"
@@ -70,21 +70,14 @@ ActiveRecord::Schema.define(:version => 20100622171024) do
     t.datetime "updated_at"
   end
 
-<<<<<<< HEAD:db/schema.rb
-  create_table "pages", :force => true do |t|
-    t.string   "title"
-=======
   create_table "image_files", :force => true do |t|
     t.string   "image_filename"
     t.integer  "image_width"
     t.integer  "image_height"
->>>>>>> upstream/emanual:db/schema.rb
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-<<<<<<< HEAD:db/schema.rb
-=======
   create_table "images", :force => true do |t|
     t.string   "owner_type"
     t.integer  "owner_id"
@@ -96,7 +89,12 @@ ActiveRecord::Schema.define(:version => 20100622171024) do
     t.integer  "step_id"
   end
 
->>>>>>> upstream/emanual:db/schema.rb
+  create_table "pages", :force => true do |t|
+    t.string   "title"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "parts", :force => true do |t|
     t.integer  "construct_id"
     t.integer  "bio_byte_id"
