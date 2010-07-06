@@ -24,7 +24,7 @@
     <td><%=h experiment.published %></td>
     <td><%= link_to 'Show', experiment %></td>
     <td><%= link_to 'Edit Description', edit_experiment_path(experiment) %></td>
-    <td><%= link_to 'Edit Constructs',  experiment_construct_path(experiment) %></td> 
+    <td><%= link_to 'Edit Constructs',  experiment_constructs_path(experiment) %></td> 
     <td><%= link_to 'Edit Steps', experiment_steps_path(experiment) %></td>
     <td><%= link_to 'Clone', clone_experiment_path( experiment ) %></td>
     <td><%= link_to 'Destroy', experiment, :confirm => 'Are you sure?', :method => :delete %></td>

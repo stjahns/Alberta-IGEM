@@ -203,8 +203,9 @@ img.step_note {
 
 #container {
 	width: 750px;
-	margin-left: auto;
-	margin-right: auto;
+  padding-right: 250px;
+  padding-left: 250px;
+  position: relative;
 }
 
 body, p, ol, ul, td {

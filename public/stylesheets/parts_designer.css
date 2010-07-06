@@ -1,9 +1,9 @@
-body {
+body{
   font-family:  "sans-serif";
 }
 
 
-
+/*
 h1#title {
   position:         absolute;
   top:              -12px;
@@ -13,7 +13,8 @@ h1#title {
   background-color: #EEEEEE;
   border: 1px solid #CCCCCC;
 }
-
+*/
+/*
 div#construct{
   position:         absolute;
   top:              53px;
@@ -23,21 +24,21 @@ div#construct{
   border:           1px solid #AAA;
   text-align:       center;
 }
+*/
 
 div#parts_box{
-  overflow:         auto;
+  overflow:         hidden;
+  position:         relative;
   border:           1px solid #999;
   margin:           2;
   height:           114px;
 }
 ol#parts_list{
   list-style-type:  none;
+  float:            left;
   height:           50;
   padding:          0;
   margin:           0;
-}
-div.xscrollbuffer{
-  width: 5000px;
 }
 
 #parts_list li{
@@ -46,6 +47,7 @@ div.xscrollbuffer{
   width:            100px;
   height:           40px;
   text-align:       center;
+  z-index:          10;
 }
 .ui-state-hover{
   background-color: #999;
@@ -58,17 +60,57 @@ div.xscrollbuffer{
 
 
 /* TODO Scroll bars screw with zooming, address this!*/
-ul.parts_bin{
-  list-style-type:  none;
-  margin:           2;
-  padding:          0;
-  height:           350;
-  overflow-y:       scroll;
-  border:           1px solid #999;
-  float:            left;
 
+#parts-bin{
+  float:            left;
 }
 
+#part-info{
+  width:            500px;
+  height:           400px;
+  float:            left;
+}
+
+
+#parts-bin-tabs{
+  width:            200px;
+}
+
+
+
+.tab-widget {
+  list-style-type:  none;
+  margin:           0 0 0 0px;
+  padding:          10 5 5 5px;
+}
+.tab-widget li{
+  list-style:       none;
+  display:          inline;
+  text-align:       center;
+  margin:           0;
+  padding:          6;
+}
+.tab-widget a{
+  padding:          5px 20px 5px 20px;
+}
+
+ul.parts_bin{
+  list-style-type:  none;
+  margin:           0 0 0 0;
+  padding:          5;
+  height:           250;
+  overflow-y:       scroll;
+  border:           1px solid #999;
+  background-color: white;
+
+}
+div#trash {
+  padding:          22 0 0 0;
+  border:           1px solid #888;
+  height:           50;
+  width:            200;
+  text-align:       center;
+}
 ul.parts_bin li{
   margin:           3px
   padding:          1px;
@@ -77,16 +119,21 @@ ul.parts_bin li{
   text-align:       center;
   border:           1px solid #555;
 }
-
+.ui-tabs-hide{
+  display:          none;
+}
 .annotation{
   border:           1px solid black;
 }
+
 .annotation.orf{
   background-color: #333;
   color:            #FFF;
 }
 
 
+
+/*
 div#parts_bin{
   position:         absolute;
   top:              53px;
@@ -96,8 +143,9 @@ div#parts_bin{
   border:           1px solid #AAA;
   text-align:       center;
 }
+*/
 
-
+/*
 div#sequence_box {
   position:         absolute;
   text-align:       center;
@@ -107,33 +155,20 @@ div#sequence_box {
   width:            900px;
   border:           1px solid #AAA;
 }
+*/
 div#sequence {
   text-align:       left;
   white-space:      nowrap;
   overflow:         auto;
   font-family:      'monospace';
-  height:           228px;
-  width:            894px;
   margin:           2;
   border:           1px solid #999;
 }
 
 div#nav {
-  position:         absolute;
-  top:              18px;
-  left:             50px;
 }
 
-div#trash {
-  padding:          22 0 0 0;
-  position:         absolute;
-  top:              422px;
-  border:           1px solid #888;
-  height:           50;
-  width:            248;
-  margin:           2;
-  text-align:       center;
-}
+
 
 .seqtable{
   font-size:        10pt;
@@ -169,21 +204,65 @@ div#trash {
   color:            #AAA;
 }
 
-#plasmid-left{
-  float:            left;
-  width:            100px;
-  height:           80px;
-  background-image: url('/images/plasmid-left.png');
+#top-left{
+  position:         absolute;
+  top:              0;
+  left:             0;
+  width:            50px;
+  height:           46px;
+  background-color: gray;
+}
+#left-side{
+  position:         absolute;
+  top:              46px;
+  width:            50px;
+  height:           200px;
+  background-color: gray;
+}
+#bottom-left{
+  position:         absolute;
+  top:              240px;
+  width:            50px;
+  height:           46px;
+  background-color: gray;
+}
+  
+#bottom{
+  position:         absolute;
+  top:              240px;
+  left:             50px;
+  width:            650px;
+  height:           46px;
+  background-color: gray;
+}
+#bottom-right{
+  position:         absolute;
+  top:              240px;
+  left:             700px;
+  width:            50px;
+  height:           46px;
+  background-color: gray;
 }
 #plasmid-mid{
-  float:            left;
-  width:            1000px;
-  height:           80px;
-  background-image: url('/images/plasmid-mid.png');
+  width:            500px;
+  height:           46px;
+  background-color: gray;
 }
-#plasmid-right{
-  float:            left;
+
+#plasmid-inner{
+  margin:           0 0 0 50px;
+}
+
+#plasmid-spacer{
+  position:         absolute;
+  width:            50px;
+  height:           46px;
+  background-color: gray;
+}
+#plasmid-end{
+  position:         absolute;
+  left:             650px;
   width:            100px;
-  height:           80px;
-  background-image: url('/images/plasmid-right.png');
+  height:           46px;
+  background-color: gray;
 }

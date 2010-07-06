@@ -69,7 +69,7 @@ class ExperimentsController < ApplicationController
   def create
     # must pass user_id information since session id is not available 
     # in the model
-    @experiment = Experiment.new( params[:experiment]  )
+    @experiment = Experiment.new( params[:experiment] )
     @experiment.user = current_user
 
     respond_to do |format|

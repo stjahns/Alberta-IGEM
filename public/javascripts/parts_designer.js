@@ -16,8 +16,8 @@
 
   $(document).ready(function() {
 
-      //initialize plasmid display div width for image
-      setPlasmidWidth(0);
+      
+      updatePlasmidDisplay(0);
 
       //Get experiment + construct id's TODO this is lazy!!
       var url = window.location.pathname.split('/');
@@ -35,7 +35,8 @@
       initConstructSortable();
 
       $("*").disableSelection();
-      
+
+      //$("#parts-bin-tabs").tabs();
       
       $(".byte").draggable({ 	
 
@@ -57,6 +58,7 @@
         }
       }); 
 
+/*
       $(".part").tooltip({
         opacity: 0.9, 
         onShow: function(){
@@ -65,7 +67,7 @@
           }
         }
       });
-
+*/
     
   }); 
 
@@ -492,21 +494,27 @@ function initConstructSortable(){
         connectWith:  '#trash',
         tolerance: 'pointer',
         start: function(){
+          updatePlasmidDisplay(1);
+          /*
           $('.tooltip').hide();
+          */
           moving = true;
           //update plasmid width 
-          setPlasmidWidth(1);
+          //setPlasmidWidth(1);
         },
         stop: function(){
+          updatePlasmidDisplay(0);
           moving = false;
           //update plasmid width 
-          setPlasmidWidth(0);
+          //setPlasmidWidth(0);
         },
         update: function(){
           //if dropped in a new part from bin
+          updatePlasmidDisplay(0);
           $('ol#parts_list > .byte').each(function(){
             $(this).attr('title', $(this).attr('popup'));
             $(this).addClass('part').removeClass('byte').text('');
+            /*
             $(this).tooltip({
               opacity: 0.9,
               onShow: function(){
@@ -515,6 +523,7 @@ function initConstructSortable(){
                 }
               }
            });
+            */
           });
           //changes=true; // for future "YOU've Neer saved yer changes!"
           $("#sequence").html(getFormattedSequence());
@@ -522,3 +531,43 @@ function initConstructSortable(){
       });
 
 }
+  function updatePlasmidDisplay(placeholders){
+    var numparts = $("#parts_list").children().length - placeholders;
+
+    var height = 92 + (-(Math.floor(-numparts/6))-1)*46;
+    //if (numparts%6 == 0){
+      //add a row
+      //height += 46;
+    //}
+
+    $("#left-side").css('height',function(){
+      return height - 92 + 'px';
+    });
+    $("#bottom-left, #bottom-right, #bottom").css('top', function(){
+      return height - 46 + 'px';
+    });
+    $("#plasmid-spacer").css('width', function(){
+      if (numparts % 6 == 0)
+        return 0 + 'px';
+      else
+        return (6 - numparts%6) * 100 + 'px';
+    }).css('top', function(){
+      return height - 92 + 'px';
+    }).css('left', function(){
+      return (numparts % 6  ) * 100 + 50 + 'px';
+    });
+    $("#plasmid-end").css('top', function(){
+      return height - 92 + 'px';
+    });
+    $("#parts_box").css('height', function(){
+      return height + 'px'; 
+    });
+    $("#parts_list").css('height', function(){
+      return height - 46 + 'px';
+    });
+
+    //add line cont. markers? eg ------//
+    //                         //------]
+
+  }
+

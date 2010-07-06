@@ -1,18 +1,30 @@
+<div id="nav">
+  <%= link_to "Back", :back %>
+  <a href="#", id="save">Save</a>
+</div>
+
 <!--
 The main construct designer view.
 -->
-
-<h1 id="title">Construct Designer v.0.6</h1>
-
 <!-- plasmid box -->
+
 <div id="construct">
 
 <h1>Editing <%= @construct.name %>:</h1>
 
-<div id="parts_box"><div class='xscrollbuffer'>
-  <div id="plasmid-left">
+<div id="parts_box">
+  <div id="top-left">
   </div>
-  <div id="plasmid-mid">
+  <div id="left-side">
+  </div>
+  <div id="bottom-left">
+  </div>
+  <div id="bottom-right">
+  </div>
+  <div id="bottom">
+  </div>
+
+  <div id="plasmid-inner">
 <ol id="parts_list">
 <% @order.each do |part| %>
   <li id = "part_<%=part.bio_byte_id%>_<%=part.id%>" class = "<%=part.bio_byte.type %> part" byte_id="byte_<%=part.bio_byte_id%>" part_id="part_<%=part.id%>"
@@ -22,12 +34,64 @@ The main construct designer view.
   </li>
 <% end %>
 </ol>
+  <div id="plasmid-spacer">
   </div>
-  <div id="plasmid-right">
+  <div id="plasmid-end">
   </div>
-</div></div>
+</div>
+</div>
 </div>
 <!-- END plasmid box -->
+
+
+<!-- Parts Bin -->
+<div id="parts-bin">
+<div id="parts-bin-tabs">
+
+  <ul class='tab-widget'>
+    <li><a href="#orf-tab">ORFs</a></li>
+    <li><a href="#linker-tab">Linkers</a></li>
+  </ul>
+
+<div id="orf-tab">
+<ul id="orf_bin" class="parts_bin">
+<% ORF.all.each do |byte| %>
+  <li id = "part_<%=byte.id%>_0" part_id="part_new" byte_id="byte_<%=byte.id%>" class = "ORF byte" popup="<b><%=byte.name%></b>
+          <p><%=byte.description%></p>
+          <p><a href='<%= bio_byte_path(byte) %>'>More Info</a></p>"><%= byte.name %></li>
+<% end %>
+</ul>
+</div>
+
+<div id="linker-tab">
+<ul id="linker_bin" class="parts_bin">
+<% Linker.all.each do |byte| %>
+  <li id = "part_<%=byte.id%>_0" part_id="part_new" byte_id="byte_<%=byte.id%>" class = "Linker byte"  popup="<b><%=byte.name%></b>
+          <p><%=byte.description%></p>
+          <p><a href='<%= bio_byte_path(byte) %>'>More Info</a></p>"><%= byte.name %></li>
+<% end %>
+</ul>
+</div>
+
+</div>
+<!-- END Parts Bin-->
+
+
+<div id="trash">
+  Trash Bin
+</div>
+
+</div>
+<!-- Part info box -->
+<div id='part-info'>
+
+
+
+
+</div>
+<!-- END part info box -->
+
+
 
 <!-- Sequence box -->
 <div id="sequence_box">
@@ -38,34 +102,5 @@ The main construct designer view.
 </div>
 <!-- END sequence -->
 
-<!-- Parts Bin -->
-<div id="parts_bin">
-<h2>Parts Bin:</h2>
 
-<ul id="orf_bin" class="parts_bin">
-<% ORF.all.each do |byte| %>
-  <li id = "part_<%=byte.id%>_0" part_id="part_new" byte_id="byte_<%=byte.id%>" class = "ORF byte" popup="<b><%=byte.name%></b>
-          <p><%=byte.description%></p>
-          <p><a href='<%= bio_byte_path(byte) %>'>More Info</a></p>"><%= byte.name %></li>
-<% end %>
-</ul>
 
-<ul id="linker_bin" class="parts_bin">
-<% Linker.all.each do |byte| %>
-  <li id = "part_<%=byte.id%>_0" part_id="part_new" byte_id="byte_<%=byte.id%>" class = "Linker byte"  popup="<b><%=byte.name%></b>
-          <p><%=byte.description%></p>
-          <p><a href='<%= bio_byte_path(byte) %>'>More Info</a></p>"><%= byte.name %></li>
-<% end %>
-</ul>
-<!-- END Parts Bin-->
-
-<div id="trash">
-  Trash Bin
-</div>
-
-</div>
-
-<div id="nav">
-  <%= link_to "Back", :back %>
-  <a href="#", id="save">Save</a>
-</div>
