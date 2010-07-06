@@ -42,7 +42,7 @@ ActionController::Routing::Routes.draw do |map|
     			  :down => :put,
     			  :insert_after => :put,
                           :insert_before => :put }
-     experiments.resource :constructs
+     experiments.resource :construct
   end 
 
 
