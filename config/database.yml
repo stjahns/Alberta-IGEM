@@ -6,8 +6,8 @@
 development:
   adapter: mysql
   database: igem_development
-  username: root
-  password: crunch87 
+  username: root 
+  password: password 
   pool: 5
   timeout: 5000
  # socket: /var/run/mysqld/mysqld.soco

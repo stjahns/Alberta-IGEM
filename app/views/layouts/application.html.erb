@@ -2,12 +2,10 @@
 
 <%= javascript_include_tag 'jquery' %>
 <%= javascript_include_tag 'jquery-ui' %>
-<%= javascript_include_tag 'parts_designer' %>
 <%= javascript_include_tag 'application' %>
 
 <%= javascript_tag "var AUTH_TOKEN = #{form_authenticity_token.inspect};" if protect_against_forgery? %>
 
-<%= stylesheet_link_tag 'parts_designer' %>
 <%= stylesheet_link_tag 'scaffold' %>
 </head>  
 

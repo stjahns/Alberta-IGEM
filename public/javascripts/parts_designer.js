@@ -34,9 +34,9 @@
       //init construct sortable list
       initConstructSortable();
 
-      //$("*").disableSelection();
+      $("*").disableSelection();
 
-      $("#parts-bin-tabs").tabs();
+      //$("#parts-bin-tabs").tabs();
       
       $(".byte").draggable({ 	
 
