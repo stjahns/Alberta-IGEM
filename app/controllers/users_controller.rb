@@ -5,6 +5,10 @@ class UsersController < ApplicationController
 
   #before_filter :login_required
 
+  def edit
+    @user = User.find(params[:id])
+  end
+  
   def update
   @user = User.find(params[:id])
 
@@ -70,11 +74,6 @@ class UsersController < ApplicationController
       flash[:error]  = "We couldn't find a user with that activation code -- check your email? Or maybe you've already activated -- try signing in."
       redirect_back_or_default('/')
     end
-  end
-  
-  private
-  def edit
-    @user = User.find(params[:id])
   end
 end
 

@@ -22,10 +22,12 @@
 	    <td><%= link_to clone_button, clone_experiment_path( experiment ) %></td>
 	    <% if is_owner_of( experiment ) %>
 	    <td><%= link_to 'Edit Description', edit_experiment_path(experiment) %></td>
-	    <td><%= link_to 'Edit Constructs',  experiment_constructs_path(experiment) %></td> 
+	    <td><%= link_to 'Edit Constructs',  experiment_construct_path(experiment) %></td> 
 	    <td><%= link_to 'Edit Steps', experiment_steps_path(experiment) %></td>
 	    <td><%= link_to 'Destroy', experiment, :confirm => 'Are you sure?', :method => :delete %></td>
-  	</tr>
+            <% end%>
+          </tr>
+
 	  <% end %>
 <% end %>
 </table>

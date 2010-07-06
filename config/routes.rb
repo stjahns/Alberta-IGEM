@@ -11,6 +11,7 @@ ActionController::Routing::Routes.draw do |map|
   map.signup '/signup', :controller => 'users', :action => 'new'
 
   map.resources :users
+  map.resources :viewer
 
   #map annoations as nested resource of biobytes
   map.resources :bio_bytes, :member => { :upload => :post, :update => :post } do |bytes|

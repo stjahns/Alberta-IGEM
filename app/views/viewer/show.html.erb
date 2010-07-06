@@ -8,13 +8,14 @@
 <% @found = "0" %>
 <% @termfound = "0" %>
 
+<% @insert_num = 0 %>
 <% @terms %>
 <% @terms.each do |term| %>
 
   
   <% @def_str = @def.to_s%>
 
-  <%  @regex = Regexp.new(/#{term}./)%>
+  <%  @regex = Regexp.new(/#{term}\w*/)%>
   <%  matchdata = @regex.match(@def_str)%>
   <%  if matchdata%>
 
@@ -22,13 +23,15 @@
     <%matchdata = matchdata.to_s%>
 
     <% @def = @def.to_s %>
-    <% @def = @def.sub!(/#{term}./){","} %>
+    <% @def = @def.sub!(/#{term}\w*/){",#{@insert_num}"} %>
+    
+    <%@insert_num += 1%>
 
     <%  if @found == "0"%>
       <% @def = @def.split(/,/, 2) %>
       <% @found = matchdata%>
       <% @termfound = term %>
-      <% @defar = @def.first %>
+      <% @defar = @def.first+"," %>
       <% @def.shift %>
       <%@def = @def.to_s %>
     <%  else%>
@@ -41,7 +44,7 @@
 
 <% @def = @def.split(/,/) %>
 <% @def.each do |segment| %>
-  <% @defar << ","+segment%>
+  <% @defar << segment+ ","%>
 <%end%>
 
 <%  unless @found == "0"%>
@@ -51,11 +54,18 @@
   <%  index = 0..(@defar.length - 1)%>
 
   <%  index.each do |i|%>
-    <% found = @found[i]%>
-    <% termfound = @termfound[i]%>
+    
+    <% if @defar[i].first =~ /\d/ then insert = @defar[i].first else insert = "" end%>
+    
+    <% unless insert == "" then insert = insert.to_i end%>
+
+    <%unless insert == "" then found = @found[insert] else found = "" end%>
+    <%unless insert == "" then termfound = @termfound[insert] end%>
     <%if @defar[i] =~ /@/ then @defar[i] = @defar[i].gsub!(/@/){","} end %>
-    <%= @defar[i]%>
+    <%if @defar[i] =~ /\d/ then @defar[i] = @defar[i].sub!(/\d/){""} end %>
+    
     <%= link_to "#{found}", {:controller => :viewer, :action => :show, :term => "#{termfound}"}%>
+    <%= @defar[i]%>
   <% end%>
 
 <%  else%>
