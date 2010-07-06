@@ -4,6 +4,6 @@ class AddStepIdToImages < ActiveRecord::Migration
   end
 
   def self.down
-	  remove_colun :images, :step_id
+	  remove_column :images, :step_id
   end
 end

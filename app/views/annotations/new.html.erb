@@ -22,4 +22,4 @@
   <%= submit_tag "Create" %>
 <% end %>
 
-<%= link_to 'Back', {:controller => :bio_bytes, :action => 'edit', :id =>@byte.id } %>
+<%= link_to 'Back', edit_bio_byte_path(@byte) %>

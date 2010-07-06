@@ -29,6 +29,7 @@ class Experiment < ActiveRecord::Base
     #  session info
     
     # assign the current user's info to the cloned experiment
+
     new_experiment = self.clone
     new_experiment.user_id = user.id
     new_experiment.authour = user.login

@@ -3,9 +3,9 @@
   </head>
 
   <body>
-  <p><%= link_to "Parts Bin", {:controller=>:bio_bytes} %></p>
-  <p><%= link_to "Construct Designer", {:controller => :construct} %></p>
-  <p><%= link_to "Experiments", {:controller=>:experiments} %></p>
+
+  <p><%= link_to "Parts Bin", bio_bytes_path %></p>
+  <p><%= link_to "Experiments", experiments_path %></p>
 
   <% if logged_in?  %>
      <p>
@@ -14,6 +14,8 @@
      </p>
   <% else %>
     <p><%= link_to "Log in", login_path %></p>
+
+    <p><%= link_to "Sign up", signup_path %></p>
   <% end %>
 
   <div id = 'content'>
@@ -21,4 +23,5 @@
     <%=yield%>
   </div>
   </body>
+
 </html>

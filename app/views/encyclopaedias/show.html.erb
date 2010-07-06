@@ -1,0 +1,13 @@
+<p>
+  <b>Title:</b>
+  <%=h @encyclopaedia.title %>
+</p>
+
+<p>
+  <b>Article:</b>
+  <%=h @encyclopaedia.article %>
+</p>
+
+
+<%= link_to 'Edit', edit_encyclopaedia_path(@encyclopaedia) %> |
+<%= link_to 'Back', encyclopaedias_path %>

@@ -1,6 +1,6 @@
 class ConstructsController < ApplicationController
   before_filter :get_exp, :except => :get_data
-  before_filter :login_required
+  #before_filter :login_required, :except => :get_data
   
   def get_exp
     @experiment = Experiment.find(params[:experiment_id])
@@ -21,7 +21,7 @@ class ConstructsController < ApplicationController
     respond_to do |format|
       if @construct.save
         flash[:notice] = 'construct was successfully created.'
-        format.html { redirect_to(experiment_constructs_path(@experiment)) }
+        format.html { redirect_to(edit_experiment_construct_path(@experiment, @construct)) }
         format.xml  { render :xml => @construct, :status => :created, :location =>[ @experiment, @construct ]}
       else
         format.html { render :action => "new" }
@@ -38,7 +38,7 @@ class ConstructsController < ApplicationController
     StepGenerator.generate_steps(@experiment)
 
     respond_to do |format|
-      format.html { redirect_to(experiment_constructs_path( @experiment )) }
+      format.html { redirect_to(experiment_path( @experiment )) }
       format.xml  { head :ok }
     end
   end
