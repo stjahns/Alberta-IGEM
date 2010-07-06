@@ -3,8 +3,13 @@
 
 <%=h note.text %></p>
 <div class="note-toolbar" >
-<% if is_owner_of(step.experiment) %>
-  <a class="btn-note-edit" href"#">Edit Note</a>
-<% end %>
+	<ul class= "note-toolbar">
+		<li class= "note-toolbar">
+
+		<% if is_owner_of(step.experiment) %>
+  		<a class="btn-note-edit note-toolbar" href"#">Edit Note</a>
+		<% end %>
+		</li>
+	</ul>
 </div>
 

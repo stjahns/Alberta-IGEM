@@ -16,6 +16,7 @@ $(document).ready(function(){
 	//$('.inplace_edit_step').each( function() {
 	$('.inplace_edit_step').live('submit', function() {
 		var step = $(this).parent().siblings('.step_view');
+		var message = $('.save-notice', this);
 		var form = $(this).parent();
 		$(this).ajaxSubmit( {
 			dataType: 'html',
@@ -23,6 +24,11 @@ $(document).ready(function(){
 		  	 // remove the old content and insert new stuff
 				step.html(data);
 //				$('.btn-step-edit',step.siblings('.step-toolbar')).trigger('click');
+				// inform user of success
+				message.html("Step updated succesfully.").fadeIn("slow");
+				setTimeout(function(){
+					message.fadeOut("slow");
+				}, 3000);	
 
 			  }
 		});
@@ -82,6 +88,33 @@ $(document).ready(function(){
 		});
 		return false;
 	});
+
+	//TODO add error callbacks to all ajaxSubmits
+	// autosubmit a change in published status
+	$('#publish').change(function(){
+		var saveNotice = $('.save-notice',this);
+		if( publish_status_changed() ){
+			//submit change
+			$(this).ajaxSubmit( {
+					dataType: 'html',
+		  	success: function(data,statusText ) { 
+			  	// status changed to published
+				var message = $("#experiment_published").is(':checked') ? 
+			       		"Experiment published" :
+					"Experiment unpublished" ;	
+				saveNotice.html(message).fadeIn("slow");
+				setTimeout(function(){
+					saveNotice.fadeOut("slow");
+				}, 3000);	
+
+		        },
+			error: function() {
+				alert('There was an error!!');
+			}
+		});
+		}
+	});
+
 
 
 	// submit a new note for a step with Ajax
@@ -243,17 +276,17 @@ $(document).ready(function(){
 		return false;
 	});	
 	$('.btn-note-edit').live('click',function(){
-		$(this).parent().parent().hide()
+		$(this).parents('div.step_note_view').hide()
 			.siblings('.step_note_form').show();
 		return false;
 	});
-	$('.btn-note-edit-cancel').live('click', function(){
-		$(this).parent().hide()
+	$('.btn-note-show-note').live('click', function(){
+		$(this).parents('div.step_note_form').hide()
 			.siblings('.step_note_view').show();
 		return false;
 	});
-	$('.btn-delete-image-note').live('submit', function(){
-		var form = $(this).parent().parent().parent();
+	$('.btn-note-delete-image').live('submit', function(){
+		var note = $(this).parent().parent().parent();
 		var url = $(this).attr('action') + '/edit';
 		$(this).ajaxSubmit( {
 			dataType: 'html',
@@ -263,11 +296,27 @@ $(document).ready(function(){
 		  	success: function(data) { 
 		  	 // remove the old content and insert new stuff
 			 form.load(url);
-			 }
+			}
 		});
 	});
 
 });	
+
+function publish_status_changed(){
+		var box =  $('#experiment_published'); 
+		var change = true;
+		if( box.is(':checked') ){
+			change = confirm(
+			'If you publish this experiment, anyone can see it!  ' + 
+			'Are you sure you want to publish it? (Note: you can ' + 
+			'unpublish it at anytime by unchecking the published ' +
+			'checkbox.');
+		}
+		if( !change ){
+			box.attr('checked', false);			
+		}
+		return change;
+}
 
 function unescapeHTML(html) {
 	html = $("<div />").html(html).text();

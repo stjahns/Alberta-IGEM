@@ -40,6 +40,13 @@ margin:0px;
 margin-bottom:3em ;
 }
 
+span.save-notice {
+	background:#C7FFC4;
+	margin-left: 0.5em;
+	padding: 0.4em 2em;
+	font-size:   13px;
+  	line-height: 18px;
+}
 
 .step_note_container {
 	background:#efefef;
@@ -62,6 +69,14 @@ div.upload_thumb_container {
 	height: 100px;
 }
 
+form.inplace_upload_image {
+	margin-top: 50px;
+}
+
+form.attach_image_to_note {
+	margin-top: 28px;
+}
+
 div.loading {
 	background-image: url(../images/spinner.gif);
 	background-position: center;
@@ -73,10 +88,6 @@ div.loading {
 img.note_thumb {
 	float: left;
 /*	margin: 1em; */
-}
-
-div.note-edit-toolbar {
-	clear: both;
 }
 
 img.step_view {
@@ -129,8 +140,6 @@ li.btn-step-note{
 	float: right;
 }
 
-
-
 a.step-toolbar:link, a.step-toolbar:visited {
 	display: block;
 	font-weight: normal;
@@ -152,6 +161,37 @@ a.btn-step-note.step-toolbar {
 	margin-right: 0;
 }
 
+
+/* toolbar for editing notes*/
+div.note-toolbar {
+	clear: both;
+	background-color: white;
+}
+ul.note-toolbar {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+}
+
+li.note-toolbar {
+	float: right;
+}
+
+a.note-toolbar:link, a.note-toolbar:visited {
+	display: block;
+	font-weight: normal;
+	padding: 4px;
+	background-color: #efefef;
+	text-decoration: none;
+	margin-left: 2px;
+}
+
+a.note-toolbar:hover {
+	background-color: #000000
+}
+
+
 img.step_note {
 	float: left;
 	margin: 10px;
@@ -159,9 +199,7 @@ img.step_note {
 	margin-top: 0;
 }
 
-div.note-toolbar {
-	clear: both;
-}
+
 
 #container {
 	width: 750px;

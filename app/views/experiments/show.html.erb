@@ -1,10 +1,11 @@
 <div id= "experiment-title">
 <h1><%=h @experiment.title %></h1>
 <h2><%=h @experiment.authour %></h2>
-  <% form_for(@experiment) do |f| %>
+<% form_for(@experiment, :html=>{:id=>'publish'} ) do |f| %>
   <%= f.error_messages %>
     <%= f.check_box :published %>
     <%= f.label :published %>
+    <span class= "save-notice" style= "display: none;"></span>
 <% end %>
 <p>
   <%=h @experiment.description %>

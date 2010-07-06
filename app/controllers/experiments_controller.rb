@@ -105,9 +105,11 @@ class ExperimentsController < ApplicationController
 	flash[:notice] = 'Experiment was successfully updated.'
 	format.html { redirect_to(@experiment) }
 	format.xml  { head :ok }
+	format.js   { head :ok }
       else
 	format.html { render :action => "edit" }
 	format.xml  { render :xml => @experiment.errors, :status => :unprocessable_entity }
+	
       end
    
 

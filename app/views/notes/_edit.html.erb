@@ -21,12 +21,17 @@
 	       <%= f.file_field :image_file %>  <%= f.submit 'Upload' %>
 	       </p>
 <% end %>
-<div class= "note-edit-toolbar">
-	<% unless note.image.blank? %>
-	<%= button_to "Delete Image", image_path(note.image), :method=>:delete, :class=>'btn-delete-image-note' %>
-	<% end %>
-
-	<a class="btn-note-edit-cancel " href"#">Cancel edit</a>
-	<a class="btn-note-delete" href"#">Delete Note</a>
-	<a class="btn-note-delele-image" href"#" >Delete Image</a>
+<div class= "note-toolbar">
+	<ul class= "note-toolbar" >
+		<li class= "note-toolbar" >
+		<a class="btn-note-show-note note-toolbar " href"#">Show Note</a>
+		</li>
+		<li class= "note-toolbar" >
+		<a class="btn-note-delete note-toolbar" href"#">Delete Note</a>
+		</li>
+		<li class= "note-toolbar" >
+		<a class="btn-note-delele-image note-toolbar"<%= 'style= "display: none;"' if note.image.blank? %>  href"#" >Delete Image</a>
+		<%= button_to "Delete Image", image_path(note.image), :method=>:delete, :class=>'btn-delete-image-note', :style=>'display: none;' %>
+		</li>
+	</ul>
 </div>

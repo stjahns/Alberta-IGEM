@@ -1,9 +1,5 @@
 <div class="step">
-  <!--- <div class="step_number" > 
-	<h1 class="step_number"><%=h " #{ step.step_order }" %></h1> 
-   </div>
-   -->
-   <div class="step_view" id=step<%= step.id  %>  > 
+     <div class="step_view" id=step<%= step.id  %>  > 
      <%= render :partial => 'steps/step', :locals => {:step => step }  %>
    </div>
 
@@ -15,11 +11,12 @@
 				<%= f.error_messages %>
 				<h2><span class="edit_step_number"><%=h step.step_order %></span>
 					<%= f.text_field :title %>
-				</h2>
+							</h2>
 				<p class= 'description' >
 				    <%= f.text_area :description %>
 				</p>
-				<p><%= f.submit 'Update' %>
+				<p><%= f.submit 'Save' %>
+				   <span class="save-notice" style="display: none;"></span>
 				</p>
 		    <% end %>
 
@@ -38,7 +35,6 @@
 			<%= f.submit 'Upload' %></p>
 		<% end %>  
   	</span>
-  <div class="step-upload-notice" style= "display:none" ><%= image_tag "spinner.gif" %> </div>
   <% end %>
 
 
