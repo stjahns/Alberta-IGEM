@@ -69,8 +69,7 @@ class ExperimentsController < ApplicationController
   def create
     # must pass user_id information since session id is not available 
     # in the model
-    #merged_params = params[:experiment].merge({ :user_id => current_user.id })
-    @experiment = Experiment.new( merged_params  )
+    @experiment = Experiment.new( params[:experiment]  )
     @experiment.user = current_user
 
     respond_to do |format|
