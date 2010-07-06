@@ -6,6 +6,8 @@
   var allparts;
 
   $(document).ready(function(){
+      
+      updatePlasmidDisplay();
 
       $.ajax({
         type: 'get',
@@ -35,6 +37,34 @@
 
       
   })
+
+  function updatePlasmidDisplay(){
+    var numparts = $("#parts_list").children().length;
+
+    var height = 92 + (-(Math.floor(-numparts/6))-1)*46;
+    if (numparts%6 == 0){
+      //add a row
+      height += 46;
+    }
+
+    $("#left-side").css('height',function(){
+      return height - 92 + 'px';
+    });
+    $("#bottom-left, #bottom-right, #bottom").css('top', function(){
+      return height - 46 + 'px';
+    });
+    $("#plasmid-spacer").css('width', function(){
+      return (5 - numparts%6) * 100 + 'px';
+    });
+    $("#parts_box").css('height', function(){
+      return height + 'px'; 
+    });
+
+    //add line cont. markers? eg ------//
+    //                         //------]
+
+  }
+
 
 </script>
 

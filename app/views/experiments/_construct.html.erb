@@ -3,12 +3,20 @@
   <p>This is what I look like:</p>
   <% unless construct.parts.empty? %>
 
-  <div id= "parts_box"><div class='xscrollbuffer'>
+  <div id= "parts_box">
 
-  <div id="plasmid-left">
+  <div id="top-left">
+  </div>
+  <div id="left-side">
+  </div>
+  <div id="bottom-left">
+  </div>
+  <div id="bottom-right">
+  </div>
+  <div id="bottom">
   </div>
 
-  <div id="plasmid-mid" style='width:<%= construct.parts.length * 100 %>px;'>
+  <div id="plasmid-inner"> 
 
   <ol id="parts_list">
   <% construct.parts.all(:order => :part_order).each do |part| %>
@@ -19,12 +27,14 @@
   </li>
   <%end%>
   </ol>
+
+  <div id="plasmid-spacer">
+  </div>
+  <div id="plasmid-end">
   </div>
 
-  <div id="plasmid-right">
   </div>
-
-  </div></div>
+  </div>
 
   <%end%>
 
