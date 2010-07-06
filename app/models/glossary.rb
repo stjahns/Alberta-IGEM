@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20100609172527
+# Schema version: 20100629180631
 #
 # Table name: glossaries
 #
@@ -11,4 +11,5 @@
 #
 
 class Glossary < ActiveRecord::Base
+  acts_as_textiled :definition
 end

@@ -1,0 +1,37 @@
+<p>
+  <h1>Hello <%=h @user.login %>!</h1>
+</p>
+
+<p>
+ <h2>Your experiments</h2>
+ 
+</p>
+
+<table>
+  <tr>
+    <th>Title</th>
+    <th>Authour</th>
+    <th>Description</th>
+    <th>Published</th>
+    <th>Image</th>
+  </tr>
+
+<% @experiments.each do |experiment| %>
+  <tr>
+    <td><%=h experiment.title %></td>
+    <td><%=h experiment.authour %></td>
+    <td><%=h experiment.description %></td>
+    <td><%=h experiment.published %></td>
+    <td><%= link_to 'Show', experiment %></td>
+    <td><%= link_to 'Edit Description', edit_experiment_path(experiment) %></td>
+    <td><%= link_to 'Edit Constructs',  experiment_construct_path(experiment) %></td> 
+    <td><%= link_to 'Edit Steps', experiment_steps_path(experiment) %></td>
+    <td><%= link_to 'Clone', clone_experiment_path( experiment ) %></td>
+    <td><%= link_to 'Destroy', experiment, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New experiment', new_experiment_path %>

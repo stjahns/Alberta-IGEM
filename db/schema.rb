@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100622171024) do
+ActiveRecord::Schema.define(:version => 20100629180631) do
 
   create_table "annotations", :force => true do |t|
     t.string   "name"
@@ -31,6 +31,7 @@ ActiveRecord::Schema.define(:version => 20100622171024) do
     t.string   "description"
     t.string   "sequence"
     t.string   "author"
+    t.string   "img_file_name"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "image_id"
@@ -43,6 +44,13 @@ ActiveRecord::Schema.define(:version => 20100622171024) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "experiment_id"
+  end
+
+  create_table "encyclopaedias", :force => true do |t|
+    t.string   "title"
+    t.text     "article"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "experiments", :force => true do |t|
@@ -71,14 +79,26 @@ ActiveRecord::Schema.define(:version => 20100622171024) do
   end
 
   create_table "images", :force => true do |t|
-    t.string   "owner_type"
-    t.integer  "owner_id"
     t.string   "image_filename"
     t.integer  "image_width"
     t.integer  "image_height"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "step_id"
+    t.integer  "note_id"
+  end
+
+  create_table "notes", :force => true do |t|
+    t.integer  "step_id"
+    t.string   "text"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "pages", :force => true do |t|
+    t.string   "title"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "parts", :force => true do |t|

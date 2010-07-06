@@ -1,4 +1,9 @@
 ActionController::Routing::Routes.draw do |map|
+
+  map.resources :encyclopaedias
+
+  map.resources :glossaries
+
   map.logout '/logout', :controller => 'sessions', :action => 'destroy'
   map.login '/login', :controller => 'sessions', :action => 'new'
   map.register '/register', :controller => 'users', :action => 'create'
@@ -16,6 +21,16 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :linkers, :controller => :bio_bytes
 
   map.resource :session
+
+
+  # pretty routes for user profile pages
+  map.profile '/user/:login', :controller => 'users', :action => 'profile', :method => 'get' 
+
+  # nest note in steps without nesting steps in experiment
+  map.resources :steps do |steps|
+     steps.resource  :note, :member => { :upload => :post }
+  end
+
   map.resources :glossaries
 
   # map steps as nested resource of experiments
@@ -24,9 +39,12 @@ ActionController::Routing::Routes.draw do |map|
      experiments.resources :steps, 
 	     :member => { :upload => :post, 
 	     		  :up => :put,
-    			  :down => :put } 
-    experiments.resources :constructs 
+    			  :down => :put,
+    			  :insert_after => :put,
+                          :insert_before => :put }
+     experiments.resource :construct
   end 
+
 
   # named route for getting part data for construct/experiment views
   map.part_data '/get_part_data', :controller => :constructs, :action => :get_data
@@ -34,7 +52,6 @@ ActionController::Routing::Routes.draw do |map|
   # some shorthand for routes
   map.move_step_up 'experiments/:experiment_id/steps/:id/up' , :controller => :steps, :action =>:up
   map.move_step_down 'experiments/:experiment_id/steps/:id/down', :controller => :steps, :action =>:down
-
 
   map.root :controller => :home 
 

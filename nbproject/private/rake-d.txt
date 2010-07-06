@@ -1,3 +1,5 @@
+annotate_models=Add schema information (as comments) to model files
+auth\:gen\:site_key=Generates config/initializers/site_keys.rb
 db\:abort_if_pending_migrations=Raises an error if there are pending migrations
 db\:charset=Retrieves the charset for the current environment's database
 db\:collation=Retrieves the collation for the current environment's database
@@ -41,10 +43,21 @@ doc\:clobber_plugins=Remove plugin documentation
 doc\:clobber_rails=Remove rdoc products
 doc\:guides=Generate Rails guides
 doc\:plugins=Generate documentation for all installed plugins
+doc\:plugins\:acts_as_textiled=Generate documentation for the acts_as_textiled plugin
+doc\:plugins\:annotate_models=Generate documentation for the annotate_models plugin
+doc\:plugins\:fleximage=Generate documentation for the fleximage plugin
+doc\:plugins\:restful-authentication=Generate documentation for the restful-authentication plugin
 doc\:rails=Build the RDOC HTML Files
 doc\:reapp=Force a rebuild of the RDOC files
 doc\:rerails=Force a rebuild of the RDOC files
 environment=
+fleximage\:convert\:to_db=Convert master image storage to use the database.  Loads all file-stored images into the database.
+fleximage\:convert\:to_filestore=Convert master image storage to use the file system.  Loads all database images into files.
+fleximage\:convert\:to_flat=Convert a nested images/2007/11/12/123.png style image store to a images/123.png style.  Requires FLEXIMAGE_CLASS=ModelName
+fleximage\:convert\:to_jpg=Convert master images stored as PNGs to JPGs
+fleximage\:convert\:to_nested=Convert a flat images/123.png style image store to a images/2007/11/12/123.png style.  Requires FLEXIMAGE_CLASS=ModelName
+fleximage\:convert\:to_png=Convert master images stored as JPGs to PNGs
+fleximage\:dimensions=Populate width and height magic columns from the current image store.  Useful when migrating from on old installation.
 gems=List the gems that this rails application depends on
 gems\:base=
 gems\:build=Build any native extensions for unpacked gems

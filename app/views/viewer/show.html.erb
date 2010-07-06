@@ -1,0 +1,63 @@
+
+<% @def = @glossary.definition %>
+
+<% @def.gsub!(/,/){"@"} %>
+
+<% @terms = @terms.split(/,/) %>
+
+<% @found = "0" %>
+<% @termfound = "0" %>
+
+<% @terms %>
+<% @terms.each do |term| %>
+
+  
+  <% @def_str = @def.to_s%>
+
+  <%  @regex = Regexp.new(/#{term}./)%>
+  <%  matchdata = @regex.match(@def_str)%>
+  <%  if matchdata%>
+
+    
+    <%matchdata = matchdata.to_s%>
+
+    <% @def = @def.to_s %>
+    <% @def = @def.sub!(/#{term}./){","} %>
+
+    <%  if @found == "0"%>
+      <% @def = @def.split(/,/, 2) %>
+      <% @found = matchdata%>
+      <% @termfound = term %>
+      <% @defar = @def.first %>
+      <% @def.shift %>
+      <%@def = @def.to_s %>
+    <%  else%>
+      <%  @found << "," +matchdata%>
+       <% @termfound << "," +term %>
+    <%  end%>
+  <%  end%>
+<% end %>
+
+
+<% @def = @def.split(/,/) %>
+<% @def.each do |segment| %>
+  <% @defar << ","+segment%>
+<%end%>
+
+<%  unless @found == "0"%>
+  <%  @found = @found.split(/,/)%>
+  <%  @defar = @defar.split(/,/)%>
+  <%  @termfound = @termfound.split(/,/)%>
+  <%  index = 0..(@defar.length - 1)%>
+
+  <%  index.each do |i|%>
+    <% found = @found[i]%>
+    <% termfound = @termfound[i]%>
+    <%if @defar[i] =~ /@/ then @defar[i] = @defar[i].gsub!(/@/){","} end %>
+    <%= @defar[i]%>
+    <%= link_to "#{found}", {:controller => :viewer, :action => :show, :term => "#{termfound}"}%>
+  <% end%>
+
+<%  else%>
+  <%= @def %>
+<% end%>

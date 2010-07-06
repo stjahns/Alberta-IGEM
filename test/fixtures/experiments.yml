@@ -1,6 +1,5 @@
 # == Schema Information
-# Schema version: 20100609172527
-# Schema version: 20100609213516
+# Schema version: 20100629180631
 #
 # Table name: experiments
 #
@@ -11,6 +10,7 @@
 #  published   :boolean(1)
 #  created_at  :datetime
 #  updated_at  :datetime
+#  user_id     :integer(4)
 #
 
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html

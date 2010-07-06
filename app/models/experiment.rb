@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20100609213516
+# Schema version: 20100629180631
 #
 # Table name: experiments
 #
@@ -10,24 +10,37 @@
 #  published   :boolean(1)
 #  created_at  :datetime
 #  updated_at  :datetime
+#  user_id     :integer(4)
 #
 
 class Experiment < ActiveRecord::Base
-  attr_accessible :title, :authour, :description, :published, :image
+  attr_accessible :title, :authour, :description, :published, :image, :user_id
   has_many :steps, :dependent => :destroy  
   has_many :constructs, :dependent => :destroy
+  has_many :notes, :through => :steps
   belongs_to :user
 
+#  after_create :assign_owner  
 
-  def clone_experiment
-  #TODO should this code just be in the controller?
+  def clone_experiment_for( user )
+  #TODO should this code just be in the controller? no this is the right spot
+    
+    # user object has to be passed in because model does not have access to
+    #  session info
+    
+    # assign the current user's info to the cloned experiment
 
     new_experiment = self.clone
+    new_experiment.user_id = user.id
+    new_experiment.authour = user.login
+    new_experiment.published = false
+    new_experiment.save
 
-    self.steps.each do |step|
-      newstep = step.clone
-      newstep.experiment = new_experiment
-      newstep.save
+    i = 1
+    self.steps.all(:order => :step_order).each do |step|
+      new_step = step.clone
+      new_step.experiment = new_experiment
+      new_step.save
     end
 
     self.constructs.each do |construct|
@@ -36,11 +49,12 @@ class Experiment < ActiveRecord::Base
       new_construct.save
     end
 
-    new_experiment.save
-
     return new_experiment
-
   end
+
+
+  private
+ 
 
 end
 

@@ -3,11 +3,39 @@ class UsersController < ApplicationController
   include AuthenticatedSystem
   
 
+  #before_filter :login_required
+
+  def update
+  @user = User.find(params[:id])
+
+  if @user.update_attributes(params[:user])
+    flash[:notice] = 'User was successfully updated.'
+    redirect_to(user_path(@user))
+  else
+    render :action => 'edit'
+  end
+  end
+
+  def index
+  @users = User.find(:all)
+  end
+
+  def show
+  @user = User.find(params[:id])
+  end
+
+  def destroy
+  @user = User.find(params[:id])
+  @user.destroy
+
+  redirect_to(users_url)
+  end
   # render new.rhtml
+
   def new
     @user = User.new
   end
- 
+
   def create
     logout_keeping_session!
     @user = User.new(params[:user])
@@ -21,6 +49,12 @@ class UsersController < ApplicationController
     end
   end
 
+  def profile
+    @user = User.find_by_login(params[:login])
+    @experiments = @user.experiments
+    #render profile.html.erb 
+  end
+  
   def activate
     logout_keeping_session!
     user = User.find_by_activation_code(params[:activation_code]) unless params[:activation_code].blank?
@@ -37,4 +71,13 @@ class UsersController < ApplicationController
       redirect_back_or_default('/')
     end
   end
+  
+  private
+  def edit
+    @user = User.find(params[:id])
+  end
 end
+
+
+
+ 

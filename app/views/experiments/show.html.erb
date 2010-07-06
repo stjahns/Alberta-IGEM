@@ -1,3 +1,13 @@
+<div id= "experiment-title">
+<h1><%=h @experiment.title %></h1>
+<h2><%=h @experiment.authour %></h2>
+<% form_for(@experiment, :html=>{:id=>'publish'} ) do |f| %>
+  <%= f.error_messages %>
+    <%= f.check_box :published %>
+    <%= f.label :published %>
+    <span class= "save-notice" style= "display: none;"></span>
+<% end %>
+
 <script src="http://cdn.jquerytools.org/1.2.3/tiny/jquery.tools.min.js"></script>
 <script> //get part background image data
 
@@ -69,24 +79,9 @@
 </script>
 
 <p>
-  <b>Title:</b>
-  <%=h @experiment.title %>
-</p>
-
-<p>
-  <b>Authour:</b>
-  <%=h @experiment.authour %>
-</p>
-
-<p>
-  <b>Description:</b>
   <%=h @experiment.description %>
 </p>
-
-<p>
-  <b>Published:</b>
-  <%=h @experiment.published %>
-</p>
+</div>
 
 <p>
   <b>Constructs:</b>
@@ -99,11 +94,7 @@
 </p>
 
 <% unless @experiment.steps.empty? %>
-    
-  <p> 
-    <b>Steps:</b>
     <%= render :partial => "step", :collection => @steps %>
-  </p>
 <% end %>
 
 <%= link_to 'Add_Step', new_experiment_step_path(@experiment) %> |

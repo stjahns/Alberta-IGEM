@@ -1,3 +1,205 @@
+/*styling for experiment page*/
+/*title of experiment */
+#experiment-title {
+	width: 600px;
+	margin-left:auto;
+	margin-right:auto;
+}
+
+#experiment-title h1{
+	text-align: center;
+}
+/* authour of experiment*/
+#experiment-title h2{
+	text-align: center;
+	text-decoration: none;
+	font-weight: normal;
+	font-style: italic;
+}
+
+/*description of experiment*/
+#experiment-title p{
+	text-align: justify;
+}
+
+/* styling steps */
+#stepTitle p {
+  text-align: left;
+  font-weight: bold;
+  padding: 5px 5px 5px 15px;
+  font-size: 12px;
+  margin: -7px;
+  background-color: #c00;
+  color: #fff;
+}
+
+div.step {
+width:730px;
+padding:0px;
+margin:0px;
+margin-bottom:3em ;
+}
+
+span.save-notice {
+	background:#C7FFC4;
+	margin-left: 0.5em;
+	padding: 0.4em 2em;
+	font-size:   13px;
+  	line-height: 18px;
+}
+
+.step_note_container {
+	background:#efefef;
+}
+
+form.new_note{
+	background:#efefef;
+}
+
+p.step_note_container {
+	background:#efefef;
+	margin: 0;
+	padding:1em;
+}
+
+div.upload_thumb_container {
+	float: left;
+	margin: 1em;
+	width: 100px;
+	height: 100px;
+}
+
+form.inplace_upload_image {
+	margin-top: 50px;
+}
+
+form.attach_image_to_note {
+	margin-top: 28px;
+}
+
+div.loading {
+	background-image: url(../images/spinner.gif);
+	background-position: center;
+	background-repeat: no-repeat;
+
+}
+
+
+img.note_thumb {
+	float: left;
+/*	margin: 1em; */
+}
+
+img.step_view {
+	float: right;
+	margin: 10px;
+	margin-right: 0;
+	margin-top: 0;
+}
+
+
+textarea {
+  width:550px;
+  height:100px;
+}
+
+
+span.step_number {
+	display:inline;
+	padding-left: 4px;
+	padding-right: 4px;
+	background-color: #000;
+	color: #efefef;
+}
+
+span.edit_step_number {
+	display:inline;
+	padding-left: 4px;
+	padding-right: 4px;
+	background-color: #000;
+	color: #efefef;
+}
+
+/*editing steps toolbar*/
+div.step-toolbar {
+	border-bottom:0.25em solid #efefef ;
+	clear:both;
+	margin-top: 0.25em;
+} 
+ul.step-toolbar {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;	
+	overflow: hidden;
+
+}
+li.step-toolbar {
+	float: left;
+}
+li.btn-step-note{
+	float: right;
+}
+
+a.step-toolbar:link, a.step-toolbar:visited {
+	display: block;
+	font-weight: normal;
+	padding: 4px;
+	background-color: #efefef;
+	text-decoration: none;
+	margin-right: 2px;
+}
+/*
+a.step-toolbar.selected {
+	background-color: white;
+}
+*/
+
+a.step-toolbar:hover {
+	background-color: #000000
+}
+a.btn-step-note.step-toolbar {
+	margin-right: 0;
+}
+
+
+/* toolbar for editing notes*/
+div.note-toolbar {
+	clear: both;
+	background-color: white;
+}
+ul.note-toolbar {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+}
+
+li.note-toolbar {
+	float: right;
+}
+
+a.note-toolbar:link, a.note-toolbar:visited {
+	display: block;
+	font-weight: normal;
+	padding: 4px;
+	background-color: #efefef;
+	text-decoration: none;
+	margin-left: 2px;
+}
+
+a.note-toolbar:hover {
+	background-color: #000000
+}
+
+
+img.step_note {
+	float: left;
+	margin: 10px;
+	margin-left: 0;
+	margin-top: 0;
+}
+
+
 
 #container {
 	width: 750px;
@@ -6,11 +208,12 @@
   position: relative;
 }
 
-body{
-	background-image: url(../images/background.jpg);
+body, p, ol, ul, td {
+	background-image: url(../images/background.png);
 	background-repeat: repeat-y;
-	background-position: 239px;
-	background-color: #f7f4ee;
+	background-position: center;
+/*background-color: #f7f4ee;*/
+	background-color:#efefef;
   font-family: verdana, arial, helvetica, sans-serif;
   font-size:   13px;
   line-height: 18px;
@@ -63,24 +266,4 @@ a:visited { color: #666; }
   list-style: square;
 }
 
-#stepTitle p {
-  text-align: left;
-  font-weight: bold;
-  padding: 5px 5px 5px 15px;
-  font-size: 12px;
-  margin: -7px;
-  background-color: #c00;
-  color: #fff;
-}
 
-div.step {
-width:400px;
-padding:10px;
-border:5px solid gray;
-margin:0px;
-}
-
-textarea {
-  rows:4;
-  cols:80;
-}
