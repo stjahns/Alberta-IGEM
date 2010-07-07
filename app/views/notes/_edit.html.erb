@@ -3,7 +3,7 @@
   <p class="step_note_container" >
     <%= f.label :note %><br/>
     <%= f.text_area :text %><br/>
-    <%= f.submit 'Update note' %>
+    <%= f.submit 'Save Changes' %><%= save_notice %>
   </p>
 <% end %>
 
@@ -24,14 +24,20 @@
 <div class= "note-toolbar">
 	<ul class= "note-toolbar" >
 		<li class= "note-toolbar" >
-		<a class="btn-note-show-note note-toolbar " href"#">Show Note</a>
+		<a class="btn-note-show-note note-toolbar " href="#">Show Note</a>
 		</li>
 		<li class= "note-toolbar" >
-		<a class="btn-note-delete note-toolbar" href"#">Delete Note</a>
+		<a class="btn-note-delete note-toolbar" href="#">Delete Note</a>
 		</li>
-		<li class= "note-toolbar" >
-		<a class="btn-note-delele-image note-toolbar"<%= 'style= "display: none;"' if note.image.blank? %>  href"#" >Delete Image</a>
-		<%= button_to "Delete Image", image_path(note.image), :method=>:delete, :class=>'btn-delete-image-note', :style=>'display: none;' %>
-		</li>
+		<% unless note.image.blank? %>
+			<li class= "note-toolbar" >
+			<a class="btn-note-delete-image note-toolbar" href="#">Delete Image</a>
+			<%= button_to "Delete Image", image_path(note.image), 
+				      :method=>:delete, 
+				      :class=>'btn-delete-image-note', 
+				      :style=>'display: none;' %>
+			</li>
+		<% end %>
+		
 	</ul>
 </div>

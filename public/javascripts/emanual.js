@@ -16,7 +16,7 @@ $(document).ready(function(){
 	//$('.inplace_edit_step').each( function() {
 	$('.inplace_edit_step').live('submit', function() {
 		var step = $(this).parent().siblings('.step_view');
-		var message = $('.save-notice', this);
+		var save_notice = $('.save-notice', this);
 		var form = $(this).parent();
 		$(this).ajaxSubmit( {
 			dataType: 'html',
@@ -25,11 +25,7 @@ $(document).ready(function(){
 				step.html(data);
 //				$('.btn-step-edit',step.siblings('.step-toolbar')).trigger('click');
 				// inform user of success
-				message.html("Step updated succesfully.").fadeIn("slow");
-				setTimeout(function(){
-					message.fadeOut("slow");
-				}, 3000);	
-
+				success_message(save_notice,"Step updated succesfully.");
 			  }
 		});
 		return false;
@@ -78,12 +74,14 @@ $(document).ready(function(){
 	$('.edit_note').live('submit', function() {
 		var form = $(this).parent();
 		var note = form.siblings('.step_note_view')
+		var saveNotice = $('.save-notice',this);
 		$(this).ajaxSubmit( {
 			dataType: 'html',
 		  	success: function(data) { 
 		  	  // remove the old content and insert new stuff
-			  form.hide();
-			  note.html( data ).show();
+			  //form.hide();
+		          success_message( saveNotice, "Note saved.");
+			  note.html( data );
 		        }
 		});
 		return false;
@@ -92,7 +90,7 @@ $(document).ready(function(){
 	//TODO add error callbacks to all ajaxSubmits
 	// autosubmit a change in published status
 	$('#publish').change(function(){
-		var saveNotice = $('.save-notice',this);
+		var save_notice = $('.save-notice',this);
 		if( publish_status_changed() ){
 			//submit change
 			$(this).ajaxSubmit( {
@@ -102,14 +100,11 @@ $(document).ready(function(){
 				var message = $("#experiment_published").is(':checked') ? 
 			       		"Experiment published" :
 					"Experiment unpublished" ;	
-				saveNotice.html(message).fadeIn("slow");
-				setTimeout(function(){
-					saveNotice.fadeOut("slow");
-				}, 3000);	
+				success_message( save_notice, message);
 
 		        },
 			error: function() {
-				alert('There was an error!!');
+				error_message(save_notice, 'There was an error!!');
 			}
 		});
 		}
@@ -119,6 +114,7 @@ $(document).ready(function(){
 
 	// submit a new note for a step with Ajax
 	$('.new_note').live('submit', function() {
+		var formDiv = $(this).parent();
 		var form = $(this);
 		var note = form.parent().siblings('.step_note_view')
 		$(this).ajaxSubmit( {
@@ -126,10 +122,10 @@ $(document).ready(function(){
 		  	success: function(data) { 
 		  	  // remove the old content and insert new stuff
 			  note.html(data).show().attr('note','true');
-			  form.parent().hide();
+			  formDiv.hide();
 			  var url = form.attr('action') + '/edit';
-			  $.get(url, function(newForm ){
-			  	form.parent().html(newForm);
+			  $.get(url, function( newForm ){
+			  	formDiv.html(newForm);
 		    	  });
 		        }
 		});
@@ -151,9 +147,10 @@ $(document).ready(function(){
 			success: function(data) { 
 				  // have to unescape data because of iframe
 				  data = unescapeHTML(data);	
-				  //alert(data);
 				  var $r = $(data);	
-				  var source = $r.find('img').attr('src').replace("step","thumb");
+				  // get general img url and thumb url
+				  var imageURL = $r.find('img').attr('src').replace("step","");
+				  var source = imageURL + "thumb";
 				
 				//get the new thumbnail and put in place of old one
 				var thumb = new Image();
@@ -167,6 +164,13 @@ $(document).ready(function(){
 					);
 					
 				}).attr('src',source);
+				// add image delete button
+				var deleteBtn = '<li class="note-toolbar"><a href="#"'+
+				       'class="btn-note-delete-image note-toolbar">Delete Image</a>' +
+					generate_delete_form( imageURL ) + '</li>';
+				deleteBtn = $(deleteBtn).hide();
+				image_container.siblings('.note-toolbar').find('ul').append( deleteBtn );
+				deleteBtn.fadeIn("slow");
 			   
 				// replace note view	
 				note.html(data);
@@ -261,6 +265,10 @@ $(document).ready(function(){
 		if( $(this).hasClass('selected') ){
 			$(this).removeClass("selected");
 			note_container.slideUp("slow");
+			// remove shadows from other tabs
+			$(this).parent().siblings().each(function(){
+				$('a',this).removeClass('shadow');
+			});
 		}
 		else{
 			// check if the note exists
@@ -272,6 +280,10 @@ $(document).ready(function(){
 			}
 			$(this).addClass("selected");
 			note_container.slideDown("slow");
+			// add shadows to other tabs
+			$(this).parent().siblings().each(function(){
+				$('a',this).addClass('shadow');
+			});
 		}		
 		return false;
 	});	
@@ -285,19 +297,28 @@ $(document).ready(function(){
 			.siblings('.step_note_view').show();
 		return false;
 	});
-	$('.btn-note-delete-image').live('submit', function(){
-		var note = $(this).parent().parent().parent();
-		var url = $(this).attr('action') + '/edit';
-		$(this).ajaxSubmit( {
+	$('.btn-note-delete-image').live('click', function(){
+		var note = $(this).parents('.step_note_container' );
+		var thumb = $('.upload_thumb_container', note).children('img');
+		var btn  = $(this).parent();
+		
+		$(this).siblings('form').ajaxSubmit( {
 			dataType: 'html',
 			beforeSubmit: function(){
 				return confirm('Are you sure?');
 			},
 		  	success: function(data) { 
 		  	 // remove the old content and insert new stuff
-			 form.load(url);
+				thumb.fadeOut("slow");
+				// change the form label
+				 $('.attach_image_to_note', note).find('label')
+				 	.html("Attach an image");
+				btn.fadeOut("slow").remove();
+				// remove image in note view
+				$('.step_note_view', note).find('img.step_note').remove();
 			}
 		});
+		return false;
 	});
 
 });	
@@ -336,6 +357,31 @@ function renumberSteps(){
 	});
 }
 
+function generate_delete_form( action ){
+	return 	'<form class="button-to" action="' + action +
+		'" method="post"><div><input type="hidden" value="delete"'+
+		'name="_method"><input type="submit" value="Delete Image"'+
+		'style="display: none;" class="btn-delete-image-note"><input'+
+		'type="hidden" value="'+ AUTH_TOKEN +
+		'" name="authenticity_token"></div></form>';
+}
+
+function success_message( message_container, message ){
+	message_container.html(message).fadeIn("slow");
+		setTimeout(function(){
+			message_container.fadeOut("slow");
+	}, 3000);	
+}
+
+function error_message( message_container, message ){
+	message_container.addClass("error-message").html(message).fadeIn("slow");
+		setTimeout(function(){
+			message_container.fadeOut("slow", function(){
+				$(this).removeClass("error-message")});
+	}, 3000);	
+}
 
 // when we ask for html we need rails to use respond to js so we need:
 $.ajaxSettings.accepts.html = $.ajaxSettings.accepts.script; 
+
+

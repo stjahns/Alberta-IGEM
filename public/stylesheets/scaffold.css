@@ -48,6 +48,11 @@ span.save-notice {
   	line-height: 18px;
 }
 
+span.save-notice.error-message {
+	background: #FF8593;
+}
+
+
 .step_note_container {
 	background:#efefef;
 }
@@ -140,6 +145,13 @@ li.btn-step-note{
 	float: right;
 }
 
+a.step-toolbar.shadow {
+	background-image: url(../images/tab-shadow.png);
+	background-repeat: repeat-x;
+	background-position: bottom;
+
+}
+
 a.step-toolbar:link, a.step-toolbar:visited {
 	display: block;
 	font-weight: normal;
@@ -155,7 +167,8 @@ a.step-toolbar.selected {
 */
 
 a.step-toolbar:hover {
-	background-color: #000000
+	background-image: none;
+	background-color: #000000;
 }
 a.btn-step-note.step-toolbar {
 	margin-right: 0;

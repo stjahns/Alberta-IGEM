@@ -16,7 +16,7 @@
 				    <%= f.text_area :description %>
 				</p>
 				<p><%= f.submit 'Save' %>
-				   <span class="save-notice" style="display: none;"></span>
+				<%= save_notice %>
 				</p>
 		    <% end %>
 
@@ -43,9 +43,9 @@
     <% if is_owner_of( @experiment ) %>
        <ul class="step-toolbar"  >
 	 <li class= "step-toolbar" >
-	 <a class="btn-step-form step-toolbar" href"#">Edit Step </a></li>
+	 <a class="btn-step-form step-toolbar" href="#">Edit Step </a></li>
 	 <li class="step-toolbar" >
-	 <a class="btn-step-insert-after step-toolbar " href"#">Insert Step Below</a> 
+	 <a class="btn-step-insert-after step-toolbar " href="#">Insert Step Below</a> 
 	<span class='hidden_insert_after' style=" display: none;" >	
 	
 	  <%= button_to "Insert Step Below",
@@ -54,7 +54,7 @@
         </span>
 	</li>
 	 <li class= "step-toolbar" >
-	 <a class="btn-step-insert-before step-toolbar " href"#">Insert Step Above</a>
+	 <a class="btn-step-insert-before step-toolbar " href="#">Insert Step Above</a>
 	 <span class='hidden_insert_before' style=" display: none;" >
 	  <%= button_to "Insert Step Above",
 	    insert_before_experiment_step_path(@experiment,step),
@@ -71,7 +71,7 @@
 	 </li>
   	 <% if allowed_to_make_notes? %>
 		 <li class= "step-toolbar btn-step-note ">
-		 <a class="btn-step-note step-toolbar " href"#">Note</a></li>
+		 <a class="btn-step-note step-toolbar " href="#">Note</a></li>
         <% end %>
         </ul> 
 	
