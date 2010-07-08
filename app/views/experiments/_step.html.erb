@@ -10,44 +10,43 @@
     <% end %>
        <div class= "step-toolbar"  >
 	  <% if is_owner_of( @experiment ) %>
-           <ul   >
-		<span class= "step-show-btns">
+           <ul >
+	   <span class= "step-show-btns">
 	   	 <li  >
 		 <a class="btn-step-edit" href="#">Edit Step </a></li>
 		 <li  >
 		    <a class="btn-step-insert-after " href="#">Insert Step Below</a> 
-		    <span class='hidden_insert_after' style=" display: none;" >	
-		
 		     <%= button_to "Insert Step Below",
 		    	insert_after_experiment_step_path(@experiment,step),
 		     	:method=>:put %>
-		     </span>
 		 </li>
 		 <li  >
 		   <a class="btn-step-insert-before" href="#">Insert Step Above</a>
-		   <span class='hidden_insert_before' style=" display: none;" >
 		      <%= button_to "Insert Step Above",
 		    	insert_before_experiment_step_path(@experiment,step),
 		    	:method=>:put %>
-		   </span>
 		 </li>
-		 <li  >
+		 <li >
 		   <a class="btn-step-destroy" href="#" >Delete</a>
-		 	<span class='hidden_delete_step' style=" display: none;" >
 		  	<%= button_to "Delete Step",
 		    	  experiment_step_path(@experiment,step),
 		    	  :method=>:delete %>
-			</span>
 		 </li>
-	 </span>
+		 </span>
 	 <span class= "step-edit-btns" style="display: none;" >
-		 <li  >
-		 <a class="btn-step-show" href="#">Show Step</a></li>
+		 <li ><a class="btn-step-show" href="#">Show Step</a></li>
+		<% unless step.image.blank? %>
+			<li><a class="btn-delete-step-image" href="#">Delete image</a>
+			<%= button_to "Delete Image",image_path( step.image ),:method=>:delete %>
+			</li>
+		<% end %>
+
 	 </span>
 		 <% if allowed_to_make_notes? %>
 			 <li class= "btn-step-note ">
 			 <a class="btn-step-note  " href="#">Note</a></li>
 		<% end %>
+		
 		
 	</ul> 
 	<% end %>

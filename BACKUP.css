@@ -138,6 +138,10 @@ div.step-toolbar ul {
 	overflow: hidden;
 
 }
+
+div.step-toolbar ul li form {
+	display: none;
+}
 div.step-toolbar ul li {
 	float: left;
 }
@@ -175,9 +179,6 @@ div.step-toolbar ul li a.btn-step-note {
 	margin-right: 0;
 }
 
-div.step-toolbar ul li form {
-	display: none;
-}
 
 /* toolbar for editing notes*/
 div.note-toolbar {

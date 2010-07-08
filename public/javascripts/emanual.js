@@ -33,9 +33,11 @@ $(document).ready(function(){
 
 	// submit an image for a step with ajaX
 	$('.inplace_upload_image').live('submit', function() {
-		var step = $(this).parent().siblings('.step_view');
+		var step = $(this).parents('div.step');
+		var step_view = $('div.step_view', step);
 		var image_container = $(this).siblings('.upload_thumb_container');
 		var image = image_container.children('img');
+		var edit_toolbar = $('.step-edit-btns',step);
 
 		$(this).ajaxSubmit( {
 			dataType: 'html',
@@ -43,28 +45,44 @@ $(document).ready(function(){
 				image_container.addClass('loading');
 				image.fadeOut("slow");
 			},
-			success: function(data) { 
-				  // have to unescape data because of iframe
-				  data = unescapeHTML(data);	
-				  var $r = $(data);	
-				  var source = $r.find('img').attr('src').replace("step","thumb");
-				
-				//get the new thumbnail and put in place of old one
-				var thumb = new Image();
-				  
-				$(thumb).load( function(){
-					$(this).hide();
-					
-					image_container.html(this);
-					$(this).fadeIn("slow", function(){
-						image_container.removeClass('loading')} 
-					);
-					
-				}).attr('src',source);
-			   
-				// replace step	
-				step.html(data);
-			}
+
+		success: function(data) { 
+			// have to unescape data because of iframe
+			data = unescapeHTML(data);	
+			var $r = $(data);	
+			var imageURL = $r.find('img').attr('src').replace("step","");
+			var source = imageURL + "thumb";
+
+			//get the new thumbnail and put in place of old one
+			var thumb = new Image();
+
+			$(thumb).load( function(){
+			      $(this).hide();
+			      
+			      image_container.html(this);
+			      $(this).fadeIn("slow", function(){
+				      image_container.removeClass('loading')} 
+			      );
+			      
+			}).attr('src',source);
+
+			// add image delete button
+		
+			var deleteBtn = '<li><a href="#"'+
+			     'class="btn-delete-step-image">Delete Image</a>' +
+			      generate_delete_form( imageURL ) + '</li>';
+			deleteBtn = $(deleteBtn).hide();
+			var test = edit_toolbar.html();
+
+			edit_toolbar.append( deleteBtn );
+			deleteBtn.fadeIn("slow");
+
+
+			// replace step	
+			step_view.html(data);
+		}
+
+
 		});
 		return false;
 	});
@@ -180,6 +198,31 @@ $(document).ready(function(){
 
 
 
+	$('.btn-delete-step-image').live('click', function(){
+		var step = $(this).parents('div.step' );
+		var thumb = $('.step_edit', step).find('img');
+		var btn  = $(this).parent();
+		
+		$(this).siblings('form').ajaxSubmit( {
+			dataType: 'html',
+			beforeSubmit: function(){
+				return confirm('Are you sure?');
+			},
+		  	success: function(data) { 
+		  	 // remove the old content and insert new stuff
+				thumb.fadeOut("slow");
+				// change the form label
+				 thumb.parent().siblings('form.inplace_upload_image').find('label')
+				 	.html("Add an image");
+				btn.fadeOut("slow").remove();
+				// remove image in note view
+				$('.step_view', step).find('img.step_view').parent().remove();
+			}
+		});
+		return false;
+	});
+
+
 	$(".btn-step-edit").live( 'click', function() {
 			step = $(this).parents('div.step');
 		        $('div.step_view',step ).hide();
@@ -206,9 +249,7 @@ $(document).ready(function(){
 	// appear normally in the edit toolbar 
 	$('.btn-step-insert-after').live( 'click', function(){
 		var step = $(this).parents('div.step');
-		var btn = $(this).siblings('.hidden_insert_after')
-		  .children('.button-to');
-		btn.ajaxSubmit({
+		$(this).siblings('form.button-to').ajaxSubmit({
 			dataType: 'html',
 		  	success: function(data) { 
 		  	  // append a new step after 
@@ -221,9 +262,7 @@ $(document).ready(function(){
 	});
 	$('.btn-step-insert-before').live( 'click', function(){
 		var step = $(this).parents('div.step');
-		var btn = $(this).siblings('.hidden_insert_before')
-		  .children('.button-to');
-		btn.ajaxSubmit({
+		$(this).siblings('form.button-to').ajaxSubmit({
 			dataType: 'html',
 		  	success: function(data) { 
 		  	  // append a new step after 
@@ -237,9 +276,7 @@ $(document).ready(function(){
 
 	$('.btn-step-destroy').live( 'click', function(){
 		var step = $(this).parents('div.step');
-		var btn = $(this).siblings('.hidden_delete_step')
-		  .children('.button-to');
-		btn.ajaxSubmit({
+		$(this).siblings('form.button-to').ajaxSubmit({
 			dataType: 'html',
 			beforeSubmit: function(){
 			   return confirm(
@@ -356,7 +393,7 @@ function generate_delete_form( action ){
 	return 	'<form class="button-to" action="' + action +
 		'" method="post"><div><input type="hidden" value="delete"'+
 		'name="_method"><input type="submit" value="Delete Image"'+
-		'style="display: none;" class="btn-delete-image-note"><input'+
+		'style="display: none;"><input'+
 		'type="hidden" value="'+ AUTH_TOKEN +
 		'" name="authenticity_token"></div></form>';
 }
