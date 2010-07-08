@@ -131,28 +131,28 @@ div.step-toolbar {
 	clear:both;
 	margin-top: 0.25em;
 } 
-ul.step-toolbar {
+div.step-toolbar ul {
 	list-style-type: none;
 	margin: 0;
 	padding: 0;	
 	overflow: hidden;
 
 }
-li.step-toolbar {
+div.step-toolbar ul li {
 	float: left;
 }
-li.btn-step-note{
+div.step-toolbar ul li.btn-step-note{
 	float: right;
 }
 
-a.step-toolbar.shadow {
+div.step-toolbar ul li a.shadow {
 	background-image: url(../images/tab-shadow.png);
 	background-repeat: repeat-x;
 	background-position: bottom;
 
 }
 
-a.step-toolbar:link, a.step-toolbar:visited {
+div.step-toolbar ul li a:link, div.step-toolbar ul li a:visited {
 	display: block;
 	font-weight: normal;
 	padding: 4px;
@@ -166,12 +166,12 @@ a.step-toolbar.selected {
 }
 */
 
-a.step-toolbar:hover {
+div.step-toolbar ul li a:hover {
 	background-image: none;
 	background-color: #000000;
 	color: #fff;
 }
-a.btn-step-note.step-toolbar {
+div.step-toolbar ul li a.btn-step-note {
 	margin-right: 0;
 }
 
@@ -181,18 +181,18 @@ div.note-toolbar {
 	clear: both;
 	background-color: white;
 }
-ul.note-toolbar {
+div.note-toolbar ul {
 	list-style-type: none;
 	margin: 0;
 	padding: 0;
 	overflow: hidden;
 }
 
-li.note-toolbar {
+div.note-toolbar li {
 	float: right;
 }
 
-a.note-toolbar:link, a.note-toolbar:visited {
+div.note-toolbar a:link, div.note-toolbar a:visited {
 	display: block;
 	font-weight: normal;
 	padding: 4px;
@@ -201,7 +201,7 @@ a.note-toolbar:link, a.note-toolbar:visited {
 	margin-left: 2px;
 }
 
-a.note-toolbar:hover {
+div.note-toolbar a:hover {
 	background-color: #000000
 }
 

@@ -23,7 +23,6 @@ $(document).ready(function(){
 		  	success: function(data) { 
 		  	 // remove the old content and insert new stuff
 				step.html(data);
-//				$('.btn-step-edit',step.siblings('.step-toolbar')).trigger('click');
 				// inform user of success
 				success_message(save_notice,"Step updated succesfully.");
 			  }
@@ -165,11 +164,11 @@ $(document).ready(function(){
 					
 				}).attr('src',source);
 				// add image delete button
-				var deleteBtn = '<li class="note-toolbar"><a href="#"'+
-				       'class="btn-note-delete-image note-toolbar">Delete Image</a>' +
+				var deleteBtn = '<li><a href="#"'+
+				       'class="btn-note-delete-image">Delete Image</a>' +
 					generate_delete_form( imageURL ) + '</li>';
 				deleteBtn = $(deleteBtn).hide();
-				image_container.siblings('.note-toolbar').find('ul').append( deleteBtn );
+				image_container.siblings('div.note-toolbar').find('ul').append( deleteBtn );
 				deleteBtn.fadeIn("slow");
 			   
 				// replace note view	

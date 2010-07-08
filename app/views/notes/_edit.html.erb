@@ -22,16 +22,16 @@
 	       </p>
 <% end %>
 <div class= "note-toolbar">
-	<ul class= "note-toolbar" >
-		<li class= "note-toolbar" >
-		<a class="btn-note-show-note note-toolbar " href="#">Show Note</a>
+	<ul  >
+		<li  >
+		<a class="btn-note-show-note  " href="#">Show Note</a>
 		</li>
-		<li class= "note-toolbar" >
-		<a class="btn-note-delete note-toolbar" href="#">Delete Note</a>
+		<li  >
+		<a class="btn-note-delete " href="#">Delete Note</a>
 		</li>
 		<% unless note.image.blank? %>
-			<li class= "note-toolbar" >
-			<a class="btn-note-delete-image note-toolbar" href="#">Delete Image</a>
+			<li  >
+			<a class="btn-note-delete-image " href="#">Delete Image</a>
 			<%= button_to "Delete Image", image_path(note.image), 
 				      :method=>:delete, 
 				      :class=>'btn-delete-image-note', 

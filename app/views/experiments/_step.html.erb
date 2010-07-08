@@ -8,14 +8,14 @@
   
   </div>
     <% end %>
-       <div class="step-toolbar" >
+       <div class= "step-toolbar"  >
 	  <% if is_owner_of( @experiment ) %>
-           <ul class="step-toolbar"  >
+           <ul   >
 		<span class= "step-show-btns">
-	   	 <li class= "step-toolbar" >
-		 <a class="btn-step-edit step-toolbar" href="#">Edit Step </a></li>
-		 <li class="step-toolbar" >
-		    <a class="btn-step-insert-after step-toolbar " href="#">Insert Step Below</a> 
+	   	 <li  >
+		 <a class="btn-step-edit" href="#">Edit Step </a></li>
+		 <li  >
+		    <a class="btn-step-insert-after " href="#">Insert Step Below</a> 
 		    <span class='hidden_insert_after' style=" display: none;" >	
 		
 		     <%= button_to "Insert Step Below",
@@ -23,16 +23,16 @@
 		     	:method=>:put %>
 		     </span>
 		 </li>
-		 <li class= "step-toolbar" >
-		   <a class="btn-step-insert-before step-toolbar " href="#">Insert Step Above</a>
+		 <li  >
+		   <a class="btn-step-insert-before" href="#">Insert Step Above</a>
 		   <span class='hidden_insert_before' style=" display: none;" >
 		      <%= button_to "Insert Step Above",
 		    	insert_before_experiment_step_path(@experiment,step),
 		    	:method=>:put %>
 		   </span>
 		 </li>
-		 <li class= "step-toolbar" >
-		   <a class="btn-step-destroy step-toolbar" href="#" >Delete</a>
+		 <li  >
+		   <a class="btn-step-destroy" href="#" >Delete</a>
 		 	<span class='hidden_delete_step' style=" display: none;" >
 		  	<%= button_to "Delete Step",
 		    	  experiment_step_path(@experiment,step),
@@ -41,12 +41,12 @@
 		 </li>
 	 </span>
 	 <span class= "step-edit-btns" style="display: none;" >
-		 <li class= "step-toolbar" >
-		 <a class="btn-step-show step-toolbar" href="#">Show Step</a></li>
+		 <li  >
+		 <a class="btn-step-show" href="#">Show Step</a></li>
 	 </span>
 		 <% if allowed_to_make_notes? %>
-			 <li class= "step-toolbar btn-step-note ">
-			 <a class="btn-step-note step-toolbar " href="#">Note</a></li>
+			 <li class= "btn-step-note ">
+			 <a class="btn-step-note  " href="#">Note</a></li>
 		<% end %>
 		
 	</ul> 
