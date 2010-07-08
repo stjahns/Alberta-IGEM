@@ -169,6 +169,7 @@ a.step-toolbar.selected {
 a.step-toolbar:hover {
 	background-image: none;
 	background-color: #000000;
+	color: #fff;
 }
 a.btn-step-note.step-toolbar {
 	margin-right: 0;
@@ -216,9 +217,9 @@ img.step_note {
 
 #container {
 	width: 750px;
-  padding-right: 250px;
-  padding-left: 250px;
-  position: relative;
+ 	margin-right: auto;
+  	margin-left: auto;
+  	position: relative;
 }
 
 body, p, ol, ul, td {

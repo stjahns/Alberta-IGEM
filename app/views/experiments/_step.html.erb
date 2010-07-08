@@ -1,107 +1,80 @@
 <div class="step">
-     <div class="step_view" id=step<%= step.id  %>  > 
-     <%= render :partial => 'steps/step', :locals => {:step => step }  %>
-   </div>
-
-   <% if is_owner_of( @experiment ) %>
-	   <span class="step_form" style="display: none;">
-		     <% form_for([@experiment, step],
-			:html => { :method => :put,:multipart => true, 
-			  :class => "inplace_edit_step"} ) do |f| %>
-				<%= f.error_messages %>
-				<h2><span class="edit_step_number"><%=h step.step_order %></span>
-					<%= f.text_field :title %>
-							</h2>
-				<p class= 'description' >
-				    <%= f.text_area :description %>
-				</p>
-				<p><%= f.submit 'Save' %>
-				<%= save_notice %>
-				</p>
-		    <% end %>
-
-		    <div class= "upload_thumb_container">
-		    	<%= image_tag( thumb_image_path(step.image)) unless step.image.blank?  %>
-		    </div>  
-		    
-		    <% image_label = step.image.blank? ? "attach an image" : "change the image" %> 
-		  <% form_for [@experiment,step],
-		     :url => upload_experiment_step_path(@experiment,step, :format=>'js' ) , 
-		    # :html => { :multipart => true, :method => 'post',
-		     :html => { :method => 'post',
-		     :class => 'inplace_upload_image'} do |f| %>
-			     <p><%= f.label image_label%><br/>
-			     <%= f.file_field :image_file %>
-			<%= f.submit 'Upload' %></p>
-		<% end %>  
-  	</span>
-  <% end %>
-
-
+  <div class="step_view" > 
+       <%= render :partial => 'steps/step', :locals => {:step => step }  %>
+  </div> 
+  <% if is_owner_of( @experiment ) %>
+      <div class= "step_edit" style="display: none;" >
+	  <%= render :partial => 'steps/edit', :locals => {:experiment => @experiment, :step => step } %>
   
-  <div class="step-toolbar" >
-    <% if is_owner_of( @experiment ) %>
-       <ul class="step-toolbar"  >
-	 <li class= "step-toolbar" >
-	 <a class="btn-step-form step-toolbar" href="#">Edit Step </a></li>
-	 <li class="step-toolbar" >
-	 <a class="btn-step-insert-after step-toolbar " href="#">Insert Step Below</a> 
-	<span class='hidden_insert_after' style=" display: none;" >	
-	
-	  <%= button_to "Insert Step Below",
-	    insert_after_experiment_step_path(@experiment,step),
-       	    :method=>:put %>
-        </span>
-	</li>
-	 <li class= "step-toolbar" >
-	 <a class="btn-step-insert-before step-toolbar " href="#">Insert Step Above</a>
-	 <span class='hidden_insert_before' style=" display: none;" >
-	  <%= button_to "Insert Step Above",
-	    insert_before_experiment_step_path(@experiment,step),
-       	    :method=>:put %>
-    	</span>
-    	</li>
-	 <li class= "step-toolbar" >
-	 <a class="btn-step-destroy step-toolbar" href="#" >Delete</a>
-	 <span class='hidden_delete_step' style=" display: none;" >
-	  <%= button_to "Delete Step",
-	    experiment_step_path(@experiment,step),
-       	    :method=>:delete %>
-  	</span>
-	 </li>
-  	 <% if allowed_to_make_notes? %>
-		 <li class= "step-toolbar btn-step-note ">
-		 <a class="btn-step-note step-toolbar " href="#">Note</a></li>
-        <% end %>
-        </ul> 
-	
-		
-
-    <% end %>
   </div>
+    <% end %>
+       <div class="step-toolbar" >
+	  <% if is_owner_of( @experiment ) %>
+           <ul class="step-toolbar"  >
+		<span class= "step-show-btns">
+	   	 <li class= "step-toolbar" >
+		 <a class="btn-step-edit step-toolbar" href="#">Edit Step </a></li>
+		 <li class="step-toolbar" >
+		    <a class="btn-step-insert-after step-toolbar " href="#">Insert Step Below</a> 
+		    <span class='hidden_insert_after' style=" display: none;" >	
+		
+		     <%= button_to "Insert Step Below",
+		    	insert_after_experiment_step_path(@experiment,step),
+		     	:method=>:put %>
+		     </span>
+		 </li>
+		 <li class= "step-toolbar" >
+		   <a class="btn-step-insert-before step-toolbar " href="#">Insert Step Above</a>
+		   <span class='hidden_insert_before' style=" display: none;" >
+		      <%= button_to "Insert Step Above",
+		    	insert_before_experiment_step_path(@experiment,step),
+		    	:method=>:put %>
+		   </span>
+		 </li>
+		 <li class= "step-toolbar" >
+		   <a class="btn-step-destroy step-toolbar" href="#" >Delete</a>
+		 	<span class='hidden_delete_step' style=" display: none;" >
+		  	<%= button_to "Delete Step",
+		    	  experiment_step_path(@experiment,step),
+		    	  :method=>:delete %>
+			</span>
+		 </li>
+	 </span>
+	 <span class= "step-edit-btns" style="display: none;" >
+		 <li class= "step-toolbar" >
+		 <a class="btn-step-show step-toolbar" href="#">Show Step</a></li>
+	 </span>
+		 <% if allowed_to_make_notes? %>
+			 <li class= "step-toolbar btn-step-note ">
+			 <a class="btn-step-note step-toolbar " href="#">Note</a></li>
+		<% end %>
+		
+	</ul> 
+	<% end %>
+      </div>	
     
- 
+
+    
   <% if allowed_to_make_notes? %>
     <div class= "step_note_container" style="display: none;"  >
     <!-- hide this form, and only show if we click note tab and their is no note or we want to add a note --> 
-      <div class= "step_note_form" >
+      <div class= "step_note_form"  >
 	    <% if step.note %>
 		    <%= render( :partial => 'notes/edit', 
 			       :locals=>{:step => step, :note => step.note}) %> 
 	    <% else %>
 		    <%= render( :partial => 'notes/new', 
 			       :locals=>{:step => step, :note => Note.new}) %>
-	    <% end %>
-
-      </div >
+		       <% end %>
+       </div>
 
       <div class= "step_note_view" note=<%=h step.note ? 'true' : '' %> >
 	   <% if step.note %>
-   		<%= render( :partial => 'notes/show', 
+		<%= render( :partial => 'notes/show', 
 				:locals=>{:step=>step, :note=>step.note}) %>
 	  <% end %>	
       </div >
- 
+
    </div >
   <% end %>
 </div>

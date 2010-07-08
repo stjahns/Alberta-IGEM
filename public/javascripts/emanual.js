@@ -181,24 +181,24 @@ $(document).ready(function(){
 
 
 
-	$(".btn-step-form").live( 'click', function() {
-			toolbar = $(this).parent().parent().parent();
-			step = toolbar.siblings(".step_view" );
-			form = toolbar.siblings(".step_form");
-			
-			//if not selected
-			if( $(this).hasClass("selected") ){
-				step.show();
-				form.hide();
-				$(this).removeClass("selected").html("Edit Step");
+	$(".btn-step-edit").live( 'click', function() {
+			step = $(this).parents('div.step');
+		        $('div.step_view',step ).hide();
+			$('div.step_edit', step).show();
+			// show the correct buttons
+			var toolbar = $(this).parents('div.step-toolbar');
+			$('span.step-show-btns', toolbar).hide();
+			$('span.step-edit-btns', toolbar).show();
+			return false;
+	});
 
-			}
-			else{
-				// hide step and show forms
-				step.hide();
-				form.show();
-				$(this).addClass('selected').html("Show Step");
-			}		
+	$('.btn-step-show').live('click',function(){
+			step = $(this).parents('div.step');
+		        $('div.step_edit', step).hide();
+			$('div.step_view', step).show();
+			var toolbar = $(this).parents('div.step-toolbar');
+			$('span.step-edit-btns', toolbar).hide();
+			$('span.step-show-btns', toolbar).show();
 			return false;
 	});
 
@@ -206,7 +206,7 @@ $(document).ready(function(){
 	// bind hidden submit form to links for insert step so
 	// appear normally in the edit toolbar 
 	$('.btn-step-insert-after').live( 'click', function(){
-		var step = $(this).parent().parent().parent().parent();
+		var step = $(this).parents('div.step');
 		var btn = $(this).siblings('.hidden_insert_after')
 		  .children('.button-to');
 		btn.ajaxSubmit({
@@ -221,7 +221,7 @@ $(document).ready(function(){
 		return false;
 	});
 	$('.btn-step-insert-before').live( 'click', function(){
-		var step = $(this).parent().parent().parent().parent();
+		var step = $(this).parents('div.step');
 		var btn = $(this).siblings('.hidden_insert_before')
 		  .children('.button-to');
 		btn.ajaxSubmit({
@@ -237,7 +237,7 @@ $(document).ready(function(){
 	});
 
 	$('.btn-step-destroy').live( 'click', function(){
-		var step = $(this).parent().parent().parent().parent();
+		var step = $(this).parents('div.step');
 		var btn = $(this).siblings('.hidden_delete_step')
 		  .children('.button-to');
 		btn.ajaxSubmit({
@@ -257,18 +257,15 @@ $(document).ready(function(){
 
 	// buttons to control notes
         $('.btn-step-note').live( 'click', function(){
-		var note_container = 
-			$(this).parent().parent().parent()
-			.siblings('.step_note_container');
+		var step_toolbar = $(this).parents('div.step-toolbar');
+		var note_container = $('.step_note_container',$(this).parents('div.step'));
 		var note = note_container.children('.step_note_view');
 		var form = note_container.children('.step_note_form');
 		if( $(this).hasClass('selected') ){
 			$(this).removeClass("selected");
+
 			note_container.slideUp("slow");
-			// remove shadows from other tabs
-			$(this).parent().siblings().each(function(){
-				$('a',this).removeClass('shadow');
-			});
+			$('a',step_toolbar).removeClass('shadow');
 		}
 		else{
 			// check if the note exists
@@ -280,13 +277,12 @@ $(document).ready(function(){
 			}
 			$(this).addClass("selected");
 			note_container.slideDown("slow");
-			// add shadows to other tabs
-			$(this).parent().siblings().each(function(){
-				$('a',this).addClass('shadow');
-			});
+			$('a',step_toolbar).not('.btn-step-note').addClass('shadow');
+					
 		}		
 		return false;
-	});	
+	});
+
 	$('.btn-note-edit').live('click',function(){
 		$(this).parents('div.step_note_view').hide()
 			.siblings('.step_note_form').show();
