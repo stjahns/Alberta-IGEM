@@ -25,7 +25,10 @@ $(document).ready(function(){
 				step.html(data);
 				// inform user of success
 				success_message(save_notice,"Step updated succesfully.");
-			  }
+			  },
+			error: function() {
+				error_message(save_notice, "Error: The step could not be updated.");
+			}
 		});
 		return false;
 	});
@@ -72,7 +75,7 @@ $(document).ready(function(){
 			     'class="btn-delete-step-image">Delete Image</a>' +
 			      generate_delete_form( imageURL ) + '</li>';
 			deleteBtn = $(deleteBtn).hide();
-			var test = edit_toolbar.html();
+			var test = edit_tolbar.html();
 
 			edit_toolbar.append( deleteBtn );
 			deleteBtn.fadeIn("slow");
@@ -80,6 +83,10 @@ $(document).ready(function(){
 
 			// replace step	
 			step_view.html(data);
+		},
+		error: function(){
+			error_mesage( $('.inplace_upload_image',step_view).find('.save-notice'),
+				"Error: the image could not be deleted.");	
 		}
 
 
@@ -99,7 +106,10 @@ $(document).ready(function(){
 			  //form.hide();
 		          success_message( saveNotice, "Note saved.");
 			  note.html( data );
-		        }
+		        },
+			error: function(){
+				error_message(saveNotice, "Error: the note could not be saved.");				
+			}
 		});
 		return false;
 	});
@@ -108,20 +118,34 @@ $(document).ready(function(){
 	// autosubmit a change in published status
 	$('#publish').change(function(){
 		var save_notice = $('.save-notice',this);
+		var published = $("#experiment_published");
 		if( publish_status_changed() ){
 			//submit change
 			$(this).ajaxSubmit( {
 					dataType: 'html',
 		  	success: function(data,statusText ) { 
 			  	// status changed to published
-				var message = $("#experiment_published").is(':checked') ? 
+				var message = published.is(':checked') ? 
 			       		"Experiment published" :
 					"Experiment unpublished" ;	
 				success_message( save_notice, message);
 
 		        },
 			error: function() {
-				error_message(save_notice, 'There was an error!!');
+				var message = "Sorry there was an error.";
+
+				if( published.is(':checked')){
+					// uncheck
+					published.removeAttr('checked');
+					message = message + "  The experiment could not be published.";
+				}
+				else{
+					// check
+					published.attr('checked','checked');
+					message = message + "  The experiment could not be unpublished.";
+				}
+
+				error_message(save_notice, message);
 			}
 		});
 		}
@@ -131,20 +155,26 @@ $(document).ready(function(){
 
 	// submit a new note for a step with Ajax
 	$('.new_note').live('submit', function() {
-		var formDiv = $(this).parent();
 		var form = $(this);
-		var note = form.parent().siblings('.step_note_view')
-		$(this).ajaxSubmit( {
+		var note = form.parents('div.step_note_container')
+		var save_notice = $('.save-notice',note);
+		form.ajaxSubmit( {
 			dataType: 'html',
 		  	success: function(data) { 
 		  	  // remove the old content and insert new stuff
 			  note.html(data).show().attr('note','true');
-			  formDiv.hide();
 			  var url = form.attr('action') + '/edit';
-			  $.get(url, function( newForm ){
-			  	formDiv.html(newForm);
-		    	  });
-		        }
+			  /*$.get(url, function( newForm ){
+			  	$('div.step_note_form', note).html(newForm);
+		    	  });*/
+			  success_message($('.step_note_view',note).find('.save-notice') ,"New note created.");
+				
+		        },
+			error: function(){
+				error_message(
+					$('.step_note_form',note).find('.save-notice') , 
+					"Sorry there was an error.  The note could not be created.");
+			}
 		});
 		return false;
 	});
@@ -154,6 +184,7 @@ $(document).ready(function(){
 		var note = $(this).parent().siblings(".step_note_view");
 	 	var image_container = $(this).siblings('.upload_thumb_container');
 		var image = image_container.children('img');
+		var save_notice = $('.save-notice',this)
 
 		$(this).ajaxSubmit( {
 			dataType: 'html',
@@ -191,6 +222,9 @@ $(document).ready(function(){
 			   
 				// replace note view	
 				note.html(data);
+			},
+			error: function(){
+				error_message(save_notice, "Error: image could not be submitted.");
 			}
 		});
 		return false;
@@ -202,6 +236,7 @@ $(document).ready(function(){
 		var step = $(this).parents('div.step' );
 		var thumb = $('.step_edit', step).find('img');
 		var btn  = $(this).parent();
+		var save_notice = $('form.inplace_upload_image',step).find('.save-notice');
 		
 		$(this).siblings('form').ajaxSubmit( {
 			dataType: 'html',
@@ -217,7 +252,11 @@ $(document).ready(function(){
 				btn.fadeOut("slow").remove();
 				// remove image in note view
 				$('.step_view', step).find('img.step_view').parent().remove();
+			},
+			error: function() {
+				error_message( save_notice, "Error: image could not be deleted." );	
 			}
+
 		});
 		return false;
 	});
@@ -249,6 +288,7 @@ $(document).ready(function(){
 	// appear normally in the edit toolbar 
 	$('.btn-step-insert-after').live( 'click', function(){
 		var step = $(this).parents('div.step');
+		var save_notice = $('.step_view',step).find('.save-notice');
 		$(this).siblings('form.button-to').ajaxSubmit({
 			dataType: 'html',
 		  	success: function(data) { 
@@ -256,12 +296,16 @@ $(document).ready(function(){
 			  data = $(data).attr({style: "display: none;"});
 			  step.after(data).next().slideDown("slow");
 			  renumberSteps();
+			},
+			error: function() {
+				error_message(save_notice, "Error: step could not be inserted.");
 			}
 		});
 		return false;
 	});
 	$('.btn-step-insert-before').live( 'click', function(){
 		var step = $(this).parents('div.step');
+		var save_notice = $('.step_view',step).find('.save-notice');
 		$(this).siblings('form.button-to').ajaxSubmit({
 			dataType: 'html',
 		  	success: function(data) { 
@@ -269,13 +313,18 @@ $(document).ready(function(){
    	  		  data = $(data).attr({style: "display: none;"});
 			  step.before(data).prev().slideDown("slow");
 			  renumberSteps();
+			},
+			error: function() {
+				error_message(save_notice, "Error: step could not be inserted.");
 			}
+
 		});
 		return false;
 	});
 
 	$('.btn-step-destroy').live( 'click', function(){
 		var step = $(this).parents('div.step');
+		var save_notice = $('.step_view',step).find('.save-notice');
 		$(this).siblings('form.button-to').ajaxSubmit({
 			dataType: 'html',
 			beforeSubmit: function(){
@@ -286,10 +335,36 @@ $(document).ready(function(){
 			  	step.remove();
 				renumberSteps();
 			  });
+			  },
+			error: function() {
+				error_message(save_notice, "Error: step could not be deleted .");
 			}
 		});
 		return false;
 	});
+	
+	$('.btn-note-delete').live( 'click', function(){
+		var note = $(this).parents('div.step_note_container');
+		var save_notice = $('.edit_note',note).find('.save-notice');
+		$(this).siblings('form.button-to').ajaxSubmit({
+			dataType: 'html',
+			beforeSubmit: function(){
+			   return confirm(
+				'Are you sure you want to delete this note?');},
+		  	success: function(data) { 
+			   // note.html(data);
+			    note.parents('div.step').find('.btn-step-note').trigger('click'); 
+			    setTimeout( function(){
+				    note.html(data);
+			    },3500 );	    
+			  },
+			error: function() {
+				error_message(save_notice, "Error: note could not be deleted.");
+			}
+		});
+		return false;
+	});
+
 
 	// buttons to control notes
         $('.btn-step-note').live( 'click', function(){
@@ -300,12 +375,13 @@ $(document).ready(function(){
 		if( $(this).hasClass('selected') ){
 			$(this).removeClass("selected");
 
-			note_container.slideUp("slow");
-			$('a',step_toolbar).removeClass('shadow');
+			note_container.slideUp("slow", function(){ 
+				$('a',step_toolbar).removeClass('shadow');
+			});
 		}
 		else{
 			// check if the note exists
-			if( note.attr('note') ){
+			if( note_container.attr('note') ){
 				note.show(); form.hide();
 			}
 			else{
@@ -348,6 +424,10 @@ $(document).ready(function(){
 				btn.fadeOut("slow").remove();
 				// remove image in note view
 				$('.step_note_view', note).find('img.step_note').remove();
+			},
+			error: function(){
+				error_message($('.attach_image_to_note',note).find('.save-notice')
+					,"Error: The image could not be deleted");
 			}
 		});
 		return false;

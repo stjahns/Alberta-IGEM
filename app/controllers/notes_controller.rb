@@ -36,11 +36,11 @@ class NotesController < ApplicationController
       if @note.save
          flash[:notice] = 'note saved'
 	 format.html { redirect_to experiment_step_path(@experiment,@step) }
-	 format.js { render(:partial=>'show',:locals=>{:step=>@step,:note=>@note}  )}
+	 format.js { render(:partial=>'note',:locals=>{:step=>@step}  )}
       else
 	 flash[:notice] = 'there was an error saving your note'
 	 format.html { redirect_to experiment_step_path(@experiment,@step) }
-	 format.js { render(:partial=>'show',:locals=>{:note=>@note}  )}
+	 format.js { render(:partial=>'note',:locals=>{:step=>@step}  )}
       end
     end
   end
@@ -64,11 +64,12 @@ class NotesController < ApplicationController
   end
   
   def destroy
-    @note = @step.note.find(params[:id])
+    @note = @step.note
     @note.destroy
     
     respond_to do |format|
       format.html { redirect_to :back }
+      format.js { render(:partial => 'new', :locals=>{:step=>@step, :note=>Note.new })}
     end
   end
   

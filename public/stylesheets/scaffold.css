@@ -41,6 +41,7 @@ margin-bottom:3em ;
 }
 
 span.save-notice {
+	display: none;
 	background:#C7FFC4;
 	margin-left: 0.5em;
 	padding: 0.4em 2em;
@@ -53,16 +54,19 @@ span.save-notice.error-message {
 }
 
 
-.step_note_container {
+div.step_note_container, div.step_note_container p, div.step_note_container form {
 	background:#efefef;
 }
 
+div.step_note_form {
+	display: none;
+}
+/*
 form.new_note{
 	background:#efefef;
 }
-
-p.step_note_container {
-	background:#efefef;
+*/
+div.step_note_container p {
 	margin: 0;
 	padding:1em;
 }
@@ -191,11 +195,15 @@ div.note-toolbar ul {
 	overflow: hidden;
 }
 
-div.note-toolbar li {
+div.note-toolbar ul li {
 	float: right;
 }
 
-div.note-toolbar a:link, div.note-toolbar a:visited {
+div.note-toolbar ul li form {
+	display: none;
+}
+
+div.note-toolbar ul li  a:link, div.note-toolbar ul li a:visited {
 	display: block;
 	font-weight: normal;
 	padding: 4px;
@@ -204,8 +212,9 @@ div.note-toolbar a:link, div.note-toolbar a:visited {
 	margin-left: 2px;
 }
 
-div.note-toolbar a:hover {
-	background-color: #000000
+div.note-toolbar ul li a:hover {
+	background-color: #000000;
+	color: #fff;
 }
 
 

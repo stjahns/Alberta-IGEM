@@ -56,25 +56,8 @@
     
   <% if allowed_to_make_notes? %>
     <div class= "step_note_container" style="display: none;"  >
-    <!-- hide this form, and only show if we click note tab and their is no note or we want to add a note --> 
-      <div class= "step_note_form"  >
-	    <% if step.note %>
-		    <%= render( :partial => 'notes/edit', 
-			       :locals=>{:step => step, :note => step.note}) %> 
-	    <% else %>
-		    <%= render( :partial => 'notes/new', 
-			       :locals=>{:step => step, :note => Note.new}) %>
-		       <% end %>
-       </div>
-
-      <div class= "step_note_view" note=<%=h step.note ? 'true' : '' %> >
-	   <% if step.note %>
-		<%= render( :partial => 'notes/show', 
-				:locals=>{:step=>step, :note=>step.note}) %>
-	  <% end %>	
-      </div >
-
-   </div >
+      <%= render( :partial=>'notes/note', :locals=>{:step=>step} ) %>
+    </div >
   <% end %>
 </div>
 
