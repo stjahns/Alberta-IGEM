@@ -68,8 +68,8 @@ class ImagesController < ApplicationController
 
     respond_to do |format|
       if @image.save
-        flash[:notice] = 'Image was successfully created.'
-        format.html { redirect_to(@image) }
+        format.html {	flash[:notice] = 'Image was successfully created.'
+ 			redirect_to(@image) }
         format.xml  { render :xml => @image, :status => :created, :location => @image }
       else
         format.html { render :action => "new" }
@@ -87,8 +87,8 @@ class ImagesController < ApplicationController
 
     respond_to do |format|
       if @image.update_attributes(params[:image])
-        flash[:notice] = 'Image was successfully updated.'
-        format.html { redirect_to(@image) }
+        format.html { 	flash[:notice] = 'Image was successfully updated.'
+			redirect_to(@image) }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }

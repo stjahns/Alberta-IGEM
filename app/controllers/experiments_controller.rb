@@ -74,8 +74,8 @@ class ExperimentsController < ApplicationController
 
     respond_to do |format|
       if @experiment.save
-        flash[:notice] = 'Experiment was successfully created.'
-        format.html { redirect_to(@experiment) }
+        format.html { 	flash[:notice] = 'Experiment was successfully created.'
+			redirect_to(@experiment) }
         format.xml  { render :xml => @experiment, :status => :created, :location => @experiment }
       else
         format.html { render :action => "new" }
@@ -101,8 +101,8 @@ class ExperimentsController < ApplicationController
     #@experiment = Experiment.find(params[:id])
     respond_to do |format|
       if @experiment.update_attributes(params[:experiment])
-	flash[:notice] = 'Experiment was successfully updated.'
-	format.html { redirect_to(@experiment) }
+	format.html {	flash[:notice] = 'Experiment was successfully updated.'
+ 			redirect_to(@experiment) }
 	format.xml  { head :ok }
 	format.js   { head :ok }
       else
