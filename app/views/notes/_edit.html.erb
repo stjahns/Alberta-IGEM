@@ -29,9 +29,11 @@
 		<li class= "note-toolbar" >
 		<a class="btn-note-delete note-toolbar" href"#">Delete Note</a>
 		</li>
-		<li class= "note-toolbar" >
-		<a class="btn-note-delele-image note-toolbar"<%= 'style= "display: none;"' if note.image.blank? %>  href"#" >Delete Image</a>
+		<% unless note.image.blank? %>
+    <li class= "note-toolbar" >
+		<a class="btn-note-delele-image note-toolbar"  href"#" >Delete Image</a>
 		<%= button_to "Delete Image", image_path(note.image), :method=>:delete, :class=>'btn-delete-image-note', :style=>'display: none;' %>
 		</li>
+    <% end %>
 	</ul>
 </div>

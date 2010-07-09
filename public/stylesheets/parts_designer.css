@@ -30,13 +30,14 @@ div#parts_box{
   overflow:         hidden;
   position:         relative;
   border:           1px solid #999;
-  margin:           2;
   height:           114px;
+  margin-bottom:    -1px;
 }
 ol#parts_list{
   list-style-type:  none;
   float:            left;
   height:           50;
+  width:            650;
   padding:          0;
   margin:           0;
 }
@@ -49,38 +50,39 @@ ol#parts_list{
   text-align:       center;
   z-index:          10;
 }
-.ui-state-hover{
-  background-color: #999;
-  color:            white;
-}
-.ui-state-active{
-  background-color: #333; 
-  color:            white;
-}
 
 
 /* TODO Scroll bars screw with zooming, address this!*/
 
+#parts-row{
+  height: 297px;
+}
+
 #parts-bin{
   float:            left;
+  border:           1px solid #999;
+}
+
+#part-info-box{
+  margin-left:      -1px;
+  width:            586px;
+  height:           295px;
+  float:            left;
+  border:           1px solid #999;
+  padding:          0 0 0 15px;
 }
 
 #part-info{
-  width:            500px;
-  height:           400px;
-  float:            left;
+  margin-left: 20px;
 }
-
 
 #parts-bin-tabs{
-  width:            200px;
+  width:            146px;
 }
-
-
 
 .tab-widget {
   list-style-type:  none;
-  margin:           0 0 0 0px;
+  margin:           0 0 -1 0px;
   padding:          10 5 5 5px;
 }
 .tab-widget li{
@@ -88,20 +90,40 @@ ol#parts_list{
   display:          inline;
   text-align:       center;
   margin:           0;
-  padding:          6;
+  padding:          6 0 6 0;
+  background-color: #666;
 }
 .tab-widget a{
-  padding:          5px 20px 5px 20px;
+  padding:          6px 10px 6px 10px;
+  margin:           0;
+  text-decoration:  none;
+}
+.tab-widget a:visited {
+  color: black;
+}
+.tab-widget a:focus {
+  outline:  none;
+}
+.tab-widget a:hover {
+  background: #666;
+}
+li.ui-tabs-selected a:hover {
+  background: #BBB;
 }
 
+li.ui-tabs-selected{
+  background: #BBB;
+  border:        1px solid #999;
+  border-bottom: 1px solid #BBB;
+}
 ul.parts_bin{
   list-style-type:  none;
-  margin:           0 0 0 0;
+  margin:           0 -1 -1 -1;
   padding:          5;
-  height:           250;
+  height:           252;
   overflow-y:       scroll;
   border:           1px solid #999;
-  background-color: white;
+  background: #BBB;
 
 }
 div#trash {
@@ -112,8 +134,7 @@ div#trash {
   text-align:       center;
 }
 ul.parts_bin li{
-  margin:           3px
-  padding:          1px;
+  margin:           3 3 3 6;
   width:            100px;
   height:           40px;
   text-align:       center;
@@ -170,8 +191,9 @@ div#nav {
 
 
 
-.seqtable{
-  font-size:        10pt;
+.seqtable td{
+  font-size:        9pt;
+  font-family:      'monospace';
 }
 
 .annotation{
@@ -210,21 +232,21 @@ div#nav {
   left:             0;
   width:            50px;
   height:           46px;
-  background-color: gray;
+  background: url(../images/top-left.png);
 }
 #left-side{
   position:         absolute;
   top:              46px;
   width:            50px;
   height:           200px;
-  background-color: gray;
+  background: url(../images/left-side.png);
 }
 #bottom-left{
   position:         absolute;
   top:              240px;
   width:            50px;
   height:           46px;
-  background-color: gray;
+  background: url(../images/bottom-left.png);
 }
   
 #bottom{
@@ -233,7 +255,7 @@ div#nav {
   left:             50px;
   width:            650px;
   height:           46px;
-  background-color: gray;
+  background: url(../images/bottom.png);
 }
 #bottom-right{
   position:         absolute;
@@ -241,7 +263,7 @@ div#nav {
   left:             700px;
   width:            50px;
   height:           46px;
-  background-color: gray;
+  background: url(../images/bottom-right.png);
 }
 #plasmid-mid{
   width:            500px;
@@ -257,12 +279,12 @@ div#nav {
   position:         absolute;
   width:            50px;
   height:           46px;
-  background-color: gray;
+  background: url(../images/plasmid-spacer.png);
 }
 #plasmid-end{
   position:         absolute;
   left:             650px;
   width:            100px;
   height:           46px;
-  background-color: gray;
+  background: url(../images/plasmid-end.png);
 }

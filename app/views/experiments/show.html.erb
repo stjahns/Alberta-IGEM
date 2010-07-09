@@ -11,71 +11,10 @@
 <script src="http://cdn.jquerytools.org/1.2.3/tiny/jquery.tools.min.js"></script>
 <script> //get part background image data
 
-  var orfs;
-  var linkers;
-  var allparts;
-
-  $(document).ready(function(){
-      
-      updatePlasmidDisplay();
-
-      $.ajax({
-        type: 'get',
-        dataType: 'json',
-        url: '/get_part_data',
-        success: function(data){
-          orfs = data.orfs;
-          linkers = data.linkers;
-          allparts= orfs.concat(linkers);
-          
-          //get images
-          $(".part, .byte").css('background-image', function(index, value){
-            for(i in allparts){
-              var byte_id = $(this).attr('byte_id');
-              if ( byte_id.split('_')[1] == allparts[i].id.toString()){
-                return 'url(/images/'+ allparts[i].image_id +'.png)';
-              }
-            }
-          });
-        }
-      })
-
-      //part tooltips
-      $('.part').tooltip({
-        opacity: 0.9,
-      });
-
-      
-  })
-
-  function updatePlasmidDisplay(){
-    var numparts = $("#parts_list").children().length;
-
-    var height = 92 + (-(Math.floor(-numparts/6))-1)*46;
-    if (numparts%6 == 0){
-      //add a row
-      height += 46;
-    }
-
-    $("#left-side").css('height',function(){
-      return height - 92 + 'px';
-    });
-    $("#bottom-left, #bottom-right, #bottom").css('top', function(){
-      return height - 46 + 'px';
-    });
-    $("#plasmid-spacer").css('width', function(){
-      return (5 - numparts%6) * 100 + 'px';
-    });
-    $("#parts_box").css('height', function(){
-      return height + 'px'; 
-    });
-
-    //add line cont. markers? eg ------//
-    //                         //------]
-
-  }
-
-
+  var constructs = [<% @experiment.constructs.each do |const| %>
+                    <%=const.id%>,
+                    <% end %>
+                    ] //array of construct ids
 </script>
 
 <p>
@@ -84,7 +23,7 @@
 </div>
 
 <p>
-  <b>Constructs:</b>
+  <h2>Constructs:</h2>
   <% unless @experiment.constructs.empty? %>
     <%= render :partial => "construct", :collection => @experiment.constructs %>
   <% end %>

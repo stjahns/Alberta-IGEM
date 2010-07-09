@@ -5,12 +5,49 @@ $.ajaxSetup({
   xhr.setRequestHeader("Accept", "text/javascript")}
 })
 
+  var orfs;
+  var linkers;
+  var allparts;
+  // constructs : initialized in experiment/show view
 
 // Define the entry point - when DOM is ready
   
 $(document).ready(function(){
 	
-	
+      updatePlasmidDisplay(0);
+
+      $.ajax({
+        type: 'get',
+        dataType: 'json',
+        url: '/get_part_data',
+        success: function(data){
+          orfs = data.orfs;
+          linkers = data.linkers;
+          allparts= orfs.concat(linkers);
+          
+          //get images
+          $(".part, .byte").css('background-image', function(index, value){
+            for(i in allparts){
+              var byte_id = $(this).attr('byte_id');
+              if ( byte_id.split('_')[1] == allparts[i].id.toString()){
+                return 'url(/images/'+ allparts[i].image_id +'.png)';
+              }
+            }
+          });
+        }
+      })
+
+      $(".part").mouseenter(function(){
+        var con = $(this).attr('construct');
+        $(".part-info." + con ).html($(this).attr('info'));
+        $(".part-info." + con ).show();
+      });
+
+      $(".part").mouseleave(function(){
+        var con = $(this).attr('construct');
+        $(".part-info." + con).hide();
+      });
+
         /*********   ajaxify forms ************************************/
 	// submit the edits for steps with ajaX
 	//$('.inplace_edit_step').each( function() {
@@ -336,6 +373,57 @@ function renumberSteps(){
 	});
 }
 
+
+function updatePlasmidDisplay(placeholders){
+  //must repeat for all constructs
+  for (i in constructs){
+
+
+    var numparts = $(".parts_list." + constructs[i]).children().length - placeholders;
+    
+    if (numparts < 7)
+      var height = 92;
+    else
+      var height = 92 + (-(Math.floor(-numparts/6))-1)*46;
+    //if (numparts%6 == 0){
+      //add a row
+      //height += 46;
+    //}
+
+    $(".left-side." + constructs[i]).css('height',function(){
+      return height - 92 + 'px';
+    });
+
+    $(".bottom-left." + constructs[i] + ", .bottom-right." + constructs[i] + ", .bottom." + constructs[i]).css('top', function(){
+      return height - 46 + 'px';
+    });
+    $(".plasmid-spacer." + constructs[i]).css('width', function(){
+      if (numparts == 0)
+        return'650px';
+      if (numparts % 6 == 0)
+        return 0 + 'px';
+      else
+        return (6 - numparts%6) * 100 + 'px';
+    }).css('top', function(){
+      return height - 92 + 'px';
+    }).css('left', function(){
+      return (numparts % 6  ) * 100 + 50 + 'px';
+    });
+    $(".plasmid-end." + constructs[i]).css('top', function(){
+      return height - 92 + 'px';
+    });
+    $(".parts_box." + constructs[i]).css('height', function(){
+      return height + 'px'; 
+    });
+    $(".parts_list." + constructs[i]).css('height', function(){
+      return height - 46 + 'px';
+    });
+
+    //add line cont. markers? eg ------//
+    //                         //------]
+
+  }
+}
 
 // when we ask for html we need rails to use respond to js so we need:
 $.ajaxSettings.accepts.html = $.ajaxSettings.accepts.script; 

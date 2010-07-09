@@ -45,6 +45,8 @@ ActionController::Routing::Routes.draw do |map|
      experiments.resources :constructs
   end 
 
+  map.resources :step_generators
+
 
   # named route for getting part data for construct/experiment views
   map.part_data '/get_part_data', :controller => :constructs, :action => :get_data

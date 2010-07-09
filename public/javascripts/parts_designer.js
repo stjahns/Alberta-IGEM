@@ -36,7 +36,7 @@
 
       $("*").disableSelection();
 
-      //$("#parts-bin-tabs").tabs();
+      $("#parts-bin-tabs").tabs();
       
       $(".byte").draggable({ 	
 
@@ -45,7 +45,7 @@
         helper: "clone"
 
       });
-
+/*
       $("#trash").droppable({
         activeClass: 'ui-state-hover',
         hoverClass: 'ui-state-active',
@@ -57,7 +57,17 @@
           $("#parts_list").sortable('refresh');
         }
       }); 
-
+*/
+      $("#parts-row").droppable({
+        accept: '#parts_list >li',
+        tolerace: 'pointer',
+        drop: function(event, ui) {
+          ui.draggable.attr()
+          ui.draggable.remove();
+          $("#parts_list").sortable('refresh');
+        }
+      });
+      
 /*
       $(".part").tooltip({
         opacity: 0.9, 
@@ -68,6 +78,9 @@
         }
       });
 */
+      $(".part, .byte").mouseenter(function(){
+        $("#part-info").html($(this).attr('info'));
+      });
     
   }); 
 
@@ -492,6 +505,8 @@ function initConstructSortable(){
       $("ol#parts_list").sortable({
 
         connectWith:  '#trash',
+        helper: 'clone',
+        appendTo: 'body',
         tolerance: 'pointer',
         start: function(){
           updatePlasmidDisplay(1);
@@ -512,7 +527,9 @@ function initConstructSortable(){
           //if dropped in a new part from bin
           updatePlasmidDisplay(0);
           $('ol#parts_list > .byte').each(function(){
-            $(this).attr('title', $(this).attr('popup'));
+            $(this).mouseenter(function(){
+              $("#part-info").html($(this).attr('info'));
+            });
             $(this).addClass('part').removeClass('byte').text('');
             /*
             $(this).tooltip({
@@ -533,8 +550,11 @@ function initConstructSortable(){
 }
   function updatePlasmidDisplay(placeholders){
     var numparts = $("#parts_list").children().length - placeholders;
-
-    var height = 92 + (-(Math.floor(-numparts/6))-1)*46;
+    
+    if (numparts < 7)
+      var height = 92;
+    else
+      var height = 92 + (-(Math.floor(-numparts/6))-1)*46;
     //if (numparts%6 == 0){
       //add a row
       //height += 46;
@@ -543,10 +563,13 @@ function initConstructSortable(){
     $("#left-side").css('height',function(){
       return height - 92 + 'px';
     });
+
     $("#bottom-left, #bottom-right, #bottom").css('top', function(){
       return height - 46 + 'px';
     });
     $("#plasmid-spacer").css('width', function(){
+      if (numparts == 0)
+        return'650px';
       if (numparts % 6 == 0)
         return 0 + 'px';
       else
