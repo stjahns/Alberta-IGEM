@@ -1,0 +1,15 @@
+<% if is_owner_of( experiment ) %>
+		<div class="lab-book">
+		<table>
+				<tr>
+					<td><h2><%=h experiment.title %></h2></td>
+					<td class="date"><%=h "Last save: " + "#{experiment.updated_at}".split(/ /)[0] %></td>
+				</tr>
+				<tr>
+					<td><input type="checkbox"> Published</td>
+					<td class="status complete" ><input type="checkbox"> Completed</td>
+				</tr>
+		</table>
+		<%= more_text experiment.description, 150 %>
+</div>
+<% end %>

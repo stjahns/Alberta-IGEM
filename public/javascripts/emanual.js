@@ -433,6 +433,17 @@ $(document).ready(function(){
 		return false;
 	});
 
+	$('a.more').live('click', function(){
+	       	$(this).hide().siblings('span.more').show();
+		return false;
+	});
+	
+	$('a.less').live('click', function(){
+			$(this).parent('span.more').hide()
+			.siblings('a.more').show();
+			return false;
+	});
+
 });	
 
 function publish_status_changed(){

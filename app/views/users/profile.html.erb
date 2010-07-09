@@ -6,6 +6,10 @@
  <h2>Your experiments</h2>
  
 </p>
+<div id="lab-book">
+		<%= render( :partial=> 'experiments/description', :collection => @experiments, :as=>:experiment ) %>
+</div>
+<p>
 
 <table>
   <tr>

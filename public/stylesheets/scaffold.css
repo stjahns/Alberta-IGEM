@@ -225,6 +225,38 @@ img.step_note {
 	margin-top: 0;
 }
 
+/* styling for profile page */
+div#lab-book table {
+	width: 100%;
+}
+div#lab-book h2 {
+	margin:0;
+	margin-bottom: 0.2em;
+}
+div#lab-book td.date {
+	text-align: right;
+	font-style:italic;
+	color: gray;
+}
+div#lab-book td.status {
+	text-align: right;
+}
+div#lab-book td.status.complete{
+	color:green;
+}
+div#lab-book td.status.inProgress {
+	color:yellow;
+}
+div.lab-book {
+	border-bottom: #efefef solid 2px;
+}
+span.more {
+	display: none;
+}
+
+
+
+
 
 
 #container {
