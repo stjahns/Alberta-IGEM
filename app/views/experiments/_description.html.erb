@@ -1,15 +1,24 @@
-<% if is_owner_of( experiment ) %>
-		<div class="lab-book">
-		<table>
-				<tr>
-					<td><h2><%=h experiment.title %></h2></td>
-					<td class="date"><%=h "Last save: " + "#{experiment.updated_at}".split(/ /)[0] %></td>
-				</tr>
-				<tr>
-					<td><input type="checkbox"> Published</td>
-					<td class="status complete" ><input type="checkbox"> Completed</td>
-				</tr>
-		</table>
-		<%= more_text experiment.description, 150 %>
+<div class="lab-book">
+	<table>
+		<tr>
+			<td><h2>
+					<a href="<%=h experiment_path(experiment) %>" ><%=h experiment.title %></a></h2></td>
+			<td class="date"><%=h "Last save: " + "#{experiment.updated_at}".split(/ /)[0] %></td>
+		</tr>
+		<tr>
+		<% if is_owner_of( experiment ) %>
+		<td><% form_for(experiment, :html=>{:class=>'publish-experiment'} ) do |f| %>
+			<%= f.error_messages %>
+			<%= f.check_box :published %>
+    			<%= f.label :published %>
+			<span class= "save-notice" style= "display: none;"></span>
+
+			<% end %>
+		</td>
+
+			<td class="status complete" ><input type="checkbox"> Completed</td>
+		<% end %>
+		</tr>
+	</table>
+	<%= more_text experiment.description, 150 %>
 </div>
-<% end %>

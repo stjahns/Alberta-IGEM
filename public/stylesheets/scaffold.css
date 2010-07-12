@@ -226,36 +226,122 @@ img.step_note {
 }
 
 /* styling for profile page */
-div#lab-book table {
+div.lab-book table {
 	width: 100%;
 }
-div#lab-book h2 {
+div.lab-book h2 {
 	margin:0;
 	margin-bottom: 0.2em;
+
 }
-div#lab-book td.date {
+div.lab-book h2 a:link, div.lab-book h2 a:visited {
+	display:inline;
+	color:black;
+	text-decoration:none;
+	padding-right:23px;
+	background-image:url(../images/arrow.png);
+	background-repeat: no-repeat;
+	background-position:right; 
+
+}
+div.lab-book h2 a:hover {
+	background-color: #efefef;
+	background-image:url(../images/arrow2.png);
+}
+
+
+div.lab-book td.date {
 	text-align: right;
 	font-style:italic;
 	color: gray;
 }
-div#lab-book td.status {
+div.lab-book td.status {
 	text-align: right;
 }
-div#lab-book td.status.complete{
+div.lab-book td.status.complete{
 	color:green;
 }
-div#lab-book td.status.inProgress {
+div.lab-book td.status.inProgress {
 	color:yellow;
 }
 div.lab-book {
 	border-bottom: #efefef solid 2px;
+	margin-bottom: 1em;
 }
 span.more {
 	display: none;
 }
 
+/*toolbar for switching between tabs on profile page*/
+div#profile{
+}
 
+div#lab-book {
+	display: none;
+}
 
+div#profile-toolbar {
+	border-bottom:0.25em solid #efefef ;
+	clear:both;
+	margin-top: 0.25em;
+	margin-bottom: 1em;
+} 
+div#profile-toolbar ul {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;	
+	overflow: hidden;
+
+}
+div#profile-toolbar ul li {
+	float: left;
+}
+div#profile-toolbar ul li#more-experiments-tab{
+	float:right;
+}
+
+/*div#profile-toolbar ul li a {
+	background-image: url(../images/tab-shadow.png);
+	background-repeat: repeat-x;
+	background-position: bottom;
+
+}
+*/
+
+div#profile-toolbar ul li a:link, div#profile-toolbar ul li a:visited {
+	display: block;
+	font-weight: normal;
+	padding: 4px;
+	background-color: #efefef;
+	text-decoration: none;
+	margin-right: 2px;
+	background-image: url(../images/tab-shadow.png);
+	background-repeat: repeat-x;
+	background-position: bottom;
+}
+div#profile-toolbar ul li a.selected:link, div#profile-toolbar ul li a.selected:visited  {
+	background-color: white;
+	background-image: none;
+	color: #000;
+	border: #efefef solid 2px;
+	border-bottom-width: 0;
+}
+div#profile-toolbar ul li a:hover {
+	background-image: none;
+	background-color: #000000;
+	color: #fff;
+}
+div#profile-toolbar ul li form {
+	display: none;
+}
+div#profile table tr td {
+	vertical-align:top;
+	padding-left: 1em;
+}
+div#profile table tr td.title {
+	padding: 1px;
+	font-weight:bold;	
+}
 
 
 

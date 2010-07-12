@@ -151,6 +151,40 @@ $(document).ready(function(){
 		}
 	});
 
+	$('.publish-experiment').live('change',function(){
+		var save_notice = $('.save-notice',this);
+		var published = $("#experiment_published",this);
+		if( publish_status_changed() ){
+			//submit change
+			$(this).ajaxSubmit( {
+					dataType: 'html',
+		  	success: function(data,statusText ) { 
+			  	// status changed to published
+				var message = published.is(':checked') ? 
+			       		"Experiment published" :
+					"Experiment unpublished" ;	
+				success_message( save_notice, message);
+
+		        },
+			error: function() {
+				var message = "Sorry there was an error.";
+
+				if( published.is(':checked')){
+					// uncheck
+					published.removeAttr('checked');
+					message = message + "  The experiment could not be published.";
+				}
+				else{
+					// check
+					published.attr('checked','checked');
+					message = message + "  The experiment could not be unpublished.";
+				}
+			error_message(save_notice, message);
+			}
+		});
+		}
+	});
+
 
 
 	// submit a new note for a step with Ajax
@@ -439,10 +473,28 @@ $(document).ready(function(){
 	});
 	
 	$('a.less').live('click', function(){
-			$(this).parent('span.more').hide()
-			.siblings('a.more').show();
-			return false;
+		$(this).parent('span.more').hide()
+		.siblings('a.more').show();
+		return false;
 	});
+
+	$('#profile-tab').click( function(){
+		$('#lab-book').hide();
+		$('#profile').show();
+		$('a','#profile-toolbar').removeClass('selected');
+		$(this).addClass('selected');
+		return false;
+	});
+	
+	$('#lab-book-tab').click( function(){
+		$('#profile').hide();
+		$('#lab-book').show();
+		$('a','#profile-toolbar').removeClass('selected');
+		$(this).addClass('selected');
+		return false;
+	});
+	
+
 
 });	
 

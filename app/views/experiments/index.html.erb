@@ -1,5 +1,7 @@
 <h1>Listing experiments</h1>
 
+<%= render :partial=>'description', :collection => @experiments, :as=>:experiment %>
+
 <table>
   <tr>
     <th>Title</th>
