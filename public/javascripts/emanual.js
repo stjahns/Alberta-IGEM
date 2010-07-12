@@ -39,13 +39,15 @@ $(document).ready(function(){
 
       $(".part").mouseenter(function(){
         var con = $(this).attr('construct');
-        $(".part-info." + con ).html($(this).attr('info'));
-        $(".part-info." + con ).show();
+        //$(".part-info." + con ).html($(this).attr('info'));
+        var id = $(this).attr('byte_id').split('_')[1];
+        $(".part-info." + con ).contents().replaceWith($("#info_" + id).clone());
+        $(".part-info." + con ).parent().show();
       });
 
       $(".part").mouseleave(function(){
         var con = $(this).attr('construct');
-        $(".part-info." + con).hide();
+        $(".part-info." + con).parent().hide();
       });
 
         /*********   ajaxify forms ************************************/

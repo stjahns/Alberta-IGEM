@@ -1,7 +1,15 @@
-.part-info{
-  border:   1px solid #999;
+.part-info-box{
+  float:  left;
   margin-top: -1px;
-  padding:  0 0 0 20px;
+  border:   1px solid #999;
+  padding-left: 10px;
+}
+.part-info{
+}
+.byte_desc_img{
+  float:    left;
+  margin-right: 10px;
+  margin-bottom: 10px;
 }
 
 div.parts_box{

@@ -79,7 +79,9 @@
       });
 */
       $(".part, .byte").mouseenter(function(){
-        $("#part-info").html($(this).attr('info'));
+        //$("#part-info").html($(this).attr('info'));
+        var id = $(this).attr('byte_id').split('_')[1];
+        $("#part-info").contents().replaceWith($("#info_" + id).clone());
       });
     
   }); 
@@ -528,7 +530,9 @@ function initConstructSortable(){
           updatePlasmidDisplay(0);
           $('ol#parts_list > .byte').each(function(){
             $(this).mouseenter(function(){
-              $("#part-info").html($(this).attr('info'));
+              //$("#part-info").html($(this).attr('info'));
+              var id = $(this).attr('byte_id').split('_')[1];
+              $("#part-info").contents().replaceWith($("#info_" + id).clone());
             });
             $(this).addClass('part').removeClass('byte').text('');
             /*

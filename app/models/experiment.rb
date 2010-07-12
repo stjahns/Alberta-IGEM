@@ -47,6 +47,11 @@ class Experiment < ActiveRecord::Base
       new_construct = construct.clone
       new_construct.experiment = new_experiment
       new_construct.save
+      construct.parts.each do |part|
+        new_part = part.clone
+        new_part.construct = new_construct
+        new_part.save
+      end
     end
 
     return new_experiment

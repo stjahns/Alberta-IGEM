@@ -3,29 +3,6 @@ body{
 }
 
 
-/*
-h1#title {
-  position:         absolute;
-  top:              -12px;
-  left:             8px;
-  width:            1158px;
-  text-align:       center;
-  background-color: #EEEEEE;
-  border: 1px solid #CCCCCC;
-}
-*/
-/*
-div#construct{
-  position:         absolute;
-  top:              53px;
-  left:             266px;
-  height:           200px;
-  width:            900px;
-  border:           1px solid #AAA;
-  text-align:       center;
-}
-*/
-
 div#parts_box{
   overflow:         hidden;
   position:         relative;
@@ -51,9 +28,6 @@ ol#parts_list{
   z-index:          10;
 }
 
-
-/* TODO Scroll bars screw with zooming, address this!*/
-
 #parts-row{
   height: 297px;
 }
@@ -70,10 +44,15 @@ ol#parts_list{
   float:            left;
   border:           1px solid #999;
   padding:          0 0 0 15px;
+  overflow-y:       auto;
 }
 
 #part-info{
-  margin-left: 20px;
+}
+
+.byte_desc_img{
+  float:      left;
+  margin: 0 10 10 0px;
 }
 
 #parts-bin-tabs{
@@ -152,31 +131,6 @@ ul.parts_bin li{
   color:            #FFF;
 }
 
-
-
-/*
-div#parts_bin{
-  position:         absolute;
-  top:              53px;
-  left:             8px;
-  height:           500px;
-  width:            255px;
-  border:           1px solid #AAA;
-  text-align:       center;
-}
-*/
-
-/*
-div#sequence_box {
-  position:         absolute;
-  text-align:       center;
-  top:              260px;
-  left:             266px;
-  height:           293px;
-  width:            900px;
-  border:           1px solid #AAA;
-}
-*/
 div#sequence {
   text-align:       left;
   white-space:      nowrap;

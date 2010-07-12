@@ -13,7 +13,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :users
 
   #map annoations as nested resource of biobytes
-  map.resources :bio_bytes, :member => { :upload => :post, :update => :post } do |bytes|
+  map.resources :bio_bytes, :member => { :upload => :post, :upload_desc_img => :post, :update => :post } do |bytes|
     bytes.resources :annotations
   end
 

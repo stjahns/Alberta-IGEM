@@ -88,6 +88,29 @@ class BioBytesController < ApplicationController
 
   end
 
+  def upload_desc_img
+
+    @byte = BioByte.find(params[:id])
+
+    unless @byte.bio_byte_image.blank?
+      unless @byte.bio_byte_image.image.blank?
+        @byte.bio_byte_image.image.destroy
+      end
+      @byte.bio_byte_image.destroy
+    end
+
+    @image = Image.new(params[:image])
+    @image.save
+    @byte.reload
+    @byte.create_bio_byte_image
+    @byte.bio_byte_image.image_id = @image.id
+    @byte.bio_byte_image.save
+    @byte.save
+
+    redirect_to edit_bio_byte_path(@byte)
+
+  end
+
   private
 
   def is_admin

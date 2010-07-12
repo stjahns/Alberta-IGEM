@@ -15,7 +15,7 @@
 
 </table>
 
-<p>Image:</p>
+<p>Icon Image:</p>
 <% unless @byte.image %>
   <p>[NONE]</p>
 <% else %>
@@ -26,6 +26,19 @@
   <p><%= f.file_field :image_file %></p>
   <p><%= f.submit 'Upload' %></p>
 <% end %>  
+
+<p>Description Image:</p>
+<% unless @byte.bio_byte_image and @byte.bio_byte_image.image%>
+  <p>[NONE]</p>
+<% else %>
+  <p><%= image_tag image_path(@byte.bio_byte_image.image) %></p> 
+<% end %>
+
+<% form_for @image, :url => upload_desc_img_bio_byte_path(@byte), :html => { :multipart => true, :method => 'post'} do |f| %>
+  <p><%= f.file_field :image_file %></p>
+  <p><%= f.submit 'Upload' %></p>
+<% end %>  
+
 
 <h3>Annotations:</h3>
 <table>
