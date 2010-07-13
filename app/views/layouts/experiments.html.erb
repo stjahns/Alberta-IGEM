@@ -15,6 +15,25 @@
   <%= javascript_include_tag 'emanual' %>
 </head>
 <body.background>
+	<div id=navBar >
+		<div id="nav-right-corner"></div>
+		<div id="nav-left-corner"></div>
+		<ul>
+		<%= yield :nav %>
+		<span id="user-nav">
+		<% if logged_in? %>
+			<li><h2><%= current_user.login %></h2></li>
+
+			<li><%= link_to "Profile", profile_path(current_user) %></a></li>
+			<li><%= link_to "Logout", logout_path %></a></li>
+				<% else %>
+		<li><%= link_to login_path %></li>
+		<% end %>
+		</span>
+		
+	</ul>
+	<div id="btn-hide-nav"><a href='#'></a></div>
+	</div>
 	<div id= container>
 	<p style="color: green"><%= flash[:notice] %></p>
 	<%= yield %>

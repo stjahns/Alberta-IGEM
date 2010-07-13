@@ -384,13 +384,120 @@ div#profile table tr td.title {
 	font-weight:bold;	
 }
 
+/* styling for navigation bar */
+div#navBar {
+	position: fixed;
+	margin-left:-520px;
+	left: 50%;
+	top: 0;
+	height: 26px;
+	width: 1040px;
+	padding-left: 0px;
+	padding-right: 0px;
+	color: white;
+	background-color: black;
+	background-image: none;
+	z-index: 1;
 
+}
+div#nav-right-corner{
+	background-image: url(../images/rcorner.png);
+	float: right;
+	height: 26px;
+	width: 26px;
+	margin-right:-26px;
+	background-color:transparent; 
+
+}
+div#nav-left-corner{
+	background-image: url(../images/lcorner.png);
+	float: left;
+	height: 26px;
+	width: 26px;
+	margin-left:-26px;
+	background-color:transparent;
+}
+div#btn-hide-nav {
+	float:left;
+	background-color: transparent;	
+	margin-left: 30px;
+}
+div#btn-hide-nav a:link, div#btn-hide-nav a:visited {
+	display:block;
+	width:58px;
+	height:19px;
+	background-image: url(../images/slideUp.png);
+}
+div#btn-hide-nav a:hover {
+	display:block;
+	background-color:transparent;
+	width:58px;
+	height:19px;
+	background-image: url(../images/slideUphover.png);
+}
+div#btn-hide-nav a.slid:link, div#btn-hide-nav a.slid:visited {
+	display:block;
+	width:58px;
+	height:19px;
+	background-image: url(../images/slideDown.png);
+}
+div#btn-hide-nav a.slid:hover {
+	display:block;
+	background-color:transparent;
+	width:58px;
+	height:19px;
+	background-image: url(../images/slideDownhover.png);
+}
+
+div#navBar ul {
+	background-color:black;
+	color: white;
+	background-image: none;
+}
+div#navBar ul li{
+	float: left;
+}
+div#navBar ul span#user-nav li{
+	float: right;
+}
+div#navBar ul {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;	
+	overflow: hidden;
+}
+
+div#navBar ul li a {
+	text-decoration: none;
+	display: block;
+	font-weight: normal;
+	padding: 4px;
+	color: #efefef;
+	text-decoration: none;
+	margin-right: 2px;
+}
+div#navBar ul li a:link, div#navBar ul li a:visited {
+}
+div#navBar ul li a:hover {
+	color: white;
+	font-weight: bold;
+}
+div#navBar ul li h2 {
+	display: block;
+	margin: 2px;
+	font-size: 18px;
+}
 
 #container {
 	width: 750px;
  	margin-right: auto;
   	margin-left: auto;
+	margin-top: 4em;
   	position: relative;
+}
+
+body {
+	margin-top: 0;
 }
 
 body, p, ol, ul, td {

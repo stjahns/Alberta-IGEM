@@ -553,6 +553,23 @@ $(document).ready(function(){
 		$(this).addClass('selected');
 		return false;
 	});
+
+	$('#btn-hide-nav a').click( function(){
+		btn = $(this);
+		if( btn.hasClass('slid') ){
+			btn.removeClass('slid');
+			$('div#navBar').animate(
+			{top: '+=26'},
+			500 );
+		}
+		else{
+			btn.addClass('slid');
+			$('div#navBar').animate(
+			{top: '-=26'},
+			500);
+		}
+	
+	});
 	
 
 
