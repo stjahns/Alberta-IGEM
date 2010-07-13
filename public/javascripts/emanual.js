@@ -32,6 +32,25 @@ $(document).ready(function(){
 		});
 		return false;
 	});
+
+	$('.inplace_edit_step').live('submit', function() {
+		var exp = $( "div.lab-book" ,$(this).parents('div.experiment-description-container'));
+		var save_notice = $('.save-notice', this);
+		var form = $(this).parent();
+		$(this).ajaxSubmit( {
+			dataType: 'html',
+		  	success: function(data) { 
+		  	 // remove the old content and insert new stuff
+				exp.html(data);
+				// inform user of success
+				success_message(save_notice,"Experiment updated succesfully.");
+			  },
+			error: function() {
+				error_message(save_notice, "Error: The  could experiment could not be updated.");
+			}
+		});
+		return false;
+	});
 	
 
 	// submit an image for a step with ajaX
@@ -466,6 +485,47 @@ $(document).ready(function(){
 		});
 		return false;
 	});
+	$(".btn-edit-experiment").live( 'click', function() {
+		exp  = $(this).parents('div.experiment-description-container');
+		view = $('div.lab-book',exp ); 
+		edit = $('div.edit-experiment', exp);
+		if( view.is(':visible') ){
+			view.hide();
+			edit.show();
+			$(this).html('Show');
+		}
+		else{
+			edit.hide();
+			view.show();
+			$(this).html('Edit');
+		}
+		return false;
+	});
+	
+	$('.btn-delete-experiment').live( 'click', function(){
+		var exp = $(this).parents('div.experiment-description-container');
+		var save_notice = $('div.lab-book',exp).find('.save-notice');
+		$(this).siblings('form.button-to').ajaxSubmit({
+			dataType: 'html',
+			beforeSubmit: function(){
+			   return confirm(
+				'Are you sure you want to delete this note?');},
+		  	success: function(data) { 
+			   exp.slideUp(function(){
+				exp.remove();	   
+			   });
+			  },
+			error: function() {
+				error_message(save_notice, "Error: experiment could not be deleted.");
+			}
+		});
+		return false;
+	});
+
+
+
+
+
 
 	$('a.more').live('click', function(){
 	       	$(this).hide().siblings('span.more').show();

@@ -16,8 +16,7 @@ class ExperimentsController < ApplicationController
   # GET /experiments.xml
     def index
     #TODO only the admin experiments here, the users experiments listed on profile
-     @experiments = Experiment.all
-   # @experiments = current_user.experiments
+     @experiments = User.find_by_login('admin').experiments;
 
     respond_to do |format|
       format.html # index.html.erb
@@ -51,6 +50,10 @@ class ExperimentsController < ApplicationController
   # GET /experiments/1/edit
   def edit
    # @experiment = Experiment.find(params[:id])
+   respond_to do |format|
+   	format.html
+	format.js { render :partial => 'edit', locals =>{ :experiment=>@experiment}}
+   end
   end
 
   # GET /experiments/add_step/1
@@ -84,6 +87,7 @@ class ExperimentsController < ApplicationController
     end
   end
 
+  #TODO make this into a post and add ajax to it
   def clone 
     old_exp = Experiment.find(params[:id])
     @experiment = old_exp.clone_experiment_for( current_user )
@@ -91,6 +95,7 @@ class ExperimentsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to(experiments_url) }
       format.xml  { head :ok }
+      format.js	  { render :partial =>'description', :locals=>{:experiment=>@experiment} }
     end
   end
 
@@ -125,6 +130,7 @@ class ExperimentsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to(experiments_url) }
       format.xml  { head :ok }
+      format.js	  { head :ok }
     end
 
   end

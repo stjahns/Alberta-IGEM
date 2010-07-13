@@ -1,0 +1,15 @@
+<% if is_owner_of( experiment ) %>
+	<% form_for(experiment,:html=>{
+	  :class => "edit-experiment"} ) do |f| %>
+		<%= f.error_messages %>
+		<h2><%= f.text_field :title %></h2>
+		<p class= 'description' >
+		    <%= f.text_area :description %>
+		</p>
+		<p><%= f.submit 'Save' %>
+		<%= save_notice %>
+		</p>
+    <% end %>
+<% end %>
+
+

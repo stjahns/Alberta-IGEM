@@ -265,12 +265,53 @@ div.lab-book td.status.inProgress {
 	color:yellow;
 }
 div.lab-book {
-	border-bottom: #efefef solid 2px;
-	margin-bottom: 1em;
 }
 span.more {
 	display: none;
 }
+div.edit-experiment {
+	display: none;
+}
+
+/*toolbar for experiments in lab-book listings*/
+div.experiment-toolbar {
+	clear: both;
+	background-color: white;
+	border-top: 2px solid #efefef;
+	margin-bottom: 2em;
+
+}
+div.experiment-toolbar ul {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+}
+
+div.experiment-toolbar ul li {
+	float: right;
+}
+
+div.experiment-toolbar ul li form {
+	display: none;
+}
+
+div.experiment-toolbar ul li a:link, div.experiment-toolbar ul li a:visited {
+	display: block;
+	color: #666;
+	font-weight: normal;
+	padding: 4px;
+	background-color: #efefef;
+	text-decoration: none;
+	margin-left: 2px;
+}
+
+div.experiment-toolbar ul li a:hover {
+	background-color: #000000;
+	color: #fff;
+}
+
+
 
 /*toolbar for switching between tabs on profile page*/
 div#profile{

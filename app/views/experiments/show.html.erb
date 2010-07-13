@@ -1,11 +1,13 @@
 <div id= "experiment-title">
 <h1><%=h @experiment.title %></h1>
 <h2><%=h @experiment.authour %></h2>
+<% if is_owner_of( @experiment ) %>
 <% form_for(@experiment, :html=>{:id=>'publish'} ) do |f| %>
   <%= f.error_messages %>
     <%= f.check_box :published %>
     <%= f.label :published %>
     <span class= "save-notice" style= "display: none;"></span>
+    <% end %>
 <% end %>
 
 <script src="http://cdn.jquerytools.org/1.2.3/tiny/jquery.tools.min.js"></script>
@@ -93,11 +95,14 @@
   </p>
 </p>
 
-<% unless @experiment.steps.empty? %>
+<% if @experiment.steps.empty? %>
+	<div id="add-first-step">
+		<a href="#">Click Here to add a step and get started, making your experiment</a>
+	</div>
+<% else %>
     <%= render :partial => "step", :collection => @steps %>
 <% end %>
 
-<%= link_to 'Add_Step', new_experiment_step_path(@experiment) %> |
 <%= link_to 'Edit Description', edit_experiment_path(@experiment) %> |
 <%= link_to 'Edit Steps', experiment_steps_path(@experiment) %> |
 <%= link_to 'List experiments', experiments_path %>

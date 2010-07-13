@@ -177,8 +177,7 @@ class StepsController < ApplicationController
 	     else
 	       messge = 'step not inseted'
 	     end 
-	     format.html {	flash{:notice] = message  
-		          	redirect_to experiment_steps_path(@experiment) }
+	     format.html {  redirect_to experiment_steps_path(@experiment)    }
 	     format.js   { render( :partial=>'experiments/step', 
 		:locals=>{:step=>@step,:experiment=>@experiment} )}
      end 
