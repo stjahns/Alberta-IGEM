@@ -1,4 +1,10 @@
 ActionController::Routing::Routes.draw do |map|
+  map.resources :glossaries
+
+  map.resources :definitions
+
+  map.resources :glossaries
+
 
   map.resources :encyclopaedias
 
