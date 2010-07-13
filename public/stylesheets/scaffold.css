@@ -361,7 +361,6 @@ div#profile-toolbar ul li a:link, div#profile-toolbar ul li a:visited {
 	background-position: bottom;
 }
 div#profile-toolbar ul li a.selected:link, div#profile-toolbar ul li a.selected:visited  {
-	background-color: white;
 	background-image: none;
 	color: #000;
 	border: #efefef solid 2px;
@@ -391,21 +390,30 @@ div#navBar {
 	left: 50%;
 	top: 0;
 	height: 26px;
-	width: 1040px;
-	padding-left: 0px;
-	padding-right: 0px;
+	width: 980px;
+	padding-left: 30px;
+	padding-right: 30px;
 	color: white;
 	background-color: black;
 	background-image: none;
 	z-index: 1;
 
 }
+div#navBar input {
+	font-size: 10px;
+	margin-right: 5px;
+	border: 1px solid gray;
+	width: 133px;
+	height: 13px;
+	margin-top: 1px;
+	margin-bottom: 1px;	
+}
 div#nav-right-corner{
 	background-image: url(../images/rcorner.png);
 	float: right;
 	height: 26px;
 	width: 26px;
-	margin-right:-26px;
+	margin-right:-56px;
 	background-color:transparent; 
 
 }
@@ -414,13 +422,13 @@ div#nav-left-corner{
 	float: left;
 	height: 26px;
 	width: 26px;
-	margin-left:-26px;
+	margin-left:-56px;
 	background-color:transparent;
 }
 div#btn-hide-nav {
 	float:left;
 	background-color: transparent;	
-	margin-left: 30px;
+	margin-left: 0px;
 }
 div#btn-hide-nav a:link, div#btn-hide-nav a:visited {
 	display:block;

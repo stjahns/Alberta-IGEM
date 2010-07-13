@@ -9,7 +9,53 @@ $.ajaxSetup({
 // Define the entry point - when DOM is ready
   
 $(document).ready(function(){
+	// check the state of the navbar in the cookie and restore it
+	if($.cookie('nav') == 'collapsed'){
+		$('#btn-hide-nav a').addClass('slid')
+		$('div#navBar').css({top: function(index,value){
+			return -26;}
+		});
+	}
+
+	// slide the nav bar up and down and store its state in a cookie
+	$('#btn-hide-nav a').click( function(){
+		btn = $(this);
+		if( btn.hasClass('slid') ){
+			btn.removeClass('slid');
+			$.cookie('nav','expanded');
+			$('div#navBar').animate(
+			{top: '+=26'},
+			500 );
+		}
+		else{
+			btn.addClass('slid');
+			$.cookie('nav','collapsed');
+			$('div#navBar').animate(
+			{top: '-=26'},
+			500);
+		}
 	
+	});
+
+
+
+	//submit login form in nav bar if the user pushes enter
+	//in the form
+	$('#navBar form').keydown(function(event){
+		if(event.keyCode == '13'){
+//			$(this).submit();
+			$(this).ajaxSubmit({
+			dataType: 'html',
+		  	success: function(data) { 
+				location.reload();
+				//success_message(save_notice,"Step updated succesfully.");
+			  },
+			error: function() {
+				error_message(save_notice, "Error: The step could not be updated.");
+			}
+			});
+		}
+	});
 	
         /*********   ajaxify forms ************************************/
 	// submit the edits for steps with ajaX
@@ -554,22 +600,8 @@ $(document).ready(function(){
 		return false;
 	});
 
-	$('#btn-hide-nav a').click( function(){
-		btn = $(this);
-		if( btn.hasClass('slid') ){
-			btn.removeClass('slid');
-			$('div#navBar').animate(
-			{top: '+=26'},
-			500 );
-		}
-		else{
-			btn.addClass('slid');
-			$('div#navBar').animate(
-			{top: '-=26'},
-			500);
-		}
-	
-	});
+
+
 	
 
 

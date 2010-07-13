@@ -12,6 +12,7 @@
   <%= javascript_include_tag 'jquery-ui' %>
   <%= javascript_include_tag 'jrails' %>
   <%= javascript_include_tag 'jquery.form' %>
+  <%= javascript_include_tag 'jquery.cookie' %>
   <%= javascript_include_tag 'emanual' %>
 </head>
 <body.background>
@@ -24,10 +25,18 @@
 		<% if logged_in? %>
 			<li><h2><%= current_user.login %></h2></li>
 
-			<li><%= link_to "Profile", profile_path(current_user) %></a></li>
+			<li><%= link_to "Profile", profile_path(current_user.login) %></a></li>
 			<li><%= link_to "Logout", logout_path %></a></li>
-				<% else %>
-		<li><%= link_to login_path %></li>
+		<% else %>
+			<% form_tag session_path do -%>
+				<li><%= password_field_tag 'password', 'password' %></li>
+				<li><%= text_field_tag 'login','username' %></li>
+
+
+			<!--
+			<p><%= submit_tag 'Log in' %></p>-->
+			<% end -%>
+			<!--		<li><%= link_to 'login',login_path %></li> -->
 		<% end %>
 		</span>
 		
