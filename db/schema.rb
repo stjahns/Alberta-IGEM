@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100629180631) do
+ActiveRecord::Schema.define(:version => 20100709222530) do
 
   create_table "annotations", :force => true do |t|
     t.string   "name"
@@ -21,6 +21,13 @@ ActiveRecord::Schema.define(:version => 20100629180631) do
     t.integer  "stop"
     t.integer  "strand"
     t.string   "author"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "bio_byte_images", :force => true do |t|
+    t.integer  "bio_byte_id"
+    t.integer  "image_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

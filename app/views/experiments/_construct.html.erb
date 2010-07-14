@@ -1,42 +1,47 @@
-<div class="construct_preview_box">
-  <p>Hello World! I am a construct! My name is <%= construct.name %>.</p>
-  <p>This is what I look like:</p>
+<div class="construct_preview_box <%=construct.id%>">
+  <h3><%= construct.name %></h3>
   <% unless construct.parts.empty? %>
 
-  <div id= "parts_box">
+  <div class= "parts_box <%=construct.id%>">
 
-  <div id="top-left">
+  <div class="top-left <%=construct.id%>">
   </div>
-  <div id="left-side">
+  <div class="left-side <%=construct.id%>">
   </div>
-  <div id="bottom-left">
+  <div class="bottom-left <%=construct.id%>">
   </div>
-  <div id="bottom-right">
+  <div class="bottom-right <%=construct.id%>">
   </div>
-  <div id="bottom">
+  <div class="bottom <%=construct.id%>">
   </div>
 
-  <div id="plasmid-inner"> 
+  <div class="plasmid-inner <%=construct.id%>"> 
 
-  <ol id="parts_list">
+  <ol class="parts_list <%=construct.id%>">
   <% construct.parts.all(:order => :part_order).each do |part| %>
-  <li id = "part_<%=part.bio_byte_id%>_<%=part.id%>" class = "<%=part.bio_byte.type %> part" byte_id="byte_<%=part.bio_byte_id%>" part_id="part_<%=part.id%>"
-   title="<b><%=part.bio_byte.name%></b>
-          <p><%=part.bio_byte.description%></p>
-          <p><a href='<%= bio_byte_path(part.bio_byte) %>'>More Info</a></p>">
+  <li id = "part_<%=part.bio_byte_id%>_<%=part.id%>" class = "<%=part.bio_byte.type %> part <%=construct.id%>" byte_id="byte_<%=part.bio_byte_id%>" part_id="part_<%=part.id%>"
+   construct='<%=construct.id%>'
+   info="<h2><%=part.bio_byte.name%></h2>
+          <p><%=part.bio_byte.description%></p>">
   </li>
   <%end%>
   </ol>
 
-  <div id="plasmid-spacer">
+  <div class="plasmid-spacer <%=construct.id%>">
   </div>
-  <div id="plasmid-end">
+  <div class="plasmid-end <%=construct.id%>">
   </div>
 
   </div>
   </div>
 
   <%end%>
+
+  <div class='part-info-box'style='display:none;'> 
+  <h2>Part Information:</h2>
+  <div class='part-info <%=construct.id%>' >
+  </div>
+  </div>
 
   <p>
   <%= link_to "Edit me?", edit_experiment_construct_path(@experiment, construct) %> |

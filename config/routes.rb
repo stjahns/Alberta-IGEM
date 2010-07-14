@@ -13,7 +13,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :users
 
   #map annoations as nested resource of biobytes
-  map.resources :bio_bytes, :member => { :upload => :post, :update => :post } do |bytes|
+  map.resources :bio_bytes, :member => { :upload => :post, :upload_desc_img => :post, :update => :post } do |bytes|
     bytes.resources :annotations
   end
 
@@ -44,6 +44,8 @@ ActionController::Routing::Routes.draw do |map|
                           :insert_before => :put }
      experiments.resources :constructs
   end 
+
+  map.resources :step_generators
 
 
   # named route for getting part data for construct/experiment views

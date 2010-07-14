@@ -19,6 +19,7 @@ class BioByte < ActiveRecord::Base
   has_many :parts
   has_many :annotations
   belongs_to :image
+  has_one :bio_byte_image
 
 #TODO add validation
 
