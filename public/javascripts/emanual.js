@@ -60,8 +60,11 @@ $(document).ready(function(){
 			});
 		}
 	});
-	
-      updatePlasmidDisplay(0);
+
+      //only run this function if contructs object has been created
+      if(typeof(constructs) != 'undefined') {
+      	updatePlasmidDisplay(0);
+      
 
       $.ajax({
         type: 'get',
@@ -96,6 +99,8 @@ $(document).ready(function(){
         var con = $(this).attr('construct');
         $(".part-info." + con).parent().hide();
       });
+      
+      }//all the part function above only are run if the construct object is defined
 
         /*********   ajaxify forms ************************************/
 	// submit the edits for steps with ajaX
@@ -710,19 +715,20 @@ function error_message( message_container, message ){
 
 function updatePlasmidDisplay(placeholders){
   //must repeat for all constructs
+
   for (i in constructs){
-
-
-    var numparts = $(".parts_list." + constructs[i]).children().length - placeholders;
+   	var numparts = $(".parts_list." + constructs[i]).children().length - placeholders;
     
-    if (numparts < 7)
-      var height = 92;
-    else
-      var height = 92 + (-(Math.floor(-numparts/6))-1)*46;
-    //if (numparts%6 == 0){
-      //add a row
-      //height += 46;
-    //}
+    	if (numparts < 7){
+      		var height = 92;
+	}
+    	else{
+      		var height = 92 + (-(Math.floor(-numparts/6))-1)*46;
+	    	//if (numparts%6 == 0){
+      		//add a row
+	      //height += 46;
+	    //}
+	
 
     $(".left-side." + constructs[i]).css('height',function(){
       return height - 92 + 'px';
@@ -757,6 +763,7 @@ function updatePlasmidDisplay(placeholders){
     //                         //------]
 
   }
+}
 }
 
 // when we ask for html we need rails to use respond to js so we need:

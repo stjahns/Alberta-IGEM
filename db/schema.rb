@@ -70,6 +70,13 @@ ActiveRecord::Schema.define(:version => 20100709222530) do
     t.integer  "user_id"
   end
 
+  create_table "glossaries", :force => true do |t|
+    t.string   "term"
+    t.text     "definition"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "image_files", :force => true do |t|
     t.string   "image_filename"
     t.integer  "image_width"
@@ -91,9 +98,6 @@ ActiveRecord::Schema.define(:version => 20100709222530) do
   create_table "notes", :force => true do |t|
     t.integer  "step_id"
     t.string   "text"
-    # need to decide where we want the foreign key
-    #t.integer  "image_id"
-    #
     t.datetime "created_at"
     t.datetime "updated_at"
   end
