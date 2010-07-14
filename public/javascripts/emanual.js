@@ -599,8 +599,11 @@ $(document).ready(function(){
 		$(this).addClass('selected');
 		return false;
 	});
-
-
+	
+	//fade out notice after 3 seconds
+	setTimeout(function(){
+		$('#home-notice').fadeOut("slow");
+	}, 3000);
 
 	
 

@@ -1,27 +1,22 @@
-<html>
-  <head>
-  </head>
+	  <div id="home-logo">
+		  <img src="/images/Alberta_Logo.png" />
+		  <h1>genomikon</h1>
 
-  <body>
-
-  <p><%= link_to "Parts Bin", bio_bytes_path %></p>
-  <p><%= link_to "Experiments", experiments_path %></p>
+	  </div>
+	  <div id="home-bar">
+	  <ul>	
+		<li><%= link_to "Parts Bin", bio_bytes_path %></li>
+  <li><%= link_to "Experiments", experiments_path %></li>
 
   <% if logged_in?  %>
-     <p>
-       <%= link_to "View your profile", profile_path( current_user.login ) %> | 
-       <%= link_to "Log out", logout_path %> 
-     </p>
+     <li><%= link_to "View your profile", profile_path( current_user.login ) %></li>  
+     <li><%= link_to "Log out", logout_path %></li>
   <% else %>
-    <p><%= link_to "Log in", login_path %></p>
-
-    <p><%= link_to "Sign up", signup_path %></p>
+    <li><%= link_to "Log in", login_path %></li>
+    <li><%= link_to "Sign up", signup_path %></li>
   <% end %>
+</ul>
+</div>
+<h2 id="home-notice" ><%= flash[:notice]%></h2>
 
-  <div id = 'content'>
-    <h2><%= flash[:notice]%></h2>
-    <%=yield%>
-  </div>
-  </body>
 
-</html>

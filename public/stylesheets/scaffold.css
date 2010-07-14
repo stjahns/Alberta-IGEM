@@ -502,6 +502,129 @@ div#navBar ul li h2 {
 	margin: 2px;
 	font-size: 18px;
 }
+a#home-link:link, a#home-link:visited {
+	height:20px;
+	width:20px;
+	padding-top:0;
+	background: #000 url(../images/miniGenomikon.png) no-repeat center;
+}
+a#home-link:hover {
+	background-image: url(../images/miniGenomikonHover.png);
+}
+
+/********* new user ********************/
+div#new_user {
+	background-color:#efefef;
+	padding:30px;
+	text-align: center;
+	color:#666;
+	margin: 0 150px;
+
+}
+div#new_user .btn{
+	border:1px solid black;
+	margin-right:3px;
+	padding:2px;
+	text-decoration:none;
+	color:black;
+	height:22px;
+	line-height:18px;
+	font-size:13px;
+	background-color:#efefef;
+	font-family: verdana,arial,helvetica,sans-serif;
+}
+div#new_user .btn:hover {
+	color:white;
+	background-color:black;
+}
+div#new_user form {
+	display:table;
+	background-color:#efefef;
+	margin-left:auto;
+	margin-right:auto;
+}
+div#new_user form p {
+	background-color:#efefef;
+	background-image:none;
+}
+div#new_user input {
+	border: 1px solid #666;
+}
+
+
+/************ homepage *****************/
+h2#home-notice {
+	text-align:center;
+	color:#666;
+}
+
+div#home-logo {
+	display:block;
+	height:100px;
+	width:400px;
+	margin-left:191px;
+	margin-top:90px;
+}
+div#home-logo h1 {
+	font-size:52px;
+	line-height:0;
+	font-family: "Trebuchet MS",arial;
+	padding-top:37px;
+	color: #666;
+
+}
+div#home-logo img {
+	float: left;
+
+}
+div#home-bar {
+	clear: both;
+	display:table;
+	margin-left:auto;
+	margin-right:auto;
+	margin-top:35px;
+}
+
+div#home-bar ul {
+	color: #666;
+	background-image: none;
+	background-color:white;
+}
+div#home-bar ul li{
+	float: left;
+}
+div#home-bar ul {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;	
+	overflow: hidden;
+}
+
+div#home-bar ul li a {
+	text-decoration: none;
+	display: block;
+	font-weight: normal;
+	padding: 12px;
+	font-size:18px;
+	color: #666;
+	text-decoration: none;
+	margin-right: 4px;
+	background-color:#efefef;
+	line-height:18px;
+	padding:13px;
+}
+div#home-bar ul li a:link, div#home-bar ul li a:visited {
+}
+div#home-bar ul li a:hover {
+	color: white;
+	font-weight: bold;
+	background-color:#666;
+}
+
+
+
+
+
 
 #container {
 	width: 750px;

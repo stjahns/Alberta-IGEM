@@ -1,4 +1,4 @@
-<h1>Sign up as a new user</h1>
+<div id="new_user" ><h1>Sign up as a new user</h1>
 <% @user.password = @user.password_confirmation = nil %>
 
 <%= error_messages_for :user %>
@@ -15,5 +15,5 @@
 <p><%= label_tag 'password_confirmation', 'Confirm Password' %><br/>
 <%= f.password_field :password_confirmation %></p>
 
-<p><%= submit_tag 'Sign up' %></p>
+<p><%= submit_tag 'Sign up',:class=>'btn' %><%= link_to "Cancel", root_path, :class => 'btn' %></p>
 <% end -%>
