@@ -322,10 +322,11 @@ div#lab-book {
 }
 
 div#profile-toolbar {
-	border-bottom:0.25em solid #efefef ;
+	border-bottom:0.25em solid black ;
 	clear:both;
 	margin-top: 0.25em;
 	margin-bottom: 1em;
+	
 } 
 div#profile-toolbar ul {
 	list-style-type: none;
@@ -339,6 +340,10 @@ div#profile-toolbar ul li {
 }
 div#profile-toolbar ul li#more-experiments-tab{
 	float:right;
+}
+div#profile-toolbar ul li#more-experiments-tab a {
+	margin: 0;
+	margin-left:2px;
 }
 
 /*div#profile-toolbar ul li a {
@@ -362,8 +367,9 @@ div#profile-toolbar ul li a:link, div#profile-toolbar ul li a:visited {
 }
 div#profile-toolbar ul li a.selected:link, div#profile-toolbar ul li a.selected:visited  {
 	background-image: none;
-	color: #000;
-	border: #efefef solid 2px;
+	background-color:black;
+	color: #fff;
+	border: 2px solid black;
 	border-bottom-width: 0;
 }
 div#profile-toolbar ul li a:hover {
@@ -426,7 +432,7 @@ div#nav-left-corner{
 	background-color:transparent;
 }
 div#btn-hide-nav {
-	float:left;
+	float:right;
 	background-color: transparent;	
 	margin-left: 0px;
 }
@@ -463,16 +469,17 @@ div#navBar ul {
 	background-image: none;
 }
 div#navBar ul li{
-	float: left;
+	float: right;
 }
 div#navBar ul span#user-nav li{
-	float: right;
+	float: left;
 }
 div#navBar ul {
 	list-style-type: none;
 	margin: 0;
 	padding: 0;	
 	overflow: hidden;
+	height: 26px;
 }
 
 div#navBar ul li a {

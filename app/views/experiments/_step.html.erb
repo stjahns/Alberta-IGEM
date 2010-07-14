@@ -55,7 +55,7 @@
 
     
   <% if allowed_to_make_notes? %>
-    <div class= "step_note_container" style="display: none;"  >
+	  <div class= "step_note_container" note=<%= step.note.blank? ?  '""' : '"true"'  %> style="display: none;"  >
       <%= render( :partial=>'notes/note', :locals=>{:step=>step} ) %>
     </div >
   <% end %>

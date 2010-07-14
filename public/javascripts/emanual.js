@@ -22,14 +22,14 @@ $(document).ready(function(){
 		btn = $(this);
 		if( btn.hasClass('slid') ){
 			btn.removeClass('slid');
-			$.cookie('nav','expanded');
+			$.cookie('nav','expanded',{ path: '/'  });
 			$('div#navBar').animate(
 			{top: '+=26'},
 			500 );
 		}
 		else{
 			btn.addClass('slid');
-			$.cookie('nav','collapsed');
+			$.cookie('nav','collapsed',{path: '/'} );
 			$('div#navBar').animate(
 			{top: '-=26'},
 			500);

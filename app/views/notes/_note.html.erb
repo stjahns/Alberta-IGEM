@@ -8,7 +8,7 @@
 	       <% end %>
 </div>
 
-<div class= "step_note_view" note=<%=h step.note ? 'true' : '' %> >
+<div class= "step_note_view" >
    <% if step.note %>
 	<%= render( :partial => 'notes/show', 
 			:locals=>{:step=>step, :note=>step.note}) %>

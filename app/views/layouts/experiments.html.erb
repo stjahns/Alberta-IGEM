@@ -29,14 +29,15 @@
 			<li><%= link_to "Logout", logout_path %></a></li>
 		<% else %>
 			<% form_tag session_path do -%>
-				<li><%= password_field_tag 'password', 'password' %></li>
 				<li><%= text_field_tag 'login','username' %></li>
+				<li><%= password_field_tag 'password', '123' %></li>
+
 
 
 			<!--
 			<p><%= submit_tag 'Log in' %></p>-->
 			<% end -%>
-			<!--		<li><%= link_to 'login',login_path %></li> -->
+			<li><%= link_to "Sign up?", signup_path %></li>
 		<% end %>
 		</span>
 		
