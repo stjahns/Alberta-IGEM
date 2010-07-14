@@ -1,3 +1,15 @@
+# == Schema Information
+# Schema version: 20100709222530
+#
+# Table name: bio_byte_images
+#
+#  id          :integer(4)      not null, primary key
+#  bio_byte_id :integer(4)
+#  image_id    :integer(4)
+#  created_at  :datetime
+#  updated_at  :datetime
+#
+
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
 # one:
