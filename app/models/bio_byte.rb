@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20100629180631
+# Schema version: 20100709222530
 #
 # Table name: bio_bytes
 #
@@ -12,6 +12,7 @@
 #  img_file_name :string(255)
 #  created_at    :datetime
 #  updated_at    :datetime
+#  image_id      :integer(4)
 #
 
 class BioByte < ActiveRecord::Base

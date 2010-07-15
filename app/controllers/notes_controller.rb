@@ -34,13 +34,15 @@ class NotesController < ApplicationController
 
     respond_to do |format|
       if @note.save
-         flash[:notice] = 'note saved'
-	 format.html { redirect_to experiment_step_path(@experiment,@step) }
-	 format.js { render(:partial=>'show',:locals=>{:step=>@step,:note=>@note}  )}
+         format.html {  flash[:notice] = 'note saved'
+ 			redirect_to experiment_step_path(@experiment,@step) 
+	 }
+	 format.js { render(:partial=>'note',:locals=>{:step=>@step}  )}
       else
-	 flash[:notice] = 'there was an error saving your note'
-	 format.html { redirect_to experiment_step_path(@experiment,@step) }
-	 format.js { render(:partial=>'show',:locals=>{:note=>@note}  )}
+	 format.html {   flash[:notice] = 'there was an error saving your note'
+			 redirect_to experiment_step_path(@experiment,@step) 
+	 }
+	 format.js { render(:partial=>'note',:locals=>{:step=>@step}  )}
       end
     end
   end
@@ -50,25 +52,26 @@ class NotesController < ApplicationController
     
     respond_to do |format|
       if @note.update_attributes(params[:note])
-        flash[:notice] = 'Note changed'
-	format.html { redirect_to :back }
+        format.html { 	flash[:notice] = 'Note changed'
+			redirect_to :back }
 	format.js   { render(:partial => 'show', 
 			     :locals=>{:step=>@step, :note=>@note})}
       else
-	flash[:notice] = 'There was an error updating your note'
-        format.html { redirect_to :back }
-	format.js   { render(:partial => 'show', 
+	format.html { 	flash[:notice] = 'There was an error updating your note'
+			redirect_to :back }
+	format.js   { 	render(:partial => 'show', 
 			     :locals=>{:step=>@step, :note=>@note})}
       end
     end
   end
   
   def destroy
-    @note = @step.note.find(params[:id])
+    @note = @step.note
     @note.destroy
     
     respond_to do |format|
       format.html { redirect_to :back }
+      format.js { render(:partial => 'new', :locals=>{:step=>@step, :note=>Note.new })}
     end
   end
   
@@ -91,8 +94,8 @@ class NotesController < ApplicationController
 	format.js { render(:partial => 'show', 
 			   :locals=>{:step=>@step, :note => @note})}
       else
-	flash[:notice] = 'your photo did not save!'
-	format.html {redirect_to([@experiment,@step]) }
+	format.html {	flash[:notice] = 'your photo did not save!'
+			redirect_to([@experiment,@step]) }
 	format.js   {render(:partial => 'show', 
 		:locals=>{:step=>@step, :note => @note} )}
       end

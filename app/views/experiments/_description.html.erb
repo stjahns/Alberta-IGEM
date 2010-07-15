@@ -1,0 +1,51 @@
+<div class="experiment-description-container">
+<div class="lab-book">
+	<table>
+		<tr>
+			<td><h2>
+					<a href="<%=h experiment_path(experiment) %>" ><%=h experiment.title %></a></h2></td>
+			<td class="date"><%=h "Last save: " + "#{experiment.updated_at}".split(/ /)[0] %></td>
+		</tr>
+		<tr>
+		<% if is_owner_of( experiment ) %>
+			<td><% form_for(experiment,
+				       	:html=>{:class=>'publish-experiment'} ) do |f| %>
+			<%= f.error_messages %>
+			<%= f.check_box :published %>
+    			<%= f.label :published %>
+			<span class= "save-notice"
+			       	style= "display: none;"></span>
+
+			<% end %>
+		</td>
+
+			<td class="status complete" ><input type="checkbox"> Completed</td>
+		<% end %>
+		</tr>
+	</table>
+	<%= more_text experiment.description, 150 %>
+</div>
+<div class="edit-experiment">
+	<%= render :partial=>"experiments/edit", :locals=>{:experiment=>experiment} %>
+</div>
+
+
+<div class="experiment-toolbar" >
+	<% if logged_in? %>
+		<ul>
+		<% if is_owner_of( experiment ) %>
+			<li><a class="btn-edit-experiment" href="#" >Edit</a></li>
+			<li><a class="btn-delete-experiment" href="#" >Delete</a>
+			<%= button_to "delete experiment", experiment_path(experiment),:method=>:delete %>
+			</li>
+			
+		<% end %>
+		<li><% clone_button =  is_owner_of(experiment) ? 
+			  'Duplicate' : 'Add to my experiments'%>
+		      <%= link_to clone_button,
+			      clone_experiment_path( experiment ) %>
+		  </li>
+		</ul>
+	<% end %>
+</div>
+</div>

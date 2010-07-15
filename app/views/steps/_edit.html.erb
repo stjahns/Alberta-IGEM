@@ -1,0 +1,34 @@
+   <% if is_owner_of( experiment ) %>
+		     <% form_for([experiment, step],
+			:html => { :method => :put,:multipart => true, 
+			  :class => "inplace_edit_step"} ) do |f| %>
+				<%= f.error_messages %>
+				<h2><span class="edit_step_number"><%=h step.step_order %></span>
+					<%= f.text_field :title %>
+							</h2>
+				<p class= 'description' >
+				    <%= f.text_area :description %>
+				</p>
+				<p><%= f.submit 'Save' %>
+				<%= save_notice %>
+				</p>
+		    <% end %>
+
+		    <div class= "upload_thumb_container">
+		    	<%= image_tag( thumb_image_path(step.image)) unless step.image.blank?  %>
+		    </div>  
+		    
+		    <% image_label = step.image.blank? ? "attach an image" : "change the image" %> 
+		  <% form_for [experiment,step],
+		     :url => upload_experiment_step_path(experiment,step, :format=>'js' ) , 
+		    # :html => { :multipart => true, :method => 'post',
+		     :html => { :method => 'post',
+		     :class => 'inplace_upload_image'} do |f| %>
+			     <p><%= f.label image_label%><br/>
+			     <%= f.file_field :image_file %>
+			<%= f.submit 'Upload' %></p>
+			<%= save_notice %>
+		<% end %>  
+  <% end %>
+
+

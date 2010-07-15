@@ -54,8 +54,8 @@ class StepsController < ApplicationController
 
     respond_to do |format|
       if @step.save
-        flash[:notice] = 'Step was successfully created.'
-        format.html { redirect_to([ @experiment, @step ]) }
+        format.html { 	flash[:notice] = 'Step was successfully created.'
+			redirect_to([ @experiment, @step ]) }
         format.xml  { render :xml => @step, :status => :created, :location =>[ @experiment, @step ]}
       else
         format.html { render :action => "new" }
@@ -71,8 +71,8 @@ class StepsController < ApplicationController
 
     respond_to do |format|
       if @step.update_attributes(params[:step])
-        flash[:notice] = 'Step was successfully updated.'
-        format.html { redirect_to([ @experiment, @step ]) }
+        format.html { 	flash[:notice] = 'Step was successfully updated.'
+			redirect_to([ @experiment, @step ]) }
         #format.xml  { head :ok }
 	format.xml  { render :xml => @step }
 	format.js { render(:partial => 'step', :locals=>{ :step => @step} )  }
@@ -111,35 +111,19 @@ class StepsController < ApplicationController
     respond_to do |format|
     
       if @image.save 
-	# this is a hack to fix it quick, TODO fix it right
-    #  	@step.image = @image 
 	
 	#format.html { render(:partial => 'step', :locals=>{ :step => @step} )  }
 	format.xml { render(:partial => 'step', :locals=>{ :step => @step} )  }
 	format.js { render(:partial => 'step', :locals=>{ :step => @step} )  }
 	format.html {redirect_to([@experiment,@step]) }
       else
-	flash[:notice] = 'your photo did not save!'
-	format.html {redirect_to([@experiment,@step]) }
+	format.html {	flash[:notice] = 'your photo did not save!'
+ 			redirect_to([@experiment,@step]) }
 	format.js   {render(:partial => 'step', :locals=>{:step=>@step})}
       end
     end
   end
- 
-  # function for updating notes with ajax (is it necessary??) maybe not
-#  def note
-#    @step = @experiment.steps.find(params[:id])
-#    @note = @step.note
 
-#    if @note.save
-#      respond_to do |format|
-#	format.html redirect_to :back
-#      end
-#   else
-#	flash[:notice] = 'There was an error saving your note'
-#	redirect_to :back
-#    end
-#  end
 
   ###### actions for repositioning  ####################
   
@@ -189,12 +173,11 @@ class StepsController < ApplicationController
       @step = pivot.insert_new(location)
      respond_to do |format| 
 	     if @step
-	       flash[:notice] = 'step inserted'
+	       message = 'step inserted'
 	     else
-	       flash[:notice] = 'step not inseted'
-	       # TODO handle errors correctly
+	       messge = 'step not inseted'
 	     end 
-	     format.html { redirect_to experiment_steps_path(@experiment) }
+	     format.html {  redirect_to experiment_steps_path(@experiment)    }
 	     format.js   { render( :partial=>'experiments/step', 
 		:locals=>{:step=>@step,:experiment=>@experiment} )}
      end 

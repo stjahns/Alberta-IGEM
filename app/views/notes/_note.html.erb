@@ -1,0 +1,16 @@
+<div class= "step_note_form"  >
+    <% if step.note %>
+	    <%= render( :partial => 'notes/edit', 
+		       :locals=>{:step => step, :note => step.note}) %> 
+    <% else %>
+	    <%= render( :partial => 'notes/new', 
+		       :locals=>{:step => step, :note => Note.new}) %>
+	       <% end %>
+</div>
+
+<div class= "step_note_view" >
+   <% if step.note %>
+	<%= render( :partial => 'notes/show', 
+			:locals=>{:step=>step, :note=>step.note}) %>
+  <% end %>	
+</div >
