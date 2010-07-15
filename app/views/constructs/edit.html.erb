@@ -1,5 +1,5 @@
 <div id="nav">
-  <%= link_to "Back", :back %>
+  <%= link_to "Back", experiment_path(@construct.experiment) %>
   <a href="#", id="save">Save</a>
 </div>
 
@@ -102,7 +102,9 @@ The main construct designer view.
 <% BioByte.all.each do |byte| %>
   
   <div id='info_<%=byte.id%>'>
-    <div class="byte_desc_img"><%= image_tag step_image_path(byte.bio_byte_image.image) %></div> 
+    <% unless byte.bio_byte_image.blank? %>
+      <div class="byte_desc_img"><%= image_tag step_image_path(byte.bio_byte_image.image) %></div> 
+    <% end %>
     <h3><%=byte.name%></h3>
     <p><i><%=byte.description%></i><p>
     <p><b>Sequence:&nbsp</b><%= byte.sequence %></p>
