@@ -9,6 +9,7 @@ class BioBytesController < ApplicationController
   
   #before_filter :login_required, :except => [:index, :show]
   #before_filter :is_admin, :except => [:index, :show]
+  layout 'experiments'
 
 
   def index

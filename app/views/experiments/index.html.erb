@@ -1,4 +1,12 @@
-<h1>Listing experiments</h1>
+<% content_for :nav do %>
+	<li><%= link_to "Lab Manual", experiments_path, :class=>'selected' %></li>
+	<li><%= link_to "Parts Bin", bio_bytes_path %></li>
+<% end %>
+
+<div id="lab-manual-header" >
+	<h1>Lab Manual</h1>
+	<p>View an experiment, without the ability to edit or add notes, or add it to your lab book for full control.</p>
+</div>
 
 
 

@@ -13,6 +13,11 @@ $.ajaxSetup({
 // Define the entry point - when DOM is ready
   
 $(document).ready(function(){
+	
+	var flashnotice = $('#flash-notice');
+	if(flashnotice.html() != "" ){
+		flashnotice.fadeIn();
+	}
 	// check the state of the navbar in the cookie and restore it
 	if($.cookie('nav') == 'collapsed'){
 		$('#btn-hide-nav a').addClass('slid')
@@ -612,6 +617,21 @@ $(document).ready(function(){
 		});
 		return false;
 	});
+	$('a.btn-byte-desc',$('#bio-bytes-table')).click(function(){
+		row = $(this).parents('.byte-row');
+		desc = $( 'div.description', row);
+		if(desc.is(':visible')){
+			desc.hide();
+			row.removeClass('selected');
+	}
+		else{
+			desc.show();
+			row.addClass('selected');
+
+		}
+		return false;
+	});
+
 
 
 
@@ -648,8 +668,8 @@ $(document).ready(function(){
 	//fade out notice after 3 seconds
 	setTimeout(function(){
 		$('#home-notice').fadeOut("slow");
+		$('#flash-notice').fadeOut("slow");
 	}, 3000);
-
 	
 
 

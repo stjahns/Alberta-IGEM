@@ -1,17 +1,13 @@
-<h1>BioBytes Listing:</h1>
-<table>
-<% @bytes.each do |byte| %>
-  <tr>
-    <td><%=byte.name%>
-    <td><%=link_to "Show",  bio_byte_path(byte)%>
-    
-    <% if current_user and current_user.login == "admin" %>
+<div id="lab-manual-header">
+<h1>Parts Bin</h1>
+</div>
+<%= render :partial=>'bio_byte',:locals=>{:bytes=>@bytes} %>
+
+<!--
+<% if current_user and current_user.login == "admin" %>
       <td><%=link_to "Edit", edit_bio_byte_path(byte)%>
       <td><%=link_to "Delete", byte, :confirm => "Are you sure?", :method => :delete %> 
     <% end %>
-
-  </tr>
-<% end %>
-</table>
+    -->
 <p><%= link_to "New", new_bio_byte_path %></p>
 <p><%= link_to "Home", :controller => :home %></p>

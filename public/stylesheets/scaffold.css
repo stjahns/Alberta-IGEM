@@ -1,4 +1,17 @@
 /*styling for experiment page*/
+
+div#flash-notice {
+	background:none repeat scroll 0 0 #C7FFC4;
+	display:table;
+	display:none;
+	font-size:13px;
+	line-height:18px;
+	margin-left:auto;
+	margin-right:auto;
+	padding:0.4em 2em;
+	text-align:center;
+}
+
 /*title of experiment */
 #experiment-title {
 	width: 600px;
@@ -272,6 +285,15 @@ span.more {
 div.edit-experiment {
 	display: none;
 }
+div#lab-manual-header {
+	border-bottom: 5px solid black;
+	margin-bottom: 4em;
+}
+div#lab-manual-header p {
+	color: #666;
+}
+
+
 
 /*toolbar for experiments in lab-book listings*/
 div.experiment-toolbar {
@@ -516,9 +538,11 @@ a#home-link:hover {
 div#new_user {
 	background-color:#efefef;
 	padding:30px;
+	padding-top:15px;
 	text-align: center;
 	color:#666;
 	margin: 0 150px;
+	margin-top:30px;
 
 }
 div#new_user .btn{
@@ -569,7 +593,7 @@ div#home-logo h1 {
 	font-size:52px;
 	line-height:0;
 	font-family: "Trebuchet MS",arial;
-	padding-top:37px;
+	padding-top:46px;
 	color: #666;
 
 }
@@ -621,9 +645,115 @@ div#home-bar ul li a:hover {
 	background-color:#666;
 }
 
+/** styling parts bin ***/
+div#bio-bytes-table {
+	width:500px;
+	margin-left:auto;
+	margin-right:auto;
+}
+div#bio-byte-table  div.description {
+	width:500px
+}
+div#bio-bytes-table div.byte-row  {
+	clear:both;
+}
+/*div#bio-bytes-table div.byte-row:hover {
+	border: 2px solid #666;
+}*/
+div.byte-row div.byte-name h2 {
+	display:inline;
+}
+div.byte-row div.byte-name h2.selected {
+	padding-top:0.5em;
+}
+div#bio-bytes-table div.byte-row a.btn-byte-desc:link, div.byte-row a.btn-byte-desc:visited {
+	text-decoration: none;
+	color:black;
+	padding-right:25px;
+	background:url(../images/expand.png) no-repeat right center;
+}
+div#bio-bytes-table div.byte-row a.btn-byte-desc:hover {
+	background-image: url(../images/expandHover.png);
+}
+div#bio-bytes-table img{
+	float:left;
+	padding:1em;
+	padding-right:1em;
+	padding-left:0;
+}
+div#bio-bytes-table div.byte-row img.icon {
+	float:right;
+	padding:0;
+}
+div#bio-bytes-table p{
+	padding-left:1em;
+	padding-bottom:1em;
+}
+div#bio-bytes-table div.description {
+	margin-bottom: 2em;
+	padding-top:0.5em;
+	display:none;
+}
+/* if the row is expanded **********************/
+div#bio-bytes-table div.byte-row.selected a.btn-byte-desc:link, div#bio-bytes-table div.byte-row.selected a.btn-byte-desc:visited {
+	background:url(../images/collapse.png) no-repeat right center;
+}
+div#bio-bytes-table div.byte-row.selected a.btn-byte-desc:hover {
+	background-image: url(../images/collapseHover.png);
+}
+div#bio-bytes-table div.byte-row.selected img.icon {
+	float:right;
+	padding:0;
+}
+/***styling for toolbar****/
+div.byte-toolbar {
+	clear:both;
+	border-top:2px solid #efefef;
+} 
+div.byte-toolbar ul {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;	
+	overflow: hidden;
 
+}
+div.byte-toolbar ul li {
+	float: left;
+}
 
+div.byte-toolbar ul li a.shadow {
+	background-image: url(../images/tab-shadow.png);
+	background-repeat: repeat-x;
+	background-position: bottom;
 
+}
+
+div.byte-toolbar ul li a:link, div.byte-toolbar ul li a:visited {
+	display: block;
+	font-weight: normal;
+	padding: 4px;
+	background-color: #efefef;
+	text-decoration: none;
+	margin-right: 2px;
+}
+/*
+a.byte-toolbar.selected {
+	background-color: white;
+}
+*/
+
+div.byte-toolbar ul li a:hover {
+	background-image: none;
+	background-color: #000000;
+	color: #fff;
+}
+div.byte-toolbar ul li a.btn-step-note {
+	margin-right: 0;
+}
+
+div.byte-toolbar ul li form {
+	display: none;
+}
 
 
 #container {

@@ -10,7 +10,7 @@
 <body.background>
 	<%= render :partial=>'shared/navBar' %>
 	<div id= container>
-	<p style="color: green"><%= flash[:notice] %></p>
+	<div id='flash-notice' ><%= flash[:notice] %></div>
 	<%= yield %>
 	</div>
 </body>
