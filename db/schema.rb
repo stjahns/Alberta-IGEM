@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100709222530) do
+ActiveRecord::Schema.define(:version => 20100716232236) do
 
   create_table "annotations", :force => true do |t|
     t.string   "name"
@@ -110,6 +110,12 @@ ActiveRecord::Schema.define(:version => 20100709222530) do
     t.datetime "updated_at"
   end
 
+  create_table "roles", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "step_generators", :force => true do |t|
     t.string   "subprotocol"
     t.integer  "sub_order"
@@ -141,6 +147,7 @@ ActiveRecord::Schema.define(:version => 20100709222530) do
     t.datetime "remember_token_expires_at"
     t.string   "activation_code",           :limit => 40
     t.datetime "activated_at"
+    t.integer  "role_id"
   end
 
   add_index "users", ["login"], :name => "index_users_on_login", :unique => true

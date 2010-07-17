@@ -30,7 +30,6 @@ class UsersController < ApplicationController
 
   redirect_to(users_url)
   end
-  # render new.rhtml
 
   def new
     @user = User.new

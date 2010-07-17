@@ -26,6 +26,7 @@ class User < ActiveRecord::Base
 
   has_many :experiments, :dependent => :destroy
   has_many :steps, :through => :experiments 
+  belongs_to :role
 
   validates_presence_of     :login
   validates_length_of       :login,    :within => 3..40
@@ -45,7 +46,7 @@ class User < ActiveRecord::Base
   # HACK HACK HACK -- how to do attr_accessible from here?
   # prevents a user from submitting a crafted form that bypasses activation
   # anything else you want your user to change should be added here.
-  attr_accessible :login, :email, :name, :password, :password_confirmation
+  attr_accessible :login, :email, :name, :password, :password_confirmation, :role
 
 
   # Activates the user in the database.
@@ -85,6 +86,19 @@ class User < ActiveRecord::Base
   def email=(value)
     write_attribute :email, (value ? value.downcase : nil)
   end
+
+
+  ### methods for roles
+  def has_role?(role)
+	  return false if self.role.blank?
+	  my_role = self.role.name
+	  my_role == 'admin' || my_role == role
+  end
+  def is_admin?
+	  return false if self.role.blank?
+	  self.role.name == 'admin'
+  end
+  
 
   protected
     

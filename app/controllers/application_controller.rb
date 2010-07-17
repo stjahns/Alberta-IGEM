@@ -8,14 +8,23 @@ class ApplicationController < ActionController::Base
   include AuthenticatedSystem
   # Scrub sensitive parameters from your log
   # filter_parameter_logging :password
-  helper_method :is_admin?
+
+  helper_method :is_admin? #makes this method available from views as well
   def is_admin? 
-     logged_in? && current_user.login == "admin"
+     logged_in? && current_user.is_admin?
   end
 
+  # replace the use of this method with has_role
   helper_method :is_owner_of
   def is_owner_of( object )
-	logged_in? && ( current_user.login == 'admin' || current_user.id  == object.user.id ) 
+	logged_in? && ( current_user.is_admin? || current_user.id  == object.user.id ) 
+  end
+
+  
+  # use this function when checking for permission of something
+  def permission_denied
+	flash[:notice] = "You don't have permission to do that!"
+	redirect_back_or_default('/')
   end
 
 end
