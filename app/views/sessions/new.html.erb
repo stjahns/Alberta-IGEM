@@ -1,3 +1,6 @@
+<%= render :partial=>'shared/logo' %>
+
+<div id="user-form">
 <h1>Log In</h1>
 
 <% form_tag session_path do -%>
@@ -14,3 +17,12 @@
 
 <p><%= submit_tag 'Log in' %></p>
 <% end -%>
+</div>
+
+<div id="home-bar">
+   <ul>	
+       <li><%= link_to "Home", '/' %></li>
+       <li><%= link_to "Experiments", experiments_path %></li>
+       <li><%= link_to "Sign up", new_user_path %></li>
+    </ul>
+</div>

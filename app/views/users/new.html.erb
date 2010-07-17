@@ -1,6 +1,6 @@
 <%= render :partial=>'shared/logo' %>
 
-<div id="new_user" ><h1>Sign up as a new user</h1>
+<div id="user-form" ><h1>Sign up as a new user</h1>
 <% @user.password = @user.password_confirmation = nil %>
 
 <%= error_messages_for :user %>
@@ -17,5 +17,18 @@
 <p><%= label_tag 'password_confirmation', 'Confirm Password' %><br/>
 <%= f.password_field :password_confirmation %></p>
 
-<p><%= submit_tag 'Sign up',:class=>'btn' %><%= link_to "Cancel", root_path, :class => 'btn' %></p>
+<p><%= submit_tag 'Sign up',:class=>'btn' %></p>
 <% end -%>
+</div>
+<div id="home-bar">
+	  <ul>	
+		<li><%= link_to "Home", '/' %></li>
+  <li><%= link_to "Experiments", experiments_path %></li>
+
+  <% if logged_in?  %>
+     <li><%= link_to "Log out", logout_path %></li>
+  <% else %>
+    <li><%= link_to "Log in", login_path %></li>
+  <% end %>
+</ul>
+</div>

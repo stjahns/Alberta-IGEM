@@ -14,10 +14,10 @@ $.ajaxSetup({
   
 $(document).ready(function(){
 	
-	var flashnotice = $('#flash-notice');
-	if(flashnotice.html() != "" ){
-		flashnotice.fadeIn();
-	}
+//	var flashnotice = $('#flash-notice');
+//	if(flashnotice.html() != "" ){
+//		flashnotice.fadeIn();
+//	}
 	// check the state of the navbar in the cookie and restore it
 	if($.cookie('nav') == 'collapsed'){
 		$('#btn-hide-nav a').addClass('slid')

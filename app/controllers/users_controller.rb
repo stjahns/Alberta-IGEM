@@ -1,7 +1,6 @@
 class UsersController < ApplicationController
   # Be sure to include AuthenticationSystem in Application Controller instead
   include AuthenticatedSystem
-  layout 'experiments'
   
   #before_filter :login_required
 
@@ -33,6 +32,10 @@ class UsersController < ApplicationController
 
   def new
     @user = User.new
+    if logged_in? 
+	flash[:notice] = 'You must log out to do that'
+    	redirect_to root_path
+    end
   end
 
   def create

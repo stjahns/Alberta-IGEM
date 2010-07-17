@@ -3,13 +3,15 @@
 div#flash-notice {
 	background:none repeat scroll 0 0 #C7FFC4;
 	display:table;
-	display:none;
 	font-size:13px;
 	line-height:18px;
 	margin-left:auto;
 	margin-right:auto;
 	padding:0.4em 2em;
 	text-align:center;
+}
+div#flash-notice.error {
+	background-color:#FF8593;
 }
 
 /*title of experiment */
@@ -266,6 +268,7 @@ div.lab-book h2 a:hover {
 div.lab-book td.date {
 	text-align: right;
 	font-style:italic;
+	font-family: georgia,serif;
 	color: gray;
 }
 div.lab-book td.status {
@@ -291,6 +294,8 @@ div#lab-manual-header {
 }
 div#lab-manual-header p {
 	color: #666;
+	font-family:georgia,serif !important;
+	font-style:italic;
 }
 
 
@@ -535,7 +540,7 @@ a#home-link:hover {
 }
 
 /********* new user ********************/
-div#new_user {
+div#user-form {
 	background-color:#efefef;
 	padding:30px;
 	padding-top:15px;
@@ -545,7 +550,7 @@ div#new_user {
 	margin-top:30px;
 
 }
-div#new_user .btn{
+div#user-form .btn{
 	border:1px solid black;
 	margin-right:3px;
 	padding:2px;
@@ -557,21 +562,21 @@ div#new_user .btn{
 	background-color:#efefef;
 	font-family: verdana,arial,helvetica,sans-serif;
 }
-div#new_user .btn:hover {
+div#user-form .btn:hover {
 	color:white;
 	background-color:black;
 }
-div#new_user form {
+div#user-form form {
 	display:table;
 	background-color:#efefef;
 	margin-left:auto;
 	margin-right:auto;
 }
-div#new_user form p {
+div#user-form form p {
 	background-color:#efefef;
 	background-image:none;
 }
-div#new_user input {
+div#user-form input {
 	border: 1px solid #666;
 }
 
@@ -580,6 +585,9 @@ div#new_user input {
 h2#home-notice {
 	text-align:center;
 	color:#666;
+}
+h2#home-notice.error {
+	color:red;
 }
 
 div#home-logo {

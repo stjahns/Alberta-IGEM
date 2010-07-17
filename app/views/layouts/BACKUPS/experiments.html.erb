@@ -10,7 +10,10 @@
 <body.background>
 	<%= render :partial=>'shared/navBar' %>
 	<div id= container>
-	<div id='flash-notice' ><%= flash[:notice] %></div>
+		<% if flash[:error] || flash[:notice] %>
+			<div id='flash-notice' <%= 'class="error"' if flash[:error] %>>
+			<%=flash[:error] || flash[:notice] %></div>
+		<% end %>
 	<%= yield %>
 	</div>
 </body>
