@@ -1,13 +1,40 @@
-<p>
-  <b>Term:</b>
-  <%=h @glossary.term %>
-</p>
 
-<p>
-  <b>Definition:</b>
-  <%= add_glossary_links(@glossary.definition)%>
-</p>
+<!doctype html>
+<html>
+  <head>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.4.2.min.js"></script>
+
+    <script type="text/javascript">
+      $(document).ready(function(){
+         $("a").hover(function(event){
+            $(this).next("em").animate({opacity: "show", top: "-75"}, "slow");
+          }, function() {
+            $(this).next("em").animate({opacity: "hide", top: "-85"}, "fast");
+	});  
+      });
+      
+
+    </script>
+  </head>
+
+  <body>
+
+    <h1>Glossary</h1>
+
+<% @glossaries.each do |glossary| %>
+
+  <p>
+    <a name ="#glossary.id"><b><%=h glossary.term %></b></a>
+  </p>
+
+  <p>
+    <%  definition= add_glossary_links(glossary.definition)%>
+    <%= add_popups(definition) %>
+  </p>
 
 
-<%= link_to 'Edit', edit_glossary_path(@glossary) %> |
-<%= link_to 'Back', glossaries_path %>
+  <%= link_to 'Edit', edit_glossary_path(glossary) %> |
+  <%= link_to 'Back', glossaries_path %>
+<% end %>
+  </body>
+</html>

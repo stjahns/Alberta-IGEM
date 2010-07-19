@@ -13,10 +13,13 @@ class GlossariesController < ApplicationController
   # GET /glossaries/1
   # GET /glossaries/1.xml
   def show
+
+    @glossaries = Glossary.all
     @glossary = Glossary.find(params[:id])
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @glossary }
+      format.xml  { render :xml => @glossaries }
     end
   end
 
