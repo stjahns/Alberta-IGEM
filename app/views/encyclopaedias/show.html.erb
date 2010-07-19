@@ -1,3 +1,21 @@
+<!doctype html>
+<html>
+  <head>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.4.2.min.js"></script>
+
+    <script type="text/javascript">
+      $(document).ready(function(){
+         $("a").hover(function(event){
+            $(this).next("em").animate({opacity: "show", top: "-75"}, "slow");
+          }, function() {
+            $(this).next("em").animate({opacity: "hide", top: "-85"}, "fast");
+	});
+      });
+
+
+    </script>
+  </head>
+
 <p>
   <b>Title:</b>
   <%=h @encyclopaedia.title %>
@@ -5,9 +23,11 @@
 
 <p>
   <b>Article:</b>
-  <%= add_glossary_links(@encyclopaedia.article) %>
+  <% article = add_glossary_links(@encyclopaedia.article) %>
+  <%= add_popups(article) %>
 </p>
 
 
 <%= link_to 'Edit', edit_encyclopaedia_path(@encyclopaedia) %> |
 <%= link_to 'Back', encyclopaedias_path %>
+</html>
