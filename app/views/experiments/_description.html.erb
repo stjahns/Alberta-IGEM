@@ -2,8 +2,7 @@
 <div class="lab-book">
 	<table>
 		<tr>
-			<td><h2>
-					<a href="<%=h experiment_path(experiment) %>" ><%=h experiment.title %></a></h2></td>
+			<td><h2><%= link_to experiment.title , experiment_path(experiment) %></h2></td>
 			<td class="date"><%=h "Last save: " + "#{experiment.updated_at}".split(/ /)[0] %></td>
 		</tr>
 		<tr>

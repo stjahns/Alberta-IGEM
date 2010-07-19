@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20100709222530
+# Schema version: 20100719175140
 #
 # Table name: users
 #
@@ -15,6 +15,7 @@
 #  remember_token_expires_at :datetime
 #  activation_code           :string(40)
 #  activated_at              :datetime
+#  group_id                  :integer(4)
 #
 
 require 'digest/sha1'
@@ -28,6 +29,7 @@ class User < ActiveRecord::Base
   has_many :steps, :through => :experiments 
   belongs_to :role
   delegate :permissions, :to => :role
+  belongs_to :group
 
   validates_presence_of     :login
   validates_length_of       :login,    :within => 3..40
@@ -47,7 +49,7 @@ class User < ActiveRecord::Base
   # HACK HACK HACK -- how to do attr_accessible from here?
   # prevents a user from submitting a crafted form that bypasses activation
   # anything else you want your user to change should be added here.
-  attr_accessible :login, :email, :name, :password, :password_confirmation
+  attr_accessible :login, :email, :name, :password, :password_confirmation, :role, :group
 
 
   # Activates the user in the database.

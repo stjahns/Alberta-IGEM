@@ -10,7 +10,15 @@ ActionController::Routing::Routes.draw do |map|
   map.activate '/activate/:activation_code', :controller => 'users', :action => 'activate'
   map.signup '/signup', :controller => 'users', :action => 'new'
 
+  # normal user routes
   map.resources :users
+  # pretty routes for user profile pages
+  map.profile '/user/:login', :controller => 'users', :action => 'profile', :method => 'get' 
+
+  # group routes
+  map.resources :groups, :member => { :upload => :post, :users => :get}
+  #pretty group routes
+  map.pretty_group '/user/:name', :controller => 'groups', :action => 'show', :method => 'get'
 
   #map annoations as nested resource of biobytes
   map.resources :bio_bytes, :member => { :upload => :post, :upload_desc_img => :post, :update => :post } do |bytes|
@@ -23,10 +31,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resource :session
 
 
-  # pretty routes for user profile pages
-  map.profile '/user/:login', :controller => 'users', :action => 'profile', :method => 'get' 
-
-  # nest note in steps without nesting steps in experiment
+    # nest note in steps without nesting steps in experiment
   map.resources :steps do |steps|
      steps.resource  :note, :member => { :upload => :post }
   end

@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20100709222530
+# Schema version: 20100719175140
 #
 # Table name: bio_bytes
 #
@@ -21,6 +21,16 @@ class BioByte < ActiveRecord::Base
   belongs_to :image
   has_one :bio_byte_image
 
+  def icon
+	#return the image object that contains the biobyte icon
+	self.image
+  end
+  def function_image
+	#return the function image 
+	linker =  self.bio_byte_image || return
+	linker.image  
+  end
 #TODO add validation
+  #TODO change bio_byte_image to has_one :through association?
 
 end

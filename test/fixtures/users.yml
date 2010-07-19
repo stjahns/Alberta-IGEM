@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20100709222530
+# Schema version: 20100719175140
 #
 # Table name: users
 #
@@ -15,6 +15,7 @@
 #  remember_token_expires_at :datetime
 #  activation_code           :string(40)
 #  activated_at              :datetime
+#  group_id                  :integer(4)
 #
 
 

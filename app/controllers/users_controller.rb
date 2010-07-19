@@ -1,7 +1,6 @@
 class UsersController < ApplicationController
   # Be sure to include AuthenticationSystem in Application Controller instead
   include AuthenticatedSystem
-  layout 'experiments'
   
   #before_filter :login_required
 
@@ -30,10 +29,13 @@ class UsersController < ApplicationController
 
   redirect_to(users_url)
   end
-  # render new.rhtml
 
   def new
     @user = User.new
+    if logged_in? 
+	flash[:notice] = 'You must log out to do that'
+    	redirect_to root_path
+    end
   end
 
   def create
@@ -51,8 +53,14 @@ class UsersController < ApplicationController
 
   def profile
     @user = User.find_by_login(params[:login])
-    @experiments = @user.experiments
-    #render profile.html.erb 
+    if @user.nil? 
+	flash[:error] = 'No user by that name!'
+    	redirect_to root_path
+
+    else
+	 @experiments = @user.experiments
+	 #render profile.html.erb
+    end
   end
   
   def activate

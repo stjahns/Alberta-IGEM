@@ -1,0 +1,23 @@
+# == Schema Information
+# Schema version: 20100719175140
+#
+# Table name: groups
+#
+#  id          :integer(4)      not null, primary key
+#  name        :string(255)
+#  description :text
+#  created_at  :datetime
+#  updated_at  :datetime
+#
+
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  role_id: 1
+  name: MyString
+  description: MyText
+
+two:
+  role_id: 1
+  name: MyString
+  description: MyText

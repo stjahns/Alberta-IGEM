@@ -1,0 +1,26 @@
+<div id='profile-head'>
+<h1><%= @group.name %></h1>
+</div>
+<div id='profile-toolbar' >
+	<ul>
+		<li><a id='group-info-tab' class='selected' href='#'>Info</a></li>
+		<li><a id='group-members-tab' href='#'>Members</a></li>
+
+		<!-- TODO if is group admin -->
+		<li><a id='admin-tools-tab' href='#'>Admin Tools</a></li>
+	</ul>
+</div>
+<div id='group-info' >
+<p><%= @group.description %></p>
+<p>total experiment status of users</p>
+
+
+</div>
+<div id='group-members'>
+	<% unless @members.blank? %>
+	<%= render :partial => 'members', :collection => @members, :as => :member %>	
+	<% end %>
+</div>
+<div id='admin-tools' >
+	<p>	see group key, change group key, view pending requests and accept them, edit group information, post a message to members, add an experiment to the group lab manual.	</p>
+</div>

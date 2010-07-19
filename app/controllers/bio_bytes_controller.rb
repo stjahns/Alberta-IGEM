@@ -7,8 +7,8 @@ Purpose - controller for user-editing of BioBytes parts db
 
 class BioBytesController < ApplicationController
   
-  #before_filter :login_required, :except => [:index, :show]
-  #before_filter :is_admin, :except => [:index, :show]
+  before_filter :login_required, :except => [:index, :show]
+  before_filter :is_admin?, :except => [:index, :show]
 
 
   def index

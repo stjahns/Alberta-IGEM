@@ -1,11 +1,12 @@
 class ExperimentsController < ApplicationController
   
   before_filter :login_required, :except => [:index, :show]
+  before_filter :get_experiment, :except => [:index, :clone, :new, :create]
   before_filter :owns_experiment?, :except => [:index, :show, :clone, :new, :create ]
 
+  #TODO this should be done with a css with media type print
   # action for displaying print template
   def print
-    @experiment = Experiment.find(params[:id])
     @steps = @experiment.steps
     
     # renders the print template without the normal layout
@@ -15,7 +16,7 @@ class ExperimentsController < ApplicationController
   # GET /experiments
   # GET /experiments.xml
     def index
-    #TODO only the admin experiments here, the users experiments listed on profile
+    #TODO use roles to do this!
      @experiments = User.find_by_login('admin').experiments;
 
     respond_to do |format|
@@ -27,7 +28,6 @@ class ExperimentsController < ApplicationController
   # GET /experiments/1
   # GET /experiments/1.xml
   def show
-    @experiment = Experiment.find(params[:id])
     @steps = @experiment.steps.all(:order => :step_order)
 
     respond_to do |format|
@@ -49,7 +49,6 @@ class ExperimentsController < ApplicationController
 
   # GET /experiments/1/edit
   def edit
-   # @experiment = Experiment.find(params[:id])
    respond_to do |format|
    	format.html
 	format.js { render :partial => 'edit', locals =>{ :experiment=>@experiment}}
@@ -58,12 +57,8 @@ class ExperimentsController < ApplicationController
 
   # GET /experiments/add_step/1
   def add_step
-   # @experiment = Experiment.find(params[:id])
     @step = Step.create(:experiment_id => @experiment)
-    
-
     render 'steps/edit'
-
   end
 
 
@@ -87,7 +82,6 @@ class ExperimentsController < ApplicationController
     end
   end
 
-  #TODO make this into a post and add ajax to it
   def clone 
     old_exp = Experiment.find(params[:id])
     @experiment = old_exp.clone_experiment_for( current_user )
@@ -103,7 +97,6 @@ class ExperimentsController < ApplicationController
   # PUT /experiments/1
   # PUT /experiments/1.xml
   def update
-    #@experiment = Experiment.find(params[:id])
     respond_to do |format|
       if @experiment.update_attributes(params[:experiment])
 	format.html {	flash[:notice] = 'Experiment was successfully updated.'
@@ -123,8 +116,6 @@ class ExperimentsController < ApplicationController
   # DELETE /experiments/1
   # DELETE /experiments/1.xml
   def destroy
-    #@experiment = Experiment.find(params[:id])
-    
     @experiment.destroy
 
     respond_to do |format|
@@ -136,14 +127,11 @@ class ExperimentsController < ApplicationController
   end
 
   private
-  def owns_experiment? 
-    @experiment = Experiment.find(params[:id])
-    is_owner_of( @experiment ) || permission_denied
-  end
-  
-  def permission_denied
-	flash[:notice] = "You don't have permission to do that!"
-	redirect_to :back
+  def get_experiment
+	 @experiment = Experiment.find(params[:id])
   end
 
+  def owns_experiment? 
+       is_owner_of( @experiment ) || permission_denied
+  end
 end

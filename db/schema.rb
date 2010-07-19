@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100719161109) do
+ActiveRecord::Schema.define(:version => 20100719175140) do
 
   create_table "annotations", :force => true do |t|
     t.string   "name"
@@ -68,6 +68,20 @@ ActiveRecord::Schema.define(:version => 20100719161109) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "user_id"
+  end
+
+  create_table "glossaries", :force => true do |t|
+    t.string   "term"
+    t.text     "definition"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "groups", :force => true do |t|
+    t.string   "name"
+    t.text     "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "image_files", :force => true do |t|
@@ -155,6 +169,7 @@ ActiveRecord::Schema.define(:version => 20100719161109) do
     t.string   "activation_code",           :limit => 40
     t.datetime "activated_at"
     t.integer  "role_id"
+    t.integer  "group_id"
   end
 
   add_index "users", ["login"], :name => "index_users_on_login", :unique => true

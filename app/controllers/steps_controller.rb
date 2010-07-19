@@ -1,9 +1,10 @@
 class StepsController < ApplicationController
-  before_filter :get_event
-  #before_filter :login_required
+  before_filter :get_experiment
+  before_filter :login_required
+  before_filter :owns_experiment? 
 
 
-  def get_event
+  def get_experiment
     @experiment = Experiment.find(params[:experiment_id])   
   end
 
@@ -167,7 +168,11 @@ class StepsController < ApplicationController
   end
 
   private
+  def owns_experiment?
+	is_owner_of(@experiment) || permission_denied 
+  end
 
+  
   def insert_step(location)
       pivot = @experiment.steps.find(params[:id])
       @step = pivot.insert_new(location)

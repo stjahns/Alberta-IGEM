@@ -1,12 +1,12 @@
 class ImagesController < ApplicationController
-  before_filter :login_required, :excep => [:thumb, :step, :show]
+  before_filter :login_required, :except => [:thumb, :step, :show]
 
 # need image caching so we don't dynamically generate images every time
 # put all the actions that render an image here 
   caches_page :thumb, :step, :show
 	
 
-### added image return types
+### these actions return different images ##TODO move them to flexi templates 
   # Get /images/1/thumb
   def thumb
     @image = Image.find(params[:id])

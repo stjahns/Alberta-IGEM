@@ -1,0 +1,29 @@
+<div id="bio-bytes-table">
+		<% bytes.each do |byte| %>
+			<div class=byte-row> 
+			<div class=byte-name>
+				<h2><%= link_to byte.name, '#',:class=>"btn-byte-desc"  %></h2>
+			
+			<%= image_tag( thumb_image_path( byte.icon), :class=>"icon"  ) unless byte.icon.blank? %>
+			</div>
+			<div class="description" >
+				<% unless byte.function_image.blank? %>
+				<%= image_tag( thumb_image_path( byte.function_image )) %>
+				<% end %>
+				<p><%=h byte.description %></p>
+			<div class="byte-toolbar"><ul>
+				<li><%= link_to "edit", "#" %></li>
+				<li><%= link_to "delete", "#" %></li>
+				<li><%= link_to "sequence", "#" %></li>
+
+
+			</ul></div>
+			</div>
+
+		</div>
+	<% end %>
+
+
+	</table>
+</div>
+
