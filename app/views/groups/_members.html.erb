@@ -1,0 +1,19 @@
+<div class="member">
+	<table>
+		<tr>
+			<td><h2><%= link_to member.name , profile_path(member) %></h2></td>
+			<td class="right" > experiments completed </td>
+		</tr>
+	</table>
+</div>
+<div class="experiment-toolbar" >
+	<!-- do this with user permission TODO -->
+	<% if true %>
+	<ul>
+			<li><a class="btn-delete-user" href="#" >Delete</a>
+			<%= button_to "delete user", experiment_path(member),:method=>:delete %>
+			</li>
+			
+	</ul>
+	<% end %>
+</div>

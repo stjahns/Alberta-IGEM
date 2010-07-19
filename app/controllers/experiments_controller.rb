@@ -4,6 +4,7 @@ class ExperimentsController < ApplicationController
   before_filter :get_experiment, :except => [:index, :clone, :new, :create]
   before_filter :owns_experiment?, :except => [:index, :show, :clone, :new, :create ]
 
+  #TODO this should be done with a css with media type print
   # action for displaying print template
   def print
     @steps = @experiment.steps
@@ -15,7 +16,7 @@ class ExperimentsController < ApplicationController
   # GET /experiments
   # GET /experiments.xml
     def index
-    #TODO only the admin experiments here, the users experiments listed on profile
+    #TODO use roles to do this!
      @experiments = User.find_by_login('admin').experiments;
 
     respond_to do |format|

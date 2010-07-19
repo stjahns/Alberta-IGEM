@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20100716232236
+# Schema version: 20100719175140
 #
 # Table name: users
 #
@@ -16,6 +16,7 @@
 #  activation_code           :string(40)
 #  activated_at              :datetime
 #  role_id                   :integer(4)
+#  group_id                  :integer(4)
 #
 
 

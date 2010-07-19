@@ -78,7 +78,6 @@ ActiveRecord::Schema.define(:version => 20100719175140) do
   end
 
   create_table "groups", :force => true do |t|
-    t.integer  "role_id"
     t.string   "name"
     t.text     "description"
     t.datetime "created_at"
@@ -118,12 +117,6 @@ ActiveRecord::Schema.define(:version => 20100719175140) do
     t.datetime "updated_at"
   end
 
-  create_table "roles", :force => true do |t|
-    t.string   "name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "step_generators", :force => true do |t|
     t.string   "subprotocol"
     t.integer  "sub_order"
@@ -155,7 +148,6 @@ ActiveRecord::Schema.define(:version => 20100719175140) do
     t.datetime "remember_token_expires_at"
     t.string   "activation_code",           :limit => 40
     t.datetime "activated_at"
-    t.integer  "role_id"
     t.integer  "group_id"
   end
 

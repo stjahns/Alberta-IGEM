@@ -1,7 +1,6 @@
 class CreateGroups < ActiveRecord::Migration
   def self.up
     create_table :groups do |t|
-      t.integer :role_id
       t.string :name
       t.text :description
 

@@ -3,15 +3,13 @@
 div#flash-notice {
 	background:none repeat scroll 0 0 #C7FFC4;
 	display:table;
+	display:none;
 	font-size:13px;
 	line-height:18px;
 	margin-left:auto;
 	margin-right:auto;
 	padding:0.4em 2em;
 	text-align:center;
-}
-div#flash-notice.error {
-	background-color:#FF8593;
 }
 
 /*title of experiment */
@@ -268,7 +266,6 @@ div.lab-book h2 a:hover {
 div.lab-book td.date {
 	text-align: right;
 	font-style:italic;
-	font-family: georgia,serif;
 	color: gray;
 }
 div.lab-book td.status {
@@ -294,8 +291,6 @@ div#lab-manual-header {
 }
 div#lab-manual-header p {
 	color: #666;
-	font-family:georgia,serif !important;
-	font-style:italic;
 }
 
 
@@ -371,6 +366,10 @@ div#profile-toolbar ul li#more-experiments-tab{
 div#profile-toolbar ul li#more-experiments-tab a {
 	margin: 0;
 	margin-left:2px;
+}
+/* group profile page */
+#group-members, #admin-tools {
+	display: none;
 }
 
 /*div#profile-toolbar ul li a {
@@ -540,7 +539,7 @@ a#home-link:hover {
 }
 
 /********* new user ********************/
-div#user-form {
+div#new_user {
 	background-color:#efefef;
 	padding:30px;
 	padding-top:15px;
@@ -550,7 +549,7 @@ div#user-form {
 	margin-top:30px;
 
 }
-div#user-form .btn{
+div#new_user .btn{
 	border:1px solid black;
 	margin-right:3px;
 	padding:2px;
@@ -562,21 +561,21 @@ div#user-form .btn{
 	background-color:#efefef;
 	font-family: verdana,arial,helvetica,sans-serif;
 }
-div#user-form .btn:hover {
+div#new_user .btn:hover {
 	color:white;
 	background-color:black;
 }
-div#user-form form {
+div#new_user form {
 	display:table;
 	background-color:#efefef;
 	margin-left:auto;
 	margin-right:auto;
 }
-div#user-form form p {
+div#new_user form p {
 	background-color:#efefef;
 	background-image:none;
 }
-div#user-form input {
+div#new_user input {
 	border: 1px solid #666;
 }
 
@@ -585,9 +584,6 @@ div#user-form input {
 h2#home-notice {
 	text-align:center;
 	color:#666;
-}
-h2#home-notice.error {
-	color:red;
 }
 
 div#home-logo {

@@ -53,8 +53,14 @@ class UsersController < ApplicationController
 
   def profile
     @user = User.find_by_login(params[:login])
-    @experiments = @user.experiments
-    #render profile.html.erb 
+    if @user.nil? 
+	flash[:error] = 'No user by that name!'
+    	redirect_to root_path
+
+    else
+	 @experiments = @user.experiments
+	 #render profile.html.erb
+    end
   end
   
   def activate
