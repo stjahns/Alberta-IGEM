@@ -53,6 +53,13 @@ ActiveRecord::Schema.define(:version => 20100719175140) do
     t.integer  "experiment_id"
   end
 
+  create_table "definitions", :force => true do |t|
+    t.string   "definition"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "glossary_id"
+  end
+
   create_table "encyclopaedias", :force => true do |t|
     t.string   "title"
     t.text     "article"
@@ -68,6 +75,7 @@ ActiveRecord::Schema.define(:version => 20100719175140) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "user_id"
+    t.integer  "owner_id"
   end
 
   create_table "glossaries", :force => true do |t|
@@ -75,6 +83,7 @@ ActiveRecord::Schema.define(:version => 20100719175140) do
     t.text     "definition"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "definition_id"
   end
 
   create_table "groups", :force => true do |t|
@@ -106,6 +115,12 @@ ActiveRecord::Schema.define(:version => 20100719175140) do
     t.integer  "step_id"
     t.string   "text"
     t.integer  "image_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "pages", :force => true do |t|
+    t.string   "title"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
