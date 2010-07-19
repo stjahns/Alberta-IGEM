@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100709222530) do
+ActiveRecord::Schema.define(:version => 20100719161109) do
 
   create_table "annotations", :force => true do |t|
     t.string   "name"
@@ -70,13 +70,6 @@ ActiveRecord::Schema.define(:version => 20100709222530) do
     t.integer  "user_id"
   end
 
-  create_table "glossaries", :force => true do |t|
-    t.string   "term"
-    t.text     "definition"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "image_files", :force => true do |t|
     t.string   "image_filename"
     t.integer  "image_width"
@@ -98,6 +91,7 @@ ActiveRecord::Schema.define(:version => 20100709222530) do
   create_table "notes", :force => true do |t|
     t.integer  "step_id"
     t.string   "text"
+    t.integer  "image_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -106,6 +100,25 @@ ActiveRecord::Schema.define(:version => 20100709222530) do
     t.integer  "construct_id"
     t.integer  "bio_byte_id"
     t.integer  "part_order"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "permissions", :force => true do |t|
+    t.string   "name"
+    t.string   "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "permissions_roles", :id => false, :force => true do |t|
+    t.integer "permission_id"
+    t.integer "role_id"
+  end
+
+  create_table "roles", :force => true do |t|
+    t.string   "name"
+    t.string   "description"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -141,6 +154,7 @@ ActiveRecord::Schema.define(:version => 20100709222530) do
     t.datetime "remember_token_expires_at"
     t.string   "activation_code",           :limit => 40
     t.datetime "activated_at"
+    t.integer  "role_id"
   end
 
   add_index "users", ["login"], :name => "index_users_on_login", :unique => true
