@@ -15,7 +15,6 @@
 #  remember_token_expires_at :datetime
 #  activation_code           :string(40)
 #  activated_at              :datetime
-#  role_id                   :integer(4)
 #  group_id                  :integer(4)
 #
 

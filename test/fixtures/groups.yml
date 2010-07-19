@@ -4,7 +4,6 @@
 # Table name: groups
 #
 #  id          :integer(4)      not null, primary key
-#  role_id     :integer(4)
 #  name        :string(255)
 #  description :text
 #  created_at  :datetime
