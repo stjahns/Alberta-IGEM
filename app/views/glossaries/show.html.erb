@@ -23,12 +23,13 @@
 
 <% @glossaries.each do |glossary| %>
 
-  <p>
-    <a name ="#glossary.id"><b><%=h glossary.term %></b></a>
+  <p class = "term">
+    <%=h glossary.term %></b></a
   </p>
 
-  <p>
+  <p class ="entry">
     <%  definition= add_glossary_links(glossary.definition)%>
+    
     <%= add_popups(definition) %>
   </p>
 

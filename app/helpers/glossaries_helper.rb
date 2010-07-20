@@ -55,8 +55,8 @@ module GlossariesHelper
         match = match.sub(/<a href=http:\/\/localhost:3000\/glossaries\/#{id}>/){""}
         
         @def = @def.to_s
-        @def = @def.sub(/<a href=http:\/\/localhost:3000\/glossaries\/#{id}>#{match}<\/a>/){"<a href=http://localhost:3000/glossaries/#{id}>#{match}</a><em class = def>#{definition}</em>"}
-        puts "def is #{@def}"
+        @def = @def.sub(/<a href=http:\/\/localhost:3000\/glossaries\/#{id}>#{match}<\/a>/){"<a href=http://localhost:3000/glossaries/#{id}>#{match}</a><em class = def><div><b>#{term}:</b></div>#{definition}</em>"}
+
         #find a way to not match em's when looking for terms in the string
         #@insert_num += 1
       end

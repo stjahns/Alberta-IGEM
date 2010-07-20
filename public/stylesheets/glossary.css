@@ -74,14 +74,25 @@ a:visited { color: #666; }
 }
 
  .def { border: 1px solid black;
-        background: white;
-        width: 15em;
+        background: silver;
+        
+        
         display: none;
         float: right;
+        position: relative;
+      
+        
+
+        -webkit-box-shadow: 5px 5px 7px #333;
+        -webkit-border-radius: 5px;
         -moz-border-radius: 5px;
         -moz-box-shadow: 5px 5px 7px #333;
   }
 
+  .term{
+      border-top: 1px solid silver;
+      padding-top: 1em;
+    }
 
 #errorExplanation ul li {
   font-size: 12px;
