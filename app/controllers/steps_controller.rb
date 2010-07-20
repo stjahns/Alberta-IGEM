@@ -56,7 +56,7 @@ class StepsController < ApplicationController
     respond_to do |format|
       if @step.save
         format.html { 	flash[:notice] = 'Step was successfully created.'
-			redirect_to([ @experiment, @step ]) }
+			redirect_to( experiment_path( @experiment ) ) }
         format.xml  { render :xml => @step, :status => :created, :location =>[ @experiment, @step ]}
       else
         format.html { render :action => "new" }

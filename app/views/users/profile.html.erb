@@ -2,15 +2,19 @@
 	<%= javascript_include_tag 'profile','experimentIndex' %>
 <% end %>
 
-<div id="profile-head">
+
+<div id="header">
   <h1><%=h @user.login %></h1>
   <p>3  Experiments completed</p>
 
-  <div id="profile-toolbar">
+  <div id="header-toolbar">
 	  <ul>
 		  <li><a id="profile-tab" class="selected" href="#">Profile</a></li>
 		  <li><a id="lab-book-tab" href="">Lab Book</a></li>
-		  <li id="more-experiments-tab" ><%= link_to "Add experiments", experiments_path %></li>
+		  <li class="right" ><%= link_to "Add experiments", experiments_path %></li>
+		<li class="right" ><%= link_to "New experiment", new_experiment_path %></li>
+
+
 	  </ul>
   </div>
 
@@ -69,6 +73,3 @@
 <% end %>
 </table>
 -->
-<br />
-
-<%= link_to 'New experiment', new_experiment_path %>

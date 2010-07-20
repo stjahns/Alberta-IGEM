@@ -44,8 +44,24 @@
 </p>
 
 <% if @experiment.steps.empty? %>
-	<div id="add-first-step">
-		<a href="#">Click Here to add a step and get started, making your experiment</a>
+	<div id="user-form">
+	<p>Create a new construct to generate a protocol or make the first step using the form below.</p>
+
+	<% form_for([ @experiment, Step.new ]) do |f| %>
+	  <%= f.error_messages %>
+
+	  <p>
+	    <%= f.label :title %><br />
+	    <%= f.text_field :title %>
+	  </p>
+	  <p>
+	    <%= f.label :description %><br />
+	    <%= f.text_area :description %>
+	  </p>
+	  <p>
+	    <%= f.submit 'Create' %>
+	  </p>
+	<% end %>
 	</div>
 <% else %>
     <%= render :partial => "step", :collection => @steps %>

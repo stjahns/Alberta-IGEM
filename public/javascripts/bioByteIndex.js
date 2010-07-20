@@ -15,4 +15,42 @@ $(document).ready(function(){
 		return false;
 	});
 
+	//delete a biobyte and expand up
+	$('.btn-delete-biobyte').live('click', function(){
+		byte_div = $(this).parents('div.byte-row');
+			 
+		$(this).next('form.button-to').ajaxSubmit({
+			dataType: 'html',
+		  	success: function(data) { 
+		  	 	// slide the div up then remove it
+				byte_div.slideUp(function(){
+					byte_div.remove();
+				});
+			  },
+			error: function() {
+				error_message($('.save-notice',byte_div), "Error: The part could not be deleted.");
+			}
+		});
+		return false;
+	});
+
+
+	//display the sequence
+	$('.btn-show-sequence').live('click',function(){
+		byte_div = $(this).parents('div.byte-row');
+		text = $('span.text',byte_div);
+		seq =  $('span.sequence',byte_div);
+		if( text.is(':visible') ){
+			text.hide();
+			seq.show();
+			$(this).html('Description');
+		}
+		else {
+			seq.hide();
+			text.show();
+			$(this).html('Sequence');
+		}
+		return false;
+	});
+
 });

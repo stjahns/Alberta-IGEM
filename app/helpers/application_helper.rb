@@ -3,4 +3,5 @@ module ApplicationHelper
 	def save_notice
   		'<span class="save-notice"></span>'
 	end
+
 end

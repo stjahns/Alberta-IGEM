@@ -1,7 +1,14 @@
-<div id='profile-head'>
+<% content_for :includes do %>
+<%= javascript_include_tag 'profile' %>
+<% end %>
+
+<% content_for :title do %>
+	<%= @group.name %>
+<% end %>
+
+<div id='header'>
 <h1><%= @group.name %></h1>
-</div>
-<div id='profile-toolbar' >
+<div id='header-toolbar' >
 	<ul>
 		<li><a id='group-info-tab' class='selected' href='#'>Info</a></li>
 		<li><a id='group-members-tab' href='#'>Members</a></li>
@@ -9,6 +16,7 @@
 		<!-- TODO if is group admin -->
 		<li><a id='admin-tools-tab' href='#'>Admin Tools</a></li>
 	</ul>
+</div>
 </div>
 <div id='group-info' >
 <p><%= @group.description %></p>

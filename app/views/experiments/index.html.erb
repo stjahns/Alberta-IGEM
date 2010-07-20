@@ -2,14 +2,14 @@
 	<%= javascript_include_tag 'experimentIndex' %>
 <% end %>
 
-<% content_for :nav do %>
-	<li><%= link_to "Lab Manual", experiments_path, :class=>'selected' %></li>
-	<li><%= link_to "Parts Bin", bio_bytes_path %></li>
+<% content_for :title do %>
+	<%= 'Lab Manual' %>
 <% end %>
 
-<div id="lab-manual-header" >
+<div id="header" >
 	<h1>Lab Manual</h1>
 	<p>View an experiment, without the ability to edit or add notes, or add it to your lab book for full control.</p>
+	<div id="header-toolbar" ></div>
 </div>
 
 
@@ -17,4 +17,3 @@
 <%= render :partial=>'description', :collection => @experiments, :as=>:experiment %>
 
 
-<%= link_to 'New experiment', new_experiment_path %>

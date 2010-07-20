@@ -286,17 +286,8 @@ span.more {
 div.edit-experiment {
 	display: none;
 }
-div#lab-manual-header {
-	border-bottom: 5px solid black;
-	margin-bottom: 4em;
-}
-div#lab-manual-header p {
-	color: #666;
-	font-family:georgia,serif;
-	font-style:italic;
-	font-size:1.2em;
-	line-height:1.5em;
-}
+
+
 
 
 
@@ -341,51 +332,49 @@ div.experiment-toolbar ul li a:hover {
 
 
 /*toolbar for switching between tabs on profile page*/
-div#profile{
-}
 
 div#lab-book {
 	display: none;
 }
 
-div#profile-toolbar {
-	border-bottom:0.25em solid black ;
+/* general header styling */
+div#header {
+	border-bottom: 5px solid black;
+	margin-bottom: 4em;
+}
+div#header p {
+	color: #666;
+	font-family:georgia,serif;
+	font-style:italic;
+	font-size:1.2em;
+	line-height:1.5em;
+}
+div#header-toolbar {
+/*	border-bottom:5px solid black ;*/
 	clear:both;
+	margin:0;
 	margin-top: 0.25em;
-	margin-bottom: 1em;
 	
 } 
-div#profile-toolbar ul {
+div#header-toolbar ul {
 	list-style-type: none;
 	margin: 0;
 	padding: 0;	
 	overflow: hidden;
 
 }
-div#profile-toolbar ul li {
+div#header-toolbar ul li {
 	float: left;
 }
-div#profile-toolbar ul li#more-experiments-tab{
-	float:right;
+div#header-toolbar ul li.right {
+	float: right;
 }
-div#profile-toolbar ul li#more-experiments-tab a {
+div#header-toolbar ul li.right a:link, div#header-toolbar ul li.right a:visited, div#header-toolbar ul li.right a:hover {
 	margin: 0;
 	margin-left:2px;
 }
-/* group profile page */
-#group-members, #admin-tools {
-	display: none;
-}
 
-/*div#profile-toolbar ul li a {
-	background-image: url(../images/tab-shadow.png);
-	background-repeat: repeat-x;
-	background-position: bottom;
-
-}
-*/
-
-div#profile-toolbar ul li a:link, div#profile-toolbar ul li a:visited {
+div#header-toolbar ul li a:link, div#header-toolbar ul li a:visited {
 	display: block;
 	font-weight: normal;
 	padding: 4px;
@@ -396,21 +385,29 @@ div#profile-toolbar ul li a:link, div#profile-toolbar ul li a:visited {
 	background-repeat: repeat-x;
 	background-position: bottom;
 }
-div#profile-toolbar ul li a.selected:link, div#profile-toolbar ul li a.selected:visited  {
+div#header-toolbar ul li a.selected:link, div#header-toolbar ul li a.selected:visited  {
 	background-image: none;
 	background-color:black;
 	color: #fff;
 	border: 2px solid black;
 	border-bottom-width: 0;
+	font-weight:bold;
 }
-div#profile-toolbar ul li a:hover {
+div#header-toolbar ul li a:hover {
 	background-image: none;
 	background-color: #000000;
 	color: #fff;
 }
-div#profile-toolbar ul li form {
+div#header-toolbar ul li form {
 	display: none;
 }
+/* group profile page */
+#group-members, #admin-tools {
+	display: none;
+}
+
+
+
 div#profile table tr td {
 	vertical-align:top;
 	padding-left: 1em;
@@ -576,12 +573,16 @@ div#user-form form {
 	margin-left:auto;
 	margin-right:auto;
 }
-div#user-form form p {
+div#user-form p {
 	background-color:#efefef;
 	background-image:none;
 }
 div#user-form input {
 	border: 1px solid #666;
+}
+div#user-form textarea {
+	height:200px;
+	width:350px;
 }
 
 
@@ -713,6 +714,11 @@ div#bio-bytes-table div.byte-row.selected img.icon {
 	float:right;
 	padding:0;
 }
+
+div#bio-bytes-table .sequence {
+	display:none;
+}
+
 /***styling for toolbar****/
 div.byte-toolbar {
 	clear:both;
@@ -728,7 +734,12 @@ div.byte-toolbar ul {
 div.byte-toolbar ul li {
 	float: left;
 }
-
+div.byte-toolbar ul li.right {
+	float: right;
+}
+div.byte-toolbar ul li form {
+	display:none;
+}
 div.byte-toolbar ul li a.shadow {
 	background-image: url(../images/tab-shadow.png);
 	background-repeat: repeat-x;
