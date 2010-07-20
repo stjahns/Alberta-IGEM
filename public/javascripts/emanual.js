@@ -1,10 +1,3 @@
-// Place your application-specific JavaScript functions and classes here
-// This file is automatically included by javascript_include_tag :defaults
-$.ajaxSetup({
-  'beforeSend': function(xhr) {
-  xhr.setRequestHeader("Accept", "text/javascript")}
-})
-
   var orfs;
   var linkers;
   var allparts;
@@ -18,56 +11,8 @@ $(document).ready(function(){
 //	if(flashnotice.html() != "" ){
 //		flashnotice.fadeIn();
 //	}
-	// check the state of the navbar in the cookie and restore it
-	if($.cookie('nav') == 'collapsed'){
-		$('#btn-hide-nav a').addClass('slid')
-		$('div#navBar').css({top: function(index,value){
-			return -26;}
-		});
-	}
-
-	// slide the nav bar up and down and store its state in a cookie
-	$('#btn-hide-nav a').click( function(){
-		btn = $(this);
-		if( btn.hasClass('slid') ){
-			btn.removeClass('slid');
-			$.cookie('nav','expanded',{ path: '/'  });
-			$('div#navBar').animate(
-			{top: '+=26'},
-			500 );
-		}
-		else{
-			btn.addClass('slid');
-			$.cookie('nav','collapsed',{path: '/'} );
-			$('div#navBar').animate(
-			{top: '-=26'},
-			500);
-		}
 	
-	});
 
-
-
-	//submit login form in nav bar if the user pushes enter
-	//in the form
-	$('#navBar form').keydown(function(event){
-		if(event.keyCode == '13'){
-//			$(this).submit();
-			$(this).ajaxSubmit({
-			dataType: 'html',
-		  	success: function(data) { 
-				location.reload();
-				//success_message(save_notice,"Step updated succesfully.");
-			  },
-			error: function() {
-				error_message(save_notice, "Error: The step could not be updated.");
-			}
-			});
-		}
-	});
-
-      //only run this function if contructs object has been created
-      if(typeof(constructs) != 'undefined') {
       	updatePlasmidDisplay(0);
       
 
@@ -105,9 +50,10 @@ $(document).ready(function(){
         $(".part-info." + con).parent().hide();
       });
       
-      }//all the part function above only are run if the construct object is defined
+	//**********************************************************
+	// javascript for editing steps
+	//**********************************************************
 
-        /*********   ajaxify forms ************************************/
 	// submit the edits for steps with ajaX
 	//$('.inplace_edit_step').each( function() {
 	$('.inplace_edit_step').live('submit', function() {
@@ -229,12 +175,11 @@ $(document).ready(function(){
 		return false;
 	});
 
-	//TODO add error callbacks to all ajaxSubmits
 	// autosubmit a change in published status
 	$('#publish').change(function(){
 		var save_notice = $('.save-notice',this);
 		var published = $("#experiment_published");
-		if( publish_status_changed() ){
+		if( publish_status_changed(published ) ){
 			//submit change
 			$(this).ajaxSubmit( {
 					dataType: 'html',
@@ -266,40 +211,6 @@ $(document).ready(function(){
 		}
 	});
 
-	$('.publish-experiment').live('change',function(){
-		var save_notice = $('.save-notice',this);
-		var published = $("#experiment_published",this);
-		if( publish_status_changed() ){
-			//submit change
-			$(this).ajaxSubmit( {
-					dataType: 'html',
-		  	success: function(data,statusText ) { 
-			  	// status changed to published
-				var message = published.is(':checked') ? 
-			       		"Experiment published" :
-					"Experiment unpublished" ;	
-				success_message( save_notice, message);
-
-		        },
-			error: function() {
-				var message = "Sorry there was an error.";
-
-				if( published.is(':checked')){
-					// uncheck
-					published.removeAttr('checked');
-					message = message + "  The experiment could not be published.";
-				}
-				else{
-					// check
-					published.attr('checked','checked');
-					message = message + "  The experiment could not be unpublished.";
-				}
-			error_message(save_notice, message);
-			}
-		});
-		}
-	});
-
 
 
 	// submit a new note for a step with Ajax
@@ -310,13 +221,15 @@ $(document).ready(function(){
 		form.ajaxSubmit( {
 			dataType: 'html',
 		  	success: function(data) { 
+			  //alert(data);
 		  	  // remove the old content and insert new stuff
-			  note.html(data).show().attr('note','true');
+			  note.html(data);
+			  note.attr('note','true');
 			  var url = form.attr('action') + '/edit';
 			  /*$.get(url, function( newForm ){
 			  	$('div.step_note_form', note).html(newForm);
 		    	  });*/
-			  success_message($('.step_note_view',note).find('.save-notice') ,"New note created.");
+			  success_message($('.step_note_view', note).find('.save-notice') ,"New note created.");
 				
 		        },
 			error: function(){
@@ -581,144 +494,9 @@ $(document).ready(function(){
 		});
 		return false;
 	});
-	$(".btn-edit-experiment").live( 'click', function() {
-		exp  = $(this).parents('div.experiment-description-container');
-		view = $('div.lab-book',exp ); 
-		edit = $('div.edit-experiment', exp);
-		if( view.is(':visible') ){
-			view.hide();
-			edit.show();
-			$(this).html('Show');
-		}
-		else{
-			edit.hide();
-			view.show();
-			$(this).html('Edit');
-		}
-		return false;
-	});
-	
-	$('.btn-delete-experiment').live( 'click', function(){
-		var exp = $(this).parents('div.experiment-description-container');
-		var save_notice = $('div.lab-book',exp).find('.save-notice');
-		$(this).siblings('form.button-to').ajaxSubmit({
-			dataType: 'html',
-			beforeSubmit: function(){
-			   return confirm(
-				'Are you sure you want to delete this note?');},
-		  	success: function(data) { 
-			   exp.slideUp(function(){
-				exp.remove();	   
-			   });
-			  },
-			error: function() {
-				error_message(save_notice, "Error: experiment could not be deleted.");
-			}
-		});
-		return false;
-	});
-	$('a.btn-byte-desc',$('#bio-bytes-table')).click(function(){
-		row = $(this).parents('.byte-row');
-		desc = $( 'div.description', row);
-		if(desc.is(':visible')){
-			desc.hide();
-			row.removeClass('selected');
-	}
-		else{
-			desc.show();
-			row.addClass('selected');
-
-		}
-		return false;
-	});
-
-
-
-
-
-
-
-	$('a.more').live('click', function(){
-	       	$(this).hide().siblings('span.more').show();
-		return false;
-	});
-	
-	$('a.less').live('click', function(){
-		$(this).parent('span.more').hide()
-		.siblings('a.more').show();
-		return false;
-	});
-
-	$('#profile-tab').click( function(){
-		$('#lab-book').hide();
-		$('#profile').show();
-		$('a','#profile-toolbar').removeClass('selected');
-		$(this).addClass('selected');
-		return false;
-	});
-	
-	$('#lab-book-tab').click( function(){
-		$('#profile').hide();
-		$('#lab-book').show();
-		$('a','#profile-toolbar').removeClass('selected');
-		$(this).addClass('selected');
-		return false;
-	});
-
-	// toolbar on group page	
-	$('#group-info-tab').click( function(){
-		$('#profile-toolbar').nextAll().hide();
-		$('#group-info').show();
-		$('a','#profile-toolbar').removeClass('selected');
-		$(this).addClass('selected');
-		return false;
-	});
-	$('#group-members-tab').click( function(){
-		$('#profile-toolbar').nextAll().hide();
-		$('#group-members').show();
-		$('a','#profile-toolbar').removeClass('selected');
-		$(this).addClass('selected');
-		return false;
-	});
-	$('#admin-tools-tab').click( function(){
- 		$('#profile-toolbar').nextAll().hide();
-		$('#admin-tools').show();
-		$('a','#profile-toolbar').removeClass('selected');
-		$(this).addClass('selected');
-		return false;
-	});
-
-	
-	//fade out notice after 3 seconds
-	setTimeout(function(){
-		$('#home-notice').fadeOut("slow");
-		$('#flash-notice').fadeOut("slow");
-	}, 3000);
-	
-
-
 });	
 
-function publish_status_changed(){
-		var box =  $('#experiment_published'); 
-		var change = true;
-		if( box.is(':checked') ){
-			change = confirm(
-			'If you publish this experiment, anyone can see it!  ' + 
-			'Are you sure you want to publish it? (Note: you can ' + 
-			'unpublish it at anytime by unchecking the published ' +
-			'checkbox.');
-		}
-		if( !change ){
-			box.attr('checked', false);			
-		}
-		return change;
-}
 
-function unescapeHTML(html) {
-	html = $("<div />").html(html).text();
- 	return html.replace('<pre>','').replace('</pre>','');
-}
 
 function renumberSteps(){
 	var i = 1;
@@ -742,20 +520,7 @@ function generate_delete_form( action ){
 		'" name="authenticity_token"></div></form>';
 }
 
-function success_message( message_container, message ){
-	message_container.html(message).fadeIn("slow");
-		setTimeout(function(){
-			message_container.fadeOut("slow");
-	}, 3000);	
-}
 
-function error_message( message_container, message ){
-	message_container.addClass("error-message").html(message).fadeIn("slow");
-		setTimeout(function(){
-			message_container.fadeOut("slow", function(){
-				$(this).removeClass("error-message")});
-	}, 3000);	
-}
 
 function updatePlasmidDisplay(placeholders){
   //must repeat for all constructs

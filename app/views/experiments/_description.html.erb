@@ -10,10 +10,9 @@
 			<td><% form_for(experiment,
 				       	:html=>{:class=>'publish-experiment'} ) do |f| %>
 			<%= f.error_messages %>
-			<%= f.check_box :published %>
+			<%= f.check_box :published, :class=>'checkbox' %>
     			<%= f.label :published %>
-			<span class= "save-notice"
-			       	style= "display: none;"></span>
+			<span class= "save-notice"></span>
 
 			<% end %>
 		</td>

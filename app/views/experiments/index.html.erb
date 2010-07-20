@@ -1,3 +1,7 @@
+<% content_for :includes do %>
+	<%= javascript_include_tag 'experimentIndex' %>
+<% end %>
+
 <% content_for :nav do %>
 	<li><%= link_to "Lab Manual", experiments_path, :class=>'selected' %></li>
 	<li><%= link_to "Parts Bin", bio_bytes_path %></li>

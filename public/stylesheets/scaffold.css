@@ -267,6 +267,7 @@ div.lab-book td.date {
 	text-align: right;
 	font-style:italic;
 	color: gray;
+	font-family: georgia,serif;
 }
 div.lab-book td.status {
 	text-align: right;
@@ -291,6 +292,10 @@ div#lab-manual-header {
 }
 div#lab-manual-header p {
 	color: #666;
+	font-family:georgia,serif;
+	font-style:italic;
+	font-size:1.2em;
+	line-height:1.5em;
 }
 
 
@@ -539,7 +544,7 @@ a#home-link:hover {
 }
 
 /********* new user ********************/
-div#new_user {
+div#user-form {
 	background-color:#efefef;
 	padding:30px;
 	padding-top:15px;
@@ -549,7 +554,7 @@ div#new_user {
 	margin-top:30px;
 
 }
-div#new_user .btn{
+div#user-form .btn{
 	border:1px solid black;
 	margin-right:3px;
 	padding:2px;
@@ -561,21 +566,21 @@ div#new_user .btn{
 	background-color:#efefef;
 	font-family: verdana,arial,helvetica,sans-serif;
 }
-div#new_user .btn:hover {
+div#user-form .btn:hover {
 	color:white;
 	background-color:black;
 }
-div#new_user form {
+div#user-form form {
 	display:table;
 	background-color:#efefef;
 	margin-left:auto;
 	margin-right:auto;
 }
-div#new_user form p {
+div#user-form form p {
 	background-color:#efefef;
 	background-image:none;
 }
-div#new_user input {
+div#user-form input {
 	border: 1px solid #666;
 }
 
@@ -661,9 +666,6 @@ div#bio-byte-table  div.description {
 div#bio-bytes-table div.byte-row  {
 	clear:both;
 }
-/*div#bio-bytes-table div.byte-row:hover {
-	border: 2px solid #666;
-}*/
 div.byte-row div.byte-name h2 {
 	display:inline;
 }
@@ -678,6 +680,7 @@ div#bio-bytes-table div.byte-row a.btn-byte-desc:link, div.byte-row a.btn-byte-d
 }
 div#bio-bytes-table div.byte-row a.btn-byte-desc:hover {
 	background-image: url(../images/expandHover.png);
+	background-color:#efefef;
 }
 div#bio-bytes-table img{
 	float:left;
@@ -704,6 +707,7 @@ div#bio-bytes-table div.byte-row.selected a.btn-byte-desc:link, div#bio-bytes-ta
 }
 div#bio-bytes-table div.byte-row.selected a.btn-byte-desc:hover {
 	background-image: url(../images/collapseHover.png);
+	background-color:#efefef;
 }
 div#bio-bytes-table div.byte-row.selected img.icon {
 	float:right;
