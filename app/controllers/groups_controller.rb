@@ -1,4 +1,5 @@
 class GroupsController < ApplicationController
+  before_filter :set_nav
   def index
 	@groups = Group.all
   end
@@ -60,6 +61,9 @@ class GroupsController < ApplicationController
   end
   
   private
+  def set_nav
+	  @navbar_selected = :groups
+  end
   def  get_group_by_id_or_name
 	 params[:name] ? Group.find_by_name(params[:name]) : Group.find(params[:id])
   end

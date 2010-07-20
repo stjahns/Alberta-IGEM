@@ -1,4 +1,7 @@
 class GlossariesController < ApplicationController
+
+  before_filter :set_nav
+
   # GET /glossaries
   # GET /glossaries.xml
   def index
@@ -83,5 +86,9 @@ class GlossariesController < ApplicationController
       format.html { redirect_to(glossaries_url) }
       format.xml  { head :ok }
     end
+  end
+  private
+  def set_nav
+	  @navbar_selected = :glossary
   end
 end

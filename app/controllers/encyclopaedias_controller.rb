@@ -1,4 +1,6 @@
 class EncyclopaediasController < ApplicationController
+ before_filter :set_nav
+
   # GET /encyclopaedias
   # GET /encyclopaedias.xml
   def index
@@ -81,5 +83,9 @@ class EncyclopaediasController < ApplicationController
       format.html { redirect_to(encyclopaedias_url) }
       format.xml  { head :ok }
     end
+  end
+  private
+  def set_nav
+	  @navbar_selected = :articles
   end
 end

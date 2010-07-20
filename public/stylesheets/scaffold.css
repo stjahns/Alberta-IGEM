@@ -525,6 +525,9 @@ div#navBar ul li a:hover {
 	color: white;
 	font-weight: bold;
 }
+div#navBar ul li.selected a:link, div#navBar ul li .selected a:hover, div#navBar ul li.selected a:visited {
+	font-weight: bold;
+}
 div#navBar ul li h2 {
 	display: block;
 	margin: 2px;

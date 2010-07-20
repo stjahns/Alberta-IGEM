@@ -9,7 +9,7 @@ class BioBytesController < ApplicationController
   
   before_filter :login_required, :except => [:index, :show]
   before_filter :is_admin?, :except => [:index, :show]
-
+  before_filter :set_nav
 
   def index
 
@@ -112,7 +112,9 @@ class BioBytesController < ApplicationController
   end
 
   private
-
+  def set_nav
+	  @navbar_selected = :parts
+  end
   def is_admin
     unless current_user.login == "admin"
       redirect_to bio_bytes_path

@@ -4,6 +4,8 @@ class ExperimentsController < ApplicationController
   before_filter :get_experiment, :except => [:index, :clone, :new, :create]
   before_filter :owns_experiment?, :except => [:index, :show, :clone, :new, :create ]
 
+  before_filter :set_nav
+
   #TODO this should be done with a css with media type print
   # action for displaying print template
   def print
@@ -127,10 +129,12 @@ class ExperimentsController < ApplicationController
   end
 
   private
+  def set_nav
+	  @navbar_selected = :manual 
+  end
   def get_experiment
 	 @experiment = Experiment.find(params[:id])
   end
-
   def owns_experiment? 
        is_owner_of( @experiment ) || permission_denied
   end
