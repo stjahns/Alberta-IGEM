@@ -2,7 +2,7 @@ class GlossariesController < ApplicationController
   # GET /glossaries
   # GET /glossaries.xml
   def index
-    @glossaries = Glossary.all
+    @glossaries = Glossary.alphabetise
 
     respond_to do |format|
       format.html # index.html.erb
@@ -14,7 +14,7 @@ class GlossariesController < ApplicationController
   # GET /glossaries/1.xml
   def show
 
-    @glossaries = Glossary.all
+    @glossaries = Glossary.alphabetise
     @glossary = Glossary.find(params[:id])
     respond_to do |format|
       format.html # show.html.erb

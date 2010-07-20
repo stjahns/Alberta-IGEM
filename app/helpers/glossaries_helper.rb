@@ -15,13 +15,15 @@ module GlossariesHelper
       @regex = Regexp.new(/#{term}\w*/)
       matchdata = @regex.match(@def_str)
       if matchdata
+        
         #if the term was found in the text, split the text on that term and insert
         # an html link
         matchdata = matchdata.to_s
+        matchdata = matchdata.sub(/\s#{term}/){"#{term}"}
 
 
         @def = @def.to_s
-        @def = @def.sub(/#{term}\w*/){"<a href=http://localhost:3000/glossaries/#{id}>#{matchdata}</a>"}
+        @def = @def.sub(/\s#{term}\w*/){"\s<a href=http://localhost:3000/glossaries/#{id}>#{matchdata}</a>"}
         #find a way to not match em's when looking for terms in the string
         #@insert_num += 1
       end
