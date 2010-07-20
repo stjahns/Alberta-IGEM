@@ -23,7 +23,7 @@ module GlossariesHelper
 
 
         @def = @def.to_s
-        @def = @def.sub(/\s#{term}\w*/){"\s<a href=http://localhost:3000/glossaries/#{id}>#{matchdata}</a>"}
+        @def = @def.sub(/\s#{term}\w*/){"\s<a class=\"termLink\" href=http://localhost:3000/glossaries/#{id}>#{matchdata}</a>"}
         #find a way to not match em's when looking for terms in the string
         #@insert_num += 1
       end
@@ -48,16 +48,16 @@ module GlossariesHelper
       
       @def_str = @def.to_s
 
-      @regex = Regexp.new(/<a href=http:\/\/localhost:3000\/glossaries\/#{id}>#{term}\w*/)
+      @regex = Regexp.new(/<a class=\"termLink\" href=http:\/\/localhost:3000\/glossaries\/#{id}>#{term}\w*/)
       matchdata = @regex.match(@def_str)
       if matchdata
         #if the term was found in the text, split the text on that term and insert
         # an html link
         match = matchdata.to_s
-        match = match.sub(/<a href=http:\/\/localhost:3000\/glossaries\/#{id}>/){""}
+        match = match.sub(/<a class=\"termLink\" href=http:\/\/localhost:3000\/glossaries\/#{id}>/){""}
         
         @def = @def.to_s
-        @def = @def.sub(/<a href=http:\/\/localhost:3000\/glossaries\/#{id}>#{match}<\/a>/){"<a href=http://localhost:3000/glossaries/#{id}>#{match}</a><em class = def><div><b>#{term}:</b></div>#{definition}</em>"}
+        @def = @def.sub(/<a class=\"termLink\" href=http:\/\/localhost:3000\/glossaries\/#{id}>#{match}<\/a>/){"<a class=\"termLink\" href=http://localhost:3000/glossaries/#{id}>#{match}</a><em class = def><div><b>#{term}:</b></div>#{definition}</em>"}
 
         #find a way to not match em's when looking for terms in the string
         #@insert_num += 1

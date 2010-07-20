@@ -3,28 +3,28 @@
 		<div id="nav-left-corner"></div>
 		<ul>
 		<%= yield :nav %>
-		
+
+			
 		<li><%= link_to "Glossary", glossaries_path %></li>
 		<li><%= link_to "Articles", encyclopaedias_path %></li>
 		<li><%= link_to "Lab Manual", experiments_path %></li>
 		<li><%= link_to "Parts Bin", bio_bytes_path %></li>
+		<li><%= link_to "Groups", groups_path %></li>
 		<li><%= link_to "Home", root_path %></li>
+
 
 		<span id="user-nav">
 			<li><a id="home-link" href="/"></a></li>
 		<% if logged_in? %>
 			<li><h2><%= current_user.login %></h2></li>
 			<li><%= link_to "Profile", profile_path(current_user.login) %></a></li>
+		
 			<li><%= link_to "Logout", logout_path %></a></li>
 		<% else %>
 			<% form_tag session_path do -%>
 				<li><%= text_field_tag 'login','username' %></li>
 				<li><%= password_field_tag 'password', '123' %></li>
 
-
-
-			<!--
-			<p><%= submit_tag 'Log in' %></p>-->
 			<% end -%>
 			<li><%= link_to "Sign up?", signup_path %></li>
 		<% end %>

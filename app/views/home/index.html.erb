@@ -4,6 +4,8 @@
 	  <ul>	
 		<li><%= link_to "Parts Bin", bio_bytes_path %></li>
   <li><%= link_to "Experiments", experiments_path %></li>
+  <li><%= link_to "Glossary", glossaries_path %></li>
+  <li><%= link_to "Articles", encyclopaedias_path %></li>
 
   <% if logged_in?  %>
      <li><%= link_to "View your profile", profile_path( current_user.login ) %></li>  

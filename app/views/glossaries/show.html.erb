@@ -6,7 +6,7 @@
 
     <script type="text/javascript">
       $(document).ready(function(){
-         $("a").hover(function(event){
+         $("a.term-link").hover(function(event){
             $(this).next("em").animate({opacity: "show", top: "-75"}, "fast");
           }, function() {
             $(this).next("em").animate({opacity: "hide", top: "-85"}, "fast");

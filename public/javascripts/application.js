@@ -63,6 +63,16 @@ $(document).ready(function(){
 	});
 
 	//**********************************************************
+	// make pop up for glossary links
+	//**********************************************************
+         $("a.termLink").hover(function(event){
+            $(this).next("em").animate({opacity: "show", top: "-75"}, "fast");
+          }, function() {
+            $(this).next("em").animate({opacity: "hide", top: "-85"}, "fast");
+	});  
+ 
+
+	//**********************************************************
 	// more/less text display
 	//**********************************************************
 	$('a.more').live('click', function(){
