@@ -1,4 +1,10 @@
 ActionController::Routing::Routes.draw do |map|
+  map.resources :glossaries
+
+  map.resources :definitions
+
+  map.resources :glossaries
+
 
   map.resources :encyclopaedias
 
@@ -12,6 +18,7 @@ ActionController::Routing::Routes.draw do |map|
 
   # normal user routes
   map.resources :users
+  
   # pretty routes for user profile pages
   map.profile '/user/:login', :controller => 'users', :action => 'profile', :method => 'get' 
 
@@ -19,6 +26,8 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :groups, :member => { :upload => :post, :users => :get}
   #pretty group routes
   map.pretty_group '/user/:name', :controller => 'groups', :action => 'show', :method => 'get'
+
+  map.resources :viewer
 
   #map annoations as nested resource of biobytes
   map.resources :bio_bytes, :member => { :upload => :post, :upload_desc_img => :post, :update => :post } do |bytes|
