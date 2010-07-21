@@ -1,0 +1,74 @@
+/* styling for the hanging toolbar seen throughout the site.
+ * as well as the toolbar for the steps.  It is almost the same execpt
+ * it does not hang down.  
+ */
+div.hanging-toolbar {
+	clear: both;
+	background-color: white;
+	border-top: 2px solid #efefef;
+	margin-bottom: 2em;
+
+}
+div.hanging-toolbar ul, div.step-toolbar ul {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+}
+
+div.hanging-toolbar ul li, div.step-toolbar ul li.btn-step-note {
+	float: right;
+}
+div.hanging-toolbar ul li.left, div.step-toolbar ul li {
+	float: left;
+}
+
+div.hanging-toolbar ul li form, div.step-toolbar ul li form {
+	display: none;
+}
+
+
+div.hanging-toolbar ul li a:link, div.hanging-toolbar ul li a:visited , div.step-toolbar ul li a:link, div.step-toolbar ul li a:visited {
+	display: block;
+	color: #666;
+	font-weight: normal;
+	padding: 4px;
+	background-color: #efefef;
+	text-decoration: none;
+	margin-left: 2px;
+}
+
+/* by default we want the step buttons to float right so we need to have the margins reversed as well */
+div.step-toolbar ul li a:link, div.step-toolbar ul li a:visited, div.step-toolbar ul li a:hover {
+	margin:0;
+	margin-right:2px;
+}
+
+
+div.hanging-toolbar ul li a:hover, div.step-toolbar ul li a:hover {
+	background-color: #000000;
+	color: #fff;
+}
+
+div.hanging-toolbar ul li.left a {
+	margin:0;
+	margin-right:2px;
+}
+
+div.step-toolbar {
+	border-bottom:0.25em solid #efefef ;
+	clear:both;
+	margin-top: 0.25em;
+} 
+
+div.step-toolbar ul li a.shadow {
+	background-image: url(../images/tab-shadow.png);
+	background-repeat: repeat-x;
+	background-position: bottom;
+
+}
+
+div.step-toolbar ul li a.btn-step-note {
+	margin-right: 0;
+}
+

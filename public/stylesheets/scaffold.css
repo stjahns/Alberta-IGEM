@@ -99,6 +99,7 @@ form.attach_image_to_note {
 	margin-top: 28px;
 }
 
+/* apply this class to make a loading gif appear in center of an object*/
 div.loading {
 	background-image: url(../images/spinner.gif);
 	background-position: center;
@@ -142,93 +143,9 @@ span.edit_step_number {
 	color: #efefef;
 }
 
-/*editing steps toolbar*/
-div.step-toolbar {
-	border-bottom:0.25em solid #efefef ;
-	clear:both;
-	margin-top: 0.25em;
-} 
-div.step-toolbar ul {
-	list-style-type: none;
-	margin: 0;
-	padding: 0;	
-	overflow: hidden;
 
-}
-div.step-toolbar ul li {
-	float: left;
-}
-div.step-toolbar ul li.btn-step-note{
-	float: right;
-}
 
-div.step-toolbar ul li a.shadow {
-	background-image: url(../images/tab-shadow.png);
-	background-repeat: repeat-x;
-	background-position: bottom;
 
-}
-
-div.step-toolbar ul li a:link, div.step-toolbar ul li a:visited {
-	display: block;
-	font-weight: normal;
-	padding: 4px;
-	background-color: #efefef;
-	text-decoration: none;
-	margin-right: 2px;
-}
-/*
-a.step-toolbar.selected {
-	background-color: white;
-}
-*/
-
-div.step-toolbar ul li a:hover {
-	background-image: none;
-	background-color: #000000;
-	color: #fff;
-}
-div.step-toolbar ul li a.btn-step-note {
-	margin-right: 0;
-}
-
-div.step-toolbar ul li form {
-	display: none;
-}
-
-/* toolbar for editing notes*/
-div.note-toolbar {
-	clear: both;
-	background-color: white;
-}
-div.note-toolbar ul {
-	list-style-type: none;
-	margin: 0;
-	padding: 0;
-	overflow: hidden;
-}
-
-div.note-toolbar ul li {
-	float: right;
-}
-
-div.note-toolbar ul li form {
-	display: none;
-}
-
-div.note-toolbar ul li  a:link, div.note-toolbar ul li a:visited {
-	display: block;
-	font-weight: normal;
-	padding: 4px;
-	background-color: #efefef;
-	text-decoration: none;
-	margin-left: 2px;
-}
-
-div.note-toolbar ul li a:hover {
-	background-color: #000000;
-	color: #fff;
-}
 
 
 img.step_note {
@@ -291,44 +208,6 @@ div.edit-experiment {
 
 
 
-/*toolbar for experiments in lab-book listings*/
-div.experiment-toolbar {
-	clear: both;
-	background-color: white;
-	border-top: 2px solid #efefef;
-	margin-bottom: 2em;
-
-}
-div.experiment-toolbar ul {
-	list-style-type: none;
-	margin: 0;
-	padding: 0;
-	overflow: hidden;
-}
-
-div.experiment-toolbar ul li {
-	float: right;
-}
-
-div.experiment-toolbar ul li form {
-	display: none;
-}
-
-div.experiment-toolbar ul li a:link, div.experiment-toolbar ul li a:visited {
-	display: block;
-	color: #666;
-	font-weight: normal;
-	padding: 4px;
-	background-color: #efefef;
-	text-decoration: none;
-	margin-left: 2px;
-}
-
-div.experiment-toolbar ul li a:hover {
-	background-color: #000000;
-	color: #fff;
-}
-
 
 
 /*toolbar for switching between tabs on profile page*/
@@ -337,74 +216,14 @@ div#lab-book {
 	display: none;
 }
 
-/* general header styling */
-div#header {
-	border-bottom: 5px solid black;
-	margin-bottom: 4em;
-}
-div#header p {
-	color: #666;
-	font-family:georgia,serif;
-	font-style:italic;
-	font-size:1.2em;
-	line-height:1.5em;
-}
-div#header-toolbar {
-/*	border-bottom:5px solid black ;*/
-	clear:both;
-	margin:0;
-	margin-top: 0.25em;
-	
-} 
-div#header-toolbar ul {
-	list-style-type: none;
-	margin: 0;
-	padding: 0;	
-	overflow: hidden;
 
-}
-div#header-toolbar ul li {
-	float: left;
-}
-div#header-toolbar ul li.right {
-	float: right;
-}
-div#header-toolbar ul li.right a:link, div#header-toolbar ul li.right a:visited, div#header-toolbar ul li.right a:hover {
-	margin: 0;
-	margin-left:2px;
-}
-
-div#header-toolbar ul li a:link, div#header-toolbar ul li a:visited {
-	display: block;
-	font-weight: normal;
-	padding: 4px;
-	background-color: #efefef;
-	text-decoration: none;
-	margin-right: 2px;
-	background-image: url(../images/tab-shadow.png);
-	background-repeat: repeat-x;
-	background-position: bottom;
-}
-div#header-toolbar ul li a.selected:link, div#header-toolbar ul li a.selected:visited  {
-	background-image: none;
-	background-color:black;
-	color: #fff;
-	border: 2px solid black;
-	border-bottom-width: 0;
-	font-weight:bold;
-}
-div#header-toolbar ul li a:hover {
-	background-image: none;
-	background-color: #000000;
-	color: #fff;
-}
-div#header-toolbar ul li form {
-	display: none;
-}
 /* group profile page */
 #group-members, #admin-tools {
 	display: none;
 }
+
+.member{
+       }	
 
 
 
@@ -722,60 +541,7 @@ div#bio-bytes-table .sequence {
 	display:none;
 }
 
-/***styling for toolbar****/
-div.byte-toolbar {
-	clear:both;
-	border-top:2px solid #efefef;
-} 
-div.byte-toolbar ul {
-	list-style-type: none;
-	margin: 0;
-	padding: 0;	
-	overflow: hidden;
 
-}
-div.byte-toolbar ul li {
-	float: left;
-}
-div.byte-toolbar ul li.right {
-	float: right;
-}
-div.byte-toolbar ul li form {
-	display:none;
-}
-div.byte-toolbar ul li a.shadow {
-	background-image: url(../images/tab-shadow.png);
-	background-repeat: repeat-x;
-	background-position: bottom;
-
-}
-
-div.byte-toolbar ul li a:link, div.byte-toolbar ul li a:visited {
-	display: block;
-	font-weight: normal;
-	padding: 4px;
-	background-color: #efefef;
-	text-decoration: none;
-	margin-right: 2px;
-}
-/*
-a.byte-toolbar.selected {
-	background-color: white;
-}
-*/
-
-div.byte-toolbar ul li a:hover {
-	background-image: none;
-	background-color: #000000;
-	color: #fff;
-}
-div.byte-toolbar ul li a.btn-step-note {
-	margin-right: 0;
-}
-
-div.byte-toolbar ul li form {
-	display: none;
-}
 
 
 #container {

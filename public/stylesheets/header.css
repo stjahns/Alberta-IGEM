@@ -1,0 +1,64 @@
+/* general header styling */
+div#header {
+	border-bottom: 5px solid black;
+	margin-bottom: 4em;
+}
+div#header p {
+	color: #666;
+	font-family:georgia,serif;
+	font-style:italic;
+	font-size:1.2em;
+	line-height:1.5em;
+}
+div#header-toolbar {
+/*	border-bottom:5px solid black ;*/
+	clear:both;
+	margin:0;
+	margin-top: 0.25em;
+	
+} 
+div#header-toolbar ul {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;	
+	overflow: hidden;
+
+}
+div#header-toolbar ul li {
+	float: left;
+}
+div#header-toolbar ul li.right {
+	float: right;
+}
+div#header-toolbar ul li.right a:link, div#header-toolbar ul li.right a:visited, div#header-toolbar ul li.right a:hover {
+	margin: 0;
+	margin-left:2px;
+}
+
+div#header-toolbar ul li a:link, div#header-toolbar ul li a:visited {
+	display: block;
+	font-weight: normal;
+	padding: 4px;
+	background-color: #efefef;
+	text-decoration: none;
+	margin-right: 2px;
+	background-image: url(../images/tab-shadow.png);
+	background-repeat: repeat-x;
+	background-position: bottom;
+}
+div#header-toolbar ul li a.selected:link, div#header-toolbar ul li a.selected:visited  {
+	background-image: none;
+	background-color:black;
+	color: #fff;
+	border: 2px solid black;
+	border-bottom-width: 0;
+	font-weight:bold;
+}
+div#header-toolbar ul li a:hover {
+	background-image: none;
+	background-color: #000000;
+	color: #fff;
+}
+div#header-toolbar ul li form {
+	display: none;
+}

@@ -38,13 +38,13 @@
 					</span>
 
 				<%= save_notice %>
-			<div class="byte-toolbar"><ul>
-				<li><%= link_to "Edit",  edit_bio_byte_path(byte)%></li>
-				<li><%= link_to "Delete", "#", :class=>'btn-delete-biobyte' %>
+			<div class="hanging-toolbar"><ul>
+				<li class="left" ><%= link_to "Edit",  edit_bio_byte_path(byte)%></li>
+				<li class="left" ><%= link_to "Delete", "#", :class=>'btn-delete-biobyte' %>
 				<%= button_to "Delete", byte, :confirm => "Are you sure?", :method => :delete %> </li>
 
-				<li><%= link_to "Sequence", "#",:class=>'btn-show-sequence' %></li>
-				<li class="right" ><%= link_to "Stats Sheet", bio_byte_path(byte) %></li>
+				<li class="left" ><%= link_to "Sequence", "#",:class=>'btn-show-sequence' %></li>
+				<li  ><%= link_to "Stats Sheet", bio_byte_path(byte) %></li>
 
 
 			</ul></div>

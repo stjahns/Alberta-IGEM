@@ -3,12 +3,12 @@
 <%= image_tag( step_image_path( note.image ), :class => "step_note" ) unless note.image.blank? %>
 
 <%=h note.text %></p>
-<div class="note-toolbar" >
-	<ul class= "note-toolbar">
-		<li class= "note-toolbar">
+<div class="hanging-toolbar" >
+	<ul>
+		<li>
 
 		<% if is_owner_of(step.experiment) %>
-  		<a class="btn-note-edit note-toolbar" href"#">Edit Note</a>
+  		<a class="btn-note-edit" href"#">Edit Note</a>
 		<% end %>
 		</li>
 	</ul>
