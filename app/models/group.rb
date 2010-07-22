@@ -12,6 +12,9 @@
 
 class Group < ActiveRecord::Base
 	has_many :users
+	has_many :messages
+
+	before_create :generate_new_key
 	
 	attr_accessible :name, :description
 
@@ -23,6 +26,18 @@ class Group < ActiveRecord::Base
 #	def admin_role
 #		self.role
 #	end
+	#
+	def generate_new_key
+		self.key = ActiveSupport::SecureRandom.hex(5)
+	end
+
+	def join_with_key( user, key )
+		return false unless key == self.key
+		# if the user submits the correct key than make
+		#  them join the group
+		user.group = self
+		user.save
+	end
 
 	private
 	def create_role

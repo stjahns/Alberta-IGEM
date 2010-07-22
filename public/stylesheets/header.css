@@ -1,3 +1,9 @@
+/* hide all tabs except the one you want to show on page load*/
+/*tabs on group page*/
+#group-members,#group-messages , #admin-tools {
+	display: none;
+}
+
 /* general header styling */
 div#header {
 	border-bottom: 5px solid black;
@@ -9,6 +15,7 @@ div#header p {
 	font-style:italic;
 	font-size:1.2em;
 	line-height:1.5em;
+	margin-bottom: 0.5em;
 }
 div#header-toolbar {
 /*	border-bottom:5px solid black ;*/

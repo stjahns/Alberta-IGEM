@@ -1,18 +1,20 @@
-<div class="group">
+<div class="lab-book">
 	<table>
 		<tr>
-			<td><h2><%= link_to member.name , profile_path(member) %></h2></td>
-			<td class="right" > experiments completed </td>
+			<td><h2><%= link_to group.name, group_path( group ) %></h2></td>
+			<td class="right" > group experiments completed </td>
 		</tr>
 	</table>
+	<p><%= more_text group.description, 150  unless group.description.blank?%></p>
 </div>
 <div class="hanging-toolbar" >
 	<!-- do this with user permission TODO -->
 	<% if true %>
 	<ul>
-			<li><a class="btn-delete-user" href="#" >Delete</a>
-			<%= button_to "delete user", experiment_path(member),:method=>:delete %>
+			<li><a class="btn-delete-group" href="#" >Delete</a>
+			<%= button_to "delete group", group_path(group),:method=>:delete %>
 			</li>
+			<li><%= link_to "Request to join", join_group_path(group)%> </li>
 			
 	</ul>
 	<% end %>

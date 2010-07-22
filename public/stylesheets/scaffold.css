@@ -1,3 +1,26 @@
+/* general styling */
+
+em.gray {
+	text-align: left;
+	font-family:georgia,serif;
+	color:#666;
+	font-style:italic;
+	font-size: 14px;
+
+}
+span.save-notice {
+	display: none;
+	background:#C7FFC4;
+	margin-left: 0.5em;
+	padding: 0.4em 2em;
+	font-size:   13px;
+  	line-height: 18px;
+}
+
+span.save-notice.error-message {
+	background: #FF8593;
+}
+
 /*styling for experiment page*/
 
 div#flash-notice {
@@ -53,18 +76,7 @@ margin:0px;
 margin-bottom:3em ;
 }
 
-span.save-notice {
-	display: none;
-	background:#C7FFC4;
-	margin-left: 0.5em;
-	padding: 0.4em 2em;
-	font-size:   13px;
-  	line-height: 18px;
-}
 
-span.save-notice.error-message {
-	background: #FF8593;
-}
 
 
 div.step_note_container, div.step_note_container p, div.step_note_container form {
@@ -100,7 +112,7 @@ form.attach_image_to_note {
 }
 
 /* apply this class to make a loading gif appear in center of an object*/
-div.loading {
+.loading {
 	background-image: url(../images/spinner.gif);
 	background-position: center;
 	background-repeat: no-repeat;
@@ -168,7 +180,8 @@ div.lab-book h2 a:link, div.lab-book h2 a:visited {
 	display:inline;
 	color:black;
 	text-decoration:none;
-	padding-right:23px;
+	padding-right:30px;
+	padding-bottom:2px;
 	background-image:url(../images/arrow.png);
 	background-repeat: no-repeat;
 	background-position:right; 
@@ -180,12 +193,15 @@ div.lab-book h2 a:hover {
 }
 
 
-div.lab-book td.date {
+div.lab-book td.date, div.lab-book td.right {
+}{
 	text-align: right;
 	font-style:italic;
 	color: gray;
 	font-family: georgia,serif;
 }
+
+
 div.lab-book td.status {
 	text-align: right;
 }
@@ -218,14 +234,25 @@ div#lab-book {
 
 
 /* group profile page */
-#group-members, #admin-tools {
-	display: none;
-}
+
 
 .member{
        }	
+p.gray-box {
+	background: none #efefef;
+	padding: 1em;
+	text-align:center;
+	border:1px solid #ccc;
 
 
+}
+span#group-key {
+	background-color: #fff;
+	border: 1px solid #ccc;
+	padding: 0.5em;
+	font-family:monospace;
+	width: 5em;
+}
 
 div#profile table tr td {
 	vertical-align:top;
@@ -373,19 +400,21 @@ div#user-form {
 	margin-top:30px;
 
 }
-div#user-form .btn{
-	border:1px solid black;
-	margin-right:3px;
-	padding:2px;
+div#user-form input.submit-btn {
 	text-decoration:none;
-	color:black;
-	height:22px;
-	line-height:18px;
-	font-size:13px;
-	background-color:#efefef;
+	height:30px;
+	line-height:30px;
 	font-family: verdana,arial,helvetica,sans-serif;
+	background-color:#666666;
+	border:0 none;
+	color:#FFFFFF;
+	display:table;
+	font-weight:bold;
+	margin-left:auto;
+	margin-right:auto;
+	padding:5px 10px;
 }
-div#user-form .btn:hover {
+div#user-form input.submit-btn:hover {
 	color:white;
 	background-color:black;
 }
@@ -542,7 +571,9 @@ div#bio-bytes-table .sequence {
 }
 
 
-
+/****** groups ***********/
+div.member {
+}
 
 #container {
 	width: 750px;

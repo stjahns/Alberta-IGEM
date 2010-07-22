@@ -7,6 +7,7 @@ class GroupsController < ApplicationController
   def show
 	@group = get_group_by_id_or_name
 	@members = @group.users
+	@messages = @group.messages.all
   end
 
   def new
@@ -54,6 +55,38 @@ class GroupsController < ApplicationController
 		flash[:error] = 'The changes were not saved'
 	  end
 	  redirect_to @group
+  end
+
+  def join
+	  @group = Group.find(params[:id])
+	  
+	  respond_to do |format|
+	    if @group.join_with_key( current_user, params[:key] )
+		format.html {
+		       	flash[:notice] =  "Succesfully joined #{@group.name}."
+			redirect_to group_path(@group)
+		}
+		format.js { head :ok }
+	    else
+		fomat.html {
+			flash[:notice] = "Incorrect key, could not joini #{@group.name}"
+			redirect_to groups_path
+
+		}
+		format.js { head 'incorrect key'}
+	    end
+	  end
+  end
+  def new_key 
+	@group = Group.find(params[:id])
+	
+	key = @group.generate_new_key
+	if key
+		render :text=>key
+	else
+		head :error
+	end
+
   end
 
   def upload

@@ -1,7 +1,3 @@
-<% content_for :includes do %>
-<%= javascript_include_tag 'profile' %>
-<% end %>
-
 <% content_for :title do %>
 	<%= @group.name %>
 <% end %>
@@ -12,6 +8,7 @@
 	<ul>
 		<li><a id='group-info-tab' class='selected' href='#'>Info</a></li>
 		<li><a id='group-members-tab' href='#'>Members</a></li>
+		<li><a id='group-messages-tab' href='#'>Messages</a></li>
 
 		<!-- TODO if is group admin -->
 		<li><a id='admin-tools-tab' href='#'>Admin Tools</a></li>
@@ -29,6 +26,39 @@
 	<%= render :partial => 'members', :collection => @members, :as => :member %>	
 	<% end %>
 </div>
+<div id='group-messages'>
+	<% if @messages.blank? %>
+		No messages
+	<% else %>
+		<%= render :partial => 'message', :collection => @messages %>
+	<% end %>
+</div>
 <div id='admin-tools' >
+	<p class="gray-box" >Your group's key is: <span id="group-key" ><%= @group.key %></span> </p>
+	<p><em class="gray">Give your group key to people so they can easily join the group.  If your key has been compromised then click on the generate new key button below.</em></p>
+	<div class="hanging-toolbar"><ul>
+			<li><%= link_to "Generate new Key", "#", :id=>'btn-new-key' %>
+			<%= button_to "generate key", new_key_group_path(@group), :method=>:put %></li>
+	</ul></div>
+
+	<h2>Send a message to your group</h2>
+	<% form_for( [@group,Message.new] ) do |f| %>
+		<p><%= f.error_messages %>
+		<%= f.text_area :body %></p>
+		<p><%= f.submit 'Send' %></p>
+	<% end %>
+	<div class="hanging-toolbar"></div>
+
+	<h2>Edit group info</h2>
+	<% form_for(@group) do |f| %>
+		<p><%= f.error_messages %></p>
+		<p><%= f.label 'name' %><br/>
+		<%= f.text_field :name %></p>
+		<p><%= f.label 'description' %><br/>
+		<%= f.text_area :description %></p>
+		<p><%= f.submit 'Save', :confirm => 'Are you sure you want to save your changes to the group\'s info?' %></p>
+	<% end %>
+	<div class="hanging-toolbar"></div>
+
 	<p>	see group key, change group key, view pending requests and accept them, edit group information, post a message to members, add an experiment to the group lab manual.	</p>
 </div>

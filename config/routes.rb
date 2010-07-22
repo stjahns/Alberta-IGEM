@@ -23,11 +23,14 @@ ActionController::Routing::Routes.draw do |map|
   map.profile '/user/:login', :controller => 'users', :action => 'profile', :method => 'get' 
 
   # group routes
-  map.resources :groups, :member => { :upload => :post, :users => :get}
+  map.resources :groups, :member => { :upload => :post, :join => :post, :request_to_join => :post , :new_key=>:put } do |groups|
+	  groups.resources :messages, :only=>[ :index,:create,:destroy,:update ]
+  end
+
+
   #pretty group routes
   map.pretty_group '/user/:name', :controller => 'groups', :action => 'show', :method => 'get'
-
-  map.resources :viewer
+    map.resources :viewer
 
   #map annoations as nested resource of biobytes
   map.resources :bio_bytes, :member => { :upload => :post, :upload_desc_img => :post, :update => :post } do |bytes|
