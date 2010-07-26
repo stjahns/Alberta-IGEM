@@ -32,6 +32,7 @@ ActionController::Routing::Routes.draw do |map|
   map.pretty_group '/user/:name', :controller => 'groups', :action => 'show', :method => 'get'
     map.resources :viewer
 
+
   #map annoations as nested resource of biobytes
   map.resources :bio_bytes, :member => { :upload => :post, :upload_desc_img => :post, :update => :post } do |bytes|
     bytes.resources :annotations

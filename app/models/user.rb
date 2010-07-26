@@ -29,6 +29,7 @@ class User < ActiveRecord::Base
   has_many :steps, :through => :experiments 
   has_one  :request, :dependent => :destroy
   belongs_to :role
+  delegate :permissions, :to => :role
   belongs_to :group
 
   validates_presence_of     :login
@@ -90,24 +91,42 @@ class User < ActiveRecord::Base
     write_attribute :email, (value ? value.downcase : nil)
   end
 
-
-  ### methods for roles
-  def has_role?(role)
-	  return false if self.role.blank?
-	  my_role = self.role.name
-	  my_role == 'admin' || my_role == role
-  end
-  def is_admin?
-	  return false if self.role.blank?
-	  self.role.name == 'admin'
+  # sugary method for rbac
+  def method_missing(method_id, *args)
+    if match = matches_dynamic_role_check?(method_id)
+      tokenize_roles(match.captures.first).each do |check|
+        return true if role.name.downcase == check
+      end
+      return false
+    elsif match = matches_dynamic_perm_check?(method_id)
+      if permissions.find_by_name(match.captures.first)
+        return true
+      else
+        return false
+      end
+    else
+      super
+    end
   end
   
-
   protected
     
     def make_activation_code
         self.activation_code = self.class.make_token
     end
 
+  private
+
+  def matches_dynamic_role_check?(method_id)
+    /^is_an?_([a-zA-Z]\w*)\?$/.match(method_id.to_s)
+  end
+
+  def tokenize_roles(string_to_split)
+    string_to_split.split(/_or_/)
+  end
+
+  def matches_dynamic_perm_check?(method_id)
+    /^can_([a-zA-Z]\w*)\?$/.match(method_id.to_s)
+  end
 
 end

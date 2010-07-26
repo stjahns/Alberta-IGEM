@@ -68,6 +68,7 @@ ActiveRecord::Schema.define(:version => 20100726173047) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "user_id"
+    t.integer  "group_id"
   end
 
   create_table "glossaries", :force => true do |t|
@@ -83,6 +84,11 @@ ActiveRecord::Schema.define(:version => 20100726173047) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "key"
+  end
+
+  create_table "groups_users", :id => false, :force => true do |t|
+    t.integer "group_id"
+    t.integer "user_id"
   end
 
   create_table "image_files", :force => true do |t|
@@ -125,12 +131,31 @@ ActiveRecord::Schema.define(:version => 20100726173047) do
     t.datetime "updated_at"
   end
 
+  create_table "permissions", :force => true do |t|
+    t.string   "name"
+    t.string   "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "permissions_roles", :id => false, :force => true do |t|
+    t.integer "permission_id"
+    t.integer "role_id"
+  end
+
   create_table "requests", :force => true do |t|
     t.integer  "group_id"
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.text     "message"
+  end
+
+  create_table "roles", :force => true do |t|
+    t.string   "name"
+    t.string   "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "step_generators", :force => true do |t|
@@ -165,6 +190,8 @@ ActiveRecord::Schema.define(:version => 20100726173047) do
     t.string   "activation_code",           :limit => 40
     t.datetime "activated_at"
     t.integer  "group_id"
+    t.integer  "role_id"
+    t.string   "reset_code"
   end
 
   add_index "users", ["login"], :name => "index_users_on_login", :unique => true
