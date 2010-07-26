@@ -11,6 +11,7 @@
 #  created_at  :datetime
 #  updated_at  :datetime
 #  user_id     :integer(4)
+#  group_id    :integer(4)
 #
 
 class Experiment < ActiveRecord::Base

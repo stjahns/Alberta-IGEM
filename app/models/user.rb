@@ -16,6 +16,8 @@
 #  activation_code           :string(40)
 #  activated_at              :datetime
 #  group_id                  :integer(4)
+#  role_id                   :integer(4)
+#  reset_code                :string(255)
 #
 
 require 'digest/sha1'
