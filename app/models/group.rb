@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20100719175140
+# Schema version: 20100722183147
 #
 # Table name: groups
 #
@@ -8,11 +8,13 @@
 #  description :text
 #  created_at  :datetime
 #  updated_at  :datetime
+#  key         :string(255)
 #
 
 class Group < ActiveRecord::Base
 	has_many :users
 	has_many :messages
+	has_many :requests
 
 	before_create :generate_new_key
 	
@@ -27,8 +29,14 @@ class Group < ActiveRecord::Base
 #		self.role
 #	end
 	#
+	def generate_key
+		self.key =  ActiveSupport::SecureRandom.hex(5) 
+	end
+
 	def generate_new_key
-		self.key = ActiveSupport::SecureRandom.hex(5)
+		self.generate_key
+		self.save
+		self.key
 	end
 
 	def join_with_key( user, key )

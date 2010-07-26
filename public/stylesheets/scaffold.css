@@ -8,6 +8,19 @@ em.gray {
 	font-size: 14px;
 
 }
+div#flash-notice {
+	background:none repeat scroll 0 0 #C7FFC4;
+	display:table;
+	font-size:13px;
+	line-height:18px;
+	margin-left:auto;
+	margin-right:auto;
+	padding:0.4em 2em;
+	text-align:center;
+}
+div#flash-notice.error{
+	background-color:#FF8593;
+}
 span.save-notice {
 	display: none;
 	background:#C7FFC4;
@@ -23,17 +36,7 @@ span.save-notice.error-message {
 
 /*styling for experiment page*/
 
-div#flash-notice {
-	background:none repeat scroll 0 0 #C7FFC4;
-	display:table;
-	display:none;
-	font-size:13px;
-	line-height:18px;
-	margin-left:auto;
-	margin-right:auto;
-	padding:0.4em 2em;
-	text-align:center;
-}
+
 
 /*title of experiment */
 #experiment-title {
@@ -194,7 +197,6 @@ div.lab-book h2 a:hover {
 
 
 div.lab-book td.date, div.lab-book td.right {
-}{
 	text-align: right;
 	font-style:italic;
 	color: gray;
@@ -441,6 +443,9 @@ div#user-form textarea {
 h2#home-notice {
 	text-align:center;
 	color:#666;
+}
+h2#home-notice.error {
+	color:#FF8593;
 }
 
 div#home-logo {

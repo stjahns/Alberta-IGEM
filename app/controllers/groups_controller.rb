@@ -1,5 +1,6 @@
 class GroupsController < ApplicationController
   before_filter :set_nav
+  before_filter :login_required, :except => [:index,:show]
   def index
 	@groups = Group.all
   end
@@ -59,6 +60,11 @@ class GroupsController < ApplicationController
 
   def join
 	  @group = Group.find(params[:id])
+	  @request = Request.new
+  end
+
+  def join_with_key
+	  @group = Group.find(params[:id])
 	  
 	  respond_to do |format|
 	    if @group.join_with_key( current_user, params[:key] )
@@ -68,14 +74,36 @@ class GroupsController < ApplicationController
 		}
 		format.js { head :ok }
 	    else
-		fomat.html {
-			flash[:notice] = "Incorrect key, could not joini #{@group.name}"
-			redirect_to groups_path
+		format.html {
+			flash[:error] = "Incorrect key, could not join #{@group.name}"
+			redirect_to join_group_path(@group)
 
 		}
 		format.js { head 'incorrect key'}
 	    end
 	  end
+  end
+  def request_to_join
+	  @group = Group.find(params[:id])
+
+	  request = Request.create( params[:group] )
+	  current_user.request = request 
+
+	  respond_to do |format|
+		  if request.save
+		  format.html {
+			  flash[:notice] = "Request to join the group #{@group.name} was sent."
+			 redirect_to group_path(@group) 
+		  }
+		  else
+			  format.html {
+				  flash[:error] = "There was an error sending the request to join the group #{@group.name}."
+				  redirect_to group_path(@group)
+			  }
+		  end
+
+	  end
+	  
   end
   def new_key 
 	@group = Group.find(params[:id])

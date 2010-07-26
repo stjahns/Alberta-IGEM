@@ -29,4 +29,10 @@ class ApplicationController < ActionController::Base
 	redirect_back_or_default('/')
   end
 
+  # overrides the default function for the filter login_required
+  def access_denied
+	  flash[:error] = "You must login to continue."
+	  redirect_to login_path
+  end
+
 end

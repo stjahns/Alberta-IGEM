@@ -94,7 +94,7 @@ $(document).ready(function(){
 	setTimeout(function(){
 		$('#home-notice').fadeOut("slow");
 		$('#flash-notice').fadeOut("slow");
-	}, 3000);
+	}, 10000);
 
 
   // UJS authenticity token fix: add the authenticity_token parameter

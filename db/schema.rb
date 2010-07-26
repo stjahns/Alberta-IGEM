@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100722183147) do
+ActiveRecord::Schema.define(:version => 20100726173047) do
 
   create_table "annotations", :force => true do |t|
     t.string   "name"
@@ -123,6 +123,14 @@ ActiveRecord::Schema.define(:version => 20100722183147) do
     t.integer  "part_order"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "requests", :force => true do |t|
+    t.integer  "group_id"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.text     "message"
   end
 
   create_table "step_generators", :force => true do |t|

@@ -1,3 +1,39 @@
-<div id="user-form" ><h1>Request to join <%= @group.name %></h1>
+<% content_for :title do %>
+	Join <%= @group.name %>
+<% end %>
 
+<div id='header'>
+<h1>Request to join <%= @group.name %></h1>
+<div id='header-toolbar' >
 </div>
+</div>
+
+<div id="user-form" >
+<p><em class='gray'>Join a group immediately if you have a key for the group</em></p>
+	<% form_tag join_with_key_group_path(@group),:method=>:post do %>
+		<p><%= label_tag 'Key:'%>
+		<%= text_field_tag :key %></p>
+		<p>
+		<% if current_user.group.blank? %>
+			<%= submit_tag 'Join', :class=>'submit-btn' %></p>
+		<% else %>
+			<%= submit_tag 'Join', :class=>'submit-btn', 
+				:confirm=>"If you join #{@group} you will no longer be a member of #{current_user.group}" %>
+		<% end %>
+		</p>
+
+	<% end %>
+</div>
+
+<div id="user-form" >
+	<p><em class='gray'>Send a request to join a group if you don't have the key. ( The message is optional. )</em></p>
+
+	<% form_for @request, :url=>request_to_join_group_path(@group),:method=>:post do |f| %>
+		<p><%= f.label 'Message' %><br/>
+		<%= f.text_area :message %>
+		</p>
+		<%= f.submit 'Send Request', :class=>'submit-btn' %>
+	<% end %>
+</div>
+
+

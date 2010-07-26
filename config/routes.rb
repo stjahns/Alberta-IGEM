@@ -23,7 +23,7 @@ ActionController::Routing::Routes.draw do |map|
   map.profile '/user/:login', :controller => 'users', :action => 'profile', :method => 'get' 
 
   # group routes
-  map.resources :groups, :member => { :upload => :post, :join => :post, :request_to_join => :post , :new_key=>:put } do |groups|
+  map.resources :groups, :member => { :upload => :post, :join => :get, :join_with_key=>:post, :request_to_join => :post , :new_key=>:put } do |groups|
 	  groups.resources :messages, :only=>[ :index,:create,:destroy,:update ]
   end
 

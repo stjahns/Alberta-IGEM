@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20100719175140
+# Schema version: 20100722183147
 #
 # Table name: groups
 #
@@ -8,6 +8,7 @@
 #  description :text
 #  created_at  :datetime
 #  updated_at  :datetime
+#  key         :string(255)
 #
 
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html

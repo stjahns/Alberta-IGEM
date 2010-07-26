@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20100719175140
+# Schema version: 20100722183147
 #
 # Table name: users
 #
@@ -27,6 +27,7 @@ class User < ActiveRecord::Base
 
   has_many :experiments, :dependent => :destroy
   has_many :steps, :through => :experiments 
+  has_one  :request, :dependent => :destroy
   belongs_to :role
   belongs_to :group
 
