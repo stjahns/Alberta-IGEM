@@ -2,15 +2,15 @@
   <div class="step_view" > 
        <%= render :partial => 'steps/step', :locals => {:step => step }  %>
   </div> 
-  <% if is_owner_of( @experiment ) %>
+  <% if can_edit_experiment?( @experiment ) %>
       <div class= "step_edit" style="display: none;" >
 	  <%= render :partial => 'steps/edit', :locals => {:experiment => @experiment, :step => step } %>
   
   </div>
     <% end %>
        <div class= "step-toolbar"  >
-	  <% if is_owner_of( @experiment ) %>
            <ul >
+	  <% if can_edit_experiment?( @experiment ) %>
 	   <span class= "step-show-btns">
 	   	 <li  >
 		 <a class="btn-step-edit" href="#">Edit Step </a></li>
@@ -42,23 +42,21 @@
 		<% end %>
 
 	 </span>
-		 <% if allowed_to_make_notes? %>
+
+	<% end %>
+
 			 <li class= "btn-step-note ">
 			 <a class="btn-step-note  " href="#">Note</a></li>
-		<% end %>
 		
 		
 	</ul> 
-	<% end %>
       </div>	
     
 
     
-  <% if allowed_to_make_notes? %>
 	  <div class= "step_note_container" note=<%= step.note.blank? ?  '""' : '"true"'  %> style="display: none;"  >
       <%= render( :partial=>'notes/note', :locals=>{:step=>step} ) %>
     </div >
-  <% end %>
 </div>
 
 

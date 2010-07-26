@@ -1,4 +1,5 @@
 <div class= "step_note_form"  >
+    <% if can_edit_experiment?(step.experiment) %>
     <% if step.note %>
 	    <%= render( :partial => 'notes/edit', 
 		       :locals=>{:step => step, :note => step.note}) %> 
@@ -6,6 +7,9 @@
 	    <%= render( :partial => 'notes/new', 
 		       :locals=>{:step => step, :note => Note.new}) %>
 	       <% end %>
+    <%else%>
+    <i>User has not submitted any observations or data here yet.</i>
+    <%end%>
 </div>
 
 <div class= "step_note_view" >

@@ -126,6 +126,14 @@ class ExperimentsController < ApplicationController
 
   end
 
+   
+  helper_method :can_edit_experiment?
+  def can_edit_experiment?( experiment )
+		logged_in? && ( current_user.can_edit_experiments? || 
+                    (current_user.id  == experiment.user.id && 
+                      current_user.can_edit_own_experiments?) )
+  end
+
   private
   def get_experiment
 	 @experiment = Experiment.find(params[:id])

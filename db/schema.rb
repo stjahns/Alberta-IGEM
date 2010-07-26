@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100719175140) do
+ActiveRecord::Schema.define(:version => 20100722211016) do
 
   create_table "annotations", :force => true do |t|
     t.string   "name"
@@ -53,13 +53,6 @@ ActiveRecord::Schema.define(:version => 20100719175140) do
     t.integer  "experiment_id"
   end
 
-  create_table "definitions", :force => true do |t|
-    t.string   "definition"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "glossary_id"
-  end
-
   create_table "encyclopaedias", :force => true do |t|
     t.string   "title"
     t.text     "article"
@@ -75,15 +68,7 @@ ActiveRecord::Schema.define(:version => 20100719175140) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "user_id"
-    t.integer  "owner_id"
-  end
-
-  create_table "glossaries", :force => true do |t|
-    t.string   "term"
-    t.text     "definition"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "definition_id"
+    t.integer  "group_id"
   end
 
   create_table "groups", :force => true do |t|
@@ -91,6 +76,11 @@ ActiveRecord::Schema.define(:version => 20100719175140) do
     t.text     "description"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "groups_users", :id => false, :force => true do |t|
+    t.integer "group_id"
+    t.integer "user_id"
   end
 
   create_table "image_files", :force => true do |t|
@@ -115,12 +105,6 @@ ActiveRecord::Schema.define(:version => 20100719175140) do
     t.integer  "step_id"
     t.string   "text"
     t.integer  "image_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "pages", :force => true do |t|
-    t.string   "title"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -184,7 +168,7 @@ ActiveRecord::Schema.define(:version => 20100719175140) do
     t.string   "activation_code",           :limit => 40
     t.datetime "activated_at"
     t.integer  "role_id"
-    t.integer  "group_id"
+    t.string   "reset_code"
   end
 
   add_index "users", ["login"], :name => "index_users_on_login", :unique => true

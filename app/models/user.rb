@@ -29,7 +29,7 @@ class User < ActiveRecord::Base
   has_many :steps, :through => :experiments 
   belongs_to :role
   delegate :permissions, :to => :role
-  belongs_to :group
+  has_and_belongs_to_many :groups
 
   validates_presence_of     :login
   validates_length_of       :login,    :within => 3..40
@@ -88,6 +88,24 @@ class User < ActiveRecord::Base
 
   def email=(value)
     write_attribute :email, (value ? value.downcase : nil)
+  end
+
+#reset methods
+
+  def create_reset_code
+    @reset = true
+    puts "Hello world!"
+    self.reset_code = Digest::SHA1.hexdigest( Time.now.to_s.split(//).sort_by {rand}.join ) 
+    save(false)
+  end
+
+  def recently_reset?
+    @reset
+  end
+
+  def delete_reset_code
+    self.attributes = {:reset_code => nil}
+    save(false)
   end
 
   # sugary method for rbac

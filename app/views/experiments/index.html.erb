@@ -10,5 +10,6 @@
 
 <%= render :partial=>'description', :collection => @experiments, :as=>:experiment %>
 
-
+<% if logged_in? && current_user.can_create_experiments? %>
 <%= link_to 'New experiment', new_experiment_path %>
+<%end%>

@@ -8,7 +8,7 @@ Purpose - controller for user-editing of BioBytes parts db
 class BioBytesController < ApplicationController
   
   before_filter :login_required, :except => [:index, :show]
-  before_filter :is_admin?, :except => [:index, :show]
+  before_filter :can_edit_bio_bytes?, :except => [:index, :show]
 
 
   def index
@@ -113,8 +113,8 @@ class BioBytesController < ApplicationController
 
   private
 
-  def is_admin
-    unless current_user.login == "admin"
+  def can_edit_bio_bytes?
+    unless current_user.can_edit_bio_bytes?
       redirect_to bio_bytes_path
     end
   end

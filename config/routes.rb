@@ -15,6 +15,8 @@ ActionController::Routing::Routes.draw do |map|
   map.register '/register', :controller => 'users', :action => 'create'
   map.activate '/activate/:activation_code', :controller => 'users', :action => 'activate'
   map.signup '/signup', :controller => 'users', :action => 'new'
+  map.forgot '/forgot', :controller => 'users', :action => 'forgot'
+  map.reset 'reset/:reset_code', :controller => 'users', :action => 'reset'
 
   # normal user routes
   map.resources :users
@@ -49,7 +51,7 @@ ActionController::Routing::Routes.draw do |map|
 
   # map steps as nested resource of experiments
   map.resources :experiments, :member => { :print => :get,
-                                           :clone => :post } do |experiments|
+                                           :clone => :get } do |experiments|
      experiments.resources :steps, 
 	     :member => { :upload => :post, 
 	     		  :up => :put,
@@ -70,6 +72,7 @@ ActionController::Routing::Routes.draw do |map|
   map.move_step_down 'experiments/:experiment_id/steps/:id/down', :controller => :steps, :action =>:down
 
   map.root :controller => :home 
+  map.home '', :controller => :home
 
   # routes for images
   map.resources :images, :member => { :thumb => :get, :step => :get  }

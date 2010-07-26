@@ -17,7 +17,11 @@
 
 <p><%= submit_tag 'Log in' %></p>
 <% end -%>
+<%= link_to 'Forgot Password?', :forgot %>
 </div>
+
+<h2 id="home-notice" <%= 'class="error"' if flash[:error]%>>
+	<%= flash[:error] || flash[:notice] %></h2>
 
 <div id="home-bar">
    <ul>	

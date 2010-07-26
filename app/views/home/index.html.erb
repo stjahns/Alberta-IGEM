@@ -2,7 +2,8 @@
 
 <div id="home-bar">
 	  <ul>	
-		<li><%= link_to "Parts Bin", bio_bytes_path %></li>
+		<li><%= link_to "Parts Bin", bio_bytes_path if logged_in? && current_user.can_create_bio_bytes? %></li>
+		<li><%= link_to "Protocol Generator", step_generators_path if logged_in? && current_user.can_edit_step_generators? %></li>
   <li><%= link_to "Experiments", experiments_path %></li>
 
   <% if logged_in?  %>

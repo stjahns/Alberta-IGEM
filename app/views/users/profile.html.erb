@@ -6,7 +6,7 @@
 	  <ul>
 		  <li><a id="profile-tab" class="selected" href="#">Profile</a></li>
 		  <li><a id="lab-book-tab" href="">Lab Book</a></li>
-		  <li id="more-experiments-tab" ><%= link_to "Add experiments", experiments_path %></li>
+		  <li id="more-experiments-tab" ><%= link_to "Add experiments", experiments_path if can_create_experiment_for?(@user)%></li>
 	  </ul>
   </div>
 
@@ -15,9 +15,6 @@
 
 <div id="profile">
 	<table>
-		<tr>
-			<td class="title">Group:</td><td><%= @user.group.name || 'No group yet!' %></td>
-		</tr>
 		<tr>
 			<td class="title">About-me:</td><td>A scientist in a broad sense is one engaging in a systematic  activity to acquire knowledge. In a more restricted sense, a scientist is an individual who uses the scientific method.[1]  The person may be an expert in one or more areas of science.[2]  This article focuses on the more restricted use of the word. Scientists perform research toward a more comprehensive understanding of nature, including physical, mathematical and social realms. This is distinct from philosophers, those who use logic toward a more comprehensive understanding of intangible aspects of reality that lack a direct connection to nature, focusing on the realm of thought itself. Scientists are also distinct from engineers, those who develop devices that serve practical purposes. When science is done with a goal toward practical utility, it is called 'applied science' (short of the creation of new devices that fall into the realm of engineering). When science is done with an inclusion of intangible aspects of reality it is called 'natural philosophy'.</td>
 		</tr>
@@ -34,6 +31,7 @@
 </div>
 	<% else %>
 		<%= render( :partial=> 'experiments/description', :collection => @experiments, :as=>:experiment ) %>
+    <%= link_to 'New experiment', new_experiment_path if can_create_experiment_for?(@user)%>
 	<% end %>
 </div>
 
@@ -67,4 +65,3 @@
 -->
 <br />
 
-<%= link_to 'New experiment', new_experiment_path %>

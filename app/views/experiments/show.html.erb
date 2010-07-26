@@ -32,22 +32,36 @@
   <h2>Constructs:</h2>
   <% unless @experiment.constructs.empty? %>
     <%= render :partial => "construct", :collection => @experiment.constructs %>
+  <% else %>
+  <i>This experiment has no asscociated constructs yet...</i>
   <% end %>
   <p>
-  <%= link_to "Add Construct", new_experiment_construct_path(@experiment) %>
+  <% if can_edit_experiment?(@experiment) %>
+    <%= link_to "Add Construct", new_experiment_construct_path(@experiment) %>
+  <% end %> 
   </p>
 </p>
 
 <% if @experiment.steps.empty? %>
+  <% if can_edit_experiment?(@experiment) %>
 	<div id="add-first-step">
 		<a href="#">Click Here to add a step and get started, making your experiment</a>
 	</div>
+  <% else %>
+    <div>
+    <i>This experiment hasn't been planned yet...</i>
+    </div>
+  <% end %>
+    
 <% else %>
     <%= render :partial => "step", :collection => @steps %>
 <% end %>
 
+
+<% if can_edit_experiment?(@experiment) %>
 <%= link_to 'Edit Description', edit_experiment_path(@experiment) %> |
 <%= link_to 'Edit Steps', experiment_steps_path(@experiment) %> |
+<% end %>
 <%= link_to 'List experiments', experiments_path %>
 
 <!-- part-info-data -->
@@ -55,13 +69,13 @@
 
 <% BioByte.all.each do |byte| %>
   
-  <div id='info_<%=byte.id%>'>
+  <div id='info_<%=h byte.id%>'>
     <% unless byte.bio_byte_image.blank? %>
       <div class="byte_desc_img"><%= image_tag step_image_path(byte.bio_byte_image.image) %></div> 
     <% end %>
-    <h3><%=byte.name%></h3>
-    <p><i><%=byte.description%></i><p>
-    <p><b>Sequence:&nbsp</b><%= byte.sequence %></p>
+    <h3><%=h byte.name%></h3>
+    <p><i><%=h byte.description%></i><p>
+    <p><b>Sequence:&nbsp</b><%=h byte.sequence %></p>
 
 
   </div>

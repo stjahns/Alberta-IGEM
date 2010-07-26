@@ -28,9 +28,9 @@ $(document).ready(function(){
 
 	// slide the nav bar up and down and store its state in a cookie
 	$('#btn-hide-nav a').click( function(){
-		btn = $(this);
+		btn = $(this); 
 		if( btn.hasClass('slid') ){
-			btn.removeClass('slid');
+			btn.removeClass('slgfpid');
 			$.cookie('nav','expanded',{ path: '/'  });
 			$('div#navBar').animate(
 			{top: '+=26'},
@@ -68,9 +68,9 @@ $(document).ready(function(){
 
       //only run this function if contructs object has been created
       if(typeof(constructs) != 'undefined') {
-      	updatePlasmidDisplay(0);
-      
+      updatePlasmidDisplay(0);
 
+      
       $.ajax({
         type: 'get',
         dataType: 'json',
@@ -765,13 +765,14 @@ function updatePlasmidDisplay(placeholders){
     
     	if (numparts < 7){
       		var height = 92;
-	}
+	    }
     	else{
       		var height = 92 + (-(Math.floor(-numparts/6))-1)*46;
 	    	//if (numparts%6 == 0){
       		//add a row
 	      //height += 46;
 	    //}
+      }
 	
 
     $(".left-side." + constructs[i]).css('height',function(){
@@ -807,7 +808,6 @@ function updatePlasmidDisplay(placeholders){
     //                         //------]
 
   }
-}
 }
 
 // when we ask for html we need rails to use respond to js so we need:
