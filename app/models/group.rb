@@ -12,11 +12,11 @@
 #
 
 class Group < ActiveRecord::Base
-	has_many :users
 	has_many :messages
 	has_many :requests
 
 	before_create :generate_new_key
+	has_and_belongs_to_many :users
 	
 	attr_accessible :name, :description
 
@@ -50,7 +50,7 @@ class Group < ActiveRecord::Base
 	private
 	def create_role
 		#TODO change this to use steves permissions
-#		admin_role = Role.create( :name => 'group_admin' )
-#		self.role = admin_role
+#admin_role = Role.create( :name => 'group_admin' )
+#self.role = admin_role
 	end
 end

@@ -1,4 +1,7 @@
 class StepGeneratorsController < ApplicationController
+
+  before_filter :login_required
+  before_filter :can_edit_step_generators?
   def index 
     @steps = StepGenerator.find(:all, :order => 'subprotocol')
   end
@@ -31,4 +34,12 @@ class StepGeneratorsController < ApplicationController
       render :action => :edit
     end
   end
+
+  def can_edit_step_generators?
+    unless current_user.can_edit_step_generators?
+      flash[:notice] = 'ACCESS DENIED, SILLY GOOSE'
+      redirect_to home_path 
+    end
+  end
+    
 end

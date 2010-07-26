@@ -1,4 +1,4 @@
-<% if is_owner_of( experiment ) %>
+<% if can_edit_experiment?( experiment ) %>
 	<% form_for(experiment,:html=>{
 	  :class => "edit-experiment"} ) do |f| %>
 		<%= f.error_messages %>

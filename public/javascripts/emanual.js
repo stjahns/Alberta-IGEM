@@ -11,11 +11,11 @@ $(document).ready(function(){
 //	if(flashnotice.html() != "" ){
 //		flashnotice.fadeIn();
 //	}
-	
+
 
       	updatePlasmidDisplay(0);
       
-
+      
       $.ajax({
         type: 'get',
         dataType: 'json',
@@ -530,13 +530,14 @@ function updatePlasmidDisplay(placeholders){
     
     	if (numparts < 7){
       		var height = 92;
-	}
+	    }
     	else{
       		var height = 92 + (-(Math.floor(-numparts/6))-1)*46;
 	    	//if (numparts%6 == 0){
       		//add a row
 	      //height += 46;
 	    //}
+      }
 	
 
     $(".left-side." + constructs[i]).css('height',function(){
@@ -572,7 +573,6 @@ function updatePlasmidDisplay(placeholders){
     //                         //------]
 
   }
-}
 }
 
 // when we ask for html we need rails to use respond to js so we need:

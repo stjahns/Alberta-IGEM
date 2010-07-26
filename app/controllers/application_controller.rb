@@ -18,10 +18,22 @@ class ApplicationController < ActionController::Base
   # replace the use of this method with has_role
   helper_method :is_owner_of
   def is_owner_of( object )
-	#	logged_in? && ( current_user.is_admin? || current_user.id  == object.user.id ) 
-	 true
+		logged_in? && ( current_user.is_an_admin? || current_user.id  == object.user.id ) 
   end
 
+  helper_method :can_edit_experiment?
+  def can_edit_experiment?( experiment )
+		logged_in? && ( current_user.can_edit_experiments? || 
+                    (current_user.id  == experiment.user.id && 
+                      current_user.can_edit_own_experiments?) )
+  end
+
+  helper_method :can_create_experiment_for?
+  def can_create_experiment_for?( user )
+		logged_in? && ( current_user.can_create_experiments? ||
+                     ( current_user == user && 
+                        current_user.can_create_own_experiments?))
+  end
   
   # use this function when checking for permission of something
   def permission_denied

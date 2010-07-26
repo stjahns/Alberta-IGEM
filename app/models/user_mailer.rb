@@ -12,6 +12,12 @@ class UserMailer < ActionMailer::Base
     @subject    += 'Your account has been activated!'
     @body[:url]  = "http://#{SITE_URL}/"
   end
+
+  def reset_notification(user)
+    setup_email(user)
+    @subject  += 'Link to reset your password'
+    @body[:url] = "#{SITE_URL}/reset/#{user.reset_code}"
+  end
   
   protected
     def setup_email(user)
