@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20100722183147
+# Schema version: 20100726173047
 #
 # Table name: encyclopaedias
 #
