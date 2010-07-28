@@ -18,5 +18,7 @@ class Image < ActiveRecord::Base
 
    belongs_to :step
    belongs_to :note
+   belongs_to :section
+
    has_one :bio_byte
 end

@@ -23,7 +23,7 @@ module GlossariesHelper
 
 
         @def = @def.to_s
-        @def = @def.sub(/\s#{term}\w*/){"\s<a href=http://localhost:3000/glossaries/#{id}>#{matchdata}</a>"}
+        @def = @def.sub(/\s#{term}\w*/){"\s<a href=http://#{SITE_URL}/glossaries/#{id}>#{matchdata}</a>"}
         #find a way to not match em's when looking for terms in the string
         #@insert_num += 1
       end

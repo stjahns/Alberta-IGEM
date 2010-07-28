@@ -1,15 +1,16 @@
 ActionController::Routing::Routes.draw do |map|
+  map.resources :sections
+
   map.resources :glossaries
 
   map.resources :definitions
 
-  map.resources :glossaries
+  map.resources :encyclopaedias do |encyclopaedias|
+     encyclopaedias.resources :sections,
+       :member => { :upload => :put}
+  end
 
-
-  map.resources :encyclopaedias
-
-  map.resources :glossaries
-
+  #map.upload '/upload', :controller =>'sections', :action => 'upload', :encyclopaedia_id => '1'
   map.logout '/logout', :controller => 'sessions', :action => 'destroy'
   map.login '/login', :controller => 'sessions', :action => 'new'
   map.register '/register', :controller => 'users', :action => 'create'

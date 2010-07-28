@@ -9,7 +9,6 @@
 <% @encyclopaedias.each do |encyclopaedia| %>
   <tr>
     <td><%=h encyclopaedia.title %></td>
-    <td><%=h encyclopaedia.article %></td>
     <td><%= link_to 'Show', encyclopaedia %></td>
     <td><%= link_to 'Edit', edit_encyclopaedia_path(encyclopaedia) %></td>
     <td><%= link_to 'Destroy', encyclopaedia, :confirm => 'Are you sure?', :method => :delete %></td>

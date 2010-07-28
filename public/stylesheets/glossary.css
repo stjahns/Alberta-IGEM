@@ -28,6 +28,9 @@ body, ol, ul, td {
   font-size:   13px;
   line-height: 18px;
   text-align: left;
+}
+
+h2,p,ol,ul,td {
   margin-left: 12em;
   margin-right: 12em;
 }
@@ -97,6 +100,17 @@ a:visited { color: #666; }
 #errorExplanation ul li {
   font-size: 12px;
   list-style: square;
+}
+
+.menu{
+    border: 1px solid black;
+    position:relative;
+    float: right;
+
+     -webkit-box-shadow: 5px 5px 7px #333;
+     -webkit-border-radius: 5px;
+     -moz-border-radius: 5px;
+     -moz-box-shadow: 5px 5px 7px #333;
 }
 
 

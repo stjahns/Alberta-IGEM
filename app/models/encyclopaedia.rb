@@ -1,3 +1,3 @@
 class Encyclopaedia < ActiveRecord::Base
-  #acts_as_textiled :article
+  has_many :sections
 end

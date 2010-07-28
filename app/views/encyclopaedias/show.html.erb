@@ -17,17 +17,39 @@
   </head>
 
 <p>
-  <b>Title:</b>
   <%=h @encyclopaedia.title %>
 </p>
 
 <p>
-  <b>Article:</b>
-  <% article = add_glossary_links(@encyclopaedia.article) %>
-  <%= add_popups(article) %>
+  <% intro = add_glossary_links(@encyclopaedia.intro) %>
+  <%= add_popups(intro) %>
 </p>
 
+<div class = "menu"><%for section in @sections %>
+  <a href ="#<%section.title%>" ><%=h section.title %></a><br/>
+<%end%></div>
 
+<% for section in @sections %>
+  
+<h2><a name ="<%section.title%>"><%=h section.title %></a></h2>
+
+    <p><%=h section.description%></p>
+
+    <p><%= section.video%></p>
+
+    <% unless  section.image.blank? %>
+	<p><%= image_tag image_path(section.image, :jpg ) %></p>
+	<p><%= image_tag thumb_image_path(section.image ) %></p>
+    <% else %>
+        <p>
+         There is no image.
+         <%= link_to 'Upload one now!', edit_encyclopaedia_section_path(@encyclopaedia,section) %>
+        </p>
+    <% end %>
+
+        <%= link_to 'Edit', edit_encyclopaedia_section_path(@encyclopaedia,section) %> <br/>
+<% end %>
+        <a name ="mouse">"I should end up here"</a>
 
 <%= link_to 'Edit', edit_encyclopaedia_path(@encyclopaedia) %> |
 <%= link_to 'Back', encyclopaedias_path %>

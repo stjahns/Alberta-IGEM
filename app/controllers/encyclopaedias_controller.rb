@@ -14,10 +14,10 @@ class EncyclopaediasController < ApplicationController
   # GET /encyclopaedias/1.xml
   def show
     @encyclopaedia = Encyclopaedia.find(params[:id])
-
+    @sections = @encyclopaedia.sections.all(:order => :section_order)
     respond_to do |format|
       format.html # show.html.erb
-      format.xml  { render :xml => @encyclopaedia }
+      format.xml  { render :xml => @encyclopaedia, :xml => @sections}
     end
   end
 
