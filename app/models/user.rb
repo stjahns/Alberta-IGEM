@@ -23,6 +23,8 @@
 require 'digest/sha1'
 
 class User < ActiveRecord::Base
+#TODO make sure that we are not querying the db with every call of permissions
+
   include Authentication
   include Authentication::ByPassword
   include Authentication::ByCookieToken
@@ -111,13 +113,24 @@ class User < ActiveRecord::Base
     save(false)
   end
 
+ 
   # sugary method for rbac
+  # added a new way to check for permission relating to ownership
+  # syntax for permission 	permission_for_own_model
+  # and 			permission_for_any_model
+  # ex:		edit_for_own_experiment? @experiment
+  # 		edit_for_any_experiment?
+  # the type needs to be singular
   def method_missing(method_id, *args)
     if match = matches_dynamic_role_check?(method_id)
       tokenize_roles(match.captures.first).each do |check|
         return true if role.name.downcase == check
       end
       return false
+    # adding a case to check if the user has a for_own or for_any permission
+    elsif match = matches_dynamic_perm_for_own_check?(method_id)
+      return permission_for_own?( match[1], match[2], args[0] ) 
+
     elsif match = matches_dynamic_perm_check?(method_id)
       if permissions.find_by_name(match.captures.first)
         return true
@@ -128,6 +141,11 @@ class User < ActiveRecord::Base
       super
     end
   end
+
+  # need this so we can say for own user
+  def user
+	self
+  end	
   
   protected
     
@@ -136,6 +154,7 @@ class User < ActiveRecord::Base
     end
 
   private
+  
 
   def matches_dynamic_role_check?(method_id)
     /^is_an?_([a-zA-Z]\w*)\?$/.match(method_id.to_s)
@@ -148,5 +167,50 @@ class User < ActiveRecord::Base
   def matches_dynamic_perm_check?(method_id)
     /^can_([a-zA-Z]\w*)\?$/.match(method_id.to_s)
   end
+
+  def matches_dynamic_perm_for_own_check?(method_id)
+    /^can_([a-zA-Z]\w*)_for_own_([a-zA-Z]\w+)\?$/.match(method_id.to_s)
+  end
+
+
+   def permission_for_own?( perm , type, object )
+    # store permissions in a variable so we don't have to do more queries
+    perms = []
+    permissions.each{ |p| perms << p.name }
+
+    # check if the user has the for any permission
+    return true if has_perm?( perms,  perm + "_for_any_" + type )
+    return false unless has_perm?( perms, perm + "_for_own_" + type )
+
+    # check if the user owns the objects by looking for association
+    if check_for_method object, "users"
+    # object has many users
+      return object.users.exists? self
+
+    elsif check_for_method object, "user"
+    # object has one user
+      return object.user == self
+    end
+    
+    #type = object.class.to_s.downcase
+    if check_for_method self, type.pluralize
+    # user has_many objects
+      return self.send( type.pluralize.to_sym ).exists?( object )
+    elsif check_for_method self, type
+    # user has_one object
+      return self.send( type.to_sym ) == object
+    end
+  
+    # should not have called this method if we get to here 
+    false
+   end  
+
+   def has_perm?(perms, query)
+	   perms.select{ |i| i =~ /^#{query}$/ }.length > 0
+   end
+
+   def check_for_method( object, method )
+	    object.methods.select{|i| i =~ /^#{method}$/}.length > 0
+   end
 
 end

@@ -105,6 +105,21 @@ class GroupsController < ApplicationController
 	  end
 	  
   end
+  def quit
+	@group = Group.find(params[:id])
+
+	if current_user.groups.delete( @group )
+		flash[:notice] = "#{current_user.login} has left #{@group.name}"
+		redirect_to profile_path( current_user.login )	
+	else
+		falsh[:error] = "error leaving #{@group.name}"
+		redirect_to profile_path( current_user.login )	
+	end
+
+
+
+  end
+
   def new_key 
 	@group = Group.find(params[:id])
 	

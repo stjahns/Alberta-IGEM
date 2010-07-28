@@ -24,7 +24,8 @@ class UsersController < ApplicationController
   end
 
   def show
-  @user = User.find(params[:id])
+  	@user = User.find(params[:id])
+	@groups = @user.groups
   end
 
   def destroy
@@ -57,6 +58,8 @@ class UsersController < ApplicationController
 
   def profile
     @user = User.find_by_login(params[:login])
+    @groups = @user.groups
+
     if @user.nil? 
 	flash[:error] = 'No user by that name!'
     	redirect_to root_path

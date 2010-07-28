@@ -43,14 +43,15 @@ class Group < ActiveRecord::Base
 		return false unless key == self.key
 		# if the user submits the correct key than make
 		#  them join the group
-		user.group = self
+		user.groups << self
 		user.save
 	end
 
 	private
 	def create_role
 		#TODO change this to use steves permissions
-#admin_role = Role.create( :name => 'group_admin' )
+		base_admin_role = Role.find_by_name('group_admin')
+		admin_role = Role.create( :name => 'group_admin' )
 #self.role = admin_role
 	end
 end

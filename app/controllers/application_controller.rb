@@ -7,8 +7,18 @@ class ApplicationController < ActionController::Base
 
   include AuthenticatedSystem
   # Scrub sensitive parameters from your log
-  # filter_parameter_logging :password
+  
+  
+  # replace the use of this method with has_role
+  helper_method :is_owner_of
+ 
+  def is_owner_of( object )
+	logged_in? && ( current_user.id  == object.user.id ) 
+  end
 
+
+  # filter_parameter_logging :password
+=begin  commented out since made new method
   helper_method :is_admin? #makes this method available from views as well
   def is_admin? 
     # logged_in? && current_user.is_admin?
@@ -28,13 +38,18 @@ class ApplicationController < ActionController::Base
                       current_user.can_edit_own_experiments?) )
   end
 
+  helper_method :can_change_user_info_for
+  def can_change_user_info_for( user )
+	  logged_in? && ( current_user == user || current_user.can_change_user_info? )  
+  end
+
   helper_method :can_create_experiment_for?
   def can_create_experiment_for?( user )
 		logged_in? && ( current_user.can_create_experiments? ||
                      ( current_user == user && 
                         current_user.can_create_own_experiments?))
   end
-  
+=end
   # use this function when checking for permission of something
   def permission_denied
 	flash[:notice] = "You don't have permission to do that!"
