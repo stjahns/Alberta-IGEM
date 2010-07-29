@@ -1,4 +1,4 @@
-<% if logged_in? && current_user.can_edit_for_own_experiment?( experiment ) %>
+<% if logged_in? && current_user.can_edit_for_experiment?( experiment ) %>
 	<% form_for(experiment,:html=>{
 	  :class => "edit-experiment"} ) do |f| %>
 		<%= f.error_messages %>

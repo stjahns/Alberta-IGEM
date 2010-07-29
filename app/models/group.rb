@@ -16,11 +16,16 @@ class Group < ActiveRecord::Base
 	has_many :requests
 
 	before_create :generate_new_key
-	has_and_belongs_to_many :users
+
+	has_many :users, :through=>:group_roles
+	
+	has_many :group_roles
+	#has_and_belongs_to_many :users
 	
 	attr_accessible :name, :description
 
 #	before_create :create_role
+#	after_create :assign_role
 
 #	def admins
 #		#self.role.users
@@ -41,17 +46,34 @@ class Group < ActiveRecord::Base
 
 	def join_with_key( user, key )
 		return false unless key == self.key
-		# if the user submits the correct key than make
-		#  them join the group
-		user.groups << self
-		user.save
+		# if the user submits the correct key then
+		# add user to group with member role
+		create_member( user )
+	end
+
+	def permissions_for( user )
+		# give permissions for the role 
+		role_for_group = user.group_roles.find_by_group_id( self.id )
+		if role_for_group.nil? 
+			return user.permissions
+		else	
+			return role_for_group.permissions
+		end
+	end
+
+	def create_admin( user )
+		create_role user, "group_admin"
+	end
+
+	def create_member( user )
+		create_role user, "group_member"
 	end
 
 	private
-	def create_role
-		#TODO change this to use steves permissions
-		base_admin_role = Role.find_by_name('group_admin')
-		admin_role = Role.create( :name => 'group_admin' )
-#self.role = admin_role
+	def create_role( user, name_of_role )
+	  	r = self.group_roles.new
+		r.user = user
+  	  	r.role = Role.find_by_name( name_of_role  )	  
+		r.save
 	end
 end

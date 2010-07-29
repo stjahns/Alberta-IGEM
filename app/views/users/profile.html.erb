@@ -11,10 +11,10 @@
 	  <ul>
 		  <li><a id="profile-tab" class="selected" href="#">Profile</a></li>
 		  <li><a id="lab-book-tab" href="">Lab Book</a></li>
-	<% if logged_in? && current_user.can_change_user_info_for_own_user?( @user ) %> 			  
+	<% if logged_in? && current_user.can_change_user_info_for_user?( @user ) %> 			  
 		  <li><a id="profile-options-tab" href="">Options</a></li>
 	  <% end %>
-<% if logged_in? && current_user.can_create_experiment_for_own_user?( @user )  %>
+<% if logged_in? && current_user.can_create_experiment_for_user?( @user )  %>
 		  <li class="right" ><%= link_to "Add experiments", experiments_path %></li>
 		<li class="right" ><%= link_to "New experiment", new_experiment_path %></li>
 <% end %>
@@ -58,7 +58,7 @@
 </div>
 	<% else %>
 		<%= render( :partial=> 'experiments/description', :collection => @experiments, :as=>:experiment ) %>
-    <%= link_to 'New experiment', new_experiment_path if logged_in? && current_user.can_create_experiment_for_own_user?( @user )%>
+    <%= link_to 'New experiment', new_experiment_path if logged_in? && current_user.can_create_experiment_for_user?( @user )%>
 	<% end %>
 </div>
 

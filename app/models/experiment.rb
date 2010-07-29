@@ -58,6 +58,13 @@ class Experiment < ActiveRecord::Base
     return new_experiment
   end
 
+  def permissions_for( user )
+	if user == self.user
+		return Role.find_by_name("experiment_owner").permissions
+	end
+	return user.permissions
+  end
+
 
   private
  

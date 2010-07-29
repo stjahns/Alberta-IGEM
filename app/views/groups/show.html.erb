@@ -10,8 +10,9 @@
 		<li><a id='group-members-tab' href='#'>Members</a></li>
 		<li><a id='group-messages-tab' href='#'>Messages</a></li>
 
-		<!-- TODO if is group admin -->
+		<% if logged_in? && current_user.can_change_info_for_group?(@group) %>
 		<li><a id='admin-tools-tab' href='#'>Admin Tools</a></li>
+		<% end %>
 	</ul>
 </div>
 </div>

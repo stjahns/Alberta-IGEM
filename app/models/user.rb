@@ -34,7 +34,10 @@ class User < ActiveRecord::Base
   has_one  :request, :dependent => :destroy
   belongs_to :role
   delegate :permissions, :to => :role
-  has_and_belongs_to_many :groups
+  
+  has_many :groups, :through => :group_role 
+  has_many :group_roles
+  #has_and_belongs_to_many :groups
 
   validates_presence_of     :login
   validates_length_of       :login,    :within => 3..40
@@ -116,10 +119,8 @@ class User < ActiveRecord::Base
  
   # sugary method for rbac
   # added a new way to check for permission relating to ownership
-  # syntax for permission 	permission_for_own_model
-  # and 			permission_for_any_model
-  # ex:		edit_for_own_experiment? @experiment
-  # 		edit_for_any_experiment?
+  # syntax for permission 	permission_for_model
+  # ex:		edit_for_experiment? @experiment
   # the type needs to be singular
   def method_missing(method_id, *args)
     if match = matches_dynamic_role_check?(method_id)
@@ -142,11 +143,24 @@ class User < ActiveRecord::Base
     end
   end
 
+
   # need this so we can say for own user
   def user
 	self
   end	
-  
+
+  def permissions_for( user )
+	# returns base role permissions
+	user.permissions
+  end 
+
+  def create_new_group( params )
+	# create a new group and assign the user
+	# to the group_admin role
+	g = Group.create( params )
+	r = g.create_admin( self )
+  end
+
   protected
     
     def make_activation_code
@@ -169,48 +183,33 @@ class User < ActiveRecord::Base
   end
 
   def matches_dynamic_perm_for_own_check?(method_id)
-    /^can_([a-zA-Z]\w*)_for_own_([a-zA-Z]\w+)\?$/.match(method_id.to_s)
+    /^can_([a-zA-Z]\w*)_for_([a-zA-Z]\w+)\?$/.match(method_id.to_s)
   end
 
 
    def permission_for_own?( perm , type, object )
     # store permissions in a variable so we don't have to do more queries
     perms = []
-    permissions.each{ |p| perms << p.name }
+    #permissions.each{ |p| perms << p.name }
 
-    # check if the user has the for any permission
-    return true if has_perm?( perms,  perm + "_for_any_" + type )
-    return false unless has_perm?( perms, perm + "_for_own_" + type )
-
-    # check if the user owns the objects by looking for association
-    if check_for_method object, "users"
-    # object has many users
-      return object.users.exists? self
-
-    elsif check_for_method object, "user"
-    # object has one user
-      return object.user == self
-    end
+    # check for permissions related to that object
+    # must define permissions for in any model with a permission
+    # should return base role permissions if its not defined in that model
     
-    #type = object.class.to_s.downcase
-    if check_for_method self, type.pluralize
-    # user has_many objects
-      return self.send( type.pluralize.to_sym ).exists?( object )
-    elsif check_for_method self, type
-    # user has_one object
-      return self.send( type.to_sym ) == object
-    end
-  
-    # should not have called this method if we get to here 
-    false
+    #object.permissions_for( self ).each{ |p| perms << p.name }
+
+    # check for permission
+    #has_perm?( perms, perm + "_for_" + type )
+
+    perm_name = perm + "_for_" + type
+    # check users base permissions and object specific permissions
+    user.permissions.find_by_name( perm_name ) ||
+	 object.permissions_for( self ).find_by_name( perm_name )
+
    end  
 
    def has_perm?(perms, query)
 	   perms.select{ |i| i =~ /^#{query}$/ }.length > 0
-   end
-
-   def check_for_method( object, method )
-	    object.methods.select{|i| i =~ /^#{method}$/}.length > 0
    end
 
 end

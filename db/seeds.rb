@@ -62,68 +62,59 @@ create_groups=Permission.create!(:name => 'create_groups',
 # 
 
 # permissions for changing user info
-change_user_info_for_own_user=Permission.create!(
-	:name=>"change_user_info_for_own_user", 
+change_user_info_for_user=Permission.create!(
+	:name=>"change_user_info_for_user", 
 	:description=>"Can change own info")
-change_user_info_for_any_user=Permission.create!(
-	:name=>"change_user_info_for_any_user", 
-	:description=>"Can change any user info")
 
 # permissions for editing experments
-create_experiment_for_own_user=Permission.create!(
-	:name=>"create_experiment_for_own_user", 
+create_experiment_for_user=Permission.create!(
+	:name=>"create_experiment_for_user", 
 	:description=>"Can create new experiments in lab-book")
-edit_experiments_for_own_group=Permission.create!(
-	:name=>"edit_experiments_for_own_group", 
+edit_experiments_for_group=Permission.create!(
+	:name=>"edit_experiments_for_group", 
 	:description=>"Can edit experiment for any user in group")
-edit_for_own_experiment=Permission.create!(
-	:name=>"edit_for_own_experiment", 
+edit_for_experiment=Permission.create!(
+	:name=>"edit_for_experiment", 
 	:description=>"Can edit own experiments")
-edit_for_any_experiment=Permission.create!(
-	:name=>"edit_for_any_experiment",
-	:description=>"Can edit any experiments")
-delete_experiments_for_own_group=Permission.create!(
-	:name=>"delete_experiments_for_own_group", 
+delete_experiments_for_group=Permission.create!(
+	:name=>"delete_experiments_for_group", 
 	:description=>"Can delete experiment for any user in group")
-delete_for_own_experiment=Permission.create!(
-	:name=>"delete_for_own_experiment", 
+delete_for_experiment=Permission.create!(
+	:name=>"delete_for_experiment", 
 	:description=>"Can delete own experiments")
-delete_for_any_experiment=Permission.create!(
-	:name=>"delete_for_any_experiment",
-	:description=>"Can delete any experiments")
+publish_for_experiment=Permission.create!(
+	:name=>"publish_for_experiment",
+	:description=>"Can publish experiments")
 
 # permissions for group attributes
-quit_for_own_group=Permission.create!(:name=>'quit_for_own_group',
+change_info_for_group=Permission.create!(:name=>'change_info_for_group',
+	     :description=>"Allowed to change some or all info for group")
+change_key_for_group=Permission.create!(:name=>'change_key_for_group',		:description=>'Can change key for own group')
+quit_for_group=Permission.create!(:name=>'quit_for_group',
 		  :description =>"Allowed to quit own group")
-delete_for_own_group=Permission.create!(:name => 'create_groups',
+delete_for_group=Permission.create!(:name => 'create_groups',
                   :description => "Allowed to delete own group.")
-delete_for_any_group=Permission.create(:name => 'delete_for_any_group',
-		  :description => "Allowed to delete any groups." )
-ban_users_for_own_group=Permission.create!(:name=>'ban_users_for_own_group',
+ban_users_for_group=Permission.create!(:name=>'ban_users_for_group',
 		  :description=>'Ban user from own group')
-ban_users_for_any_group=Permission.create!(:name => 'ban_users_for_any_group',
-                  :description => "Allowed to ban any user")
-probate_users_for_own_group=Permission.create!(
-		  :name => 'probate_users_for_own_group',
+probate_users_for_group=Permission.create!(
+		  :name => 'probate_users_for_group',
                   :description => "Allowed to probate users in group")
-probate_users_for_any_group=Permission.create!(
-		  :name => 'probate_users_for_any_group',
-                  :description => "Allowed to probate any user")
-accept_requests_for_own_group=Permission.create!(
-	:name => 'accept_requests_for_own_group',
+accept_requests_for_group=Permission.create!(
+	:name => 'accept_requests_for_group',
         :description => "Allowed to accept requests to join own group")
-accept_requests_for_any_group=Permission.create!(
-	:name => 'accept_requests_for_any_group',
+accept_requests_for_group=Permission.create!(
+	:name => 'accept_requests_for_group',
         :description => "Allowed to accept requests to join any group")
-remove_users_for_own_group=Permission.create!(
-	:name => 'remove_users_for_own_group',
+remove_users_for_group=Permission.create!(
+	:name => 'remove_users_for_group',
         :description => "Allowed to remove any user from own group")
-remove_users_for_any_group=Permission.create!(
-	:name => 'remove_users_for_any_group',
-        :description => "Allowed to remove any user from any group")
 
 	
-#create roles
+
+	
+	
+#create base roles
+#a permission_for_object in a base role will work for any object
 admin_role=Role.create!(:name => 'admin', 
                 :description => "Primary administrator role",
                 :permissions => [
@@ -131,72 +122,61 @@ admin_role=Role.create!(:name => 'admin',
                                  edit_bio_bytes,
                                  delete_users,
 				 edit_step_generators,
-=begin
-# permissions mike replaced
-				 delete_experiments,
-                                 edit_experiments,
-                                 ban_users,
-                                 probate_users,
-                                 delete_groups,
-                                 add_users_to_groups,
-                                 remove_users_from_groups,
-                                 create_experiments,
-				 edit_any_user_info,
-=end
-				 # added by mike
-				 create_experiment_for_own_user,
-				 change_user_info_for_any_user,
-				 edit_for_any_experiment,
-				 delete_for_any_experiment,
-				 ban_users_for_any_group,
-				 probate_users_for_any_group,
-				 accept_requests_for_any_group,
-				 remove_users_for_any_group,
-				 delete_for_any_group,
-                                 create_groups,
-				 quit_for_own_group
 
+				 create_experiment_for_user,
+				 change_user_info_for_user,
+
+				 edit_for_experiment,
+				 delete_for_experiment,
+				 publish_for_experiment,
+
+				 create_groups,
+				 ban_users_for_group,
+				 probate_users_for_group,
+				 accept_requests_for_group,
+				 remove_users_for_group,
+				 delete_for_group,
+				 quit_for_group,
+				 change_info_for_group
 
                                 ])
 
-group_admin_role=Role.create!(:name => 'group_admin', 
-                :description => "Group administrator role",
-                :permissions => [
-				 change_user_info_for_own_user,
-                                 edit_experiments_for_own_group,
-				 delete_experiments_for_own_group,
-				 delete_for_own_group,
-				 ban_users_for_own_group,
-				 probate_users_for_own_group,
-				 accept_requests_for_own_group,
-				 remove_users_for_own_group,
-				 quit_for_own_group,
-=begin old perms
-				 delete_group_users,
-                                 delete_group_experiments,
-                                 edit_group_experiments,
-                                 create_group_experiments,
-                                 make_comments,
-                                 create_groups,
-                                 delete_groups,
-                                 add_users_to_groups,
-                                 remove_users_from_groups,
-                                  #include default perm's as well?
-				 #should they be able to change users info
-=end
-				])
+				
 
 default_role=Role.create!(:name => 'default', 
                 :description => "Default user role, can do basic stuff like create and do experiments and whatnot",
                 :permissions => [
-                                #create_experiments,
-                                #delete_own_experiments,
-                                #edit_own_experiments,
-				quit_for_own_group,
-				create_experiment_for_own_user,
-				delete_for_own_experiment,
-				edit_for_own_experiment
+				create_groups,
+				quit_for_group,
+				create_experiment_for_user,
                                 ])
+
+# object specific roles
+group_admin_role=Role.create!(:name => 'group_admin', 
+                :description => "Group administrator role",
+                :permissions => [
+				
+
+
+ 		       		 change_info_for_group,
+				 edit_experiments_for_group,
+				 delete_experiments_for_group,
+				 delete_for_group,
+				 ban_users_for_group,
+				 probate_users_for_group,
+				 accept_requests_for_group,
+				 remove_users_for_group,
+				 quit_for_group,
+
+				])
+
+experiment_owner=Role.create!(:name=>'experiment_owner',
+		:description =>"user is creater of the experiment",
+		:permissions => [
+			delete_for_experiment,
+			edit_for_experiment,
+			publish_for_experiment
+])
 
 moderator_role=Role.create!(:name => 'moderator',
                 :description => "Moderator role, can ban and probate ne'er-do-wells",
@@ -209,7 +189,12 @@ moderator_role=Role.create!(:name => 'moderator',
                                 make_comments,
 =end
 				])
-                            
+ 
+
+group_member_role=Role.create!(:name=>'group_member'
+			      )
+
+                           
 
 banned_role=Role.create!(:name => 'banned', 
                 :description => "Banned user role",
