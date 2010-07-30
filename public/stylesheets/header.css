@@ -4,6 +4,11 @@
 	display: none;
 }
 
+/* tabs on profile page */
+#lab-book, #profile-options {
+	display: none;
+}
+
 /* general header styling */
 div#header {
 	border-bottom: 5px solid black;

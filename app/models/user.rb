@@ -35,7 +35,7 @@ class User < ActiveRecord::Base
   belongs_to :role
   delegate :permissions, :to => :role
   
-  has_many :groups, :through => :group_role 
+  has_many :groups, :through => :group_roles 
   has_many :group_roles
   #has_and_belongs_to_many :groups
 
@@ -116,6 +116,27 @@ class User < ActiveRecord::Base
     save(false)
   end
 
+  # need this so we can say for own user
+  def user
+	self
+  end	
+
+  def permissions_for( user )
+	# returns base role permissions
+	if user == self
+		return	Role.find_by_name('own_user').permissions
+	else
+		return user.permissions
+	end
+  end 
+
+  def create_new_group( params )
+	# create a new group and assign the user
+	# to the group_admin role
+	g = Group.create( params )
+	r = g.create_admin( self )
+  end
+
  
   # sugary method for rbac
   # added a new way to check for permission relating to ownership
@@ -144,22 +165,6 @@ class User < ActiveRecord::Base
   end
 
 
-  # need this so we can say for own user
-  def user
-	self
-  end	
-
-  def permissions_for( user )
-	# returns base role permissions
-	user.permissions
-  end 
-
-  def create_new_group( params )
-	# create a new group and assign the user
-	# to the group_admin role
-	g = Group.create( params )
-	r = g.create_admin( self )
-  end
 
   protected
     

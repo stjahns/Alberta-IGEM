@@ -2,7 +2,7 @@
   <div class="step_view" > 
        <%= render :partial => 'steps/step', :locals => {:step => step }  %>
   </div> 
-  <% if can_edit_experiment?( @experiment ) %>
+  <% if logged_in? && current_user.can_edit_for_experiment?( @experiment ) %>
       <div class= "step_edit" style="display: none;" >
 	  <%= render :partial => 'steps/edit', :locals => {:experiment => @experiment, :step => step } %>
   
@@ -10,7 +10,7 @@
     <% end %>
        <div class= "step-toolbar"  >
            <ul >
-	  <% if can_edit_experiment?( @experiment ) %>
+	  <% if logged_in? && current_user.can_edit_for_experiment?( @experiment ) %>
 	   <span class= "step-show-btns">
 	   	 <li  >
 		 <a class="btn-step-edit" href="#">Edit Step </a></li>

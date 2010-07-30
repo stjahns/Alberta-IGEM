@@ -1,6 +1,7 @@
 class GroupsController < ApplicationController
   before_filter :set_nav
   before_filter :login_required, :except => [:index,:show]
+
   def index
 	@groups = Group.all
   end

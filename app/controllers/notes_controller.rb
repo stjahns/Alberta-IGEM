@@ -1,7 +1,7 @@
 class NotesController < ApplicationController
   before_filter :login_required
   before_filter :get_step
-  before_filter :owns_note?
+  before_filter :can_edit_note?
 
  
   #TODO remove show,new,edit and add image to note 
@@ -109,9 +109,8 @@ private
     @step = Step.find(params[:step_id])
     @experiment = @step.experiment
   end
-  def owns_note?
-	# uses current_users role to determine ownership
-	is_owner_of(@step.note) || permission_denied
+  def can_edit_note?
+	current_user.can_edit_for_experiment?( @experiment ) || permission_denied
   end
   def permission_denied
 	  flash[:notice] = "You don't have permission to do that!"

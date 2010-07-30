@@ -34,6 +34,7 @@
 		<%= render :partial => 'message', :collection => @messages %>
 	<% end %>
 </div>
+<% if logged_in? && current_user.can_change_info_for_group?( group ) %>
 <div id='admin-tools' >
 	<p class="gray-box" >Your group's key is: <span id="group-key" ><%= @group.key %></span></p>
 	<p><em class="gray">Give your group key to people so they can easily join the group.  If your key has been compromised then click on the generate new key button below.</em></p>
@@ -63,3 +64,4 @@
 
 	<p>	see group key, change group key, view pending requests and accept them, edit group information, post a message to members, add an experiment to the group lab manual.	</p>
 </div>
+<% end %>

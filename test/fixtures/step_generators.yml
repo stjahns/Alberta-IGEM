@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20100726173047
+# Schema version: 20100728230826
 #
 # Table name: step_generators
 #

@@ -11,7 +11,7 @@
 	  <ul>
 		  <li><a id="profile-tab" class="selected" href="#">Profile</a></li>
 		  <li><a id="lab-book-tab" href="">Lab Book</a></li>
-	<% if logged_in? && current_user.can_change_user_info_for_user?( @user ) %> 			  
+	<% if logged_in? && current_user.can_change_info_for_user?( @user ) %> 			  
 		  <li><a id="profile-options-tab" href="">Options</a></li>
 	  <% end %>
 <% if logged_in? && current_user.can_create_experiment_for_user?( @user )  %>
@@ -49,13 +49,15 @@
 	</table>
 </div>
 <div id="lab-book">
-	<% if @experiments.blank? %>
-		<div id="home-bar">
-   		<ul>	
+	<% if @experiments.blank?  %>
+		<div id="home-bar"><ul>
+		<% if current_user == @user %>
        		<li><%= link_to "Create a new experiment", new_experiment_path %></li>
        		<li><%= link_to "Add an experiment from the lab manual", experiments_path %></li>
-    </ul>
-</div>
+		<% else %>
+	 	<li><%= @user.login %> hasn't added any experiments yet</li>	
+		<% end %>
+		</ul></div>
 	<% else %>
 		<%= render( :partial=> 'experiments/description', :collection => @experiments, :as=>:experiment ) %>
     <%= link_to 'New experiment', new_experiment_path if logged_in? && current_user.can_create_experiment_for_user?( @user )%>
@@ -63,8 +65,7 @@
 </div>
 
 
-
-<div id="profile-options">
+<% if logged_in? && current_user.can_change_info_for_user?( @user ) %> 	<div id="profile-options">
 	quit a group, cancel a request, change info
 	<% if @groups.length > 0 %>
 		<table>
@@ -84,31 +85,5 @@
 
 
 </div>
-
-
-<!--
-<table>
-  <tr>
-    <th>Title</th>
-    <th>Authour</th>
-    <th>Description</th>
-    <th>Published</th>
-    <th>Image</th>
-  </tr>
-
-<% @experiments.each do |experiment| %>
-  <tr>
-    <td><%=h experiment.title %></td>
-    <td><%=h experiment.authour %></td>
-    <td><%=h experiment.description %></td>
-    <td><%=h experiment.published %></td>
-    <td><%= link_to 'Show', experiment %></td>
-    <td><%= link_to 'Edit Description', edit_experiment_path(experiment) %></td>
-    <td><%= link_to 'Edit Constructs',  experiment_constructs_path(experiment) %></td> 
-    <td><%= link_to 'Edit Steps', experiment_steps_path(experiment) %></td>
-    <td><%= link_to 'Clone', clone_experiment_path( experiment ) %></td>
-    <td><%= link_to 'Destroy', experiment, :confirm => 'Are you sure?', :method => :delete %></td>
-  </tr>
 <% end %>
-</table>
--->
+
