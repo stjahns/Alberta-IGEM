@@ -4,12 +4,26 @@
 <%  form_tag :action => 'update', :id => @byte do %>
   <tr><td><label for="byte_name">Name:</label></td>
       <td><%= text_field 'byte', 'name'%></td></tr>
-  <tr><td><label for="byte_type">Type</label></td>
+  <tr><td><label for="byte_type">Type:</label></td>
       <td><%= select("byte", "type", ["ORF", "Linker"]) %> </td>
+  <tr><td><label for="byte_biobrick_id">BioBrick ID:</label></td>
+      <td><%= text_field 'byte', 'biobrick_id'%></td></tr>
+  <tr><td><label for="byte_biobrick_backbone">BioBrick Backbone:</label></td>
+      <td><%= text_field 'byte', 'biobrick_backbone'%></td></tr>
+  <tr><td><label for="byte_biobyte_id">BioByte ID:</label></td>
+      <td><%= text_field 'byte', 'biobyte_id'%></td></tr>
+  <tr><td><label for="byte_backbone">BioByte Backbone:</label></td>
+      <td><%= collection_select(:byte, :backbone_id, @backbones, :id, :name) %> </td>
+  <tr><td><label for="byte_biobyte_plasmid">BioByte Plasmid:</label></td>
+      <td><%= text_field 'byte', 'biobyte_plasmid'%></td></tr>
   <tr><td><label for="byte_description">Description:</label></td>
-      <td><%= text_field 'byte', 'description' %></td></tr>
+      <td><%= text_area 'byte', 'description' %></td></tr>
   <tr><td><label for="byte_sequence">Sequence:</label></td>
-      <td><%= text_field 'byte', 'sequence' %></td></tr>
+      <td><%= text_area 'byte', 'sequence' %></td></tr>
+  <tr><td><label for="byte_function_verification">Function Verification:</label></td>
+      <td><%= text_area 'byte', 'function_verification' %></td></tr>
+  <tr><td><label for="byte_comments">Additional Comments:</label></td>
+      <td><%= text_area 'byte', 'comments' %></td></tr>
   <tr><td><%= submit_tag 'Update' %></td></tr>
 <% end %>
 
@@ -39,7 +53,38 @@
   <p><%= f.submit 'Upload' %></p>
 <% end %>  
 
+<p>Sequence Validation:</p>
+<p>Vf sequence data (*.ab1, *.abi)</p>
 
+<% if @byte.vf_uploaded %>
+<%= link_to "vf_#{@byte.biobyte_id}.abi", download_vf_bio_byte_path(@byte) %>
+<% end %>
+
+<% form_tag({:action => 'upload_abi', :type => 'vf'}, :multipart => true) do %>
+<p><label for="upload_file">Select File</label> : 
+  <%= file_field 'upload', 'datafile' %></p>
+  <%= submit_tag 'Upload' %>
+<% end %>
+
+<p>Vr sequence data (*.ab1, *.abi)</p>
+
+<% if @byte.vr_uploaded %>
+<%= link_to "vr_#{@byte.biobyte_id}.abi", download_vr_bio_byte_path(@byte) %>
+<% end %>
+
+<% form_tag({:action => 'upload_abi', :type => 'vr'}, :multipart => true) do %>
+<p><label for="upload_file">Select File</label> : 
+  <%= file_field 'upload', 'datafile' %></p>
+  <%= submit_tag 'Upload' %>
+<% end %>
+<% if @byte.vr_uploaded and @byte.vf_uploaded %>
+<%= link_to "Validate!", validate_sequence_bio_byte_path(@byte) %>
+<%end%>
+
+<p>Validation String:</p>
+<div class = validation_string>
+<%= @byte.val_string %>
+</div>
 <h3>Annotations:</h3>
 <table>
 <tr><th>Name</th><th>Start</th><th>Stop</th></tr>

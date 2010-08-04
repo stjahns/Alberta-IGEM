@@ -20,6 +20,7 @@ class BioByte < ActiveRecord::Base
   has_many :annotations
   belongs_to :image
   has_one :bio_byte_image
+  belongs_to :backbone
 
   def icon
 	#return the image object that contains the biobyte icon
@@ -32,5 +33,38 @@ class BioByte < ActiveRecord::Base
   end
 #TODO add validation
   #TODO change bio_byte_image to has_one :through association?
+
+  def parse_validation(script_output)
+
+    script_output = script_output.split("\n")
+    puts script_output
+    puts "hello!"
+    refseq = script_output[0]
+    charmap = script_output[1]
+    lastmap = 0;
+    val_html = "";
+    map_hash = { "Y" => "vfonly",
+                 "G" => "both",
+                 "B" => "vronly",
+                 "!" => "mismatch",
+                 "?" => "unsure" }
+
+    i=0;
+    refseq.each_byte do |nt|
+      if lastmap == 0 
+        val_html += "<span class = #{map_hash[charmap[i].chr]}>#{nt.chr}"
+      elsif lastmap == charmap[i]
+        val_html += "#{nt.chr}"
+      else
+        val_html += "</span><span class = #{map_hash[charmap[i].chr]}>#{nt.chr}"
+      end
+      lastmap = charmap[i]
+      i+=1
+    end
+
+    val_html += "</span>"
+    return val_html
+
+  end
 
 end

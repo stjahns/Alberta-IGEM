@@ -1,0 +1,29 @@
+.datasheet {
+  font-family: monospace;
+}
+p{
+  font-family: monospace;
+}
+td{
+  font-family: monospace;
+}
+.validation_string {
+  word-wrap:  break-word;
+}
+
+
+.vfonly {
+  background-color: #FFFF00;
+}
+.vronly {
+  background-color: #00FFFF;
+}
+.both {
+  background-color: #00FF00;
+}
+.mismatch {
+  background-color: #FF0000;
+}
+.unsure {
+  background-color: #FF00FF;
+}
