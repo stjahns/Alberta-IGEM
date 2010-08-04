@@ -44,7 +44,7 @@ div#header-toolbar ul li.right {
 }
 div#header-toolbar ul li.right a:link, div#header-toolbar ul li.right a:visited, div#header-toolbar ul li.right a:hover {
 	margin: 0;
-	margin-left:2px;
+	margin-left:3px;
 }
 
 div#header-toolbar ul li a:link, div#header-toolbar ul li a:visited {
@@ -53,10 +53,18 @@ div#header-toolbar ul li a:link, div#header-toolbar ul li a:visited {
 	padding: 4px;
 	background-color: #efefef;
 	text-decoration: none;
-	margin-right: 2px;
+	margin-right: 3px;
 	background-image: url(../images/tab-shadow.png);
 	background-repeat: repeat-x;
 	background-position: bottom;
+	
+	border-color:#eee #aaa #000 #eee;
+	border-style:solid;
+	border-width:1px 1px 0 1px;
+
+	-moz-border-radius:4px 4px 0 0;
+
+
 }
 div#header-toolbar ul li a.selected:link, div#header-toolbar ul li a.selected:visited  {
 	background-image: none;

@@ -33,6 +33,9 @@
 </div>
 <% if logged_in? && current_user.can_change_info_for_group?( @group ) %>
 <div id='admin-tools' >
+
+<div class="left-column" >
+
 	<p class="gray-box" >Your group's key is: <span id="group-key" ><%= @group.key %></span></p>
 	<p><em class="gray">Give your group key to people so they can easily join the group.  If your key has been compromised then click on the generate new key button below.</em></p>
 	<div class="hanging-toolbar"><ul>
@@ -40,25 +43,11 @@
 			<%= button_to "generate key", new_key_group_path(@group), :method=>:put %></li>
 	</ul></div>
 
-	<h2>Send a message to your group</h2>
-	<% form_for( [@group,Message.new] ) do |f| %>
-		<p><%= f.error_messages %>
-		<%= f.text_area :body %></p>
-		<p><%= f.submit 'Send' %><%= save_notice %></p>
-	<% end %>
-	<div class="hanging-toolbar"></div>
 
-	<h2>Edit group info</h2>
-	<% form_for(@group, :html=>{ :id=>"edit-group-info" } ) do |f| %>
-		<p><%= f.error_messages %></p>
-		<p><%= f.label 'name' %><br/>
-		<%= f.text_field :name %></p>
-		<p><%= f.label 'description' %><br/>
-		<%= f.text_area :description %></p>
-		<p><%= f.submit 'Save' %><%= save_notice %></p>
-	<% end %>
+	
 	<h2>Pending Requests</h2>
 	<%= 'No requests right now.' unless( @requests.length > 1 )%>
+	<div id="request-list">
 	<% @requests.each do |request| %>
 		<div class="request"
 			<%= link_to request.user.login, profile_path( request.user.login) %>
@@ -73,6 +62,42 @@
 		</div>
 
 	<% end %>
+	</div>
+</div>
+<div class="right-column">
+	<div id="send-message">
+	<h2>Send a message to your group</h2>
+	<% form_for( [@group,Message.new] ) do |f| %>
+		<p class="gray-box" ><%= f.error_messages %>
+		<%= f.text_area :body %></p>
+
+		<p><em class="gray">The messages will show up in the messages tab.</em><br/><%= save_notice %></p> 
+		<div class="hanging-toolbar"><ul><li>
+			<%= f.submit 'Send' %>	
+		</li></ul></div>
+
+	
+		<% end %>
+
+	<h2>Edit group description</h2>
+	<% form_for(@group, :html=>{ :id=>"edit-group-info" } ) do |f| %>
+		<p><%= f.error_messages %></p>
+		<p class="gray-box">
+		<%= f.text_area :description %>
+		</p>
+		
+		<p><em class="gray">Create a description for your group. </em>
+		<br/><%= save_notice %></p>
+
+		<div class="hanging-toolbar"><ul><li>
+		<%= f.submit 'Save' %>
+		</li></ul></div>
+
+
+	<% end %>
+
+</div>
+
 	<div class="hanging-toolbar"></div>
 
 	<p>	see group key, change group key, view pending requests and accept them, edit group information, post a message to members, add an experiment to the group lab manual.	</p>

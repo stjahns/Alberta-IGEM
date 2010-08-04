@@ -1,5 +1,14 @@
 /* general styling */
 
+div.right-column {
+	width:425px;
+	float:right;
+}
+div.left-column {
+	width:300px;
+	float:left;
+}
+
 em.gray {
 	text-align: left;
 	font-family:georgia,serif;
@@ -237,17 +246,24 @@ div#lab-book {
 
 /* group profile page */
 
+#request-list {
+	height 360px;
+}
 
 .member{
        }	
+
 p.gray-box {
 	background: none #efefef;
 	padding: 1em;
 	text-align:center;
 	border:1px solid #ccc;
-
-
 }
+
+.gray-box textarea {
+	width:389px;
+}
+
 span#group-key {
 	background-color: #fff;
 	border: 1px solid #ccc;

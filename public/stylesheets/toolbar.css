@@ -5,8 +5,9 @@
 div.hanging-toolbar {
 	clear: both;
 	background-color: white;
-	border-top: 2px solid #efefef;
+	border-top: 4px solid #efefef;
 	margin-bottom: 2em;
+	margin-top:1em;
 
 }
 div.hanging-toolbar ul, div.step-toolbar ul {
@@ -28,20 +29,24 @@ div.hanging-toolbar ul li form, div.step-toolbar ul li form {
 }
 
 
-div.hanging-toolbar ul li a:link, div.hanging-toolbar ul li a:visited , div.step-toolbar ul li a:link, div.step-toolbar ul li a:visited {
+div.hanging-toolbar ul li a:link, div.hanging-toolbar ul li a:visited , div.step-toolbar ul li a:link, div.step-toolbar ul li a:visited, div.hanging-toolbar ul li input  {
 	display: block;
 	color: #666;
 	font-weight: normal;
 	padding: 4px;
 	background-color: #efefef;
 	text-decoration: none;
-	margin-left: 2px;
+	margin-left: 3px;
+	border-color: #ccc;
+	border-width: 0 1px 1px 0;
+	border-style:solid;
+/*	-moz-border-radius: 0 0 4px 4px;*/
 }
 
 /* by default we want the step buttons to float right so we need to have the margins reversed as well */
 div.step-toolbar ul li a:link, div.step-toolbar ul li a:visited, div.step-toolbar ul li a:hover {
 	margin:0;
-	margin-right:2px;
+	margin-right:3px;
 }
 
 
