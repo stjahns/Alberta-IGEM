@@ -1,13 +1,13 @@
 <div class="message">
-	<h2><%= message.updated_at.strftime("%A, %b. %d") %><h2>
+	<h2><%= message.updated_at.strftime("%A, %b. %d") %></h2>
+	<%= save_notice %>
 	<p><%= more_text h( message.body ) , 150 %>
 
 <div class="hanging-toolbar" >
-	<!-- do this with user permission TODO -->
-	<% if true %>
+	<% if logged_in? && current_user.can_delete_messages_for_group?( group ) %>
 	<ul>
 			<li><a class='btn-delete-message' href="#" >Delete</a>
-			<%= button_to "delete message" , group_message_path(@group,message)%>
+			<%= button_to "delete message" , group_message_path(@group,message), :method=>:delete%>
 			</li>
 			
 	</ul>

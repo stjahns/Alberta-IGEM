@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20100728230826
+# Schema version: 20100726173047
 #
 # Table name: users
 #
@@ -38,6 +38,8 @@ class User < ActiveRecord::Base
   has_many :groups, :through => :group_roles 
   has_many :group_roles
   #has_and_belongs_to_many :groups
+  
+  has_many :requests
 
   validates_presence_of     :login
   validates_length_of       :login,    :within => 3..40
@@ -57,7 +59,7 @@ class User < ActiveRecord::Base
   # HACK HACK HACK -- how to do attr_accessible from here?
   # prevents a user from submitting a crafted form that bypasses activation
   # anything else you want your user to change should be added here.
-  attr_accessible :login, :email, :name, :password, :password_confirmation, :role, :group
+  attr_accessible :login, :email, :name, :password, :password_confirmation, :role, :group, :description
 
 
   # Activates the user in the database.
@@ -120,6 +122,10 @@ class User < ActiveRecord::Base
   def user
 	self
   end	
+
+  def in_group?(group)
+	self.groups.exists?( group )
+  end
 
   def permissions_for( user )
 	# returns base role permissions

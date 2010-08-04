@@ -2,6 +2,7 @@
 	<%= @group.name %>
 <% end %>
 
+
 <div id='header'>
 <h1><%= @group.name %></h1>
 <div id='header-toolbar' >
@@ -16,25 +17,21 @@
 	</ul>
 </div>
 </div>
-<div id='group-info' >
-<p><%= @group.description %></p>
-<p>total experiment status of users</p>
+<%= render :partial => 'info' %> 
 
-
-</div>
 <div id='group-members'>
 	<% unless @members.blank? %>
-	<%= render :partial => 'members', :collection => @members, :as => :member %>	
+		<%= render :partial => 'members', :collection => @members, :as => :member, :locals=>{:group=>@group} %>	
 	<% end %>
 </div>
 <div id='group-messages'>
 	<% if @messages.blank? %>
 		No messages
 	<% else %>
-		<%= render :partial => 'message', :collection => @messages %>
+		<%= render :partial => 'message', :collection => @messages ,:locals=>{:group=>@group} %>
 	<% end %>
 </div>
-<% if logged_in? && current_user.can_change_info_for_group?( group ) %>
+<% if logged_in? && current_user.can_change_info_for_group?( @group ) %>
 <div id='admin-tools' >
 	<p class="gray-box" >Your group's key is: <span id="group-key" ><%= @group.key %></span></p>
 	<p><em class="gray">Give your group key to people so they can easily join the group.  If your key has been compromised then click on the generate new key button below.</em></p>
@@ -47,18 +44,34 @@
 	<% form_for( [@group,Message.new] ) do |f| %>
 		<p><%= f.error_messages %>
 		<%= f.text_area :body %></p>
-		<p><%= f.submit 'Send' %></p>
+		<p><%= f.submit 'Send' %><%= save_notice %></p>
 	<% end %>
 	<div class="hanging-toolbar"></div>
 
 	<h2>Edit group info</h2>
-	<% form_for(@group) do |f| %>
+	<% form_for(@group, :html=>{ :id=>"edit-group-info" } ) do |f| %>
 		<p><%= f.error_messages %></p>
 		<p><%= f.label 'name' %><br/>
 		<%= f.text_field :name %></p>
 		<p><%= f.label 'description' %><br/>
 		<%= f.text_area :description %></p>
-		<p><%= f.submit 'Save', :confirm => 'Are you sure you want to save your changes to the group\'s info?' %></p>
+		<p><%= f.submit 'Save' %><%= save_notice %></p>
+	<% end %>
+	<h2>Pending Requests</h2>
+	<%= 'No requests right now.' unless( @requests.length > 1 )%>
+	<% @requests.each do |request| %>
+		<div class="request"
+			<%= link_to request.user.login, profile_path( request.user.login) %>
+			<%= save_notice %>
+			<p><%= request.message %></p>
+			<div class="hanging-toolbar"><ul>
+					<li><%= link_to "Accept", "#",:class=>"accept-request-btn" %>
+					<%= button_to "accept", accept_request_path( request ) %></li>
+					<li><%= link_to "Reject" , "#" ,:class=>"reject-request-btn" %>
+					<%= button_to "reject", reject_request_path( request ) %></li>
+			</ul></div>
+		</div>
+
 	<% end %>
 	<div class="hanging-toolbar"></div>
 

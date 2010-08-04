@@ -13,7 +13,7 @@ class UsersController < ApplicationController
 
   if @user.update_attributes(params[:user])
     flash[:notice] = 'User was successfully updated.'
-    redirect_to(user_path(@user))
+    redirect_to(profile_path(@user.login))
   else
     render :action => 'edit'
   end
@@ -26,6 +26,7 @@ class UsersController < ApplicationController
   def show
   	@user = User.find(params[:id])
 	@groups = @user.groups
+	@requests = @user.requests
   end
 
   def destroy
@@ -59,6 +60,7 @@ class UsersController < ApplicationController
   def profile
     @user = User.find_by_login(params[:login])
     @groups = @user.groups
+    @requests = @user.requests
 
     if @user.nil? 
 	flash[:error] = 'No user by that name!'

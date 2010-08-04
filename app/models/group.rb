@@ -51,14 +51,30 @@ class Group < ActiveRecord::Base
 		create_member( user )
 	end
 
+	def request_to_join( user, message )
+		request = Request.new( 
+			:group=>self, :user=>user, :message=>message )
+		request.save	
+	end
+
 	def permissions_for( user )
 		# give permissions for the role 
-		role_for_group = user.group_roles.find_by_group_id( self.id )
-		if role_for_group.nil? 
+		role_for_user = user.group_roles.find_by_group_id( self.id )
+		
+		if role_for_user.nil? 
 			return user.permissions
 		else	
-			return role_for_group.permissions
+			return role_for_user.permissions
 		end
+	end
+
+	def role_for( user )
+		user.group_roles.find_by_group_id( self.id ).role
+	end
+
+	def name_of_role_for( user )
+		role = user.group_roles.find_by_group_id( self.id ).role
+		role.description
 	end
 
 	def create_admin( user )
@@ -69,7 +85,35 @@ class Group < ActiveRecord::Base
 		create_role user, "group_member"
 	end
 
+	def make_member_admin( user )
+		change_role( user, "group_admin" )
+	end
+
+	def make_admin_member( user )
+		change_role( user, "group_member" )
+	end
+
+	def ban_member( user )
+		change_role( user, "banned" )
+	end
+
+	def unban_member( user )
+		change_role( user, "group_member" )
+	end
+
+	def kick_out( user )
+		r = self.group_roles.find_by_user_id( user.id )
+		return false if r.blank?
+		r.destroy
+	end
+
+
 	private
+	def change_role( user, name_of_role )
+		r = self.group_roles.find_by_user_id( user.id )
+		r.role = Role.find_by_name( name_of_role )
+		r.save
+	end
 	def create_role( user, name_of_role )
 	  	r = self.group_roles.new
 		r.user = user

@@ -11,7 +11,7 @@ class MessagesController < ApplicationController
 
 	  respond_to do |format|
 		  if @message.save
-			format.js{  render(  :partial=>'group/message' , :locals=>{ :message => @message } ) }
+			format.js{  render(  :partial=>'groups/message' , :locals=>{ :message => @message, :group=>@group } ) }
 			format.html{ redirect_to group_path(@group) }
 		  else
 			  head :error

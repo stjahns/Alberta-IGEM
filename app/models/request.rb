@@ -17,6 +17,12 @@ class Request < ActiveRecord::Base
 
 
 	attr_accessible :user, :group, :message
-	
 
+	def accept
+		self.group.create_member( self.user )
+		self.destroy
+	end
+	def reject
+		self.destroy
+	end
 end

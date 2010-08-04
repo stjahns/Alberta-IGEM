@@ -1,18 +1,49 @@
-<div class="lab-book">
+<div class="lab-book member" id="user_<%= member.id  %>">
 	<table>
 		<tr>
 			<td><h2><%= link_to member.login , profile_path(member.login) %></h2></td>
 			<td class="right" > experiments completed </td>
 		</tr>
+		<tr>
+			<td class="role" ><%= group.name_of_role_for( member ) %></td>
+			<td><%= save_notice %></td>
+		</tr>
 	</table>
 <div class="hanging-toolbar" >
-	<!-- do this with user permission TODO -->
-	<% if true %>
+	<% if logged_in? %>
 	<ul>
-			<li><a class="btn-delete-user" href="#" >Delete</a>
-			<%= button_to "delete user", experiment_path(member),:method=>:delete %>
+		<% if current_user.can_remove_users_for_group?( group ) %>
+
+			<li><a class="btn-kick-out-user" href="#" >Kick out</a>
+				<% form_tag kick_out_group_path(group),:method=>:delete do %>
+				<%= hidden_field_tag( 'user', member.id ) %>
+				<% end %>
 			</li>
-			
+		<% end %>
+		<% if current_user.can_modify_roles_for_group?( group ) %>
+			<% if group.role_for( member ).name == "group_admin" %>
+				<li>
+				<%= link_to "remove admin priveleges", "#", :class=>"btn-remove-admin" %>
+				<%= change_role_form( group, member, "group_member") %>
+				</li>
+				
+			<% elsif  group.role_for( member ).name == "banned" %>
+				<li>
+				<%= link_to "unban", "#", :class=>'btn-unban' %>
+				<%= change_role_form( group, member, "unban") %>
+				</li>
+			<% else %>
+				<li>
+				<%= link_to "ban", "#",:class=>'btn-ban' %>
+				<%= change_role_form( group, member, "ban") %>
+				</li>
+				<li>
+				<%= link_to "make admin", "#",:class=>'btn-make-admin' %>
+				<%= change_role_form( group, member, "group_admin") %>
+				</li>
+			<% end %>
+		<% end %>
+
 	</ul>
 	<% end %>
 </div>

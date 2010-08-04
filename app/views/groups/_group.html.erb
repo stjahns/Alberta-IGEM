@@ -4,18 +4,23 @@
 			<td><h2><%= link_to group.name, group_path( group ) %></h2></td>
 			<td class="right" > group experiments completed </td>
 		</tr>
+		<% if logged_in? && current_user.in_group?( group ) %>
+			<tr><td><em class="gray">You are a <%= group.name_of_role_for( current_user ) %>.</em></td></tr>
+		<% end %>
 	</table>
 	<p><%= more_text group.description, 150  unless group.description.blank?%></p>
 </div>
 <div class="hanging-toolbar" >
-	<!-- do this with user permission TODO -->
-	<% if true %>
 	<ul>
+		<% if logged_in? %>
+			<% if current_user.can_delete_for_group?( group ) %>
 			<li><a class="btn-delete-group" href="#" >Delete</a>
 			<%= button_to "delete group", group_path(group),:method=>:delete %>
 			</li>
+			<% end %>
+			<% unless current_user.in_group?( group ) %>
 			<li><%= link_to "Request to join", join_group_path(group)%> </li>
-			
+			<% end %>
+		<% end %>
 	</ul>
-	<% end %>
 </div>

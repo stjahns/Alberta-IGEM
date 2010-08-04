@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100728230826) do
+ActiveRecord::Schema.define(:version => 20100730041111) do
 
   create_table "annotations", :force => true do |t|
     t.string   "name"
@@ -200,6 +200,7 @@ ActiveRecord::Schema.define(:version => 20100728230826) do
     t.integer  "group_id"
     t.integer  "role_id"
     t.string   "reset_code"
+    t.text     "description"
   end
 
   add_index "users", ["login"], :name => "index_users_on_login", :unique => true

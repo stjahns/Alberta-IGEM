@@ -25,14 +25,17 @@ ActionController::Routing::Routes.draw do |map|
   map.profile '/user/:login', :controller => 'users', :action => 'profile', :method => 'get' 
 
   # group routes
-  map.resources :groups, :member => { :upload => :post, :join => :get, :join_with_key=>:post, :request_to_join => :post , :quit=>:delete, :new_key=>:put } do |groups|
+  map.resources :groups, :member => { :upload => :post, :join => :get, :join_with_key=>:post, :request_to_join => :post , :quit=>:delete, :new_key=>:put, :change_role=>:put, :kick_out=>:delete } do |groups|
 	  groups.resources :messages, :only=>[ :index,:create,:destroy,:update ]
   end
 
 
   #pretty group routes
-  map.pretty_group '/user/:name', :controller => 'groups', :action => 'show', :method => 'get'
+  map.pretty_group '/group/:name', :controller => 'groups', :action => 'show', :method => 'get'
     map.resources :viewer
+
+
+  map.resources :requests, :only => ['destroy'], :member=>{:accept => :post, :reject=>:post}
 
 
   #map annoations as nested resource of biobytes
