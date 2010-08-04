@@ -67,8 +67,6 @@
 
 <% if logged_in? && current_user.can_change_info_for_user?( @user ) %> 	
 <div id="profile-options">
-	quit a group, cancel a request, change info
-
 	<h2>Change your info</h2>
 <% form_for @user do |f| -%>
 	
@@ -111,12 +109,14 @@
 	<% unless @requests.blank? %>
 	<h2>Pending Requests</h2>
 		<% @requests.each do |request| %>
-			<p>Request to join: <%= request.group.name %></p>
+			<div class="request">
+				<p>Request to join: <%= request.group.name %><%= save_notice %></p>
 			<p><%= request.message unless request.message.blank? %>
 			<div class="hanging-toolbar"><ul>
-					<li><%= link_to "Cancel", "#" %>
+					<li><%= link_to "Cancel", "#", :class=>"btn-cancel-request" %>
 					<%= button_to "cancel", request_path( request ), :method => :delete %></li>
 			</ul></div>
+			</div>
 		<% end %>
 	<% end %>
 
