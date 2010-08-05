@@ -12,6 +12,10 @@
 */
 /*styling for glossaries page*/
 
+h1{
+    text-align: center;
+    
+}
 #container {
 	width: 750px;
 	margin-left: auto;
@@ -30,11 +34,16 @@ body, ol, ul, td {
   text-align: left;
 }
 
-h2,p,ol,ul,td {
+ p,ol,ul,td {
   margin-left: 12em;
-  margin-right: 12em;
+  margin-right: 10em;
+  text-align: left;
 }
 
+h2{
+  margin-left:8em;
+  text-align: left;
+}
 pre {
   background-color: #eee;
   padding: 10px;
@@ -102,15 +111,88 @@ a:visited { color: #666; }
   list-style: square;
 }
 
-.menu{
-    border: 1px solid black;
+#menu{
+    border: 1px solid gray;
     position:relative;
-    float: right;
+    float: left;
+    background: white;
+    width: 120px;
+    
+     /*-webkit-border-radius: 5px;
+     -moz-border-radius: 5px;*/
+     
+}
 
-     -webkit-box-shadow: 5px 5px 7px #333;
-     -webkit-border-radius: 5px;
-     -moz-border-radius: 5px;
-     -moz-box-shadow: 5px 5px 7px #333;
+.item{
+  width: inherit;
+  height: 18px;
+  overflow: hidden;
+  margin-left: 8px;
 }
 
 
+.hanging-toolbar{
+    margin-right: 12em;
+    margin-left: 12em;
+    border-top: 1px silver solid;
+    clear:right;
+}
+
+.caption{
+    float :none;
+   /* border-bottom: 1px black solid;
+    border-right: 1px black solid;
+    border-left: 1px black solid;*/
+   
+    font-size: 11px;
+    line-height: 14px;
+    text-align: center;
+    width: 20em;
+    margin-bottom: 5px;
+
+}
+
+.image{
+    /*border: 1px black solid;*/
+
+    text-align: center;
+
+    margin-top: 5px;
+    margin-right: 5px;
+    margin-left: 5px;
+
+    float: none;
+}
+
+.captionimage{
+    float: right;
+    border: 1px black solid;
+    margin-right: 12em;
+    margin-bottom: 15px;
+    margin-left: 15px;
+}
+
+.edit{
+    margin-bottom: 0px;
+    margin-top: 0px;
+    margin-right: 12em;
+    float : right;
+}
+
+.section{
+    margin-top: 0px;
+}
+
+.image_form{
+    border: solid black 1px;
+    margin-left: 470px;
+    margin-right: 250px;
+}
+.description{
+    float:left;
+    margin-bottom: 150px;
+}
+
+em{
+    display:none;
+}

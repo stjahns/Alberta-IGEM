@@ -64,7 +64,7 @@ ActionController::Routing::Routes.draw do |map|
   map.root :controller => :home 
 
   # routes for images
-  map.resources :images, :member => { :thumb => :get, :step => :get  }
+  map.resources :images, :member => { :thumb => :get, :step => :get , :section => :get }
   
   
   # default routes

@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100724183151) do
+ActiveRecord::Schema.define(:version => 20100804041300) do
 
   create_table "annotations", :force => true do |t|
     t.string   "name"
@@ -96,6 +96,7 @@ ActiveRecord::Schema.define(:version => 20100724183151) do
     t.integer  "step_id"
     t.integer  "note_id"
     t.integer  "section_id"
+    t.text     "caption"
   end
 
   create_table "notes", :force => true do |t|
@@ -128,6 +129,8 @@ ActiveRecord::Schema.define(:version => 20100724183151) do
     t.text     "video"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.text     "video_title"
+    t.text     "caption"
   end
 
   create_table "step_generators", :force => true do |t|

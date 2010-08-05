@@ -5,52 +5,72 @@
 
     <script type="text/javascript">
       $(document).ready(function(){
-         $("a").hover(function(event){
+         $("a .term").hover(function(event){
             $(this).next("em").animate({opacity: "show", top: "-75"}, "slow");
           }, function() {
             $(this).next("em").animate({opacity: "hide", top: "-85"}, "fast");
 	});
+
       });
 
 
     </script>
   </head>
 
-<p>
-  <%=h @encyclopaedia.title %>
+  <p>
+    <i><h1><%= @encyclopaedia.title %></h1></i>
 </p>
+
+
+<%unless @encyclopaedia.sections.blank?%>
+
+    <div id = "menu">
+      <b>Contents:</b>
+  <%for section in @sections %>
+      <div class ="item">
+      <%= create_menu_links(section.title) %><br/>
+      </div>
+    <%end%></div>
+<%end%>
 
 <p>
   <% intro = add_glossary_links(@encyclopaedia.intro) %>
   <%= add_popups(intro) %>
 </p>
 
-<div class = "menu"><%for section in @sections %>
-  <a href ="#<%section.title%>" ><%=h section.title %></a><br/>
-<%end%></div>
 
 <% for section in @sections %>
-  
-<h2><a name ="<%section.title%>"><%=h section.title %></a></h2>
-
-    <p><%=h section.description%></p>
-
-    <p><%= section.video%></p>
-
-    <% unless  section.image.blank? %>
-	<p><%= image_tag image_path(section.image, :jpg ) %></p>
-	<p><%= image_tag thumb_image_path(section.image ) %></p>
+<div class ="hanging-toolbar"></div>
+  <p class ="edit"><%= link_to 'Edit', edit_encyclopaedia_section_path(@encyclopaedia,section) %></p> <br/>
+  <div class ="section">
+   <% unless  section.image.blank? %>
+	<div class ="captionimage">
+          <div class = "image"><%= image_tag section_image_path(section.image, :jpg) %></div>
+          <i><div class ="caption"><%= section.caption %></div></i>
+        </div>
     <% else %>
-        <p>
-         There is no image.
-         <%= link_to 'Upload one now!', edit_encyclopaedia_section_path(@encyclopaedia,section) %>
+        <p class ="edit">
+         <%= link_to 'Upload Image', edit_encyclopaedia_section_path(@encyclopaedia,section) %>
         </p>
     <% end %>
 
-        <%= link_to 'Edit', edit_encyclopaedia_section_path(@encyclopaedia,section) %> <br/>
-<% end %>
-        <a name ="mouse">"I should end up here"</a>
+    <h2><%= create_bookmark(section.title) %></h2>
 
-<%= link_to 'Edit', edit_encyclopaedia_path(@encyclopaedia) %> |
-<%= link_to 'Back', encyclopaedias_path %>
+    <p><%=h section.description%></p>
+
+    <%unless section.video.blank?%>
+    <a href ="#section.title"class ="video"><%= "Watch a video on #{section.video_title}" %></a>
+    <em><%= section.video%></em>
+    <%end%>
+
+     </div>
+ 
+<% end %>
+
+<div class ="hanging-toolbar"></div>
+
+
+
+<p><%= link_to 'Edit', edit_encyclopaedia_path(@encyclopaedia) %> |
+<%= link_to 'Back', encyclopaedias_path %></p>
 </html>
