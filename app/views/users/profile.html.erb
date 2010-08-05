@@ -67,29 +67,18 @@
 
 <% if logged_in? && current_user.can_change_info_for_user?( @user ) %> 	
 <div id="profile-options">
-	<h2>Change your info</h2>
+<div class="left-column">
 <% form_for @user do |f| -%>
-	
-  <%= error_messages_for :user %>
-
-  <p><label for="email">Email</label><br/>
-  <%= f.text_field :email %></p>
-
-  <p><f.label "description"><br/>
-  <%= f.text_area :description %></p>
-
-  <p><%= submit_tag 'Update' %></p>
-<% end %>
-
-<h2>Make a new password</h2>
-<% form_for @user do |f| -%>
+  <div class="gray-box">
+	<h2>Make a new password</h2>
 	
   <p><label for="password">Password</label><br/>
   <%= f.password_field :password %></p>
 
   <p><label for="password_confirmation">Confirm Password</label><br/>
   <%= f.password_field :password_confirmation %></p>
-  <p><%= f.submit 'Update' %></p>
+  </div>
+  <div class="hanging-btns"><ul><li><%= f.submit 'Update' %></li></ul></div>
 <% end %>
 
 <h2>Current groups</h2>
@@ -106,7 +95,28 @@
 			<% end %>
 		</table>
 	<% end %>
-	<% unless @requests.blank? %>
+
+</div>
+<div class="right-column">
+<% form_for @user do |f| -%>
+	<div  class="gray-box">
+	<h2>Change your info</h2>
+
+		
+	  <%= error_messages_for :user %>
+
+	  <p>
+	  <label for="email">Email</label><br/>
+	  <%= f.text_field :email %></p>
+
+	  <p><%= f.label "description" %><br/>
+	  <%= f.text_area :description %>
+	  </p>
+  </div>
+  <div class="hanging-btns"><ul><li><%= submit_tag 'Update' %></li></ul></div>
+<% end %>
+
+<% unless @requests.blank? %>
 	<h2>Pending Requests</h2>
 		<% @requests.each do |request| %>
 			<div class="request">
@@ -121,6 +131,9 @@
 	<% end %>
 
 
+
+
+</div>
 </div>
 <% end %>
 

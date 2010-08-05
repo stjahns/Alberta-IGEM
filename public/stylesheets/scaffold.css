@@ -247,13 +247,16 @@ div#lab-book {
 /* group profile page */
 
 #request-list {
-	height 360px;
+	height: 360px;
+	border: 1px solid #ccc;
+	background-color:#fff;
+	padding:10px;
 }
 
 .member{
        }	
 
-p.gray-box {
+.gray-box {
 	background: none #efefef;
 	padding: 1em;
 	text-align:center;
@@ -262,6 +265,9 @@ p.gray-box {
 
 .gray-box textarea {
 	width:389px;
+}
+.gray-box p {
+	background:transparent;
 }
 
 span#group-key {

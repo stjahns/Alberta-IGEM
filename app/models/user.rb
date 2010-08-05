@@ -171,7 +171,12 @@ class User < ActiveRecord::Base
     end
   end
 
-
+  def experiments_completed
+	self.experiments.find_all_by_status( "complete" ).length
+  end
+  def experiments_working
+	self.experiments.find_all_by_status( "working" ).length
+  end
 
   protected
     

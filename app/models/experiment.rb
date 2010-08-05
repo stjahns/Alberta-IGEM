@@ -15,12 +15,13 @@
 #
 
 class Experiment < ActiveRecord::Base
-  attr_accessible :title, :authour, :description, :published, :image, :user_id
+  attr_accessible :title, :authour, :description, :published, :image, :user_idi, :status
   has_many :steps, :dependent => :destroy  
   has_many :constructs, :dependent => :destroy
   has_many :notes, :through => :steps
   belongs_to :user
 
+   before_create :status_none
 #  after_create :assign_owner  
 
   def clone_experiment_for( user )
@@ -35,6 +36,7 @@ class Experiment < ActiveRecord::Base
     new_experiment.user_id = user.id
     new_experiment.authour = user.login
     new_experiment.published = false
+    new_experiment.status_none
     new_experiment.save
 
     i = 1
@@ -65,8 +67,28 @@ class Experiment < ActiveRecord::Base
 	return user.permissions
   end
 
+  def status_completed
+	  setStatus( "complete" )
+  end
+  def status_working
+	  setStatus( "working" )
+  end
+  def status_none
+	  setStatus( "none" )
+  end
+
+  def complete?
+	  self.status == "complete"
+  end
+  def working?
+	  self.status == "working"
+  end 
+
 
   private
+  def setStatus( new_status )
+	  self.status = new_status
+  end
  
 
 end

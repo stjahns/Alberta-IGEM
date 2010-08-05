@@ -5,6 +5,8 @@
 
 <div id='header'>
 <h1><%= @group.name %></h1>
+<p><em class="gray"><%= total_experiment_status( @group )  %></em></p>
+<%= experiment_status( @group.experiments.first.status, 1 ) %>
 <div id='header-toolbar' >
 	<ul>
 		<li><a id='group-info-tab' class='selected' href='#'>Info</a></li>
@@ -18,6 +20,7 @@
 </div>
 </div>
 <%= render :partial => 'info' %> 
+
 
 <div id='group-members'>
 	<% unless @members.blank? %>
@@ -36,9 +39,10 @@
 
 <div class="left-column" >
 
-	<p class="gray-box" >Your group's key is: <span id="group-key" ><%= @group.key %></span></p>
+	<div class="gray-box">Your group's key is: <span id="group-key" ><%= @group.key %></span></p>
 	<p><em class="gray">Give your group key to people so they can easily join the group.  If your key has been compromised then click on the generate new key button below.</em></p>
-	<div class="hanging-toolbar"><ul>
+	</div>
+	<div class="hanging-toolbar no-bar"><ul>
 			<li><%= link_to "Generate new Key", "#", :id=>'btn-new-key' %>
 			<%= button_to "generate key", new_key_group_path(@group), :method=>:put %></li>
 	</ul></div>
@@ -46,10 +50,11 @@
 
 	
 	<h2>Pending Requests</h2>
-	<%= 'No requests right now.' unless( @requests.length > 1 )%>
-	<div id="request-list">
+
+	<%= '<p><em class="gray">No requests right now.</em></p>' unless( @requests.length > 0 )%>
+
 	<% @requests.each do |request| %>
-		<div class="request"
+		<div class="request">
 			<%= link_to request.user.login, profile_path( request.user.login) %>
 			<%= save_notice %>
 			<p><%= request.message %></p>
@@ -62,34 +67,36 @@
 		</div>
 
 	<% end %>
-	</div>
 </div>
 <div class="right-column">
 	<div id="send-message">
-	<h2>Send a message to your group</h2>
 	<% form_for( [@group,Message.new] ) do |f| %>
-		<p class="gray-box" ><%= f.error_messages %>
-		<%= f.text_area :body %></p>
+		<div class="gray-box" ><%= f.error_messages %>
+		<h2>Send a message to your group</h2>
 
-		<p><em class="gray">The messages will show up in the messages tab.</em><br/><%= save_notice %></p> 
-		<div class="hanging-toolbar"><ul><li>
+		<%= f.text_area :body %>
+
+		<p><em class="gray">The messages will show up in the messages tab.</em><br/><%= save_notice %></p>
+	</div>	
+		<div class="hanging-btns"><ul><li>
 			<%= f.submit 'Send' %>	
 		</li></ul></div>
 
 	
 		<% end %>
 
-	<h2>Edit group description</h2>
 	<% form_for(@group, :html=>{ :id=>"edit-group-info" } ) do |f| %>
 		<p><%= f.error_messages %></p>
-		<p class="gray-box">
+		<div class="gray-box">
+		<h2>Edit group description</h2>
+
 		<%= f.text_area :description %>
-		</p>
 		
 		<p><em class="gray">Create a description for your group. </em>
 		<br/><%= save_notice %></p>
+	</div>
 
-		<div class="hanging-toolbar"><ul><li>
+		<div class="hanging-btns"><ul><li>
 		<%= f.submit 'Save' %>
 		</li></ul></div>
 

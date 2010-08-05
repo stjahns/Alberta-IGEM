@@ -18,6 +18,7 @@ class Group < ActiveRecord::Base
 	before_create :generate_new_key
 
 	has_many :users, :through=>:group_roles
+	has_many :experiments, :through=>:users
 	
 	has_many :group_roles
 	#has_and_belongs_to_many :users
@@ -106,6 +107,13 @@ class Group < ActiveRecord::Base
 		return false if r.blank?
 		r.destroy
 	end
+	def experiments_completed
+		self.experiments.find_all_by_status( "complete" ).length
+	end
+	def experiments_working
+		self.experiments.find_all_by_status( "working" ).length
+	end
+
 
 
 	private
