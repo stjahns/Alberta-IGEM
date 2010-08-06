@@ -6,6 +6,7 @@ use ABI;
 use Bio::Perl;
 use Bio::Tools::Run::StandAloneBlast;
 
+my $status; #status of script after running, ERROR or whatever
 my $ref = $ARGV[0];
 #open (my $refin, "<", $ARGV[0]) or die $!;
 my $vfin = $ARGV[1];
@@ -27,7 +28,7 @@ my $vr = Bio::Seq->new(-id => 'vr', -seq => $vrabi->get_sequence(),
 
 #trim vf
 #need grab any acgtn until reach 3n's separated by <10 bp
-$vf->seq =~ /(GAATTC\w+?)(N{2,})/;
+$vf->seq =~ /(GAATTC\w+?)()/;
 $vf->seq($1);
 
 #trim vr
@@ -47,6 +48,10 @@ my $hsp_obj = $hit_obj->next_hsp;
 my $vfhit = uc $hsp_obj->query_string;
 my $homo = uc $hsp_obj->homology_string;
 my $vrhit = uc $hsp_obj->hit_string;
+
+#print $vfhit, "\n";
+#print $homo, "\n";
+#print $vrhit, "\n";
 
 my $obsvseq; #observed sequence string -> produced from vf + vr overlap
 my $hil; #contains strings of chars corresp. to highlight colors for obsvseq
@@ -120,10 +125,13 @@ until ( $i == length $vr->seq ) {
   $i++;
 }
 
-if (length $obsvseq != length $ref->seq) {
-  print "--SOMETHING HAS GONE HORRIBLY WRONG!!--\n";
-}
-else {
+my $changes; #store mismatch information
+
+unless (length $obsvseq != length $ref->seq) {
+
+  $status = "GOOD";
+  
+  #The easy way!!
   #compare seq's char by char
   my @obslist = split ('', $obsvseq);
   my @reflist = split ('', $ref->seq);
@@ -139,33 +147,48 @@ else {
     else {
       #oh crap, mismatch!
       substr( $hil, $i, 1) = "!";
+      # $i is coordinate of mismatch..., 
+      $changes .= "$i: $reflist[$i] to $_|"; #changes delimited with |'s
     }
     $i++;
   }
+  
+  unless ($obsvseq eq $ref->seq) {
+    $status = "MISMATCH";
+
+  }
+
+}
+else {
+  # I guess we gotta do things the hard way.... Another blast!
+#align ref seq with obsvseq
+#alignment cant be longer than refseq right?
+#find where hits start, 
+
+  $status = "ERROR: Lengths of observed and reference sequences between cutsites are unequal.";
+  
+#TODO yo kill this shit, you aren't using it, at least now.
+  my $exp = Bio::Seq->new(-id => 'exp', -seq => $obsvseq,
+      -alphabet => 'dna');
+
+  my $blast_report2 = $factory->bl2seq($exp, $ref);
+
+  my $result_obj2 = $blast_report2->next_result;
+  my $hit_obj2 = $result_obj2->next_hit;
+  my $hsp_obj2 = $hit_obj2->next_hsp;
+
+
+  my $observed = uc $hsp_obj2->query_string;
+  my $homo2 = uc $hsp_obj2->homology_string;
+  my $reference= uc $hsp_obj2->hit_string;
+
+
 }
 
+#OUTPUT
 print $ref->seq, "\n";
 print $hil, "\n";
-
-
-=pod If you decide its not good to assume the same length
-my $exp = Bio::Seq->new(-id => 'exp', -seq => $obsvseq,
-                          -alphabet => 'dna');
-
-my $blast_report2 = $factory->bl2seq($exp, $ref);
-
-
-
-my $result_obj2 = $blast_report2->next_result;
-my $hit_obj2 = $result_obj2->next_hit;
-my $hsp_obj2 = $hit_obj2->next_hsp;
-
-
-my $observed = uc $hsp_obj2->query_string;
-my $homo2 = uc $hsp_obj2->homology_string;
-my $reference= uc $hsp_obj2->hit_string;
-
-print $observed, "\n", $homo2, "\n", $reference, "\n";
-=cut
-
+print $obsvseq, "\n";
+print $status, "\n";
+print $changes, "\n";
 

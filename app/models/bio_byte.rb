@@ -41,6 +41,10 @@ class BioByte < ActiveRecord::Base
     puts "hello!"
     refseq = script_output[0]
     charmap = script_output[1]
+    obsvseq = script_output[2]
+    status = script_output[3]
+    changes = script_output[4]
+
     lastmap = 0;
     val_html = "";
     map_hash = { "Y" => "vfonly",
@@ -48,23 +52,46 @@ class BioByte < ActiveRecord::Base
                  "B" => "vronly",
                  "!" => "mismatch",
                  "?" => "unsure" }
-
-    i=0;
-    refseq.each_byte do |nt|
-      if lastmap == 0 
-        val_html += "<span class = #{map_hash[charmap[i].chr]}>#{nt.chr}"
-      elsif lastmap == charmap[i]
-        val_html += "#{nt.chr}"
-      else
-        val_html += "</span><span class = #{map_hash[charmap[i].chr]}>#{nt.chr}"
+    unless status.include? "inequal" #if lengths refseq obsvseq equal
+      val_html += "Observed Sequence:<br/>"
+      seqouts = [obsvseq]
+      seqouts.each do |seq|
+        i=0;
+        seq.each_byte do |nt|
+          if lastmap == 0 
+            val_html += "<span class = #{map_hash[charmap[i].chr]}>#{nt.chr}"
+          elsif lastmap == charmap[i]
+            val_html += "#{nt.chr}"
+          else
+            val_html += "</span><span class = #{map_hash[charmap[i].chr]}>#{nt.chr}"
+          end
+          lastmap = charmap[i]
+          i+=1
+        end
+        #break line
+        val_html += "<br/>"
       end
-      lastmap = charmap[i]
-      i+=1
+
+      val_html += "</span>"
+    else #there was an error 
+      val_html += status
+      val_html += "<br/>Reference sequence:<br/>"
+      val_html += refseq
+      val_html += "<br/>Observed sequence:<br/>"
+      val_html += obsvseq
+      val_html += "<br/>"
     end
 
-    val_html += "</span>"
-    return val_html
+    unless changes.nil?
+      changes = changes.split('|')
+      val_html += "<br/>Mismatches:<br/>"
+      changes.each do |c|
+        val_html += c
+        val_html += "<br/>"
+      end
+    end
 
+    return val_html
   end
 
 end
