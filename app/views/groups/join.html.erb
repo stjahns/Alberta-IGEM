@@ -14,12 +14,7 @@
 		<p><%= label_tag 'Key:'%>
 		<%= text_field_tag :key %></p>
 		<p>
-		<% if current_user.group.blank? %>
-			<%= submit_tag 'Join', :class=>'submit-btn' %></p>
-		<% else %>
-			<%= submit_tag 'Join', :class=>'submit-btn', 
-				:confirm=>"If you join #{@group} you will no longer be a member of #{current_user.group}" %>
-		<% end %>
+		<%= submit_tag 'Join', :class=>'submit-btn' %></p>
 		</p>
 
 	<% end %>

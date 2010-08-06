@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20100726173047
+# Schema version: 20100806052151
 #
 # Table name: requests
 #
@@ -17,6 +17,12 @@ class Request < ActiveRecord::Base
 
 
 	attr_accessible :user, :group, :message
-	
 
+	def accept
+		self.group.create_member( self.user )
+		self.destroy
+	end
+	def reject
+		self.destroy
+	end
 end

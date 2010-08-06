@@ -136,7 +136,6 @@ $(document).ready(function(){
 			     'class="btn-delete-step-image">Delete Image</a>' +
 			      generate_delete_form( imageURL ) + '</li>';
 			deleteBtn = $(deleteBtn).hide();
-			var test = edit_tolbar.html();
 
 			edit_toolbar.append( deleteBtn );
 			deleteBtn.fadeIn("slow");

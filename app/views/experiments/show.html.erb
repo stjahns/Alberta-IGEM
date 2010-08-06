@@ -16,7 +16,7 @@
 <div id= "experiment-title">
 <h1><%=h @experiment.title %></h1>
 <h2><%=h @experiment.authour %></h2>
-<% if is_owner_of( @experiment ) %>
+<% if logged_in? && current_user.can_publish_for_experiment?( @experiment ) %>
 <% form_for(@experiment, :html=>{:id=>'publish'} ) do |f| %>
   <%= f.error_messages %>
     <%= f.check_box :published %>
@@ -38,13 +38,13 @@
   <i>This experiment has no asscociated constructs yet...</i>
   <% end %>
   <p>
-  <% if can_edit_experiment?(@experiment) %>
+  <% if logged_in? && current_user.can_edit_for_experiment?(@experiment) %>
     <%= link_to "Add Construct", new_experiment_construct_path(@experiment) %>
   <% end %> 
   </p>
 </p>
 <% if @experiment.steps.empty? %>
-<% if can_edit_experiment?(@experiment) %>
+<% if logged_in? && current_user.can_edit_for_experiment?(@experiment) %>
 
 
 	<div id="user-form">
@@ -75,12 +75,6 @@
     <%= render :partial => "step", :collection => @steps %>
 <% end %>
 
-
-<% if can_edit_experiment?(@experiment) %>
-<%= link_to 'Edit Description', edit_experiment_path(@experiment) %> |
-<%= link_to 'Edit Steps', experiment_steps_path(@experiment) %> |
-<% end %>
-<%= link_to 'List experiments', experiments_path %>
 
 <!-- part-info-data -->
 <div id="part-info-data", style="display:none;">

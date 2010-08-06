@@ -6,7 +6,7 @@
 			<td class="date"><%=h "Last save: " + "#{experiment.updated_at}".split(/ /)[0] %></td>
 		</tr>
 		<tr>
-		<% if is_owner_of( experiment ) %>
+		<% if logged_in? && current_user.can_publish_for_experiment?( experiment )   %>
 			<td><% form_for(experiment,
 				       	:html=>{:class=>'publish-experiment'} ) do |f| %>
 			<%= f.error_messages %>
@@ -18,6 +18,8 @@
 		</td>
 
 			<td class="status complete" ><input type="checkbox"> Completed</td>
+		<% else %>
+			<td class="status complete">"PUT STATUS HERE" </td>
 		<% end %>
 		</tr>
 	</table>
@@ -33,7 +35,7 @@
 <div class="hanging-toolbar" >
 	<% if logged_in? %>
 		<ul>
-		<% if is_owner_of( experiment ) %>
+		<% if current_user.can_edit_for_experiment?( experiment ) %>
 			<li><a class="btn-edit-experiment" href="#" >Edit</a></li>
 			<li><a class="btn-delete-experiment" href="#" >Delete</a>
 			<%= button_to "delete experiment", experiment_path(experiment),:method=>:delete %>

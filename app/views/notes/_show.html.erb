@@ -7,7 +7,7 @@
 	<ul>
 		<li>
 
-		<% if is_owner_of(step.experiment) %>
+		<% if logged_in? && current_user.can_edit_for_experiment?(step.experiment) %>
   		<a class="btn-note-edit" href"#">Edit Note</a>
 		<% end %>
 		</li>

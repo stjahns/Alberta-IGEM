@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100804195835) do
+ActiveRecord::Schema.define(:version => 20100806052151) do
 
   create_table "annotations", :force => true do |t|
     t.string   "name"
@@ -69,6 +69,14 @@ ActiveRecord::Schema.define(:version => 20100804195835) do
     t.integer  "experiment_id"
   end
 
+  create_table "email_observers", :force => true do |t|
+    t.string   "email"
+    t.string   "key"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "user_id"
+  end
+
   create_table "encyclopaedias", :force => true do |t|
     t.string   "title"
     t.text     "article"
@@ -85,11 +93,20 @@ ActiveRecord::Schema.define(:version => 20100804195835) do
     t.datetime "updated_at"
     t.integer  "user_id"
     t.integer  "group_id"
+    t.string   "status"
   end
 
   create_table "glossaries", :force => true do |t|
     t.string   "term"
     t.text     "definition"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "group_roles", :force => true do |t|
+    t.integer  "group_id"
+    t.integer  "role_id"
+    t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -208,6 +225,7 @@ ActiveRecord::Schema.define(:version => 20100804195835) do
     t.datetime "activated_at"
     t.integer  "role_id"
     t.string   "reset_code"
+    t.text     "description"
   end
 
   add_index "users", ["login"], :name => "index_users_on_login", :unique => true

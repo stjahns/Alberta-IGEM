@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20100726173047
+# Schema version: 20100806052151
 #
 # Table name: experiments
 #
@@ -12,6 +12,7 @@
 #  updated_at  :datetime
 #  user_id     :integer(4)
 #  group_id    :integer(4)
+#  status      :string(255)
 #
 
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html

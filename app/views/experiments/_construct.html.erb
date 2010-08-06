@@ -43,7 +43,7 @@
   </div>
   </div>
 
-<% if can_edit_experiment?(@experiment) %>
+<% if logged_in? && current_user.can_edit_for_experiment?(@experiment) %>
   <p>
   <%= link_to "Edit me?", edit_experiment_construct_path(@experiment, construct) %> |
   <%= link_to "Delete me?", experiment_construct_path( construct.experiment, construct), :confirm => 'Are you sure?', :method => :delete %>

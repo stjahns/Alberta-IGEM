@@ -11,10 +11,12 @@
 <h1>Parts Bin</h1>
 <p>Browse the parts in the kit and view detailed information in the stats sheet.</p> 
 	<div id="header-toolbar" > 
-		<!-- set the permission of this!!-->
+		<% if logged_in? && current_user.can_create_bio_bytes? %>
 		<ul>
 		<li class="right"><%= link_to "New Part", new_bio_byte_path %></li>
-	</ul>
+		</ul>
+		<% end %>
+
 	</div>
 </div>
 <div id="bio-bytes-table">
@@ -25,8 +27,7 @@
 			
 				<%= image_tag( thumb_image_path( byte.icon), :class=>"icon"  ) unless byte.icon.blank? %>
 			</div>
-			<div class="description-container" >
-				<div class='description'>
+			<div class="description" >
 					<span class='text'>
 					<% unless byte.function_image.blank? %>
 						<%= image_tag( thumb_image_path( byte.function_image )) %>
@@ -38,24 +39,23 @@
 					</span>
 
 				<%= save_notice %>
-			<div class="hanging-toolbar"><ul>
-				<li class="left" ><%= link_to "Edit",  edit_bio_byte_path(byte)%></li>
-				<li class="left" ><%= link_to "Delete", "#", :class=>'btn-delete-biobyte' %>
-				<%= button_to "Delete", byte, :confirm => "Are you sure?", :method => :delete %> </li>
+				<div class="hanging-toolbar"><ul>
+				<% if logged_in? && current_user.can_edit_bio_bytes? %>
+					<li class="left" ><%= link_to "Edit",  edit_bio_byte_path(byte)%></li>
+					<li class="left" ><%= link_to "Delete", "#", :class=>'btn-delete-biobyte' %>
+					<%= button_to "Delete", byte, :confirm => "Are you sure?", :method => :delete %> </li>
+				<% end %>
+					<li ><%= link_to "Sequence", "#",:class=>'btn-show-sequence' %></li>
+					<li  ><%= link_to "Stats Sheet", bio_byte_path(byte) %></li>
 
-				<li class="left" ><%= link_to "Sequence", "#",:class=>'btn-show-sequence' %></li>
-				<li  ><%= link_to "Stats Sheet", bio_byte_path(byte) %></li>
 
-
-			</ul></div>
+				</ul></div>
+			</div>
 		</div>
-
-	</div>
-<% end %>
-
-
-	</table>
+	<% end %>
 </div>
+
+
 
 <%
 =begin %>

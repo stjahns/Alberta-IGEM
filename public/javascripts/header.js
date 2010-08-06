@@ -3,6 +3,7 @@ $(document).ready(function(){
 	// tabs on profile page
 	header_tab('#profile');
 	header_tab('#lab-book');
+	header_tab('#profile-options');
 
 	// tabs on group profile page
 	header_tab('#group-info');

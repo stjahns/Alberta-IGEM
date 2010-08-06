@@ -2,21 +2,27 @@
  * as well as the toolbar for the steps.  It is almost the same execpt
  * it does not hang down.  
  */
-div.hanging-toolbar {
+div.hanging-toolbar, div.hanging-btns {
 	clear: both;
 	background-color: white;
-	border-top: 2px solid #efefef;
+	border-top: 4px solid #efefef;
 	margin-bottom: 2em;
+	margin-top:1em;
 
 }
-div.hanging-toolbar ul, div.step-toolbar ul {
+div.hanging-toolbar.no-bar, div.hanging-btns {
+	margin-top:0;
+	border:0;
+}
+
+div.hanging-toolbar ul, div.step-toolbar ul, div.hanging-btns ul {
 	list-style-type: none;
 	margin: 0;
 	padding: 0;
 	overflow: hidden;
 }
 
-div.hanging-toolbar ul li, div.step-toolbar ul li.btn-step-note {
+div.hanging-toolbar ul li, div.step-toolbar ul li.btn-step-note, div.hanging-btns ul li {
 	float: right;
 }
 div.hanging-toolbar ul li.left, div.step-toolbar ul li {
@@ -28,24 +34,34 @@ div.hanging-toolbar ul li form, div.step-toolbar ul li form {
 }
 
 
-div.hanging-toolbar ul li a:link, div.hanging-toolbar ul li a:visited , div.step-toolbar ul li a:link, div.step-toolbar ul li a:visited {
+div.hanging-toolbar ul li a:link, div.hanging-toolbar ul li a:visited , div.step-toolbar ul li a:link, div.step-toolbar ul li a:visited, div.hanging-toolbar ul li input, div.hanging-btns ul li input {
 	display: block;
 	color: #666;
 	font-weight: normal;
 	padding: 4px;
 	background-color: #efefef;
 	text-decoration: none;
-	margin-left: 2px;
+	margin-left: 3px;
+	border-color: #ccc;
+	border-width: 0 1px 1px 0;
+	border-style:solid;
+	-moz-border-radius: 0 0 4px 4px;
+	/*background:url("../images/btn-grad.png") repeat-x scroll left bottom #efefef;*/
+}
+div.step-toolbar ul li a:link, div.step-toolbar ul li a:visited, div.step-toolbar ul li a:hover {
+	-moz-border-radius: 4px 4px 0 0;
+	border: 0;
+
 }
 
 /* by default we want the step buttons to float right so we need to have the margins reversed as well */
 div.step-toolbar ul li a:link, div.step-toolbar ul li a:visited, div.step-toolbar ul li a:hover {
 	margin:0;
-	margin-right:2px;
+	margin-right:3px;
 }
 
 
-div.hanging-toolbar ul li a:hover, div.step-toolbar ul li a:hover {
+div.hanging-toolbar ul li a:hover, div.step-toolbar ul li a:hover, div.hanging-btns ul li input:hover {
 	background-color: #000000;
 	color: #fff;
 }
@@ -54,6 +70,7 @@ div.hanging-toolbar ul li.left a {
 	margin:0;
 	margin-right:2px;
 }
+
 
 div.step-toolbar {
 	border-bottom:0.25em solid #efefef ;

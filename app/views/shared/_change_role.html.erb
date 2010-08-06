@@ -1,0 +1,5 @@
+<% form_tag change_role_group_path( group ), :method=>:put do %>
+				
+	<%= hidden_field_tag( 'user', user.id ) %>
+	<%= hidden_field_tag( 'role', new_role ) %>
+<% end  %>

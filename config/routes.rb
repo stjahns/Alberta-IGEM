@@ -17,25 +17,30 @@ ActionController::Routing::Routes.draw do |map|
   map.signup '/signup', :controller => 'users', :action => 'new'
   map.forgot '/forgot', :controller => 'users', :action => 'forgot'
   map.reset 'reset/:reset_code', :controller => 'users', :action => 'reset'
+  map.new_email 'users/:id/new_email/:key', :controller => 'users', :action => 'activate_email'
 
   # normal user routes
-  map.resources :users
+  map.resources :users, :member=>{:new_email=>:put}
   
   # pretty routes for user profile pages
   map.profile '/user/:login', :controller => 'users', :action => 'profile', :method => 'get' 
 
   # group routes
-  map.resources :groups, :member => { :upload => :post, :join => :get, :join_with_key=>:post, :request_to_join => :post , :new_key=>:put } do |groups|
+  map.resources :groups, :member => { :upload => :post, :join => :get, :join_with_key=>:post, :request_to_join => :post , :quit=>:delete, :new_key=>:put, :change_role=>:put, :kick_out=>:delete } do |groups|
 	  groups.resources :messages, :only=>[ :index,:create,:destroy,:update ]
   end
 
 
   #pretty group routes
-  map.pretty_group '/user/:name', :controller => 'groups', :action => 'show', :method => 'get'
+  map.pretty_group '/group/:name', :controller => 'groups', :action => 'show', :method => 'get'
     map.resources :viewer
 
 
   #TODO validate_sequence probably shoudn't be a GET request?
+  #->Use button-to
+  map.resources :requests, :only => ['destroy'], :member=>{:accept => :post, :reject=>:post}
+
+
   #map annoations as nested resource of biobytes
   map.resources :bio_bytes, :member => { :upload => :post, 
                                         :upload_desc_img => :post, 

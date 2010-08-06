@@ -1,5 +1,5 @@
 <div class= "step_note_form"  >
-    <% if can_edit_experiment?(step.experiment) %>
+    <% if logged_in? && current_user.can_edit_for_experiment?(step.experiment) %>
     <% if step.note %>
 	    <%= render( :partial => 'notes/edit', 
 		       :locals=>{:step => step, :note => step.note}) %> 

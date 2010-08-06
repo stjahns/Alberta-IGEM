@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20100726173047
+# Schema version: 20100806052151
 #
 # Table name: experiments
 #
@@ -12,15 +12,17 @@
 #  updated_at  :datetime
 #  user_id     :integer(4)
 #  group_id    :integer(4)
+#  status      :string(255)
 #
 
 class Experiment < ActiveRecord::Base
-  attr_accessible :title, :authour, :description, :published, :image, :user_id
+  attr_accessible :title, :authour, :description, :published, :image, :user_idi, :status
   has_many :steps, :dependent => :destroy  
   has_many :constructs, :dependent => :destroy
   has_many :notes, :through => :steps
   belongs_to :user
 
+   before_create :status_none
 #  after_create :assign_owner  
 
   def clone_experiment_for( user )
@@ -35,6 +37,7 @@ class Experiment < ActiveRecord::Base
     new_experiment.user_id = user.id
     new_experiment.authour = user.login
     new_experiment.published = false
+    new_experiment.status_none
     new_experiment.save
 
     i = 1
@@ -58,8 +61,35 @@ class Experiment < ActiveRecord::Base
     return new_experiment
   end
 
+  def permissions_for( user )
+	if user == self.user
+		return Role.find_by_name("experiment_owner").permissions
+	end
+	return user.permissions
+  end
+
+  def status_completed
+	  setStatus( "complete" )
+  end
+  def status_working
+	  setStatus( "working" )
+  end
+  def status_none
+	  setStatus( "none" )
+  end
+
+  def complete?
+	  self.status == "complete"
+  end
+  def working?
+	  self.status == "working"
+  end 
+
 
   private
+  def setStatus( new_status )
+	  self.status = new_status
+  end
  
 
 end
