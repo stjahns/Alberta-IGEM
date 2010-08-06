@@ -89,6 +89,41 @@ class UsersController < ApplicationController
     end
   end
 
+  # responds to POST /users/:id/new_email
+  def new_email
+	  user = User.find( params[:id] )
+	  if current_user.can_activate_new_email_for_user?( user )
+		  user.create_new_email( params[:email] )
+		  respond_to do |format|
+			  format.js { head :ok }
+			  format.html { flash[:notice] = "An email was sent to your new address.  Follow the link to complete the process"
+				  redirect_back_or_default('/')}
+		  end
+	  else
+		  flash[ :error ] = "Your not allowed to do that."
+		  redirect_back_or_default('/')
+	  end
+  end
+
+  # responds to /users/:id/new_email/:key
+  def activate_email
+	  # user must be logged in, checks if current user is allowed to 
+	  # activate the new email for the user in link before trying to
+	  # activate
+	  user_to_activate = User.find( params[:id] )
+	  if current_user.can_activate_new_email_for_user?( user_to_activate )
+	     if user_to_activate.activate_email( params[:key] )
+		     flash[:notice] = "Successfully activate your new email address"
+		     
+	     else
+		     flash[:error] = "Could not activate new email address, check that you correctly copied the link from your email."
+	     end
+	  else
+		  flash[:error] = "You do not have permission to do that!"
+	  end
+	  redirect_back_or_default('/')
+  end
+
   def forgot
     if request.post?
       user = User.find_by_email(params[:user][:email])

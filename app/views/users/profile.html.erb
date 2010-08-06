@@ -81,6 +81,22 @@
   <div class="hanging-btns"><ul><li><%= f.submit 'Update' %></li></ul></div>
 <% end %>
 
+<% form_tag new_email_user_path( @user ), :method=>:put do  -%>
+	<div  class="gray-box">
+	<h2>Change your email</h2>
+
+		
+	  <%= error_messages_for :user %>
+
+	  <p>
+	  <label for="email">New email</label><br/>
+	  <%= text_field_tag :email %></p>
+
+  </div>
+  <div class="hanging-btns"><ul><li><%= submit_tag 'Submit Change' %></li></ul></div>
+<% end %>
+
+
 <h2>Current groups</h2>
 	<% if @groups.length > 0 %>
 		<table>
@@ -105,9 +121,6 @@
 		
 	  <%= error_messages_for :user %>
 
-	  <p>
-	  <label for="email">Email</label><br/>
-	  <%= f.text_field :email %></p>
 
 	  <p><%= f.label "description" %><br/>
 	  <%= f.text_area :description %>

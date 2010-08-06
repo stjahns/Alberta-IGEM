@@ -21,7 +21,9 @@ create_groups.update_attributes(:description => "Allowed to create user groups."
 change_info_for_user=Permission.find_or_create_by_name("change_info_for_user")
 change_info_for_user.update_attributes(
 		:description=>"Can change own info")
-
+activate_new_email_for_user=Permission.find_or_create_by_name("activate_new_email_for_user")
+change_info_for_user.update_attributes(
+	:description=>"Can activate email for user")
 
 # permissions for editing experments
 create_experiment_for_user=Permission.find_or_create_by_name("create_experiment_for_user")
@@ -105,6 +107,7 @@ admin_role.update_attributes(
 
 				 create_experiment_for_user,
 				 change_info_for_user,
+				 activate_new_email_for_user,
 
 				 edit_for_experiment,
 				 delete_for_experiment,
@@ -133,6 +136,7 @@ default_role.update_attributes(
                 :permissions => [
 				create_groups,
 				quit_for_group,
+				activate_new_email_for_user
 
                                 ])
 

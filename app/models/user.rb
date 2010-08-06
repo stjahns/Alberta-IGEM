@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20100730041111
+# Schema version: 20100804220646
 #
 # Table name: users
 #
@@ -32,7 +32,8 @@ class User < ActiveRecord::Base
 
   has_many :experiments, :dependent => :destroy
   has_many :steps, :through => :experiments 
-  has_one  :request, :dependent => :destroy
+  has_one :email_observer, :dependent => :destroy
+
   belongs_to :role
   delegate :permissions, :to => :role
   
@@ -40,7 +41,7 @@ class User < ActiveRecord::Base
   has_many :group_roles
   #has_and_belongs_to_many :groups
   
-  has_many :requests
+  has_many :requests, :dependent => :destroy
 
   validates_presence_of     :login
   validates_length_of       :login,    :within => 3..40
@@ -117,6 +118,26 @@ class User < ActiveRecord::Base
   def delete_reset_code
     self.attributes = {:reset_code => nil}
     save(false)
+  end
+
+  # create new email
+  def create_new_email( email )
+	e = self.build_email_observer( :email => email, :user=>self )
+	e.save
+  end
+
+  # responds to /new_email/:key
+  def activate_email( key )
+	return false if self.email_observer.blank?
+
+	if self.email_observer.key == key
+		self.email = email_observer.email
+		self.save
+		email_observer.destroy
+		true
+	else
+		false
+	end
   end
 
   # need this so we can say for own user

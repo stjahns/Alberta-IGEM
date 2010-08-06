@@ -17,9 +17,10 @@ ActionController::Routing::Routes.draw do |map|
   map.signup '/signup', :controller => 'users', :action => 'new'
   map.forgot '/forgot', :controller => 'users', :action => 'forgot'
   map.reset 'reset/:reset_code', :controller => 'users', :action => 'reset'
+  map.new_email 'users/:id/new_email/:key', :controller => 'users', :action => 'activate_email'
 
   # normal user routes
-  map.resources :users
+  map.resources :users, :member=>{:new_email=>:put}
   
   # pretty routes for user profile pages
   map.profile '/user/:login', :controller => 'users', :action => 'profile', :method => 'get' 
