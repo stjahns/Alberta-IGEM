@@ -2,7 +2,7 @@
 	<%= javascript_include_tag 'experimentIndex' %>
 <% end %>
 
-
+<% content_for :header do %>
 <div id="header">
   <h1><%=h @user.login %></h1>
   <p>3  Experiments completed</p>
@@ -23,7 +23,7 @@
   </div>
 
 </div>
-
+<% end %>
 
 <div id="profile">
 	<table>

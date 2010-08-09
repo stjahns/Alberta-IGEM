@@ -16,6 +16,33 @@ delete_users.update_attributes(:description => "Allowed to delete any user")
 create_groups=Permission.find_or_create_by_name("create_groups")
 create_groups.update_attributes(:description => "Allowed to create user groups.")
 
+create_encyclopaedias=Permission.find_or_create_by_name("create_encyclopaedias")
+create_encyclopaedias.update_attributes(:description => "Allowed to create a new encyclopaedia article in the database")
+
+edit_encyclopaedias=Permission.find_or_create_by_name("edit_encyclopaedias")
+edit_encyclopaedias.update_attributes(:description => "Allowed to edit the encyclopaedia database")
+
+delete_encyclopaedias=Permission.find_or_create_by_name("encyclopaedias")
+delete_encyclopaedias.update_attributes(:description => "Allowed to delete any encyclopaedia article")
+
+create_sections=Permission.find_or_create_by_name("create_sections")
+create_sections.update_attributes(:description => "Allowed to create new sections in the database")
+
+edit_sections=Permission.find_or_create_by_name("edit_sections")
+edit_sections.update_attributes(:description => "Allowed to edit the sections database")
+
+delete_sections=Permission.find_or_create_by_name("delete_sections")
+delete_sections.update_attributes(:description => "Allowed to delete any sections")
+
+create_glossaries=Permission.find_or_create_by_name("create_glossaries")
+create_glossaries.update_attributes(:description => "Allowed to create new glossary entries in the database")
+
+edit_glossaries=Permission.find_or_create_by_name("edit_bio_bytes")
+edit_glossaries.update_attributes(:description => "Allowed to edit the glossary database")
+
+delete_glossaries=Permission.find_or_create_by_name("delete_glossaries")
+delete_glossaries.update_attributes(:description => "Allowed to delete any glossary entries")
+
 
 # permissions for user 
 change_info_for_user=Permission.find_or_create_by_name("change_info_for_user")
@@ -123,8 +150,17 @@ admin_role.update_attributes(
 				 change_info_for_group,
 				 modify_roles_for_group,
 				 delete_messages_for_group,
-				 send_messages_for_group
+				 send_messages_for_group,
 
+         create_encyclopaedias,
+         edit_encyclopaedias,
+				 delete_encyclopaedias,
+         create_sections,
+         edit_sections,
+				 delete_sections,
+				 create_glossaries,
+         edit_glossaries,
+				 delete_glossaries,
 
                                 ])
 

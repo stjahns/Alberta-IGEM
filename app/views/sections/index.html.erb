@@ -1,0 +1,15 @@
+
+<% @sections.each do |section| %>
+  
+    <td><%=h section.title %></td>
+    <td><%= link_to 'Show', encyclopaedia_section_path(@encyclopaedia,section) %></td>
+    <td><%= link_to 'Edit', edit_encyclopaedia_section_path(@encyclopaedia,section) %></td>
+    <td><%= link_to 'Destroy', encyclopaedia_section_path( @encyclopaedia, section ), :confirm => 'Are you sure?', :method => :delete %></td><br/>
+  
+<% end %>
+
+
+<br />
+
+<%= link_to 'New section', new_encyclopaedia_section_path(@encyclopaedia) %>
+<%= link_to 'back to encyclopaedia article', @encyclopaedia %>

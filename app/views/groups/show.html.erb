@@ -2,7 +2,7 @@
 	<%= @group.name %>
 <% end %>
 
-
+<% content_for :header do %>
 <div id='header'>
 <h1><%= @group.name %></h1>
 <p><em class="gray"><%= total_experiment_status( @group )  %></em></p>
@@ -19,6 +19,9 @@
 	</ul>
 </div>
 </div>
+
+<% end %>
+
 <%= render :partial => 'info' %> 
 
 
