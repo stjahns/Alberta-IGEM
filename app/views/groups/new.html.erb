@@ -1,2 +1,33 @@
-<h1>Group#new</h1>
-<p>Find me in app/views/group/new.html.erb</p>
+<% content_for :title do %>
+	<%= 'New Group' %>
+<% end %>
+
+<div id='header'>
+<h1><%= 'Create a new group' %></h1>
+<p><em class="gray"> Create a new group, you will get a key which you can give your friends so they can join too.  Or if they find your group then they can request to join it.</em></p>
+<div id='header-toolbar' >
+	<ul>
+		<li><%= link_to "Back to groups", groups_path %></li>
+	</ul>
+</div>
+</div>
+
+
+<div id="user-form" >
+	<h1>Create a group</h1>
+
+<% form_for @group do |f| %>
+		<p><%= f.error_messages %></p>
+		<p>
+		<%= f.label 'Name' %><br/>
+		<%= f.text_field :name   %>
+		</p>
+		<p>
+		<%= f.label 'Description' %>
+		<%= f.text_area :description %>
+		</p>
+
+		<%= f.submit 'Create', :class=>'submit-btn' %>
+	<% end %>
+</div>
+

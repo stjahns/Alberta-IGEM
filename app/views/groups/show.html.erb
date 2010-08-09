@@ -6,7 +6,7 @@
 <div id='header'>
 <h1><%= @group.name %></h1>
 <p><em class="gray"><%= total_experiment_status( @group )  %></em></p>
-<%= experiment_status( @group.experiments.first.status, 1 ) %>
+<%= experiment_status( @group.experiments.first.status, 1 ) unless @group.experiments.blank? %>
 <div id='header-toolbar' >
 	<ul>
 		<li><a id='group-info-tab' class='selected' href='#'>Info</a></li>
