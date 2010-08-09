@@ -53,6 +53,13 @@ ActiveRecord::Schema.define(:version => 20100806052151) do
     t.integer  "experiment_id"
   end
 
+  create_table "definitions", :force => true do |t|
+    t.string   "definition"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "glossary_id"
+  end
+
   create_table "email_observers", :force => true do |t|
     t.string   "email"
     t.string   "key"
@@ -63,9 +70,9 @@ ActiveRecord::Schema.define(:version => 20100806052151) do
 
   create_table "encyclopaedias", :force => true do |t|
     t.string   "title"
-    t.text     "article"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.text     "intro"
   end
 
   create_table "experiments", :force => true do |t|
@@ -76,6 +83,7 @@ ActiveRecord::Schema.define(:version => 20100806052151) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "user_id"
+    t.integer  "owner_id"
     t.integer  "group_id"
     t.string   "status"
   end
@@ -85,6 +93,7 @@ ActiveRecord::Schema.define(:version => 20100806052151) do
     t.text     "definition"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "definition_id"
   end
 
   create_table "group_roles", :force => true do |t|
@@ -124,6 +133,8 @@ ActiveRecord::Schema.define(:version => 20100806052151) do
     t.datetime "updated_at"
     t.integer  "step_id"
     t.integer  "note_id"
+    t.integer  "section_id"
+    t.text     "caption"
   end
 
   create_table "messages", :force => true do |t|
@@ -136,6 +147,13 @@ ActiveRecord::Schema.define(:version => 20100806052151) do
   create_table "notes", :force => true do |t|
     t.integer  "step_id"
     t.string   "text"
+    t.integer  "image_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "pages", :force => true do |t|
+    t.string   "title"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -175,6 +193,18 @@ ActiveRecord::Schema.define(:version => 20100806052151) do
     t.datetime "updated_at"
   end
 
+  create_table "sections", :force => true do |t|
+    t.string   "title"
+    t.text     "description"
+    t.integer  "encyclopaedia_id"
+    t.integer  "section_order"
+    t.text     "video"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.text     "video_title"
+    t.text     "caption"
+  end
+
   create_table "step_generators", :force => true do |t|
     t.string   "subprotocol"
     t.integer  "sub_order"
@@ -206,7 +236,6 @@ ActiveRecord::Schema.define(:version => 20100806052151) do
     t.datetime "remember_token_expires_at"
     t.string   "activation_code",           :limit => 40
     t.datetime "activated_at"
-    t.integer  "group_id"
     t.integer  "role_id"
     t.string   "reset_code"
     t.text     "description"
