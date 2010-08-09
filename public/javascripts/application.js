@@ -13,6 +13,8 @@ $.ajaxSetup({
 })
 
 
+// Define the entry point - when DOM is ready
+  
 $(document).ready(function(){
 	//**********************************************************
 	// nav bar

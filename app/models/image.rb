@@ -11,6 +11,8 @@
 #  updated_at     :datetime
 #  step_id        :integer(4)
 #  note_id        :integer(4)
+#  section_id     :integer(4)
+#  caption        :text
 #
 
 class Image < ActiveRecord::Base
@@ -18,6 +20,8 @@ class Image < ActiveRecord::Base
 
    belongs_to :step
    belongs_to :note
+   belongs_to :section
+
    has_one :bio_byte
    has_one :bio_byte_image
 end

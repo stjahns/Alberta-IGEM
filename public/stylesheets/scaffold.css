@@ -17,13 +17,16 @@ em.gray {
 	font-size: 14px;
 
 }
+div #flash-notice-container {
+	height: 4em;
+}
 div#flash-notice {
 	background:none repeat scroll 0 0 #C7FFC4;
-	display:table;
+	font-family:georgia,serif;
+	font-style:italic;
+	display:block;
 	font-size:13px;
 	line-height:18px;
-	margin-left:auto;
-	margin-right:auto;
 	padding:0.4em 2em;
 	text-align:center;
 }
@@ -607,7 +610,7 @@ div.member {
  	margin-right: auto;
   	margin-left: auto;
 	margin-top: 4em;
-  	position: relative;
+/*  	position: relative;*/
 }
 
 body {

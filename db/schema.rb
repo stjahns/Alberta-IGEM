@@ -71,9 +71,9 @@ ActiveRecord::Schema.define(:version => 20100804220646) do
 
   create_table "encyclopaedias", :force => true do |t|
     t.string   "title"
-    t.text     "article"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.text     "intro"
   end
 
   create_table "experiments", :force => true do |t|
@@ -132,6 +132,8 @@ ActiveRecord::Schema.define(:version => 20100804220646) do
     t.datetime "updated_at"
     t.integer  "step_id"
     t.integer  "note_id"
+    t.integer  "section_id"
+    t.text     "caption"
   end
 
   create_table "messages", :force => true do |t|
@@ -182,6 +184,18 @@ ActiveRecord::Schema.define(:version => 20100804220646) do
     t.string   "description"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "sections", :force => true do |t|
+    t.string   "title"
+    t.text     "description"
+    t.integer  "encyclopaedia_id"
+    t.integer  "section_order"
+    t.text     "video"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.text     "video_title"
+    t.text     "caption"
   end
 
   create_table "step_generators", :force => true do |t|

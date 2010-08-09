@@ -5,30 +5,85 @@
 
     <script type="text/javascript">
       $(document).ready(function(){
-         $("a").hover(function(event){
-            $(this).next("em").animate({opacity: "show", top: "-75"}, "slow");
+         $("a.gloss").hover(function(event){
+            $(this).next("em").animate({opacity: "show", top: "-75"}, "fast");
           }, function() {
             $(this).next("em").animate({opacity: "hide", top: "-85"}, "fast");
 	});
+
+      $('a.vidlink').click(function() {
+         $('em.video').toggle(1000);
+        });
+
       });
 
 
     </script>
+
   </head>
 
-<p>
-  <b>Title:</b>
-  <%=h @encyclopaedia.title %>
-</p>
-
-<p>
-  <b>Article:</b>
-  <% article = add_glossary_links(@encyclopaedia.article) %>
-  <%= add_popups(article) %>
+  <p>
+    <i><h1><%= @encyclopaedia.title %></h1></i>
 </p>
 
 
+<%unless @encyclopaedia.sections.blank?%>
 
-<%= link_to 'Edit', edit_encyclopaedia_path(@encyclopaedia) %> |
-<%= link_to 'Back', encyclopaedias_path %>
+    <div id = "menu">
+      <b>Contents:</b>
+  <%for section in @sections %>
+      <div class ="item">
+      <%= create_menu_links(section.title) %><br/>
+      </div>
+    <%end%></div>
+<%end%>
+
+<p class ="intro">
+  <% intro = add_glossary_links(@encyclopaedia.intro) %>
+  <%= add_popups(intro) %>
+</p>
+
+
+<% for section in @sections %>
+<div class ="hanging-toolbar"></div>
+  <p class ="edit"><%= link_to 'Edit', edit_encyclopaedia_section_path(@encyclopaedia,section) %></p> <br/>
+  <div class ="section">
+   <% unless  section.image.blank? %>
+	<div class ="captionimage">
+          <div class = "image"><%= image_tag section_image_path(section.image, :jpg) %></div>
+          <i><div class ="caption"><%= section.caption %></div></i>
+        </div>
+    <% else %>
+        <p class ="edit">
+         <%= link_to 'Upload Image', edit_encyclopaedia_section_path(@encyclopaedia,section) %>
+        </p>
+    <% end %>
+
+    <h2><%= create_bookmark(section.title) %></h2>
+
+    <p>
+    <% description = add_glossary_links(section.description) %>
+    <%= add_popups(description) %>
+    </p>
+
+    
+    <%unless section.video.blank?%>
+
+    
+    <a class ="vidlink" href ="#section.title"><%= "Watch a video on "+section.video_title %></a>
+    <em class= "video"><%= section.video%></em>
+
+    <%end%>
+
+     </div>
+ 
+<% end %>
+
+<div class ="hanging-toolbar"></div>
+
+
+
+<p><%= link_to 'Edit', edit_encyclopaedia_path(@encyclopaedia) %> |
+<%= link_to 'Back', encyclopaedias_path %>| <%= link_to 'New Section', new_encyclopaedia_section_path(@encyclopaedia) %>
+</p>
 </html>

@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20100804220646
+# Schema version: 20100806052151
 #
 # Table name: users
 #
@@ -57,6 +57,7 @@ class User < ActiveRecord::Base
   validates_format_of       :email,    :with => Authentication.email_regex, :message => Authentication.bad_email_message
 
   before_create :make_activation_code 
+  before_create :give_default_role
 
   # HACK HACK HACK -- how to do attr_accessible from here?
   # prevents a user from submitting a crafted form that bypasses activation
@@ -163,6 +164,7 @@ class User < ActiveRecord::Base
 	# to the group_admin role
 	g = Group.create( params )
 	r = g.create_admin( self )
+	g
   end
 
  
@@ -206,6 +208,10 @@ class User < ActiveRecord::Base
     end
 
   private
+
+  def give_default_role
+	self.role = Role.find_by_name( "default" )
+  end
   
 
   def matches_dynamic_role_check?(method_id)
@@ -226,28 +232,22 @@ class User < ActiveRecord::Base
 
 
    def permission_for_own?( perm , type, object )
-    # store permissions in a variable so we don't have to do more queries
-    perms = []
-    #permissions.each{ |p| perms << p.name }
-
     # check for permissions related to that object
-    # must define permissions for in any model with a permission
-    # should return base role permissions if its not defined in that model
-    
-    #object.permissions_for( self ).each{ |p| perms << p.name }
+    # ownership is controlled by the premissions_for method in a model
+    # object.permissions_for( user ) must decide what role user has in
+    # relation to that object and return permissions for it
+    # for example the experiments model checks if the user created the
+    # experiment and returns permissions for the Role experiment_owner
+    # if they are the creater
 
     # check for permission
-    #has_perm?( perms, perm + "_for_" + type )
-
     perm_name = perm + "_for_" + type
-    # check users base permissions and object specific permissions
+    # check users base permissions if we don't find the 
+    # permission there check the object specific permissions
     user.permissions.find_by_name( perm_name ) ||
 	 object.permissions_for( self ).find_by_name( perm_name )
 
    end  
 
-   def has_perm?(perms, query)
-	   perms.select{ |i| i =~ /^#{query}$/ }.length > 0
-   end
 
 end

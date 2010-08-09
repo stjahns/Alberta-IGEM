@@ -15,7 +15,8 @@ class Group < ActiveRecord::Base
 	has_many :messages
 	has_many :requests
 
-	before_create :generate_new_key
+	# note if this is set to genreate_new_key it creates an endless loop
+	before_create :generate_key
 
 	has_many :users, :through=>:group_roles
 	has_many :experiments, :through=>:users
@@ -40,7 +41,7 @@ class Group < ActiveRecord::Base
 	end
 
 	def generate_new_key
-		self.generate_key
+		generate_key
 		self.save
 		self.key
 	end

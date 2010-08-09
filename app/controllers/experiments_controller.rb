@@ -18,8 +18,9 @@ class ExperimentsController < ApplicationController
   # GET /experiments
   # GET /experiments.xml
     def index
-    #TODO use roles to do this!
-     @experiments = User.find_by_login('admin').experiments;
+     admin_role  = Role.find_by_name( 'admin' )
+    
+     @experiments = User.find_by_role_id( admin_role.id  ).experiments.find_all_by_published( true );
 
     respond_to do |format|
       format.html # index.html.erb

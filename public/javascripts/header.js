@@ -18,7 +18,7 @@ function header_tab( tabId ){
 	btnId = tabId + '-tab'; 
 	
 	$(btnId).click( function(){
-		$('#header').nextAll().hide();
+		$('#header').nextAll().not('#flash-notice-container' ).hide();
 		$(tabId).show();
 		$('a','#header-toolbar').removeClass('selected');
 		$(this).addClass('selected');

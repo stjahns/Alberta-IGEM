@@ -27,20 +27,21 @@ class GroupsController < ApplicationController
   end
 
   def create
-	  @group = Group.new( params[:group] )
-	  if  @group.save
+	  #@group = Group.new( params[:group] )
+	  @group = current_user.create_new_group( params[:group] )
+	  unless @group.nil?
 	  
 		  # assign creater to admin_role of group
-		  current_user.group = @group
-		  current_user.role = @group.admin_role
+		  #current_user.group = @group
+		  #current_user.role = @group.admin_role
 		  
-		  if current_user.save
+		  #if current_user.save
 			flash[:notice] = 'The group was succesfully created.'
 			#redirect_to pretty_group_path( @group.name )
 			redirect_to group_path( @group )
-		  else
-			flash[:error] = 'There was an error creating the group.'
-		  end
+		  #else
+		#	flash[:error] = 'There was an error creating the group.'
+		 # end
 	  else
 		  flash[:error] = 'The group could not be created!'
 		  redirect_to groups_path

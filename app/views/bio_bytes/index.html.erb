@@ -6,7 +6,7 @@
 	<%= 'Parts Bin' %>
 <% end %>
 
-
+<% content_for :header do %>
 <div id="header">
 <h1>Parts Bin</h1>
 <p>Browse the parts in the kit and view detailed information in the stats sheet.</p> 
@@ -19,6 +19,8 @@
 
 	</div>
 </div>
+<% end %>
+
 <div id="bio-bytes-table">
 	<% @bytes.each do |byte| %>
 		<div class=byte-row> 

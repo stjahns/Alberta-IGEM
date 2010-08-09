@@ -1,0 +1,69 @@
+<h1>Editing section</h1>
+<div class ="description">
+<% form_for([ @encyclopaedia, @section ]) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :title %><br />
+    <%= f.text_field :title %>
+  </p>
+  <p>
+    <%= f.label :description %><br />
+    <%= f.text_area :description %>
+  </p>
+  <p>
+    <%= f.label :encyclopaedia_id %><br />
+    <%= f.text_field :encyclopaedia_id %>
+  </p>
+  <p>
+    <%= f.label :section_order %><br />
+    <%= f.text_field :section_order %>
+  </p>
+
+  <p>
+    <%=f.label :video_title%>
+    <%=f.text_field :video_title%>
+  </p>
+  <p>
+    <%= f.label :video %><br />
+    <%= f.text_area :video %>
+  </p>
+  <p>
+    <%= f.submit 'Update' %>
+  </p>
+
+
+<% end %>
+
+  <p>
+        <%= link_to 'Show', encyclopaedia_section_path( @encyclopaedia, @section ) %> |
+        <%= link_to 'list of article sections', encyclopaedia_sections_path(@encyclopaedia) %>|
+        <%= link_to 'Back to Article', encyclopaedia_sections_path(@encyclopaedia) %>
+        </p>
+</div>
+
+<% form_for([ @encyclopaedia, @section ]) do |f| %>
+<p>
+  <%= f.label :caption %>
+  <%= f.text_field :caption %>
+</p>
+<p><%= f.submit 'Update Caption'%></p>
+<%end%>
+
+  <div class="image_form">
+<%  if !@section.image.blank? %>
+  <p><b>Image:</b></p>
+	<p><%= image_tag thumb_image_path(@section.image, :jpg ) %></p>
+<%end%>
+
+        <p><b>New Image:</b></p>
+
+<% form_for [@encyclopaedia, @section], :url =>{ :action => :upload },:html => { :multipart => true, :method => 'put'} do |f| %>
+
+            <p><%= f.file_field :image_file %></p>
+           <p><%= f.submit 'Upload' %></p>
+<% end %>
+
+  </div>
+
+
