@@ -4,6 +4,8 @@ class ImagesController < ApplicationController
 # need image caching so we don't dynamically generate images every time
 # put all the actions that render an image here 
   caches_page :thumb, :step, :show
+
+  caches_page :thumb, :section, :show
 	
 
 ### these actions return different images ##TODO move them to flexi templates 
@@ -17,6 +19,11 @@ class ImagesController < ApplicationController
   def step
     @image = Image.find(params[:id])
     render :inline => "@image.operate {|p| p.resize '300x300'}", :type => :flexi
+  end
+
+  def section
+    @image = Image.find(params[:id])
+    render :inline => "@image.operate {|p| p.resize '250x250'}", :type => :flexi
   end
 ###################################
 

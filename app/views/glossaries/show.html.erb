@@ -21,10 +21,18 @@
 
     <h1>Glossary</h1>
 
+    <div id = "menu">
+      <b>Contents:</b>
+  <%for glossary in @glossaries %>
+      <div class ="item">
+      <%= create_menu_links(glossary.term) %><br/>
+      </div>
+    <%end%></div>
+
 <% @glossaries.each do |glossary| %>
 
   <p class = "term">
-    <%=h glossary.term %></b></a
+    <b><%= create_bookmark(glossary.term) %></b>
   </p>
 
   <p class ="entry">
@@ -34,8 +42,8 @@
   </p>
 
 
-  <%= link_to 'Edit', edit_glossary_path(glossary) %> |
-  <%= link_to 'Back', glossaries_path %>
+  <p><%= link_to 'Edit', edit_glossary_path(glossary) %> |
+  <%= link_to 'Back', glossaries_path %></p>
 <% end %>
   </body>
 </html>
