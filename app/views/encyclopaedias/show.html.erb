@@ -5,16 +5,21 @@
 
     <script type="text/javascript">
       $(document).ready(function(){
-         $("a .term").hover(function(event){
-            $(this).next("em").animate({opacity: "show", top: "-75"}, "slow");
+         $("a.gloss").hover(function(event){
+            $(this).next("em").animate({opacity: "show", top: "-75"}, "fast");
           }, function() {
             $(this).next("em").animate({opacity: "hide", top: "-85"}, "fast");
 	});
+
+      $('a.vidlink').click(function() {
+         $('em.video').toggle(1000);
+        });
 
       });
 
 
     </script>
+
   </head>
 
   <p>
@@ -33,7 +38,7 @@
     <%end%></div>
 <%end%>
 
-<p>
+<p class ="intro">
   <% intro = add_glossary_links(@encyclopaedia.intro) %>
   <%= add_popups(intro) %>
 </p>
@@ -56,11 +61,18 @@
 
     <h2><%= create_bookmark(section.title) %></h2>
 
-    <p><%=h section.description%></p>
+    <p>
+    <% description = add_glossary_links(section.description) %>
+    <%= add_popups(description) %>
+    </p>
 
+    
     <%unless section.video.blank?%>
-    <a href ="#section.title"class ="video"><%= "Watch a video on #{section.video_title}" %></a>
-    <em><%= section.video%></em>
+
+    
+    <a class ="vidlink" href ="#section.title"><%= "Watch a video on "+section.video_title %></a>
+    <em class= "video"><%= section.video%></em>
+
     <%end%>
 
      </div>
@@ -72,5 +84,6 @@
 
 
 <p><%= link_to 'Edit', edit_encyclopaedia_path(@encyclopaedia) %> |
-<%= link_to 'Back', encyclopaedias_path %></p>
+<%= link_to 'Back', encyclopaedias_path %>| <%= link_to 'New Section', new_encyclopaedia_section_path(@encyclopaedia) %>
+</p>
 </html>

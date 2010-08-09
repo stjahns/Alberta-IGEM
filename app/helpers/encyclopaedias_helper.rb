@@ -7,4 +7,8 @@ module EncyclopaediasHelper
     bookmark = "<a name=\"#{title}\">#{title}</a> "
     return bookmark
   end
+  def create_em(term)
+      definition = "<em class = \"#{term.term}\">#{term.definition}</em>"
+      return definition
+  end
 end
