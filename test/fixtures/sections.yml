@@ -1,0 +1,15 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  title: MyString
+  description: MyText
+  encyclopaedia_id: 1
+  section_order: 1
+  video: MyText
+
+two:
+  title: MyString
+  description: MyText
+  encyclopaedia_id: 1
+  section_order: 1
+  video: MyText

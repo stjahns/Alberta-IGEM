@@ -1,0 +1,39 @@
+<p>
+  <b>Title:</b>
+  <%=h @section.title %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%=h @section.description %>
+</p>
+
+<p>
+  <b>Encyclopaedia:</b>
+  <%=h @section.encyclopaedia_id %>
+</p>
+
+<p>
+  <b>Section order:</b>
+  <%=h @section.section_order %>
+</p>
+
+<p>
+  <b>Video:</b>
+  <%= @section.video %>
+</p>
+
+<%  if !@section.image.blank? %>
+	<p><%= image_tag image_path(@section.image, :jpg ) %></p>
+<% else %>
+  <p>
+    There is no image.
+    <%= link_to 'Upload one now!', edit_encyclopaedia_section_path(@encyclopaedia,@section) %>
+ </p>
+<% end %>
+
+ <p>
+<%= link_to 'Edit', edit_encyclopaedia_section_path(@encyclopaedia) %> |
+<%= link_to 'list of article sections', encyclopaedia_sections_path(@encyclopaedia) %>|
+<%= link_to 'Back to Encyclopaedia Article', encyclopaedia_path(@encyclopaedia) %>
+ </p>
