@@ -2,6 +2,8 @@
 class SessionsController < ApplicationController
   # Be sure to include AuthenticationSystem in Application Controller instead
   include AuthenticatedSystem
+
+  layout 'home'
   
 
   # render new.rhtml

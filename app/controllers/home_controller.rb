@@ -1,5 +1,5 @@
 class HomeController < ApplicationController
-	layout 'home';
+	layout 'home'
  	before_filter :set_nav
 
 
