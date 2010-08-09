@@ -28,7 +28,7 @@ my $vr = Bio::Seq->new(-id => 'vr', -seq => $vrabi->get_sequence(),
 
 #trim vf
 #need grab any acgtn until reach 3n's separated by <10 bp
-$vf->seq =~ /(GAATTC\w+?)()/;
+$vf->seq =~ /(GAATTC\w+?)(N{2,})/;
 $vf->seq($1);
 
 #trim vr
