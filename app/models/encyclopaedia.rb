@@ -5,9 +5,9 @@
 #
 #  id         :integer(4)      not null, primary key
 #  title      :string(255)
-#  article    :text
 #  created_at :datetime
 #  updated_at :datetime
+#  intro      :text
 #
 
 class Encyclopaedia < ActiveRecord::Base
