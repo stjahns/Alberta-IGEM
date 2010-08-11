@@ -1,0 +1,9 @@
+<div class="status-form" url="<%= set_status_experiment_path( experiment ) %>">
+	<a class="<%= experiment.status %>" href="#"></a>
+	<div class="status-selection"><ul>
+		<% ["","working","complete"].each do |status| %>
+			<li><%= experiment_status( status )  %></li>
+		<% end %>
+	</div>
+</div>
+

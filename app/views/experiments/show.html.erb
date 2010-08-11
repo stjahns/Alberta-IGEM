@@ -11,6 +11,10 @@
                     ] //array of construct ids
 </script>
 
+<% content_for :nav_bar do %>
+	<%= link_to "Edit off", '#', :id=>"toggle-edit-steps" %>
+<% end %>
+
 
 
 <div id= "experiment-title">
@@ -43,6 +47,8 @@
   <% end %> 
   </p>
 </p>
+
+<div class="seperator"></div>
 <% if @experiment.steps.empty? %>
 <% if logged_in? && current_user.can_edit_for_experiment?(@experiment) %>
 

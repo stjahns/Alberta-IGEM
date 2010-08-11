@@ -37,11 +37,13 @@ class UsersController < ApplicationController
   end
 
   def new
+    
     @user = User.new
     if logged_in? 
 	flash[:notice] = 'You must log out to do that'
     	redirect_to root_path
     end
+    render :layout=>'home'
   end
 
   def create
@@ -52,8 +54,8 @@ class UsersController < ApplicationController
       redirect_back_or_default('/')
       flash[:notice] = "Thanks for signing up!  We're sending you an email with your activation code."
     else
-      flash[:error]  = "We couldn't set up that account, sorry.  Please try again, or contact an admin (link is above)."
-      render :action => 'new'
+      flash[:error]  = "We couldn't set up that account, sorry.  Please try again, or contact an admin."
+      render :action => 'new', :layout=>'home'
     end
   end
 

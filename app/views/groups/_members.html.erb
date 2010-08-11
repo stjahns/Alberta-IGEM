@@ -2,7 +2,7 @@
 	<table>
 		<tr>
 			<td><h2><%= link_to member.login , profile_path(member.login) %></h2></td>
-			<td class="right" > experiments completed </td>
+			<td class="right" ><%= total_experiment_status( member )%></td>
 		</tr>
 		<tr>
 			<td class="role" ><%= group.name_of_role_for( member ) %></td>

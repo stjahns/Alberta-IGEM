@@ -5,8 +5,7 @@
 <% content_for :header do %>
 <div id='header'>
 <h1><%= @group.name %></h1>
-<p><em class="gray"><%= total_experiment_status( @group )  %></em></p>
-<%= experiment_status( @group.experiments.first.status, 1 ) unless @group.experiments.blank? %>
+<%= total_experiment_status( @group )  %>
 <div id='header-toolbar' >
 	<ul>
 		<li><a id='group-info-tab' class='selected' href='#'>Info</a></li>
@@ -108,8 +107,5 @@
 
 </div>
 
-	<div class="hanging-toolbar"></div>
-
-	<p>	see group key, change group key, view pending requests and accept them, edit group information, post a message to members, add an experiment to the group lab manual.	</p>
 </div>
 <% end %>

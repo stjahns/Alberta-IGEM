@@ -38,9 +38,8 @@ class EmailObserver < ActiveRecord::Base
 	 end
 
 	 def email_user
-		UserMailer.deliver_new_email_activation( self )
+		UserMailer.deliver_new_email_activation( self.user )
 	 end
-
 
 
 end

@@ -53,6 +53,16 @@ $(document).ready(function(){
 	//**********************************************************
 	// javascript for editing steps
 	//**********************************************************
+	
+      	//toggle edit controls
+	$('#toggle-edit-steps').click( function(){
+	 	$('.step-toolbar ul li')
+			.not('.btn-step-note')
+			.toggle()
+
+		return false;
+	});
+	
 
 	// submit the edits for steps with ajaX
 	//$('.inplace_edit_step').each( function() {

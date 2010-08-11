@@ -12,7 +12,12 @@
 /* general header styling */
 div#header {
 	border-bottom: 5px solid black;
-	
+}
+#header div.experiment-status {
+	float:left;
+}
+div#header h1 {
+	float:left;
 }
 div#header p {
 	color: #666;
@@ -21,6 +26,7 @@ div#header p {
 	font-size:1.2em;
 	line-height:1.5em;
 	margin-bottom: 0.5em;
+	clear:both;
 }
 div#header-toolbar {
 /*	border-bottom:5px solid black ;*/

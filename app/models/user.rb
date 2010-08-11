@@ -49,6 +49,14 @@ class User < ActiveRecord::Base
   validates_format_of       :login,    :with => Authentication.login_regex, :message => Authentication.bad_login_message
 
   validates_format_of       :name,     :with => Authentication.name_regex,  :message => Authentication.bad_name_message, :allow_nil => true
+
+  #TODO
+  validates_each :login do |record, attr, value|
+	  if record =~ /[^0-9a-zA-Z]/
+		  record.errors.add attr, "login must be composed of alphanumberic characters and _"
+	  end
+  end
+
   validates_length_of       :name,     :maximum => 100
 
   validates_presence_of     :email
