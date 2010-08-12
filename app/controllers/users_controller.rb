@@ -13,7 +13,7 @@ class UsersController < ApplicationController
 
   if @user.update_attributes(params[:user])
     flash[:notice] = 'User was successfully updated.'
-    redirect_to(profile_path(@user.login))
+    redirect_to(profile_path(@user))
   else
     render :action => 'edit'
   end
@@ -23,11 +23,11 @@ class UsersController < ApplicationController
   @users = User.find(:all)
   end
 
-  def show
-  	@user = User.find(params[:id])
-	@groups = @user.groups
-	@requests = @user.requests
-  end
+#  def show
+#  	@user = User.find(params[:id])
+#	@groups = @user.groups
+#	@requests = @user.requests
+#  end
 
   def destroy
   @user = User.find(params[:id])
@@ -59,8 +59,9 @@ class UsersController < ApplicationController
     end
   end
 
-  def profile
-    @user = User.find_by_login(params[:login])
+#  def profile
+   def show
+    @user = get_user_by_id_or_login
     @groups = @user.groups
     @requests = @user.requests
 
@@ -157,6 +158,17 @@ class UsersController < ApplicationController
       end
     end
   end
+
+  private
+  def  get_user_by_id_or_login
+	if params[:id] =~ /[a-zA-Z]/
+	       	User.find_by_login(params[:id]) 
+	else 
+		User.find(params[:id])
+	end
+  end
+
+
 
 end
 

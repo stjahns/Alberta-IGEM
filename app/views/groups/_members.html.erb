@@ -1,7 +1,7 @@
 <div class="lab-book member" id="user_<%= member.id  %>">
 	<table>
 		<tr>
-			<td><h2><%= link_to member.login , profile_path(member.login) %></h2></td>
+			<td><h2><%= link_to member.login , profile_path(member) %></h2></td>
 			<td class="right" ><%= total_experiment_status( member )%></td>
 		</tr>
 		<tr>

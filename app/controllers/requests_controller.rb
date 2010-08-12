@@ -7,7 +7,7 @@ class RequestsController < ApplicationController
 	@request.destroy
 	respond_to do |format|
 		format.html { flash[:notice] = 'Request deleted'
-			redirect_to profile_path( current_user.login )
+			redirect_to profile_path( current_user )
 		}	
 		format.js { render :text=>'Request deleted' }
 	end

@@ -57,7 +57,7 @@
 
 	<% @requests.each do |request| %>
 		<div class="request">
-			<%= link_to request.user.login, profile_path( request.user.login) %>
+			<%= link_to request.user.login, profile_path( request.user) %>
 			<%= save_notice %>
 			<p><%= request.message %></p>
 			<div class="hanging-toolbar"><ul>

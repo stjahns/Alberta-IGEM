@@ -8,7 +8,7 @@
   <li><%= link_to "About", '#' %></li>
 
   <% if logged_in?  %>
-     <li><%= link_to "View your profile", profile_path( current_user.login ) %></li>  
+     <li><%= link_to "View your profile", profile_path( current_user ) %></li>  
      <li><%= link_to "Log out", logout_path %></li>
   <% else %>
     <li><%= link_to "Log in", login_path %></li>

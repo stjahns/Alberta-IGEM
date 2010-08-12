@@ -1,29 +1,4 @@
 module ExperimentsHelper
-=begin		def experiment_status( experiment ) 
-			if experiment.complete?
-				image = "complete_status_large.jpg"
-
-			elsif experiment.working?
-				image = "working_status_large.jpg"
-			
-			else
-				image = "no_status_large.jpg"
-			end	
-
-			image_tag image
-		end
-
-
-		def select_status( experiment )
-			status = experiment.status
-			"
-			<div class="status-form">
-			<a class=\"current-status\"></a>
-			#{form_ta}
-			</div>"
-			
-		end
-=end
 		def total_experiment_status( owner )
 			# can be used for group or user
 

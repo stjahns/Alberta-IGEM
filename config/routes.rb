@@ -23,17 +23,12 @@ ActionController::Routing::Routes.draw do |map|
   # normal user routes
   map.resources :users, :member=>{:new_email=>:put}
   
-  # pretty routes for user profile pages
-  map.profile '/user/:login', :controller => 'users', :action => 'profile', :method => 'get' 
-
   # group routes
   map.resources :groups, :member => { :upload => :post, :join => :get, :join_with_key=>:post, :request_to_join => :post , :quit=>:delete, :new_key=>:put, :change_role=>:put, :kick_out=>:delete } do |groups|
 	  groups.resources :messages, :only=>[ :index,:create,:destroy,:update ]
   end
 
 
-  #pretty group routes
-  map.pretty_group '/group/:name', :controller => 'groups', :action => 'show', :method => 'get'
     map.resources :viewer
 
 
