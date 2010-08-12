@@ -14,12 +14,12 @@ div#header {
 	border-bottom: 5px solid black;
 }
 #header div.experiment-status {
-	float:left;
+	float:right;
 }
 div#header h1 {
 	float:left;
 }
-div#header p {
+div#header p, #group-info p, div.message p {
 	color: #666;
 	font-family:georgia,serif;
 	font-style:italic;
