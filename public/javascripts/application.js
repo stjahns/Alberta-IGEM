@@ -46,6 +46,8 @@ $(document).ready(function(){
 		}
 	
 	});
+	//higlight text in login form on click
+	$('#user-nav #login, #user-nav #password').focus( function(){this.select()} );
 
 	//submit login form in nav bar if the user pushes enter
 	//in the form

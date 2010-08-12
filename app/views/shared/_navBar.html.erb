@@ -13,6 +13,7 @@
 			<li><%= link_to "Profile", profile_path(current_user) %></a></li>
 		
 			<li><%= link_to "Logout", logout_path %></a></li>
+			<%= yield :user_nav %>
 		<% else %>
 			<% form_tag session_path do -%>
 				<li><%= text_field_tag 'login','username' %></li>

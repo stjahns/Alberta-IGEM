@@ -29,9 +29,10 @@ div.hanging-toolbar ul li.left, div.step-toolbar ul li {
 	float: left;
 }
 
-div.hanging-toolbar ul li form, div.step-toolbar ul li form {
+div.hanging-toolbar ul li form, div.step-toolbar ul li form , div.step-toolbar ul li {
 	display: none;
 }
+ div.step-toolbar ul li.btn-step-note { display:block; }
 
 
 div.hanging-toolbar ul li a:link, div.hanging-toolbar ul li a:visited , div.step-toolbar ul li a:link, div.step-toolbar ul li a:visited, div.hanging-toolbar ul li input, div.hanging-btns ul li input {

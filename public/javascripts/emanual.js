@@ -56,10 +56,22 @@ $(document).ready(function(){
 	
       	//toggle edit controls
 	$('#toggle-edit-steps').click( function(){
-	 	$('.step-toolbar ul li')
-			.not('.btn-step-note')
-			.toggle()
+	 	
+		if( $(this).hasClass( 'edit-on' ) ){ 
+			$(this).html("Edit off")
+				.removeClass('edit-on');
+			$('.step-toolbar ul li')
+				.not('.btn-step-note')
+				.hide();
 
+		}
+		else {
+			$(this).html("Edit on")
+				.addClass('edit-on'); 
+			$('.step-toolbar ul li')
+				.not('.btn-step-note')
+				.show();
+		}
 		return false;
 	});
 	

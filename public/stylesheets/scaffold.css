@@ -507,19 +507,32 @@ div#navBar ul li a {
 	margin-right: 2px;
 }
 
-#toggle-edit-steps {
-	background-color: #efefef;
-	
-}
 div#navBar ul li a:link, div#navBar ul li a:visited {
 }
 div#navBar ul li a:hover {
 	color: white;
-	font-weight: bold;
+	/*font-weight: bold;*/
 }
 div#navBar ul li.selected a:link, div#navBar ul li .selected a:hover, div#navBar ul li.selected a:visited {
 	font-weight: bold;
 }
+
+div#navBar ul li a#toggle-edit-steps {
+	background-color:#efefef;
+	color:#666;
+	left:72px;
+	margin-top:26px;
+	position:absolute;
+	-moz-border-radius:0 0 3px 3px;
+}
+div#navBar ul li a#toggle-edit-steps:hover {
+	background-color:#ccc;
+	color:#fff;
+}
+div#navBar ul li a#toggle-edit-steps.edit-on {
+	background-color:#C7FFC4;
+}
+
 div#navBar ul li h2 {
 	display: block;
 	margin: 2px;

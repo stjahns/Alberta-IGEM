@@ -53,6 +53,7 @@ change_info_for_user.update_attributes(
 	:description=>"Can activate email for user")
 
 # permissions for editing experments
+	# some of these are not necessary probably
 create_experiment_for_user=Permission.find_or_create_by_name("create_experiment_for_user")
 create_experiment_for_user.update_attributes(
 		:description=>"Can create new experiments in lab-book")
