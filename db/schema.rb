@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100806052151) do
+ActiveRecord::Schema.define(:version => 20100804220646) do
 
   create_table "annotations", :force => true do |t|
     t.string   "name"
@@ -25,6 +25,12 @@ ActiveRecord::Schema.define(:version => 20100806052151) do
     t.datetime "updated_at"
   end
 
+  create_table "backbones", :force => true do |t|
+    t.string "name"
+    t.string "prefix"
+    t.string "suffix"
+  end
+
   create_table "bio_byte_images", :force => true do |t|
     t.integer  "bio_byte_id"
     t.integer  "image_id"
@@ -36,12 +42,22 @@ ActiveRecord::Schema.define(:version => 20100806052151) do
     t.string   "type"
     t.string   "name"
     t.string   "description"
-    t.string   "sequence"
     t.string   "author"
     t.string   "img_file_name"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "image_id"
+    t.text     "val_string"
+    t.text     "sequence"
+    t.integer  "backbone_id"
+    t.string   "biobrick_id"
+    t.string   "biobrick_backbone"
+    t.string   "biobyte_id"
+    t.string   "biobyte_plasmid"
+    t.text     "function_verification"
+    t.text     "comments"
+    t.boolean  "vf_uploaded"
+    t.boolean  "vr_uploaded"
   end
 
   create_table "constructs", :force => true do |t|
@@ -51,14 +67,6 @@ ActiveRecord::Schema.define(:version => 20100806052151) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "experiment_id"
-  end
-
-  create_table "email_observers", :force => true do |t|
-    t.string   "email"
-    t.string   "key"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "user_id"
   end
 
   create_table "encyclopaedias", :force => true do |t|
@@ -138,6 +146,7 @@ ActiveRecord::Schema.define(:version => 20100806052151) do
   create_table "notes", :force => true do |t|
     t.integer  "step_id"
     t.string   "text"
+    t.integer  "image_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -220,7 +229,6 @@ ActiveRecord::Schema.define(:version => 20100806052151) do
     t.datetime "remember_token_expires_at"
     t.string   "activation_code",           :limit => 40
     t.datetime "activated_at"
-    t.integer  "group_id"
     t.integer  "role_id"
     t.string   "reset_code"
     t.text     "description"

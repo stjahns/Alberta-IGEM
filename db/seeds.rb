@@ -52,5 +52,25 @@ step3 = StepGenerator.create!(:subprotocol => "assembly completion",
                              )
 
 #------------------------------------------------
+# Create backbones
+
+Backbone.create!(:name => "pC.b.A",
+                 :prefix => "GAATTCGCGGCCGCTTCTAGAGAAGACCATGGG",
+                 :suffix => "GCCTAGGTCTTCACTAGTTGCGGCCGCTGCAG")
+Backbone.create!(:name => "pC.b.B",
+                 :prefix => "GAATTCGCGGCCGCTTCTAGAGAAGACCAGCCT",
+                 :suffix => "TGGGTGGTCTTCACTAGTTGCGGCCGCTGCAG")
+Backbone.create!(:name => "pC.f.A",
+                 :prefix => "GAATTCGCGGCCGCTTCTAGACCTGCACCATGGG",
+                 :suffix => "GCCTAGGTGCAGGTACTAGTTGCGGCCGCTGCAG")
+Backbone.create!(:name => "pC.f.B",
+                 :prefix => "GAATTCGCGGCCGCTTCTAGACCTGCACCAGCCT",
+                 :suffix => "TGGGTGGTGCAGGTACTAGTTGCGGCCGCTGCAG")
+Backbone.create!(:name => "pC.s.A",
+                 :prefix => "GAATTCGCGGCCGCTTCTAGAGGTCTCATGGG",
+                 :suffix => "GCCTAGAGACCACTAGTTGCGGCCGCTGCAG")
+Backbone.create!(:name => "pC.s.B",
+                 :prefix => "GAATTCGCGGCCGCTTCTAGAGGTCTCAGCCT",
+                 :suffix => "TGGGTGAGACCACTAGTTGCGGCCGCTGCA")
                  
 
