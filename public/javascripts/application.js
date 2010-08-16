@@ -44,7 +44,7 @@ $(document).ready(function(){
 			{top: '-=26'},
 			500);
 		}
-	
+		return false;
 	});
 	//higlight text in login form on click
 	$('#user-nav #login, #user-nav #password').focus( function(){this.select()} );
