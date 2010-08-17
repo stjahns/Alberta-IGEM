@@ -2,8 +2,10 @@ namespace :roles do
   
   desc "Remake the permissions for the role"
   task :build_permissions => :environment do
-	# run roles/permissions.rb
+	puts "building...."
+	# run role/permissions.rb
 	require 'roles/permissions'
+	puts "done"
   end
 
 end

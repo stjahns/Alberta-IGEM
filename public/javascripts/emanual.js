@@ -53,6 +53,28 @@ $(document).ready(function(){
 	//**********************************************************
 	// javascript for editing steps
 	//**********************************************************
+	
+      	//toggle edit controls
+	$('#toggle-edit-steps').click( function(){
+	 	
+		if( $(this).hasClass( 'edit-on' ) ){ 
+			$(this).html("Edit off")
+				.removeClass('edit-on');
+			$('.step-toolbar ul li')
+				.not('.btn-step-note')
+				.hide();
+
+		}
+		else {
+			$(this).html("Edit on")
+				.addClass('edit-on'); 
+			$('.step-toolbar ul li')
+				.not('.btn-step-note')
+				.show();
+		}
+		return false;
+	});
+	
 
 	// submit the edits for steps with ajaX
 	//$('.inplace_edit_step').each( function() {
@@ -145,7 +167,7 @@ $(document).ready(function(){
 			step_view.html(data);
 		},
 		error: function(){
-			error_mesage( $('.inplace_upload_image',step_view).find('.save-notice'),
+			error_message( $('.inplace_upload_image',step_view).find('.save-notice'),
 				"Error: the image could not be deleted.");	
 		}
 

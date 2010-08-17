@@ -1,8 +1,8 @@
 <div class="lab-book">
 	<table>
 		<tr>
-			<td><h2><%= link_to group.name, group_path( group ) %></h2></td>
-			<td class="right" > group experiments completed </td>
+			<td><h2><%= link_to group.name, pretty_group_path( group ) %></h2></td>
+			<td class="right" ><%= total_experiment_status group  %></td>
 		</tr>
 		<% if logged_in? && current_user.in_group?( group ) %>
 			<tr><td><em class="gray">You are a <%= group.name_of_role_for( current_user ) %>.</em></td></tr>

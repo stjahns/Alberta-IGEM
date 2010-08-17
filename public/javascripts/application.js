@@ -44,8 +44,10 @@ $(document).ready(function(){
 			{top: '-=26'},
 			500);
 		}
-	
+		return false;
 	});
+	//higlight text in login form on click
+	$('#user-nav #login, #user-nav #password').focus( function(){this.select()} );
 
 	//submit login form in nav bar if the user pushes enter
 	//in the form
@@ -72,6 +74,47 @@ $(document).ready(function(){
           }, function() {
             $(this).next("em").animate({opacity: "hide", top: "-85"}, "fast");
 	});  
+
+	//**********************************************************
+	// make pop up to select the experiment status and send submit
+	//**********************************************************
+	$("div.status-form a").live('mouseover', function(){
+		$(this).next('div.status-selection').show();		
+	});
+	$("div.status-selection").live('mouseleave',function(){
+		$(this).fadeOut();
+	});
+	// function to bind submiting a change by clicking 
+	// on a new experiment status
+	$('div.status-selection ul li a' ).live('click',function(){
+		container = $(this).parents('div.status-form');
+		status_image = container.children('a');
+		old_status = status_image.attr('class');
+		new_status =  $(this).attr('class'); 
+		
+		var selection = $.param( { status: new_status } );
+
+		$.post(container.attr('url'), selection, function(data){
+			status_image.attr('class',new_status); 
+
+			//update the status in the header if present
+			var tstatus = $('#header div.experiment-status');
+			if( tstatus ){
+				if( old_status ){ 
+					//subtract from count
+					var count = $( "a." + old_status, tstatus );
+					count.html( count.html() - 1 );
+				}
+				if( new_status ){
+					//add to new count
+					var count = $("a." + new_status, tstatus );
+					count.html( parseInt( count.html() ) + 1  );
+				}
+			}
+		});
+		return false;
+	});
+
  
 
 	//**********************************************************
@@ -97,6 +140,28 @@ $(document).ready(function(){
 		$('#home-notice').fadeOut("slow");
 		$('#flash-notice').fadeOut("slow");
 	}, 5000);
+
+	//**********************************************************
+	//  print to pdf button
+	//**********************************************************
+
+	//on click send the documents html to the server
+	$('#print-to-pdf').click( function(){
+		var form = $(this).next('form');
+		form.find( '#page_content:input').attr('value',"");
+		
+		var html =  $('body').html();
+
+
+		form.find( '#page_content:input').attr('value',html);
+		form.submit();
+
+		// get rid of this big thing 
+		delete html;
+//return false;
+
+	});
+
 
 
   // UJS authenticity token fix: add the authenticity_token parameter
@@ -156,4 +221,5 @@ function unescapeHTML(html) {
 	html = $("<div />").html(html).text();
  	return html.replace('<pre>','').replace('</pre>','');
 }
+
 

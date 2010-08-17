@@ -7,7 +7,7 @@ development:
   adapter: mysql
   database: igem_development
   username: root 
-  password: password
+  password: crunch87 
   pool: 5
   timeout: 5000
 

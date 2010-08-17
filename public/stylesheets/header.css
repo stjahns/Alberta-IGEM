@@ -12,15 +12,21 @@
 /* general header styling */
 div#header {
 	border-bottom: 5px solid black;
-	
 }
-div#header p {
+#header div.experiment-status {
+	float:right;
+}
+div#header h1 {
+	float:left;
+}
+div#header p, #group-info p, div.message p {
 	color: #666;
 	font-family:georgia,serif;
 	font-style:italic;
 	font-size:1.2em;
 	line-height:1.5em;
 	margin-bottom: 0.5em;
+	clear:both;
 }
 div#header-toolbar {
 /*	border-bottom:5px solid black ;*/

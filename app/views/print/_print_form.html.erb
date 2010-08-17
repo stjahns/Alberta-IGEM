@@ -1,0 +1,7 @@
+<span id="<%= id %>" >	
+	<a id= "print-to-pdf" title="Save this page as a pdf" ><%= name_of_btn || ""  %></a>
+	<% form_tag '/print', :method => :post do %>
+		<%= hidden_field_tag 'page_content' %>
+		<%= hidden_field_tag 'name', name_of_doc %>
+	<% end %>
+</span>

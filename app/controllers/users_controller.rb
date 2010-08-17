@@ -13,7 +13,7 @@ class UsersController < ApplicationController
 
   if @user.update_attributes(params[:user])
     flash[:notice] = 'User was successfully updated.'
-    redirect_to(profile_path(@user.login))
+    redirect_to(profile_path(@user))
   else
     render :action => 'edit'
   end
@@ -23,11 +23,11 @@ class UsersController < ApplicationController
   @users = User.find(:all)
   end
 
-  def show
-  	@user = User.find(params[:id])
-	@groups = @user.groups
-	@requests = @user.requests
-  end
+#  def show
+#  	@user = User.find(params[:id])
+#	@groups = @user.groups
+#	@requests = @user.requests
+#  end
 
   def destroy
   @user = User.find(params[:id])
@@ -37,11 +37,13 @@ class UsersController < ApplicationController
   end
 
   def new
+    
     @user = User.new
     if logged_in? 
 	flash[:notice] = 'You must log out to do that'
     	redirect_to root_path
     end
+    render :layout=>'home'
   end
 
   def create
@@ -52,13 +54,14 @@ class UsersController < ApplicationController
       redirect_back_or_default('/')
       flash[:notice] = "Thanks for signing up!  We're sending you an email with your activation code."
     else
-      flash[:error]  = "We couldn't set up that account, sorry.  Please try again, or contact an admin (link is above)."
-      render :action => 'new'
+      flash[:error]  = "We couldn't set up that account, sorry.  Please try again, or contact an admin."
+      render :action => 'new', :layout=>'home'
     end
   end
 
-  def profile
-    @user = User.find_by_login(params[:login])
+#  def profile
+   def show
+    @user = get_user_by_id_or_login
     @groups = @user.groups
     @requests = @user.requests
 
@@ -155,6 +158,17 @@ class UsersController < ApplicationController
       end
     end
   end
+
+  private
+  def  get_user_by_id_or_login
+	if params[:id] =~ /[a-zA-Z]/
+	       	User.find_by_login(params[:id]) 
+	else 
+		User.find(params[:id])
+	end
+  end
+
+
 
 end
 

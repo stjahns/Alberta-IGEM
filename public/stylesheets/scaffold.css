@@ -1,4 +1,24 @@
 /* general styling */
+.gray-box {
+	background: none #efefef;
+	padding: 1em;
+	text-align:center;
+	border:1px solid #ccc;
+}
+
+.gray-box textarea {
+	width:389px;
+}
+.gray-box p {
+	background:transparent;
+}
+
+
+div.seperator {
+	clear:both;
+	margin:0;
+	padding:0;
+}
 
 div.right-column {
 	width:425px;
@@ -45,6 +65,90 @@ span.save-notice {
 span.save-notice.error-message {
 	background: #FF8593;
 }
+
+
+.left {
+	float:left;
+}
+span.more {
+	display: none;
+}
+
+/* styles for experiment status */
+div.experiment-status, div.status-selection{
+	height: 40px;
+}
+div.experiment-status {
+	float:right;
+	margin-left:30px;
+	position:relative;
+	top:8px;
+}
+div.status-selection{
+	width:120px;
+	padding: 25px;
+	background: url(../images/status-selection-bg.png) no-repeat center;
+	position:absolute;
+	top:-26px;
+	left:-105px;
+	display:none;
+}
+
+div.experiment-status ul, div.status-selection ul {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+}
+
+div.status-selection ul li {
+	float:right;
+}
+div.experiment-status ul li {
+	 float:left;
+}
+
+
+div.status-selection ul li a, div.status-form a, div.experiment-status ul li a{
+	height:30px;
+	padding:5px;
+	display:block;
+	background:url(../images/nostatus-image.png) no-repeat center;
+	line-height:24px;
+	text-align:center;
+	text-decoration:none;
+	line-height:25px;
+	font-size:21px;
+	font-family:Tahoma;
+	color:#666;
+	min-width:30px;
+	font-style:normal;
+}
+div.status-selection ul li a.complete , div.status-form a.complete  , div.experiment-status a.complete   {
+	background:url(../images/done-image.png) no-repeat center;
+}
+div.status-selection ul li a.working , div.status-form a.working  , div.experiment-status a.working   {
+	background:url(../images/inprogress-image.png) no-repeat center;
+}
+
+div.status-selection ul li a:hover, div.status-form a:hover , div.experiment-status a.hover  {
+	background:url(../images/nostatus-hover.png) no-repeat center;
+}
+div.status-selection ul li a.complete:hover , div.status-form a.complete:hover  , div.experiment-status a.complete:hover   {
+	background:url(../images/done-hover.png) no-repeat center;
+}
+div.status-selection ul li a.working:hover , div.status-form a.working:hover  , div.experiment-status a.working:hover   {
+	background:url(../images/inprogress-hover.png) no-repeat center;
+}
+
+div.status-form {
+	position:relative;
+	float:right;
+}
+
+div.status-form form {
+}
+
 
 /*styling for experiment page*/
 
@@ -208,7 +312,7 @@ div.lab-book h2 a:hover {
 }
 
 
-div.lab-book td.date, div.lab-book td.right {
+div.lab-book td.date, div.lab-book td.right,.member td.role {
 	text-align: right;
 	font-style:italic;
 	color: gray;
@@ -216,20 +320,22 @@ div.lab-book td.date, div.lab-book td.right {
 }
 
 
-div.lab-book td.status {
-	text-align: right;
+.member td.role {
+	text-align:left;
 }
-div.lab-book td.status.complete{
-	color:green;
+.member h1 {
 }
-div.lab-book td.status.inProgress {
-	color:yellow;
+
+div.member {
+	position:relative;
 }
-div.lab-book {
+.member div.experiment-status {
+	height:0;
+	top:0;
 }
-span.more {
-	display: none;
-}
+
+
+
 div.edit-experiment {
 	display: none;
 }
@@ -256,23 +362,6 @@ div#lab-book {
 	padding:10px;
 }
 
-.member{
-       }	
-
-.gray-box {
-	background: none #efefef;
-	padding: 1em;
-	text-align:center;
-	border:1px solid #ccc;
-}
-
-.gray-box textarea {
-	width:389px;
-}
-.gray-box p {
-	background:transparent;
-}
-
 span#group-key {
 	background-color: #fff;
 	border: 1px solid #ccc;
@@ -290,6 +379,31 @@ div#profile table tr td.title {
 	font-weight:bold;	
 }
 
+/* messages on group page*/
+div.message {
+	padding-left:70px;
+	position:relative;
+	margin-left:30px;
+}
+div.message p {
+	min-height:2em;
+}
+div.message h2 {
+	background-color:#000;
+	color:#fff;
+	left:-30px;
+	padding-bottom:10px;
+	padding-top:10px;
+	position:absolute;
+	top:-14px;
+	width:90px;
+	text-align:center;
+	height:36px;
+}
+
+
+
+
 /* styling for navigation bar */
 div#navBar {
 	position: fixed;
@@ -306,6 +420,20 @@ div#navBar {
 	z-index: 1;
 
 }
+
+#nav-print-to-pdf form { display:none; }
+span#nav-print-to-pdf a#print-to-pdf { 
+	display:block;
+	height:26px;
+	width:26px;
+	background:#000 url(/images/pdf_logo.png) no-repeat center;
+	padding:0;
+	cursor:pointer;
+ }
+
+
+
+
 div#navBar input {
 	font-size: 10px;
 	margin-right: 5px;
@@ -392,15 +520,33 @@ div#navBar ul li a {
 	text-decoration: none;
 	margin-right: 2px;
 }
+
 div#navBar ul li a:link, div#navBar ul li a:visited {
 }
 div#navBar ul li a:hover {
 	color: white;
-	font-weight: bold;
+	/*font-weight: bold;*/
 }
 div#navBar ul li.selected a:link, div#navBar ul li .selected a:hover, div#navBar ul li.selected a:visited {
 	font-weight: bold;
 }
+
+div#navBar ul li a#toggle-edit-steps {
+	background-color:#efefef;
+	color:#666;
+	left:72px;
+	margin-top:26px;
+	position:absolute;
+	-moz-border-radius:0 0 3px 3px;
+}
+div#navBar ul li a#toggle-edit-steps:hover {
+	background-color:#ccc;
+	color:#fff;
+}
+div#navBar ul li a#toggle-edit-steps.edit-on {
+	background-color:#C7FFC4;
+}
+
 div#navBar ul li h2 {
 	display: block;
 	margin: 2px;
@@ -547,6 +693,7 @@ div#bio-byte-table  div.description {
 }
 div#bio-bytes-table div.byte-row  {
 	clear:both;
+	margin-bottom:1em;
 }
 div.byte-row div.byte-name h2 {
 	display:inline;
@@ -601,9 +748,6 @@ div#bio-bytes-table .sequence {
 
 
 /****** groups ***********/
-div.member {
-}
-
 #container {
 	width: 750px;
  	margin-right: auto;
