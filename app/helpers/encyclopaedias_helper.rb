@@ -11,4 +11,12 @@ module EncyclopaediasHelper
       definition = "<em class = \"#{term.term}\">#{term.definition}</em>"
       return definition
   end
+  def create_div_class(title)
+      title = "<div class=\"##{title.title}\">"
+      return title
+  end
+
+   def last_div()
+      return "</div>"
+  end
 end

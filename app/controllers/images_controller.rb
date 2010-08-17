@@ -1,5 +1,5 @@
 class ImagesController < ApplicationController
-  before_filter :login_required, :except => [:thumb, :step, :show]
+  before_filter :login_required, :except => [:thumb, :step, :show, :section, :image150]
 
 # need image caching so we don't dynamically generate images every time
 # put all the actions that render an image here 
@@ -24,6 +24,11 @@ class ImagesController < ApplicationController
   def section
     @image = Image.find(params[:id])
     render :inline => "@image.operate {|p| p.resize '250x250'}", :type => :flexi
+  end
+
+  def image150
+    @image = Image.find(params[:id])
+    render :inline => "@image.operate {|p| p.resize '150x150'}", :type => :flexi
   end
 ###################################
 

@@ -1,3 +1,4 @@
+<div id ="encyclopaedia">
 <h1>Editing section</h1>
 <div class ="description">
 <% form_for([ @encyclopaedia, @section ]) do |f| %>
@@ -36,8 +37,6 @@
 <% end %>
 
   <p>
-        <%= link_to 'Show', encyclopaedia_section_path( @encyclopaedia, @section ) %> |
-        <%= link_to 'list of article sections', encyclopaedia_sections_path(@encyclopaedia) %>|
         <%= link_to 'Back to Article', encyclopaedia_sections_path(@encyclopaedia) %>
         </p>
 </div>
@@ -65,5 +64,5 @@
 <% end %>
 
   </div>
-
+</div>
 

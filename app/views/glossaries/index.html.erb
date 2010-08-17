@@ -1,20 +1,53 @@
-<h1>Listing Terms</h1>
+<div id ="encyclopaedia">
+<!doctype html>
+<html>
+  <head>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.4.2.min.js"></script>
 
-<table>
-  <tr>
-    <th>Term</th>
-  </tr>
+    <script type="text/javascript">
+      $(document).ready(function(){
+         $("a.term-link").hover(function(event){
+            $(this).next("em").animate({opacity: "show", top: "-75"}, "fast");
+          }, function() {
+            $(this).next("em").animate({opacity: "hide", top: "-85"}, "fast");
+	});
+      });
+
+
+    </script>
+  </head>
+
+  <body>
+
+    <h1>Glossary</h1>
+<%unless @glossaries.first.blank?%>
+    <div id = "menu">
+      <b>Contents:</b>
+      <%for glossary in @glossaries %>
+        <div class ="item">
+          <%= create_menu_links(glossary.term) %><br/>
+        </div>
+      <%end%>
+    </div>
+ <%end%>
 
 <% @glossaries.each do |glossary| %>
-  <tr>
-    <td><%=h glossary.term %></td>
-    <td><%= link_to 'Show', glossary %></td>
-    <td><%= link_to 'Edit', edit_glossary_path(glossary) %></td>
-    <td><%= link_to 'Destroy', glossary, :confirm => 'Are you sure?', :method => :delete %></td>
-  </tr>
+
+  <p class = "term">
+    <b><%= create_bookmark(glossary.term) %></b>
+  </p>
+
+  <p class ="entry">
+    <%  definition= add_glossary_links(glossary.definition)%>
+
+    <%= add_popups(definition) %>
+  </p>
+
+
+  <p><%= link_to 'Edit', edit_glossary_path(glossary) %>|
+    <%= link_to 'Delete', glossary, :confirm => 'Are you sure?', :method => :delete %></p>
 <% end %>
-</table>
-
-<br />
-
-<%= link_to 'New glossary', new_glossary_path %>
+  <p><%= link_to 'New Entry', new_glossary_path %></p>
+  </body>
+</html>
+</div>

@@ -11,7 +11,10 @@
 #
 
 class Encyclopaedia < ActiveRecord::Base
+  attr_accessible :title, :intro, :image
+
   has_many :sections
+  has_one :image
 
   protected
       def validate

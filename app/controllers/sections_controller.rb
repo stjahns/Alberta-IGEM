@@ -11,6 +11,9 @@ class SectionsController < ApplicationController
     #puts "encyclopaedia id is #{@section.encyclopaedia_id}"
   end
 
+  def auto_create
+    
+  end
 
   def index
     @sections = @encyclopaedia.sections.all

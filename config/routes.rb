@@ -1,16 +1,17 @@
 ActionController::Routing::Routes.draw do |map|
-  map.resources :sections
+  map.resources :sections, :member => {:auto_create => :post}
 
   map.resources :glossaries
 
   map.resources :definitions
 
-  map.resources :encyclopaedias do |encyclopaedias|
+
+  map.resources :encyclopaedias, :member => {:upload => :post, :image_form => :get} do |encyclopaedias|
      encyclopaedias.resources :sections,
        :member => { :upload => :put}
   end
 
-  #map.upload '/upload', :controller =>'sections', :action => 'upload', :encyclopaedia_id => '1'
+  
   map.logout '/logout', :controller => 'sessions', :action => 'destroy'
   map.login '/login', :controller => 'sessions', :action => 'new'
   map.register '/register', :controller => 'users', :action => 'create'
@@ -84,7 +85,7 @@ ActionController::Routing::Routes.draw do |map|
   map.home '', :controller => :home
 
   # routes for images
-  map.resources :images, :member => { :thumb => :get, :step => :get , :section => :get }
+  map.resources :images, :member => { :thumb => :get, :step => :get , :section => :get, :image150 => :get }
   
   
   # default routes
