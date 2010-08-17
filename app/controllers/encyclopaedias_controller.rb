@@ -85,6 +85,7 @@ class EncyclopaediasController < ApplicationController
 
     respond_to do |format|
       if @encyclopaedia.save
+        
         flash[:notice] = 'Encyclopaedia was successfully created.'
         format.html { redirect_to(@encyclopaedia) }
         format.xml  { render :xml => @encyclopaedia, :status => :created, :location => @encyclopaedia }
