@@ -4,6 +4,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :glossaries
 
   map.resources :definitions
+  
 
   map.resources :encyclopaedias do |encyclopaedias|
      encyclopaedias.resources :sections,
@@ -42,6 +43,8 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :requests, :only => ['destroy'], :member=>{:accept => :post, :reject=>:post}
 
 
+  map.resources :categories
+
   #map annoations as nested resource of biobytes
   map.resources :bio_bytes, :member => { :upload => :post, 
                                         :upload_desc_img => :post, 
@@ -49,6 +52,7 @@ ActionController::Routing::Routes.draw do |map|
                                         :upload_abi => :post,
                                         :download_vf => :get,
                                         :download_vr => :get,
+                                        :datasheet => :get,
                                         :validate_sequence => :get } do |bytes|
     bytes.resources :annotations
   end

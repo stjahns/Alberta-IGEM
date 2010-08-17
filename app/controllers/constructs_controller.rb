@@ -54,8 +54,9 @@ class ConstructsController < ApplicationController
     orfs = ORF.find(:all)
     linkers = Linker.find(:all)
     annotations = Annotation.find(:all)
+    backbones = Backbone.find(:all)
     ActiveRecord::Base.include_root_in_json = false
-    render :json => { :orfs => orfs, :linkers => linkers, :annotations => annotations}
+    render :json => { :orfs => orfs, :linkers => linkers, :annotations => annotations, :backbones => backbones}
 
   end
   

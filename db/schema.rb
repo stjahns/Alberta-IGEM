@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100804220646) do
+ActiveRecord::Schema.define(:version => 20100817201153) do
 
   create_table "annotations", :force => true do |t|
     t.string   "name"
@@ -58,6 +58,14 @@ ActiveRecord::Schema.define(:version => 20100804220646) do
     t.text     "comments"
     t.boolean  "vf_uploaded"
     t.boolean  "vr_uploaded"
+    t.integer  "category_id"
+  end
+
+  create_table "categories", :force => true do |t|
+    t.string   "name"
+    t.text     "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "constructs", :force => true do |t|
@@ -67,6 +75,14 @@ ActiveRecord::Schema.define(:version => 20100804220646) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "experiment_id"
+  end
+
+  create_table "email_observers", :force => true do |t|
+    t.string   "email"
+    t.string   "key"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "user_id"
   end
 
   create_table "encyclopaedias", :force => true do |t|

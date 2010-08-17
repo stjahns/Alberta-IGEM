@@ -10,51 +10,79 @@
 <div id="header">
 <h1>Parts Bin</h1>
 <p>Browse the parts in the kit and view detailed information in the stats sheet.</p> 
+		<% if logged_in? && current_user.can_edit_categories? %>
+      <%= link_to "New Category", new_category_path %> 
+    <%end%>
 	<div id="header-toolbar" > 
-		<% if logged_in? && current_user.can_create_bio_bytes? %>
 		<ul>
-		<li class="right"><%= link_to "New Part", new_bio_byte_path %></li>
-		</ul>
+		<% if logged_in? && current_user.can_create_bio_bytes? %>
+	  	<li class="right"><%= link_to "New Part", new_bio_byte_path %></li>
 		<% end %>
+    <% @categories.each do |c| %>    
+      <li class="left" ><a href=# class="cat" category=<%=h c.name%>><%=h c.name %></a></li>
+    <% end %>
+		</ul>
+
 
 	</div>
 </div>
 <% end %>
 
+
 <div id="bio-bytes-table">
-	<% @bytes.each do |byte| %>
-		<div class=byte-row> 
-			<div class=byte-name>
-				<h2><%= link_to byte.name, '#',:class=>"btn-byte-desc"  %></h2>
-			
-				<%= image_tag( thumb_image_path( byte.icon), :class=>"icon"  ) unless byte.icon.blank? %>
-			</div>
-			<div class="description" >
-					<span class='text'>
-					<% unless byte.function_image.blank? %>
-						<%= image_tag( thumb_image_path( byte.function_image )) %>
-					<% end %>
-					<p><%=h byte.description %></p>
-					</span>
-					<span class='sequence'>
-						acgatagac
-					</span>
+  
+  <% @categories.each do |c| %>
 
-				<%= save_notice %>
-				<div class="hanging-toolbar"><ul>
-				<% if logged_in? && current_user.can_edit_bio_bytes? %>
-					<li class="left" ><%= link_to "Edit",  edit_bio_byte_path(byte)%></li>
-					<li class="left" ><%= link_to "Delete", "#", :class=>'btn-delete-biobyte' %>
-					<%= button_to "Delete", byte, :confirm => "Are you sure?", :method => :delete %> </li>
-				<% end %>
-					<li ><%= link_to "Sequence", "#",:class=>'btn-show-sequence' %></li>
-					<li  ><%= link_to "Stats Sheet", bio_byte_path(byte) %></li>
+    <div class="category" id=<%=h c.name %> style="display:none;">
+
+		<% if logged_in? && current_user.can_edit_categories? %>
+      <%= link_to "Edit Category", edit_category_path(c)%> 
+      <%= link_to "Delete Category", c,
+          :confirm => "Are you sure? Bytes will be moved to 'Other'.",
+          :method => :delete %>
+    <%end%>
+
+    <h3><%=h c.name %></h3>
+    <p><%=h c.description %></p>
+    
+	  <% c.bio_bytes.each do |byte| %>
+	  	<div class=byte-row> 
+	  		<div class=byte-name>
+	  			<h2><%= link_to byte.name, '#',:class=>"btn-byte-desc"  %></h2>
+	  		
+	  			<%= image_tag( image_path( byte.icon), :class=>"icon"  ) unless byte.icon.blank? %>
+	  		</div>
+	  		<div class="description" >
+	  				<span class='text'>
+	  				<% unless byte.function_image.blank? %>
+	  					<%= image_tag( thumb_image_path( byte.function_image )) %>
+	  				<% end %>
+	  				<p><%=h byte.description %></p>
+	  				</span>
+
+	  			<%= save_notice %>
+	  			<div class="hanging-toolbar"><ul>
+	  			<% if logged_in? && current_user.can_edit_bio_bytes? %>
+	  				<li class="left" ><%= link_to "Edit",  edit_bio_byte_path(byte)%></li>
+	  				<li class="left" ><%= link_to "Delete", "#", :class=>'btn-delete-biobyte' %>
+	  				<%= button_to "Delete", byte, :confirm => "Are you sure?", :method => :delete %> </li>
+	  			<% end %>
+	  				<li ><%= link_to "More Information", bio_byte_path(byte) %></li>
+	  				<li  ><%= link_to "Stats Sheet", datasheet_bio_byte_path(byte) %></li>
 
 
-				</ul></div>
-			</div>
-		</div>
-	<% end %>
+	  			</ul></div>
+	  		</div>
+	  	</div>
+	  <% end %>
+
+    </div>
+
+  <% end %>
+
+
+
+
 </div>
 
 

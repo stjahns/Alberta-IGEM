@@ -4,6 +4,9 @@
 create_bio_bytes=Permission.find_or_create_by_name("create_bio_bytes")
 create_bio_bytes.update_attributes(:description => "Allowed to create new bio bytes in the database")
 
+edit_categories=Permission.find_or_create_by_name("edit_categories")
+edit_categories.update_attributes(:description => "Allowed to create, edit, delete bio byte categories")
+
 edit_bio_bytes=Permission.find_or_create_by_name("edit_bio_bytes")
 edit_bio_bytes.update_attributes(:description => "Allowed to edit the bio byte database")
 
@@ -129,6 +132,7 @@ admin_role.update_attributes(
                 :permissions => [
                                  create_bio_bytes,
                                  edit_bio_bytes,
+                                 edit_categories,
                                  delete_users,
 				 edit_step_generators,
 

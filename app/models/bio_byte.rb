@@ -21,6 +21,7 @@ class BioByte < ActiveRecord::Base
   belongs_to :image
   has_one :bio_byte_image
   belongs_to :backbone
+  belongs_to :category
 
   def icon
 	#return the image object that contains the biobyte icon
