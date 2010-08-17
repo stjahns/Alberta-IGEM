@@ -1,10 +1,49 @@
 class EncyclopaediasController < ApplicationController
  before_filter :set_nav
+ before_filter :login_required, :except => [:index, :show]
 
   # GET /encyclopaedias
   # GET /encyclopaedias.xml
+
+
+# GET /encyclopaedias/1/image_form
+  def image_form
+    @encyclopaedia = Encyclopaedia.find(params[:id])
+    @images = Image.all
+  end
+
+  require 'fileutils'
+  def upload
+    @encyclopaedia = Encyclopaedia.find(params[:id])
+
+    unless @encyclopaedia.image.blank?
+      @encyclopaedia.image.destroy
+    end
+
+    @image = Image.new(params[:encyclopaedia])
+    @encyclopaedia.image = @image
+
+    respond_to do |format|
+    
+      if @image.save
+
+	#format.html { render(:partial => 'step', :locals=>{ :step => @step} )  }
+	format.xml { render(:partial => 'encyclopaedia', :locals=>{ :encyclopaedia => @encyclopaedia} )  }
+	format.js { render(:partial => 'encyclopaedia', :locals=>{ :encyclopaedia => @encyclopaedia} )  }
+	format.html {redirect_to(edit_encyclopaedia_path(@encyclopaedia)) }
+      else
+
+	flash[:notice] = "your photo did not save!"
+	format.html {redirect_to(@encyclopaedia) }
+	format.js   {render(:partial => 'encyclopaedia', :locals=>{:encyclopaedia=>@encyclopaedia})}
+      end
+    end
+
+  end
+
   def index
     @encyclopaedias = Encyclopaedia.all
+    @new_article = Encyclopaedia.new
 
     respond_to do |format|
       format.html # index.html.erb
@@ -19,7 +58,7 @@ class EncyclopaediasController < ApplicationController
     @sections = @encyclopaedia.sections.all(:order => :section_order)
     respond_to do |format|
       format.html # show.html.erb
-      format.xml  { render :xml => @encyclopaedia, :xml => @sections}
+      format.xml  { render :xml => @encyclopaedia}
     end
   end
 
@@ -46,6 +85,7 @@ class EncyclopaediasController < ApplicationController
 
     respond_to do |format|
       if @encyclopaedia.save
+        
         flash[:notice] = 'Encyclopaedia was successfully created.'
         format.html { redirect_to(@encyclopaedia) }
         format.xml  { render :xml => @encyclopaedia, :status => :created, :location => @encyclopaedia }
@@ -88,4 +128,5 @@ class EncyclopaediasController < ApplicationController
   def set_nav
 	  @navbar_selected = :articles
   end
+
 end

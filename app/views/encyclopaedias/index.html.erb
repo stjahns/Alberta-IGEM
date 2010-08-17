@@ -1,21 +1,140 @@
-<h1>Listing encyclopaedias</h1>
+<head>
+      <script type="text/javascript" src="http://code.jquery.com/jquery-1.4.2.min.js"></script>
 
-<table>
-  <tr>
-    <th>Title</th>
-    <th>Article</th>
-  </tr>
+    <script type="text/javascript">
+      $(document).ready(function(){
+        $('div .article_intro:first').show();
+        $('.article_button a').click(function() {
+          var locator = $(this).attr("href");
+          
+          $("div:visible .article_intro").hide("fast");
+          $("div [class="+locator+"] .article_intro").show("fast");
+        });
+        $('.article_intro .links a[href$=edit]').click(function() {
+            $("div:visible .article_text").hide("fast");
+            $("div .edit_form").show("fast");
+        });
+        $('.index_new_article a[href$=new_article_form]').click(function() {
+            $("div:visible .article_text").hide("fast");
+            $("div .new_article_form").show("fast");
+        });
 
-<% @encyclopaedias.each do |encyclopaedia| %>
-  <tr>
-    <td><%=h encyclopaedia.title %></td>
-    <td><%= link_to 'Show', encyclopaedia %></td>
-    <td><%= link_to 'Edit', edit_encyclopaedia_path(encyclopaedia) %></td>
-    <td><%= link_to 'Destroy', encyclopaedia, :confirm => 'Are you sure?', :method => :delete %></td>
-  </tr>
-<% end %>
-</table>
+      });
 
-<br />
 
-<%= link_to 'New encyclopaedia', new_encyclopaedia_path %>
+    </script>
+
+</head>
+
+
+<div id ="encyclopaedia">
+<div class ="header">
+  <h1>Encyclopaedia</h1>
+</div>
+
+
+  <div class ="index">
+
+   <div class ="article_list">
+    <% for encyclopaedia in @encyclopaedias do %>
+      <div class ="article_button"><%= create_menu_links(encyclopaedia.title) %></div>
+  <%end%>
+  <div class="index_new_article">
+  <% if logged_in? && current_user.can_create_encyclopaedias?%>
+      <p><a href ="#new_article_form">New Article</a></p>
+  <% end %>
+  </div>
+  </div>
+
+   <% for encyclopaedia in @encyclopaedias do %>
+      <%= create_div_class(encyclopaedia) %>
+          <div class ="article_intro">
+            <div class="article_text">
+              <h2><%= encyclopaedia.title%></h2>
+
+              <% unless encyclopaedia.image.blank? %>
+              <div class ="captionimage">
+                 <div class = "image"><%= image_tag image150_image_path(encyclopaedia.image, :jpg) %></div>
+              </div>
+              <%end%>
+
+              <p><%= encyclopaedia.intro %></p>
+
+              <div class="links">
+          <%= link_to 'See Full Article', encyclopaedia%>
+
+          <% if logged_in? && current_user.can_edit_encyclopaedias? %>
+              | <a href="#edit">Edit</a>
+          <%end%>
+
+          <% if logged_in? && current_user.can_delete_encyclopaedias?%>
+              | <%= link_to 'Delete',encyclopaedia, :confirm => 'Are you sure?', :method => :delete %>
+          <%end%>
+          </div>
+
+
+          </div>
+
+
+              <div class ="edit_form">
+
+                  <% form_for(encyclopaedia) do |f| %>
+                  <%= f.error_messages %>
+
+                  <p>
+                    <%= f.label :title %><br />
+                    <%= f.text_field :title %>
+                  </p>
+                  <p>
+                    <%= f.label :intro %><br />
+                    <%= f.text_area :intro %>
+                  </p>
+                  <p>
+                    <%= f.submit 'Update' %>
+                  </p>
+                  <% end %>
+
+                   
+                  <div style ="float:left">
+                     <%  if !encyclopaedia.image.blank? %>
+                         <p><%= image_tag thumb_image_path(encyclopaedia.image, :jpg ) %></p>
+                     <%end%>
+                  </div>
+
+                  <div style="float:left; margin-left: 20px">
+                     <% form_for encyclopaedia, :url => upload_encyclopaedia_path(encyclopaedia), :html => { :multipart => true, :method => 'post'} do |f| %>
+                         <p><%= f.file_field :image_file %></p>
+                         <p><%= f.submit 'Upload' %></p>
+                     <% end %>
+                  </div>
+                  
+
+                  
+              </div>
+          </div>
+
+      <%= last_div() %>
+
+   <%end%>
+
+        <div class="new_article_form">
+      <% form_for(@new_article) do |f| %>
+        <%= f.error_messages %>
+
+        <p>
+         <%= f.label :title %><br />
+         <%= f.text_field :title %>
+        </p>
+        <p>
+          <%= f.label :intro %><br />
+          <%= f.text_area :intro %>
+        </p>
+        <p>
+          <%= f.submit 'Create' %>
+        </p>
+      <% end %>
+
+    </div>
+    
+ </div>
+</div>

@@ -1,4 +1,4 @@
-
+<div id ="encyclopaedia">
 <!doctype html>
 <html>
   <head>
@@ -21,13 +21,16 @@
 
     <h1>Glossary</h1>
 
-    <div id = "menu">
-      <b>Contents:</b>
-  <%for glossary in @glossaries %>
-      <div class ="item">
-      <%= create_menu_links(glossary.term) %><br/>
+    <%unless @glossaries.first.blank?%>
+      <div id = "menu">
+        <b>Contents:</b>
+        <%for glossary in @glossaries %>
+          <div class ="item">
+            <%= create_menu_links(glossary.term) %><br/>
+          </div>
+        <%end%>
       </div>
-    <%end%></div>
+    <%end%>
 
 <% @glossaries.each do |glossary| %>
 
@@ -42,8 +45,9 @@
   </p>
 
 
-  <p><%= link_to 'Edit', edit_glossary_path(glossary) %> |
-  <%= link_to 'Back', glossaries_path %></p>
+  <p><%= link_to 'Edit', edit_glossary_path(glossary) %></p>
 <% end %>
+  <p><%= link_to 'New Entry', new_glossary_path %></p>
   </body>
 </html>
+</div>

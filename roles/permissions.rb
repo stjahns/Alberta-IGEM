@@ -25,7 +25,7 @@ create_encyclopaedias.update_attributes(:description => "Allowed to create a new
 edit_encyclopaedias=Permission.find_or_create_by_name("edit_encyclopaedias")
 edit_encyclopaedias.update_attributes(:description => "Allowed to edit the encyclopaedia database")
 
-delete_encyclopaedias=Permission.find_or_create_by_name("encyclopaedias")
+delete_encyclopaedias=Permission.find_or_create_by_name("delete_encyclopaedias")
 delete_encyclopaedias.update_attributes(:description => "Allowed to delete any encyclopaedia article")
 
 create_sections=Permission.find_or_create_by_name("create_sections")
