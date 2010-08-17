@@ -1,8 +1,13 @@
 <% content_for :includes do %>
-	<%= stylesheet_link_tag 'manual' %>
+	<%= stylesheet_link_tag 'manual', :media=>'all' %>
   	<%= javascript_include_tag 'emanual' %>
 	<script src="http://cdn.jquerytools.org/1.2.3/tiny/jquery.tools.min.js"></script>
 <% end  %>
+
+<% content_for :nav do %>
+	<li><%= print_to_pdf_btn 'nav-print-to-pdf','genomikon' %></li>
+<% end %>
+
 <script> //get part background image data
 
   var constructs = [<% @experiment.constructs.each do |const| %>
@@ -15,7 +20,6 @@
 		<li><%= link_to "Edit off", '#', :id=>"toggle-edit-steps" %></li>
 	<% end %>
 <% end %>
-
 
 
 <div id= "experiment-title">

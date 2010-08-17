@@ -20,6 +20,11 @@ ActionController::Routing::Routes.draw do |map|
   map.reset 'reset/:reset_code', :controller => 'users', :action => 'reset'
   map.new_email 'users/:id/new_email/:key', :controller => 'users', :action => 'activate_email'
 
+ 
+  # print to pdf
+  map.print '/print', :controller => 'print', :action => 'print', :method => :post 
+  
+  
   # normal user routes
   map.resources :users, :member=>{:new_email=>:put}
   
@@ -35,6 +40,7 @@ ActionController::Routing::Routes.draw do |map|
   #TODO validate_sequence probably shoudn't be a GET request?
   #->Use button-to
   map.resources :requests, :only => ['destroy'], :member=>{:accept => :post, :reject=>:post}
+
 
 
   #map annoations as nested resource of biobytes

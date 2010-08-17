@@ -420,6 +420,20 @@ div#navBar {
 	z-index: 1;
 
 }
+
+#nav-print-to-pdf form { display:none; }
+span#nav-print-to-pdf a#print-to-pdf { 
+	display:block;
+	height:26px;
+	width:26px;
+	background:#000 url(/images/pdf_logo.png) no-repeat center;
+	padding:0;
+	cursor:pointer;
+ }
+
+
+
+
 div#navBar input {
 	font-size: 10px;
 	margin-right: 5px;

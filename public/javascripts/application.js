@@ -141,6 +141,28 @@ $(document).ready(function(){
 		$('#flash-notice').fadeOut("slow");
 	}, 5000);
 
+	//**********************************************************
+	//  print to pdf button
+	//**********************************************************
+
+	//on click send the documents html to the server
+	$('#print-to-pdf').click( function(){
+		var form = $(this).next('form');
+		form.find( '#page_content:input').attr('value',"");
+		
+		var html =  $('body').html();
+
+
+		form.find( '#page_content:input').attr('value',html);
+		form.submit();
+
+		// get rid of this big thing 
+		delete html;
+//return false;
+
+	});
+
+
 
   // UJS authenticity token fix: add the authenticity_token parameter
   // expected by any Rails POST request 
