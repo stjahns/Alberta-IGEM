@@ -167,7 +167,7 @@ $(document).ready(function(){
 			step_view.html(data);
 		},
 		error: function(){
-			error_mesage( $('.inplace_upload_image',step_view).find('.save-notice'),
+			error_message( $('.inplace_upload_image',step_view).find('.save-notice'),
 				"Error: the image could not be deleted.");	
 		}
 

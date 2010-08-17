@@ -94,7 +94,16 @@ ActionController::Routing::Routes.draw do |map|
   map.home '', :controller => :home
 
   # routes for images
-  map.resources :images, :member => { :thumb => :get, :step => :get , :section => :get }
+  # paths that get images need to use default .jpg format so that 
+  # they are cached as jpg instead of as html
+  map.with_options :controller => :images do |image|
+	  image.image 'images/:id.jpg', :action =>'thumb',:method=>:get 
+	  image.step_image 'images/:id/step.jpg', :action=>'step', :method=>:get
+	  image.thumb_image 'images/:id/thumb.jpg', :action=>'thumb',:method=>:get
+	  image.section_image 'images/:id/section.jpg',:action=>'thumb',:method=>:get
+  end
+  map.resources :images, :except => [ :show ]
+ # map.resources :images, :member => { :thumb => :get, :step => :get , :section => :get }
   
   
   # default routes

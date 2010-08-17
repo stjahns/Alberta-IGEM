@@ -9,7 +9,15 @@ class PrintController < ApplicationController
 		html.gsub!(/&quot;/,'')
 
 		# change paths to local paths
-		html.gsub!( /url\(\s*"(.+)\s*"\)/, "url(#{RAILS_ROOT}/public"+'\1)' )
+		html.gsub!( /url\(\s*"(.+?)\s*"\)/, "url(#{RAILS_ROOT}/public"+'\1)' )
+		#NOTE this will only work when caching is on!
+		html.gsub!( /src="(.+?)"/,"src=\"#{RAILS_ROOT}/public" + '\1' + '"' )
+
+		#TODO in order for this to work everywhere we need to cache css
+		#sheets with all url changed to absolute locations and use these
+		#for the pdf generation 
+
+		# TODO add page breaks somehow!!!
 
 		#write to a temp file
 		temp_file = File.open( 'app/views/print/' + file_name , 'w') do |f|

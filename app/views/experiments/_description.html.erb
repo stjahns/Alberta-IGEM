@@ -16,10 +16,11 @@
 
 			<% end %>
 		</td>
-		<td><%= render :partial=>'experiments/status', :locals=>{:experiment=>experiment} %> </td>
 		<% else %>
-			<td class="status complete">"PUT STATUS HERE" </td>
+			<td></td>
 		<% end %>
+		<td><%= render :partial=>'experiments/status', :locals=>{:experiment=>experiment} %> </td>
+
 		</tr>
 	</table>
 
