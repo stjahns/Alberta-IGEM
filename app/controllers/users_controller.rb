@@ -23,12 +23,6 @@ class UsersController < ApplicationController
   @users = User.find(:all)
   end
 
-#  def show
-#  	@user = User.find(params[:id])
-#	@groups = @user.groups
-#	@requests = @user.requests
-#  end
-
   def destroy
   @user = User.find(params[:id])
   @user.destroy
@@ -59,19 +53,15 @@ class UsersController < ApplicationController
     end
   end
 
-#  def profile
-   def show
+  def show
     @user = get_user_by_id_or_login
-    @groups = @user.groups
-    @requests = @user.requests
-
     if @user.nil? 
 	flash[:error] = 'No user by that name!'
     	redirect_to root_path
-
     else
-	 @experiments = @user.experiments
-	 #render profile.html.erb
+	@groups = @user.groups
+    	@requests = @user.requests
+	@experiments = @user.experiments
     end
   end
   
@@ -100,7 +90,7 @@ class UsersController < ApplicationController
 		  respond_to do |format|
 			  format.js { head :ok }
 			  format.html { flash[:notice] = "An email was sent to your new address.  Follow the link to complete the process"
-				  redirect_back_or_default('/')}
+				  redirect_to( profile_path(user) + '#_profile-options'  )}
 		  end
 	  else
 		  flash[ :error ] = "Your not allowed to do that."
@@ -113,18 +103,19 @@ class UsersController < ApplicationController
 	  # user must be logged in, checks if current user is allowed to 
 	  # activate the new email for the user in link before trying to
 	  # activate
-	  user_to_activate = User.find( params[:id] )
-	  if current_user.can_activate_new_email_for_user?( user_to_activate )
-	     if user_to_activate.activate_email( params[:key] )
-		     flash[:notice] = "Successfully activate your new email address"
+	  user = User.find( params[:id] )
+	  if current_user.can_activate_new_email_for_user?( user )
+	     if user.activate_email( params[:key] )
+		     flash[:notice] = "Successfully activated your new email address"
 		     
 	     else
 		     flash[:error] = "Could not activate new email address, check that you correctly copied the link from your email."
 	     end
+	     redirect_to( profile_path(user) + '#_profile-options' )
 	  else
 		  flash[:error] = "You do not have permission to do that!"
+		  redirect_back_or_default('/')
 	  end
-	  redirect_back_or_default('/')
   end
 
   def forgot
