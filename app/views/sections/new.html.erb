@@ -1,5 +1,7 @@
-<h1>Editing section</h1>
-<div class ="description">
+<div id ="encyclopaedia">
+<body>
+
+<h1>New section</h1>
 <% form_for([ @encyclopaedia, @section ]) do |f| %>
   <%= f.error_messages %>
 
@@ -21,7 +23,7 @@
   </p>
 
   <p>
-    <%=f.label :video_title%>
+    <%=f.label :video_title%><br/>
     <%=f.text_field :video_title%>
   </p>
   <p>
@@ -36,10 +38,12 @@
 <% end %>
 
   <p>
-        <%= link_to 'list of article sections', encyclopaedia_sections_path(@encyclopaedia) %>|
         <%= link_to 'Back to Article', encyclopaedia_sections_path(@encyclopaedia) %>
-        </p>
+  </p>
+
+
+</body>
+
 </div>
 
-  <!---Image form not working Remember to fix error later on>
 

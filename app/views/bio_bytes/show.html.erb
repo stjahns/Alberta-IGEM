@@ -1,92 +1,38 @@
-<!-- BioByte datasheet -->
-<div class = datasheet>
-<h2><u>Byte Specification sheet: <%=h @byte.biobyte_id %> in <%=h @byte.backbone.name %></u></h2>
+<% content_for :includes do %>
+  <%= javascript_include_tag 'sequence_display' %>
+  <%= javascript_include_tag 'parts_designer' %>
+  <%= stylesheet_link_tag 'parts_designer' %> 
+<%end%>
 
-<u>Description:</u>
-  <p><%=h @byte.description%></p>
+<% content_for :title do %>
+  <%=h @byte.name %>
+<% end %>
 
-<u>BioBrick registration:</u>
-  <table>
-    <tr>
-      <td>Part:</td>
-      <td><%=h @byte.biobrick_id %></td>
-    </tr>
-    <tr>
-      <td>Backbone:</td>
-      <td><%=h @byte.biobrick_backbone %></td>
-    </tr>
-  </table>
-  <br/>
-<u>BioByte designation:</u>
-  <table>
-    <tr>
-      <td>Part:</td>
-      <td><%= @byte.biobyte_id %></td>
-    </tr>
-    <tr>
-      <td>Backbone:</td>
-      <td><%= @byte.backbone.name %></td>
-    </tr>
-    <tr>
-      <td>Plasmid:</td>
-      <td><%= @byte.biobyte_plasmid %></td>
-    </tr>
-  </table>
-  <br/>
-  
-<u>Sequence features:</u>
-  <table>
-  <% @byte.annotations.each do |f| %>
-    <tr>
-      <td><%=f.start%>-<%=f.stop%>:</td>
-      <td><%=f.name%></td>
-    </tr>
-  <% end %>
-  </table>
-  <br/>
+<% content_for :header do %>
+<div id="header">
+  <%= image_tag( image_path( @byte.icon), :style=>"float:right;" ) unless @byte.icon.blank? %> 
+  <h1><%=h @byte.name %></h1>
+  <p>Part Information and Sequence</p>
 
-<u>Sequence verification:</u>
-  
-  <p>Template/primers <%=h @byte.biobyte_plasmid %> using BBa standard primers Vf and Vr</p>
-
-  <table>
-    <tr>
-      <td>Yellow:</td>
-      <td>Vf single strand confirmation <% if @byte.vf_uploaded %>(raw seq file: <%= link_to "vf_#{@byte.biobyte_id}.abi", download_vf_bio_byte_path(@byte) %>)<%end%></td>
-    </tr>
-    <tr>
-      <td>Cyan:</td>
-      <td>Vr single strand confirmation <% if @byte.vr_uploaded %> (raw seq file: <%= link_to "vr_#{@byte.biobyte_id}.abi", download_vr_bio_byte_path(@byte) %>)<%end%></td>
-    </tr>
-    <tr>
-      <td>Green:</td>
-      <td>double strand confirmation from overlap.</td>
-    </tr>
-    <tr>
-      <td>Red:</td>
-      <td>difference from expected.</td>
-    </tr>
-    <tr>
-      <td>Magenta:</td>
-      <td>uncertain.</td>
-    </tr>
-  </table>
-  <br/>
-      
-      
-  <div class = validation_string>
-    <%= @byte.val_string %>
+  <div id="header-toolbar" >
+    <ul>
+      <li class="right"><%= link_to "Technical Datasheet", datasheet_bio_byte_path(@byte) %></li>
+    </ul>
   </div>
-  <br/>
-
-<u>Function verification:</u>
-
-  <p><%=h @byte.function_verification %></p>
-  <p>INSERT PRETTY PICTURE HERE<p>
-
-<u>Additional comments:</u>
-
-  <p><%= @byte.comments %></p>
-
 </div>
+<%end%>
+
+<h2>Description:</h2> 
+<p><%=h @byte.description%></p>
+
+<p>
+  <div id="sequence">
+  </div>
+</p>
+
+<!-- hidden info for sequence display -->
+<ol id="parts_list" style="display:none;">
+  <li id = "part_<%=@byte.id%>_<%=@byte.id%>" class = "<%=@byte.type %> part" byte_id="byte_<%=@byte.id%>" part_id="part_<%=@byte.id%>" > </li>
+</ol>
+
 <%= link_to "Back", :back %>

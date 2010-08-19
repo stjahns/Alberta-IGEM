@@ -15,12 +15,19 @@ class BioBytesController < ApplicationController
 
     #get array of all BioBytes in db
     @bytes = BioByte.find(:all)
+    @categories = Category.find(:all)
 
   end
 
   def show
     
     #get byte corr. to id
+    @byte = BioByte.find(params[:id])
+
+  end
+
+  def datasheet
+
     @byte = BioByte.find(params[:id])
     render :layout => 'datasheet'
 
@@ -30,6 +37,7 @@ class BioBytesController < ApplicationController
     @image = Image.new
     @byte = BioByte.find(params[:id])
     @backbones = Backbone.all
+    @categories = Category.all
   end
 
   def new
@@ -40,6 +48,7 @@ class BioBytesController < ApplicationController
     #linker or ORF?
     @byte=params[:byte][:type].constantize.new(params[:byte])
     @byte.sequence = @byte.sequence.upcase
+    @byte.category = Category.find_by_name("Other")
     #TODO exceptions
     if @byte.save
       redirect_to edit_bio_byte_path(@byte)
@@ -69,6 +78,8 @@ class BioBytesController < ApplicationController
     end
 
     if @byte.update_attributes(params[:byte])
+      @byte.sequence = @byte.sequence.upcase
+      @byte.save
       redirect_to bio_byte_path(@byte)
     else
       render edit_bio_byte_path(@byte)

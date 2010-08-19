@@ -7,4 +7,5 @@ namespace :roles do
 	require 'roles/permissions'
 	puts "done"
   end
+
 end

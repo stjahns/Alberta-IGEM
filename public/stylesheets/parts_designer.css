@@ -122,7 +122,9 @@ ul.parts_bin li{
 .ui-tabs-hide{
   display:          none;
 }
+
 .annotation{
+  position:         absolute;
   border:           1px solid black;
 }
 
@@ -133,27 +135,47 @@ ul.parts_bin li{
 
 div#sequence {
   text-align:       left;
+  font-size:        9pt;
   white-space:      nowrap;
-  overflow:         auto;
   font-family:      'monospace';
-  margin:           2;
   border:           1px solid #999;
+  padding-top:      7px;
+}
+
+.numspacer{
+  float: left;
+  text-align: right;
+  width: 6ex;
+}
+
+.seq{
+  position: relative;
+}
+.partline{
+  left: 6ex;
+  position:         relative;
+  height: 3ex;
+}
+.featureline{
+  left: 6ex;
+  position:         relative;
+  height: 3ex;
 }
 
 div#nav {
 }
 
 
-
+/*
 .seqtable td{
   font-size:        9pt;
   font-family:      'monospace';
 }
+*/
 
 .annotation{
   margin:           -1px;
   text-align:       center;
-  float:            left;
   white-space:      nowrap;
 }
 

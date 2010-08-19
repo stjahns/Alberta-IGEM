@@ -12,9 +12,18 @@
 */
 /*styling for glossaries page*/
 
-h1{
+#encyclopaedia{
+    margin-left: 150px;
+    margin-right: 150px;
+}
+
+#encyclopaedia h1{
     text-align: center;
     
+}
+#encyclopaedia .header{
+    margin-top: 40px;
+    margin-bottom:40px;
 }
 #container {
 	width: 750px;
@@ -22,7 +31,7 @@ h1{
 	margin-right: auto;
 }
 
-body, ol, ul, td {
+ body, ol, ul, td {
 	background-image: url(../images/background.png);
 	background-repeat: repeat-y;
 	background-position: center;
@@ -34,14 +43,11 @@ body, ol, ul, td {
   text-align: left;
 }
 
- p,ol,ul,td {
-  margin-left: 12em;
-  margin-right: 10em;
+ #encyclopaedia p{
   text-align: left;
 }
 
-h2{
-  margin-left:8em;
+#encyclopaedia h2{
   text-align: left;
 }
 pre {
@@ -51,17 +57,16 @@ pre {
 }
 
 a { color: #000; }
-a:hover { color: #fff; background-color:#000; }
+#encyclopaedia a:hover { color: #000; }
 a:visited { color: #666; }
 
-.fieldWithErrors {
+#encyclopaedia .fieldWithErrors {
   padding: 2px;
   background-color: red;
   display: table;
-  margin-left: 12em;
 }
 
-#errorExplanation {
+#encyclopaedia #errorExplanation {
   width: 400px;
   border: 2px solid red;
   padding: 7px;
@@ -125,7 +130,7 @@ a:visited { color: #666; }
      
 }
 
-.item{
+#menu.item{
   width: inherit;
   height: 18px;
   overflow: hidden;
@@ -169,7 +174,6 @@ a:visited { color: #666; }
 .captionimage{
     float: right;
     border: 1px black solid;
-    margin-right: 12em;
     margin-bottom: 15px;
     margin-left: 15px;
 }
@@ -177,7 +181,6 @@ a:visited { color: #666; }
 .edit{
     margin-bottom: 0px;
     margin-top: 0px;
-    margin-right: 12em;
     float : right;
 }
 
@@ -190,23 +193,78 @@ a:visited { color: #666; }
     margin-left: 470px;
     margin-right: 250px;
 }
+
+#encyclopaedia .image_form_link{
+   
+}
 .description{
     float:left;
     margin-bottom: 150px;
 }
 
-.intro{
+#article .intro{
     margin-right: 12em;
 }
 
-em{
+#encyclopaedia em{
     display:none;
 }
 
+.def{
+    display:none;
+}
 .video{
     margin-left: 12em;
 }
 
 .vidlink{
     margin-left:12em;
+}
+
+#encyclopaedia .article_list{
+    border-right: 1px solid gray;
+    float: left;
+    width:250px;
+    line-height: 25px;
+    font-size: 15.5px;
+}
+
+#encyclopaedia .article_intro{
+    display:none;
+    font-family: Courrier;
+    float: right;
+    width:490px;
+    margin-left: 10px;
+}
+
+#encyclopaedia .index{
+    margin-left:100px;
+    margin-right: 95px;
+    border-top: 1px solid gray;
+}
+
+#encyclopaedia .article_button{
+    border-bottom: 1px solid gray;
+}
+
+#encyclopaedia .links{
+    margin-bottom: 0px;
+    height: 18px;
+}
+
+#encyclopaedia .edit_form{
+    margin-bottom: 0px;
+    height: 18px;
+    display: none;
+}
+
+#encyclopaedia .index_new_article{
+    line-height: 18px;
+    font-size: 13px;
+}
+
+#encyclopaedia .new_article_form{
+    display:none;
+    float:right;
+    width: 490px;
 }

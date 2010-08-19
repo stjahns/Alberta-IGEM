@@ -6,6 +6,8 @@
       <td><%= text_field 'byte', 'name'%></td></tr>
   <tr><td><label for="byte_type">Type:</label></td>
       <td><%= select("byte", "type", ["ORF", "Linker"]) %> </td>
+  <tr><td><label for="byte_category">BioByte Category:</label></td>
+      <td><%= collection_select(:byte, :category_id, @categories, :id, :name) %> </td>
   <tr><td><label for="byte_biobrick_id">BioBrick ID:</label></td>
       <td><%= text_field 'byte', 'biobrick_id'%></td></tr>
   <tr><td><label for="byte_biobrick_backbone">BioBrick Backbone:</label></td>

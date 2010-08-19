@@ -728,7 +728,6 @@ div#bio-bytes-table p{
 div#bio-bytes-table div.description {
 	margin-bottom: 2em;
 	padding-top:0.5em;
-	display:none;
 }
 /* if the row is expanded **********************/
 div#bio-bytes-table div.byte-row.selected a.btn-byte-desc:link, div#bio-bytes-table div.byte-row.selected a.btn-byte-desc:visited {

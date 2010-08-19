@@ -4,6 +4,9 @@
 create_bio_bytes=Permission.find_or_create_by_name("create_bio_bytes")
 create_bio_bytes.update_attributes(:description => "Allowed to create new bio bytes in the database")
 
+edit_categories=Permission.find_or_create_by_name("edit_categories")
+edit_categories.update_attributes(:description => "Allowed to create, edit, delete bio byte categories")
+
 edit_bio_bytes=Permission.find_or_create_by_name("edit_bio_bytes")
 edit_bio_bytes.update_attributes(:description => "Allowed to edit the bio byte database")
 
@@ -22,7 +25,7 @@ create_encyclopaedias.update_attributes(:description => "Allowed to create a new
 edit_encyclopaedias=Permission.find_or_create_by_name("edit_encyclopaedias")
 edit_encyclopaedias.update_attributes(:description => "Allowed to edit the encyclopaedia database")
 
-delete_encyclopaedias=Permission.find_or_create_by_name("encyclopaedias")
+delete_encyclopaedias=Permission.find_or_create_by_name("delete_encyclopaedias")
 delete_encyclopaedias.update_attributes(:description => "Allowed to delete any encyclopaedia article")
 
 create_sections=Permission.find_or_create_by_name("create_sections")
@@ -130,6 +133,7 @@ admin_role.update_attributes(
                 :permissions => [
                                  create_bio_bytes,
                                  edit_bio_bytes,
+                                 edit_categories,
                                  delete_users,
 				 edit_step_generators,
 

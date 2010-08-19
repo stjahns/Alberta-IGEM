@@ -21,7 +21,7 @@
     </script>
 
   </head>
-
+  <div id ="encyclopaedia">
   <p>
     <i><h1><%= @encyclopaedia.title %></h1></i>
 </p>
@@ -86,4 +86,5 @@
 <p><%= link_to 'Edit', edit_encyclopaedia_path(@encyclopaedia) %> |
 <%= link_to 'Back', encyclopaedias_path %>| <%= link_to 'New Section', new_encyclopaedia_section_path(@encyclopaedia) %>
 </p>
+  </div>
 </html>
