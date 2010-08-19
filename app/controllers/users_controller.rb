@@ -152,7 +152,7 @@ class UsersController < ApplicationController
 
   private
   def  get_user_by_id_or_login
-	if params[:id] =~ /[a-zA-Z]/
+	if params[:id] =~ /[a-zA-Z_]/
 	       	User.find_by_login(params[:id]) 
 	else 
 		User.find(params[:id])

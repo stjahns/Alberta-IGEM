@@ -1,13 +1,14 @@
 # == Schema Information
-# Schema version: 20100806052151
+# Schema version: 20100819165030
 #
 # Table name: encyclopaedias
 #
-#  id         :integer(4)      not null, primary key
-#  title      :string(255)
-#  created_at :datetime
-#  updated_at :datetime
-#  intro      :text
+#  id           :integer(4)      not null, primary key
+#  title        :string(255)
+#  created_at   :datetime
+#  updated_at   :datetime
+#  intro        :text
+#  num_sections :integer(4)
 #
 
 class Encyclopaedia < ActiveRecord::Base

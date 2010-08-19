@@ -1,2 +1,0 @@
-class ORF < BioByte
-end

@@ -1,14 +1,14 @@
 # == Schema Information
-# Schema version: 20100806052151
+# Schema version: 20100819165030
 #
-# Table name: email_observers
+# Table name: new_user_emails
 #
 #  id         :integer(4)      not null, primary key
 #  email      :string(255)
 #  key        :string(255)
+#  user_id    :integer(4)
 #  created_at :datetime
 #  updated_at :datetime
-#  user_id    :integer(4)
 #
 
 class NewUserEmail  < ActiveRecord::Base
