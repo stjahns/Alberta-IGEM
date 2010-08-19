@@ -2,8 +2,8 @@ module ExperimentsHelper
 		def total_experiment_status( owner )
 			# can be used for group or user
 
-			tcomplete = owner.experiments_completed
-			tworking  = owner.experiments_working
+			tcomplete = owner.complete_counter
+			tworking  = owner.working_counter
 			#tnone	  = owner.experiments.all.length - tcomplete - tworking
 			"<div class=\"experiment-status\"><ul>" +
 			"<li>#{experiment_status "complete",tcomplete }</li>" +

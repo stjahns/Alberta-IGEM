@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20100806052151
+# Schema version: 20100819165030
 #
 # Table name: groups
 #
@@ -115,13 +115,22 @@ class Group < ActiveRecord::Base
 		return false if r.blank?
 		r.destroy
 	end
-	def experiments_completed
-		self.experiments.find_all_by_status( "complete" ).length
+	def complete_counter
+		total = 0
+		all_users =  self.users.all
+		all_users.each do |user|
+			total += user.complete_counter
+		end
+		total
 	end
-	def experiments_working
-		self.experiments.find_all_by_status( "working" ).length
+	def working_counter
+		total = 0
+		all_users = self.users.all
+		all_users.each do |user|
+			total += user.working_counter
+		end
+		total
 	end
-
 
 
 	private

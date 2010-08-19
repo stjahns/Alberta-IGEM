@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20100806052151
+# Schema version: 20100817210110
 #
 # Table name: experiments
 #
@@ -16,7 +16,7 @@
 #
 
 class Experiment < ActiveRecord::Base
-  attr_accessible :title, :authour, :description, :published, :image, :user_idi, :status
+  attr_accessible :title, :authour, :description, :published, :image, :user_id, :status
   has_many :steps, :dependent => :destroy  
   has_many :constructs, :dependent => :destroy
   has_many :notes, :through => :steps
@@ -88,7 +88,16 @@ class Experiment < ActiveRecord::Base
 
   private
   def setStatus( new_status )
+	  u = self.user
+	  if( self.status == "working" )
+		  u.working_counter  -= 1 if( new_status != "working" )
+		  u.complete_counter += 1 if( new_status == "complete")
+	  elsif( self.status == "complete" )
+		  u.complete_counter -= 1 if( new_status != "complete")
+		  u.working_counter  += 1 if( new_status == "working" )
+	  end
 	  self.status = new_status
+	  self.save && u.save
   end
  
 
