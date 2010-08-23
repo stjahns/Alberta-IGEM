@@ -8,7 +8,7 @@
 <% end %>
 
 <div class= "upload_thumb_container">
-	<%= image_tag( thumb_image_path(note.image)) unless note.image.blank? %>
+	<%= image_tag( thumb_image_path(note.image, :jpg )) unless note.image.blank? %>
 </div>
 
 <% image_label = note.image.blank? ? "attach an image" : "change the image" %>

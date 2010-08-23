@@ -101,11 +101,11 @@ ActionController::Routing::Routes.draw do |map|
   # paths that get images need to use default .jpg format so that 
   # they are cached as jpg instead of as html
   map.with_options :controller => :images do |image|
-	  image.image 'images/:id.jpg', :action =>'thumb',:method=>:get 
-	  image.step_image 'images/:id/step.jpg', :action=>'step', :method=>:get
-	  image.thumb_image 'images/:id/thumb.jpg', :action=>'thumb',:method=>:get
-	  image.section_image 'images/:id/section.jpg',:action=>'thumb',:method=>:get
-    image.image150 'images/:id/image150.jpg',:action=>'image150',:method=>:get
+#	  image.image 'images/:id.:format', :action =>'thumb',:method=>:get 
+	  image.step_image 'images/:id/step.:format', :action=>'step', :method=>:get
+	  image.thumb_image 'images/:id/thumb.:format', :action=>'thumb',:method=>:get
+	  image.section_image 'images/:id/section.:format',:action=>'thumb',:method=>:get
+    image.image150 'images/:id/image150.:format',:action=>'image150',:method=>:get
   end
   map.resources :images, :except => [ :show ]
  # map.resources :images, :member => { :thumb => :get, :step => :get , :section => :get }

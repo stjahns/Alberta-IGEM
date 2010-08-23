@@ -12,7 +12,7 @@
 
 <%  if !@step.image.blank? %>
 	<p><%= image_tag image_path(@step.image, :jpg ) %></p>
-	<p><%= image_tag thumb_image_path(@step.image ) %></p>
+	<p><%= image_tag thumb_image_path(@step.image, :jpg ) %></p>
 <% else %>
   <p>
     There is no image.

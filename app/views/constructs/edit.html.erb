@@ -102,7 +102,7 @@ The main construct designer view.
 <% BioByte.all.each do |byte| %>
   
   <div id='info_<%=byte.id%>'>
-    <div class="byte_desc_img"><%= image_tag step_image_path(byte.bio_byte_image.image) unless byte.bio_byte_image.blank? %></div> 
+    <div class="byte_desc_img"><%= image_tag step_image_path(byte.bio_byte_image.image, :jpg ) unless byte.bio_byte_image.blank? %></div> 
     
     <h3><%=h byte.name%></h3>
     <p><i><%=h byte.description%></i><p>

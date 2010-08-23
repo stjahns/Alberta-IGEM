@@ -17,7 +17,8 @@
 #
 
 class Image < ActiveRecord::Base
-   acts_as_fleximage :image_directory => 'public/images/fullsize'
+   acts_as_fleximage 	:image_directory => 'public/images/fullsize',
+	   		:image_storage_format => :png
 
    belongs_to :step
    belongs_to :note
