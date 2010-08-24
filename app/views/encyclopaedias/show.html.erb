@@ -11,8 +11,17 @@
             $(this).next("em").animate({opacity: "hide", top: "-85"}, "fast");
 	});
 
-      $('a.vidlink').click(function() {
-         $('em.video').toggle(1000);
+      $('div.show_section_vidlink').click(function() {
+         $(this).next('em.video').toggle(1000);
+        });
+       $('.edit a').click(function() {
+         var locator= $(this).attr("href");
+          
+          $("div:visible .edit_section_form").hide("fast");
+          $("div .section_text").show("fast");
+          $("div [class="+locator+"] .section_text").hide("fast");
+          $("div [class="+locator+"] .edit_section_form").show("fast");
+          
         });
 
       });
@@ -22,69 +31,134 @@
 
   </head>
   <div id ="encyclopaedia">
-  <p>
-    <i><h1><%= @encyclopaedia.title %></h1></i>
-</p>
+
+<div class="show_nav_links">
+<%if logged_in? && current_user.can_edit_encyclopaedias?%>
+    <%= link_to 'Edit', edit_encyclopaedia_path(@encyclopaedia) %> |
+<%end%>
+<%= link_to 'Back to Encyclopaedia', encyclopaedias_path %>
+<%if logged_in? && current_user.can_create_sections?%>
+  | <%= link_to 'New Section', new_encyclopaedia_section_path(@encyclopaedia) %>
+<% end %>
+</div>
+
+<div class ="show_intro">
 
 
-<%unless @encyclopaedia.sections.blank?%>
-
+  <%unless @encyclopaedia.sections.blank?%>
     <div id = "menu">
       <b>Contents:</b>
-  <%for section in @sections %>
-      <div class ="item">
-      <%= create_menu_links(section.title) %><br/>
-      </div>
-    <%end%></div>
+      <%for section in @sections %>
+        <div class ="item">
+        <%= create_menu_links(section.title) %><br/>
+        </div>
+      <%end%>
+    </div>
 <%end%>
 
-<p class ="intro">
   <% intro = add_glossary_links(@encyclopaedia.intro) %>
+   <% unless  @encyclopaedia.image.blank? %>
+	<div class ="captionimage">
+          <div class = "image"><%= image_tag section_image_path(@encyclopaedia.image, :jpg) %></div>
+          <i><div class ="caption"><%= section.caption %></div></i>
+        </div>
+  <div class ="article_header">
+    <i><%= @encyclopaedia.title %></i>
+</div>
+    <% end %>
   <%= add_popups(intro) %>
-</p>
+
+</div>
 
 
 <% for section in @sections %>
 <div class ="hanging-toolbar"></div>
-  <p class ="edit"><%= link_to 'Edit', edit_encyclopaedia_section_path(@encyclopaedia,section) %></p> <br/>
+<%=create_div_class(section)%>
+<div class="section_text">
+  <div class ="edit"><%= create_section_edit_link(section.title, "Edit") %></div> <br/>
+
   <div class ="section">
    <% unless  section.image.blank? %>
 	<div class ="captionimage">
           <div class = "image"><%= image_tag section_image_path(section.image, :jpg) %></div>
           <i><div class ="caption"><%= section.caption %></div></i>
         </div>
-    <% else %>
-        <p class ="edit">
-         <%= link_to 'Upload Image', edit_encyclopaedia_section_path(@encyclopaedia,section) %>
-        </p>
     <% end %>
 
-    <h2><%= create_bookmark(section.title) %></h2>
-
-    <p>
+    <div class = "show_section_title">
+    <%= create_bookmark(section.title) %>
+    </div>
+    <div class ="show_section_text">
     <% description = add_glossary_links(section.description) %>
     <%= add_popups(description) %>
-    </p>
+    </div>
 
     
     <%unless section.video.blank?%>
 
-    
-    <a class ="vidlink" href ="#section.title"><%= "Watch a video on "+section.video_title %></a>
+    <div class ="show_section_vidlink">
+    <a href ="#section.vid"><%= "Watch a video on "+section.video_title %></a>
+    </div>
     <em class= "video"><%= section.video%></em>
+    
 
     <%end%>
 
+    </div>
+
      </div>
- 
+
+<div class="edit_section_form">
+                    <% form_for([ @encyclopaedia, section ]) do |f| %>
+                  <%= f.error_messages %>
+
+                <div class="show_section_edit_text">
+                  <p>
+                    <%= f.label :title %><br />
+                    <%= f.text_field :title %>
+                  </p>
+                  <p>
+                    <%= f.label :text %><br />
+                    <%= f.text_area :description %>
+                  </p>
+                  <div class="update_button">
+                  <p>
+                    <%= f.submit 'Update' %>
+                  </p>
+                  </div>
+                  </div>
+                <div class ="show_section_edit_video">
+                  <p>
+                    <%=f.label :video_title%>
+                    <%=f.text_field :video_title%>
+                  </p>
+                  <div class="update_button">
+                    <%= f.label :video %><br />
+                     <%= f.text_area :video %>
+                  
+                </div>
+
+                  <% end %>
+
+                  <div style ="float:left">
+                     <%  if !section.image.blank? %>
+                         <p><%= image_tag thumb_image_path(section.image, :jpg ) %></p>
+                     <%end%>
+                  </div>
+
+                  <div style="float:left; margin-left: 20px">
+                     <% form_for section, :url => upload_encyclopaedia_path(section), :html => { :multipart => true, :method => 'post'} do |f| %>
+                         <p><%= f.file_field :image_file %></p>
+                         <p><%= f.submit 'Upload' %></p>
+                     <% end %>
+                  </div>
+</div>
+ <%=last_div()%>
 <% end %>
 
 <div class ="hanging-toolbar"></div>
 
-
-
-<p><%= link_to 'Edit', edit_encyclopaedia_path(@encyclopaedia) %> |
-<%= link_to 'Back', encyclopaedias_path %>| <%= link_to 'New Section', new_encyclopaedia_section_path(@encyclopaedia) %>
-</p>
   </div>
+
+
 </html>

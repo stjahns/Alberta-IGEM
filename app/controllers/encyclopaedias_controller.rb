@@ -55,7 +55,7 @@ class EncyclopaediasController < ApplicationController
   # GET /encyclopaedias/1.xml
   def show
     @encyclopaedia = Encyclopaedia.find(params[:id])
-    @sections = @encyclopaedia.sections.all(:order => :section_order)
+    @sections = @encyclopaedia.sections.all
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @encyclopaedia}
@@ -85,7 +85,6 @@ class EncyclopaediasController < ApplicationController
 
     respond_to do |format|
       if @encyclopaedia.save
-        
         flash[:notice] = 'Encyclopaedia was successfully created.'
         format.html { redirect_to(@encyclopaedia) }
         format.xml  { render :xml => @encyclopaedia, :status => :created, :location => @encyclopaedia }

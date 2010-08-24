@@ -8,7 +8,9 @@
           var locator = $(this).attr("href");
           
           $("div:visible .article_intro").hide("fast");
+          $("div:visible .new_article_form").hide("fast");
           $("div [class="+locator+"] .article_intro").show("fast");
+          $("div .edit_form").hide("fast");
         });
         $('.article_intro .links a[href$=edit]').click(function() {
             $("div:visible .article_text").hide("fast");
@@ -117,7 +119,7 @@
 
    <%end%>
 
-        <div class="new_article_form">
+    <div class="new_article_form">
       <% form_for(@new_article) do |f| %>
         <%= f.error_messages %>
 
