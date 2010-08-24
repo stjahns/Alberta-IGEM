@@ -1,0 +1,8 @@
+# how to install wkhtmltopdf for ubuntu 
+# note! this is the 32 bit version
+
+wget http://wkhtmltopdf.googlecode.com/files/wkhtmltopdf-0.9.9-static-i386.tar.bz2
+
+tar -jxvf wkhtmltopdf-0.9.9-static-i386.tar.bz2 
+
+sudo mv wkhtmltopdf-i386 /usr/bin/wkhtmltopdf

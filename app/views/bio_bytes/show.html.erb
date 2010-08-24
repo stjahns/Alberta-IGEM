@@ -1,23 +1,38 @@
-<h1><%= @byte.name %></h1>
+<% content_for :includes do %>
+  <%= javascript_include_tag 'sequence_display' %>
+  <%= javascript_include_tag 'parts_designer' %>
+  <%= stylesheet_link_tag 'parts_designer' %> 
+<%end%>
 
-<table>
-  <tr>
-    <td>Name:</td>
-    <td><%=@byte.name%></td>
-  </tr>
-  <tr>
-    <td>Type:</td>
-    <td><%=@byte.type%></td>
-  </tr> 
-  <tr>
-    <td>Description:</td>
-    <td><%=@byte.description%></td>
-  </tr>
+<% content_for :title do %>
+  <%=h @byte.name %>
+<% end %>
 
-  <tr>
-    <td>Sequence:</td>
-    <td><%=@byte.sequence%></td>
-  </tr>
-</table>
+<% content_for :header do %>
+<div id="header">
+  <%= image_tag( image_path( @byte.icon), :style=>"float:right;" ) unless @byte.icon.blank? %> 
+  <h1><%=h @byte.name %></h1>
+  <p>Part Information and Sequence</p>
+
+  <div id="header-toolbar" >
+    <ul>
+      <li class="right"><%= link_to "Technical Datasheet", datasheet_bio_byte_path(@byte) %></li>
+    </ul>
+  </div>
+</div>
+<%end%>
+
+<h2>Description:</h2> 
+<p><%=h @byte.description%></p>
+
+<p>
+  <div id="sequence">
+  </div>
+</p>
+
+<!-- hidden info for sequence display -->
+<ol id="parts_list" style="display:none;">
+  <li id = "part_<%=@byte.id%>_<%=@byte.id%>" class = "<%=@byte.type %> part" byte_id="byte_<%=@byte.id%>" part_id="part_<%=@byte.id%>" > </li>
+</ol>
 
 <%= link_to "Back", :back %>

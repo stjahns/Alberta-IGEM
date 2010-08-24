@@ -26,8 +26,15 @@ class Group < ActiveRecord::Base
 	
 	attr_accessible :name, :description
 
-#	before_create :create_role
-#	after_create :assign_role
+
+	validates_presence_of :name
+	validates_length_of   :name, :within => 3..40
+	validates_format_of :name, :with => /^(\s|[0-9a-zA-Z])+$/, :message=>"Only alphanumberic characters and spaces allowed"
+  	validates_format_of :name, :with => /[a-zA-Z]/, :message=>"must contain at least one letter"
+	validates_uniqueness_of :name, :case_sensitive => false
+
+ 
+
 
 #	def admins
 #		#self.role.users

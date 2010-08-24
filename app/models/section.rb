@@ -1,3 +1,20 @@
+# == Schema Information
+# Schema version: 20100806052151
+#
+# Table name: sections
+#
+#  id               :integer(4)      not null, primary key
+#  title            :string(255)
+#  description      :text
+#  encyclopaedia_id :integer(4)
+#  section_order    :integer(4)
+#  video            :text
+#  created_at       :datetime
+#  updated_at       :datetime
+#  video_title      :text
+#  caption          :text
+#
+
 class Section < ActiveRecord::Base
   attr_accessible :title, :description, :image, :encyclopaedia_id,
                   :section_order, :video, :caption, :video_title

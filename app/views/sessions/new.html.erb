@@ -1,5 +1,9 @@
 <%= render :partial=>'shared/logo' %>
 
+<h2 id="home-notice" <%= 'class="error"' if flash[:error]%>>
+	<%= flash[:error] || flash[:notice] %></h2>
+
+
 <div id="user-form">
 <h1>Log In</h1>
 
@@ -19,9 +23,6 @@
 <% end -%>
 <%= link_to 'Forgot Password?', :forgot %>
 </div>
-
-<h2 id="home-notice" <%= 'class="error"' if flash[:error]%>>
-	<%= flash[:error] || flash[:notice] %></h2>
 
 <div id="home-bar">
    <ul>	

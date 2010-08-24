@@ -53,4 +53,13 @@ $(document).ready(function(){
 		return false;
 	});
 
+  //linkify tabs
+  $('.cat').click(function(){
+    $('.cat').removeClass('selected');
+    $(this).addClass('selected');
+    cat = $("#" + $(this).attr('category') );
+    $('.category').hide();
+    cat.show(); 
+  });
+
 });

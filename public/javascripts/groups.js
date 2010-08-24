@@ -154,8 +154,17 @@ $(document).ready(function(){
 				text_area.addClass('loading');	
 				},
 		  	success: function(data) { 
+
+				text_area.removeClass('loading')
+				.css('background-color', '#c7ffc4' )
+				.delay('1000')
+				.animate({backgroundColor: '#fff'},3000)
+
+/*
 				text_area.removeClass('loading');
+
 				success_message( save_notice, "Message sent");
+*/
 				form.reset();
 				$('#group-messages').prepend(data);
 

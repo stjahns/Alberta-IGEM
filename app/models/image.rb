@@ -11,6 +11,8 @@
 #  updated_at     :datetime
 #  step_id        :integer(4)
 #  note_id        :integer(4)
+#  section_id     :integer(4)
+#  caption        :text
 #
 
 class Image < ActiveRecord::Base

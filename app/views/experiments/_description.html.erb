@@ -16,11 +16,11 @@
 
 			<% end %>
 		</td>
-
-			<td class="status complete" ><input type="checkbox"> Completed</td>
 		<% else %>
-			<td class="status complete">"PUT STATUS HERE" </td>
+			<td></td>
 		<% end %>
+		<td><%= render :partial=>'experiments/status', :locals=>{:experiment=>experiment} %> </td>
+
 		</tr>
 	</table>
 

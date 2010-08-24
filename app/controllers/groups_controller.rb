@@ -27,24 +27,19 @@ class GroupsController < ApplicationController
   end
 
   def create
-	  #@group = Group.new( params[:group] )
-	  @group = current_user.create_new_group( params[:group] )
-	  unless @group.nil?
+	  @group = Group.new( params[:group] )
+	  if @group.save
 	  
 		  # assign creater to admin_role of group
-		  #current_user.group = @group
-		  #current_user.role = @group.admin_role
+		  @group.create_admin( current_user )
 		  
 		  #if current_user.save
 			flash[:notice] = 'The group was succesfully created.'
-			#redirect_to pretty_group_path( @group.name )
-			redirect_to group_path( @group )
-		  #else
-		#	flash[:error] = 'There was an error creating the group.'
-		 # end
+			redirect_to pretty_group_path( @group )
+			#redirect_to group_path( @group )
 	  else
 		  flash[:error] = 'The group could not be created!'
-		  redirect_to groups_path
+		  render :action => 'new'
 	  end
 
   end
@@ -120,10 +115,10 @@ class GroupsController < ApplicationController
 
 	if current_user.groups.delete( @group )
 		flash[:notice] = "#{current_user.login} has left #{@group.name}"
-		redirect_to profile_path( current_user.login )	
+		redirect_to profile_path( current_user )	
 	else
 		falsh[:error] = "error leaving #{@group.name}"
-		redirect_to profile_path( current_user.login )	
+		redirect_to profile_path( current_user )	
 	end
 
 
@@ -200,7 +195,11 @@ class GroupsController < ApplicationController
 	  @navbar_selected = :groups
   end
   def  get_group_by_id_or_name
-	 params[:name] ? Group.find_by_name(params[:name]) : Group.find(params[:id])
+	if params[:id] =~ /[a-zA-Z]/
+	       	Group.find_by_name(params[:id].gsub( /_/ ," " ) ) 
+	else 
+		Group.find(params[:id])
+	end
   end
 
   def not_in_group

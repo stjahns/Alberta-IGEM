@@ -4,6 +4,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :glossaries
 
   map.resources :definitions
+  
 
 
   map.resources :encyclopaedias, :member => {:upload => :post, :image_form => :get} do |encyclopaedias|
@@ -21,28 +22,39 @@ ActionController::Routing::Routes.draw do |map|
   map.reset 'reset/:reset_code', :controller => 'users', :action => 'reset'
   map.new_email 'users/:id/new_email/:key', :controller => 'users', :action => 'activate_email'
 
+ 
+  # print to pdf
+  map.print '/print', :controller => 'print', :action => 'print', :method => :post 
+  
+  
   # normal user routes
   map.resources :users, :member=>{:new_email=>:put}
   
-  # pretty routes for user profile pages
-  map.profile '/user/:login', :controller => 'users', :action => 'profile', :method => 'get' 
-
   # group routes
   map.resources :groups, :member => { :upload => :post, :join => :get, :join_with_key=>:post, :request_to_join => :post , :quit=>:delete, :new_key=>:put, :change_role=>:put, :kick_out=>:delete } do |groups|
 	  groups.resources :messages, :only=>[ :index,:create,:destroy,:update ]
   end
 
 
-  #pretty group routes
-  map.pretty_group '/group/:name', :controller => 'groups', :action => 'show', :method => 'get'
     map.resources :viewer
 
 
+  #TODO validate_sequence probably shoudn't be a GET request?
+  #->Use button-to
   map.resources :requests, :only => ['destroy'], :member=>{:accept => :post, :reject=>:post}
 
 
+  map.resources :categories
+
   #map annoations as nested resource of biobytes
-  map.resources :bio_bytes, :member => { :upload => :post, :upload_desc_img => :post, :update => :post } do |bytes|
+  map.resources :bio_bytes, :member => { :upload => :post, 
+                                        :upload_desc_img => :post, 
+                                        :update => :post,
+                                        :upload_abi => :post,
+                                        :download_vf => :get,
+                                        :download_vr => :get,
+                                        :datasheet => :get,
+                                        :validate_sequence => :get } do |bytes|
     bytes.resources :annotations
   end
 
@@ -61,7 +73,8 @@ ActionController::Routing::Routes.draw do |map|
 
   # map steps as nested resource of experiments
   map.resources :experiments, :member => { :print => :get,
-                                           :clone => :get } do |experiments|
+                                           :clone => :get,
+ 					   :set_status => :post } do |experiments|
      experiments.resources :steps, 
 	     :member => { :upload => :post, 
 	     		  :up => :put,
@@ -85,7 +98,17 @@ ActionController::Routing::Routes.draw do |map|
   map.home '', :controller => :home
 
   # routes for images
-  map.resources :images, :member => { :thumb => :get, :step => :get , :section => :get, :image150 => :get }
+  # paths that get images need to use default .jpg format so that 
+  # they are cached as jpg instead of as html
+  map.with_options :controller => :images do |image|
+	  image.image 'images/:id.jpg', :action =>'thumb',:method=>:get 
+	  image.step_image 'images/:id/step.jpg', :action=>'step', :method=>:get
+	  image.thumb_image 'images/:id/thumb.jpg', :action=>'thumb',:method=>:get
+	  image.section_image 'images/:id/section.jpg',:action=>'thumb',:method=>:get
+    image.image150 'images/:id/image150.jpg',:action=>'image150',:method=>:get
+  end
+  map.resources :images, :except => [ :show ]
+ # map.resources :images, :member => { :thumb => :get, :step => :get , :section => :get }
   
   
   # default routes

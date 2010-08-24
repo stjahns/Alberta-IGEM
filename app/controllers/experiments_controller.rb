@@ -129,6 +129,22 @@ class ExperimentsController < ApplicationController
 
   end
 
+  def set_status
+	status = params[:status]
+	if status == "complete"
+		@experiment.status_completed
+	elsif status == "working"
+		@experiment.status_working
+	else 
+		@experiment.status_none
+	end
+	
+	respond_to do |format|
+		format.js { head :ok }
+
+	end
+  end
+
    
   helper_method :can_edit_experiment?
   def can_edit_experiment?( experiment )

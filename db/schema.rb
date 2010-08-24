@@ -25,6 +25,12 @@ ActiveRecord::Schema.define(:version => 20100817210110) do
     t.datetime "updated_at"
   end
 
+  create_table "backbones", :force => true do |t|
+    t.string "name"
+    t.string "prefix"
+    t.string "suffix"
+  end
+
   create_table "bio_byte_images", :force => true do |t|
     t.integer  "bio_byte_id"
     t.integer  "image_id"
@@ -36,12 +42,30 @@ ActiveRecord::Schema.define(:version => 20100817210110) do
     t.string   "type"
     t.string   "name"
     t.string   "description"
-    t.string   "sequence"
     t.string   "author"
     t.string   "img_file_name"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "image_id"
+    t.text     "val_string"
+    t.text     "sequence"
+    t.integer  "backbone_id"
+    t.string   "biobrick_id"
+    t.string   "biobrick_backbone"
+    t.string   "biobyte_id"
+    t.string   "biobyte_plasmid"
+    t.text     "function_verification"
+    t.text     "comments"
+    t.boolean  "vf_uploaded"
+    t.boolean  "vr_uploaded"
+    t.integer  "category_id"
+  end
+
+  create_table "categories", :force => true do |t|
+    t.string   "name"
+    t.text     "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "constructs", :force => true do |t|
@@ -51,13 +75,6 @@ ActiveRecord::Schema.define(:version => 20100817210110) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "experiment_id"
-  end
-
-  create_table "definitions", :force => true do |t|
-    t.string   "definition"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "glossary_id"
   end
 
   create_table "email_observers", :force => true do |t|
@@ -84,7 +101,6 @@ ActiveRecord::Schema.define(:version => 20100817210110) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "user_id"
-    t.integer  "owner_id"
     t.integer  "group_id"
     t.string   "status"
   end
@@ -94,7 +110,6 @@ ActiveRecord::Schema.define(:version => 20100817210110) do
     t.text     "definition"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "definition_id"
   end
 
   create_table "group_roles", :force => true do |t|
@@ -150,12 +165,6 @@ ActiveRecord::Schema.define(:version => 20100817210110) do
     t.integer  "step_id"
     t.string   "text"
     t.integer  "image_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "pages", :force => true do |t|
-    t.string   "title"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

@@ -8,48 +8,35 @@ class ApplicationController < ActionController::Base
   include AuthenticatedSystem
   # Scrub sensitive parameters from your log
   
-  
-  # replace the use of this method with has_role
+  # pretty url helpers for group and user 
+  helper_method :pretty_group_path
+  helper_method :pretty_group_url
+  def pretty_group_path( group )
+		"/groups/#{group.name.gsub(/ /,"_")}"
+  end	
+  def pretty_group_url( group )
+	  pretty_group_path( group )
+  end
+  helper_method :pretty_user_path
+  helper_method :pretty_user_url
+  def pretty_user_path( user )
+		"/users/#{user.login}"
+  end	
+  def pretty_user_url( user )
+	  pretty_user_path( user )
+  end
+  helper_method :profile_path
+  def profile_path( user )
+	  pretty_user_path( user )
+  end
+
+  # NOTE don't use this method in place of roles
   helper_method :is_owner_of
- 
   def is_owner_of( object )
 	logged_in? && ( current_user.id  == object.user.id ) 
   end
 
-
-  # filter_parameter_logging :password
-=begin  commented out since made new method
-  helper_method :is_admin? #makes this method available from views as well
-  def is_admin? 
-    # logged_in? && current_user.is_admin?
-	 true
-  end
-
-  # replace the use of this method with has_role
-  helper_method :is_owner_of
-  def is_owner_of( object )
-		logged_in? && ( current_user.is_an_admin? || current_user.id  == object.user.id ) 
-  end
-
-  helper_method :can_edit_experiment?
-  def can_edit_experiment?( experiment )
-		logged_in? && ( current_user.can_edit_experiments? || 
-                    (current_user.id  == experiment.user.id && 
-                      current_user.can_edit_own_experiments?) )
-  end
-
-  helper_method :can_change_user_info_for
-  def can_change_user_info_for( user )
-	  logged_in? && ( current_user == user || current_user.can_change_user_info? )  
-  end
-
-  helper_method :can_create_experiment_for?
-  def can_create_experiment_for?( user )
-		logged_in? && ( current_user.can_create_experiments? ||
-                     ( current_user == user && 
-                        current_user.can_create_own_experiments?))
-  end
-=end
+ 
   # use this function when checking for permission of something
   def permission_denied
 	flash[:notice] = "You don't have permission to do that!"

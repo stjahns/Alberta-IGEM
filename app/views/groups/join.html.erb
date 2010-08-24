@@ -2,11 +2,13 @@
 	Join <%= @group.name %>
 <% end %>
 
+<% content_for :header do %>
 <div id='header'>
 <h1>Request to join <%= @group.name %></h1>
 <div id='header-toolbar' >
 </div>
 </div>
+<% end %>
 
 <div id="user-form" >
 <p><em class='gray'>Join a group immediately if you have a key for the group</em></p>

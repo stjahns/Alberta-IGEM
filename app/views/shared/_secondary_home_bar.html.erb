@@ -4,7 +4,7 @@
   <li><%= link_to "Experiments", experiments_path %></li>
 
   <% if logged_in?  %>
-     <li><%= link_to "Profile", profile_path( current_user.login ) %></li>  
+     <li><%= link_to "Profile", profile_path( current_user ) %></li>  
      <li><%= link_to "Log out", logout_path %></li>
   <% else %>
     <li><%= link_to "Log in", login_path %></li>
