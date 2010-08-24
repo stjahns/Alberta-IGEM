@@ -54,12 +54,12 @@
 	  		<div class=byte-name>
 	  			<h2><%= link_to byte.name, '#',:class=>"btn-byte-desc"  %></h2>
 	  		
-	  			<%= image_tag( image_path( byte.icon), :class=>"icon"  ) unless byte.icon.blank? %>
+	  			<%= image_tag( image_path( byte.icon, :png ), :class=>"icon"  ) unless byte.icon.blank? %>
 	  		</div>
 	  		<div class="description" >
 	  				<span class='text'>
 	  				<% unless byte.function_image.blank? %>
-	  					<%= image_tag( thumb_image_path( byte.function_image )) %>
+	  					<%= image_tag( thumb_image_path( byte.function_image, :jpg )) %>
 	  				<% end %>
 	  				<p><%=h byte.description %></p>
 	  				</span>

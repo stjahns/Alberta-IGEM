@@ -10,9 +10,14 @@ class GroupsController < ApplicationController
 
   def show
 	@group = get_group_by_id_or_name
-	@members = @group.users
-	@messages = @group.messages.all(:order=>"created_at DESC")
-	@requests = @group.requests.all
+    	if @group.nil? 
+		flash[:error] = 'No group by that name!'
+    		redirect_to root_path
+	else
+		@members = @group.users
+		@messages = @group.messages.all(:order=>"created_at DESC")
+		@requests = @group.requests.all
+	end
   end
 
   def new
@@ -195,8 +200,8 @@ class GroupsController < ApplicationController
 	  @navbar_selected = :groups
   end
   def  get_group_by_id_or_name
-	if params[:id] =~ /[a-zA-Z]/
-	       	Group.find_by_name(params[:id].gsub( /_/ ," " ) ) 
+	if params[:id] =~ /[a-zA-Z_]/
+	       	Group.find_by_name( params[:id].gsub( /_/ ," " ) ) 
 	else 
 		Group.find(params[:id])
 	end

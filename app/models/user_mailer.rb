@@ -19,12 +19,13 @@ class UserMailer < ActionMailer::Base
     @body[:url] = "#{SITE_URL}/reset/#{user.reset_code}"
   end
 
-  def new_email_activation(user)
-	e = user.email_observer
-	setup_email(user)
+  def new_email_activation( user )
+	new_email = user.new_user_email
+	@recipients = new_email.email
+	setup_email( user )
+	
 	@subject += "Link to activate your new email for #{user.login} at Genomikon"
-	@recipients = e.email
-	@body[:url] = "Please go to the link below to activate your new email.\nhttp://#{SITE_URL}/users/#{user.id}/new_email#{e.key}"
+	@body[:url] = "http://#{SITE_URL}/users/#{user.id}/new_email/#{new_email.key}"
   end
   
   protected

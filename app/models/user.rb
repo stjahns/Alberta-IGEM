@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20100806052151
+# Schema version: 20100819165030
 #
 # Table name: users
 #
@@ -19,6 +19,8 @@
 #  role_id                   :integer(4)
 #  reset_code                :string(255)
 #  description               :text
+#  complete_counter          :integer(4)
+#  working_counter           :integer(4)
 #
 
 require 'digest/sha1'
@@ -32,7 +34,7 @@ class User < ActiveRecord::Base
 
   has_many :experiments, :dependent => :destroy
   has_many :steps, :through => :experiments 
-  has_one :email_observer, :dependent => :destroy
+  has_one :new_user_email, :dependent => :destroy
 
   belongs_to :role
   delegate :permissions, :to => :role
@@ -56,7 +58,7 @@ class User < ActiveRecord::Base
 #		  record.errors.add attr, "login must be composed of alphanumberic characters and _"
 #	  end
 #  end
-  validates_format_of :login, :with => /^[0-9a-zA-Z]+$/, :message=>"Only alphanumberic characters allowed"
+  validates_format_of :login, :with => /^[0-9a-zA-Z_]+$/, :message=>"Only alphanumberic characters and underscores allowed"
   validates_format_of :login, :with => /[a-zA-Z]/, :message=>"Must contain at least one letter"
 
   validates_length_of       :name,     :maximum => 100
@@ -72,7 +74,7 @@ class User < ActiveRecord::Base
   # HACK HACK HACK -- how to do attr_accessible from here?
   # prevents a user from submitting a crafted form that bypasses activation
   # anything else you want your user to change should be added here.
-  attr_accessible :login, :email, :name, :password, :password_confirmation, :role, :group, :description
+  attr_accessible :login, :email, :name, :password, :password_confirmation, :role, :group, :description, :working_counter, :complete_counter
 
 
   # Activates the user in the database.
@@ -133,18 +135,18 @@ class User < ActiveRecord::Base
 
   # create new email
   def create_new_email( email )
-	e = self.build_email_observer( :email => email, :user=>self )
+	e = self.build_new_user_email( :email => email, :user=>self )
 	e.save
   end
 
   # responds to /new_email/:key
   def activate_email( key )
-	return false if self.email_observer.blank?
+	return false if self.new_user_email.blank?
 
-	if self.email_observer.key == key
-		self.email = email_observer.email
+	if self.new_user_email.key == key
+		self.email = new_user_email.email
 		self.save
-		email_observer.destroy
+		new_user_email.destroy
 		true
 	else
 		false
@@ -206,10 +208,10 @@ class User < ActiveRecord::Base
   end
 
   def experiments_completed
-	self.experiments.find_all_by_status( "complete" ).length
+	self.experiments.find_all_by_status( "complete" )
   end
   def experiments_working
-	self.experiments.find_all_by_status( "working" ).length
+	self.experiments.find_all_by_status( "working" )
   end
 
   protected

@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20100806052151
+# Schema version: 20100819165030
 #
 # Table name: users
 #
@@ -19,6 +19,8 @@
 #  role_id                   :integer(4)
 #  reset_code                :string(255)
 #  description               :text
+#  complete_counter          :integer(4)
+#  working_counter           :integer(4)
 #
 
 

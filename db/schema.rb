@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100817210110) do
+ActiveRecord::Schema.define(:version => 20100819165030) do
 
   create_table "annotations", :force => true do |t|
     t.string   "name"
@@ -75,14 +75,6 @@ ActiveRecord::Schema.define(:version => 20100817210110) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "experiment_id"
-  end
-
-  create_table "email_observers", :force => true do |t|
-    t.string   "email"
-    t.string   "key"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "user_id"
   end
 
   create_table "encyclopaedias", :force => true do |t|
@@ -161,10 +153,17 @@ ActiveRecord::Schema.define(:version => 20100817210110) do
     t.datetime "updated_at"
   end
 
+  create_table "new_user_emails", :force => true do |t|
+    t.string   "email"
+    t.string   "key"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "notes", :force => true do |t|
     t.integer  "step_id"
     t.string   "text"
-    t.integer  "image_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -247,9 +246,12 @@ ActiveRecord::Schema.define(:version => 20100817210110) do
     t.datetime "remember_token_expires_at"
     t.string   "activation_code",           :limit => 40
     t.datetime "activated_at"
+    t.integer  "group_id"
     t.integer  "role_id"
     t.string   "reset_code"
     t.text     "description"
+    t.integer  "complete_counter"
+    t.integer  "working_counter"
   end
 
   add_index "users", ["login"], :name => "index_users_on_login", :unique => true

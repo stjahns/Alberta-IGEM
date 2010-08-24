@@ -84,6 +84,7 @@
 <% form_tag new_email_user_path( @user ), :method=>:put do  -%>
 	<div  class="gray-box">
 	<h2>Change your email</h2>
+	<p><em class="gray">Your current email is:</em> <br/><%=  @user.email %></p>
 
 		
 	  <%= error_messages_for :user %>

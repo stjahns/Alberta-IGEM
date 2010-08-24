@@ -35,7 +35,7 @@
 <% unless @byte.image %>
   <p>[NONE]</p>
 <% else %>
-  <p><%= image_tag image_path(@byte.image) %></p> 
+  <p><%= image_tag image_path(@byte.image, :png) %></p> 
 <% end %>
 
 <% form_for @image, :url => upload_bio_byte_path(@byte), :html => { :multipart => true, :method => 'post'} do |f| %>
@@ -47,7 +47,7 @@
 <% unless @byte.bio_byte_image and @byte.bio_byte_image.image%>
   <p>[NONE]</p>
 <% else %>
-  <p><%= image_tag image_path(@byte.bio_byte_image.image) %></p> 
+  <p><%= image_tag image_path(@byte.bio_byte_image.image, :jpg) %></p> 
 <% end %>
 
 <% form_for @image, :url => upload_desc_img_bio_byte_path(@byte), :html => { :multipart => true, :method => 'post'} do |f| %>
