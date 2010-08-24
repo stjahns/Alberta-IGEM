@@ -8,6 +8,9 @@
 
 # build permissions
 require 'roles/permissions'
+require 'lib/tasks/categories'
+
+admin_role = Role.find_by_name('admin')
 
 #create an admin user
 admin_user=User.create!(:login => 'admin', 

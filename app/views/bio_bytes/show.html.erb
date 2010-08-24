@@ -10,7 +10,7 @@
 
 <% content_for :header do %>
 <div id="header">
-  <%= image_tag( image_path( @byte.icon), :style=>"float:right;" ) unless @byte.icon.blank? %> 
+  <%= image_tag( image_path( @byte.icon), :class => "icon_image" ) unless @byte.icon.blank? %> 
   <h1><%=h @byte.name %></h1>
   <p>Part Information and Sequence</p>
 
@@ -22,8 +22,12 @@
 </div>
 <%end%>
 
-<h2>Description:</h2> 
-<p><%=h @byte.description%></p>
+<div class=description>
+  <h2>Description:</h2> 
+  <%= image_tag( step_image_path( @byte.function_image ), :class => "function_image" ) unless @byte.function_image.blank? %>
+  <p><%=h @byte.description%></p>
+  <div style="clear:both; height:1px; margin-bottom:-1px;">&nbsp;</div>
+</div>
 
 <p>
   <div id="sequence">

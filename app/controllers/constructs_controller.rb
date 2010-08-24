@@ -20,7 +20,7 @@ class ConstructsController < ApplicationController
 
     respond_to do |format|
       if @construct.save
-        flash[:notice] = 'construct was successfully created.'
+        flash[:notice] = 'Construct was successfully created.'
         format.html { redirect_to(edit_experiment_construct_path(@experiment, @construct)) }
         format.xml  { render :xml => @construct, :status => :created, :location =>[ @experiment, @construct ]}
       else

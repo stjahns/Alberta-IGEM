@@ -10,16 +10,13 @@
 <div id="header">
 <h1>Parts Bin</h1>
 <p>Browse the parts in the kit and view detailed information in the stats sheet.</p> 
-		<% if logged_in? && current_user.can_edit_categories? %>
-      <%= link_to "New Category", new_category_path %> 
-    <%end%>
 	<div id="header-toolbar" > 
 		<ul>
 		<% if logged_in? && current_user.can_create_bio_bytes? %>
 	  	<li class="right"><%= link_to "New Part", new_bio_byte_path %></li>
 		<% end %>
     <% @categories.each do |c| %>    
-      <li class="left" ><a href=# class="cat" category=<%=h c.name%>><%=h c.name %></a></li>
+      <li class="left" ><a href=# class="cat <%= 'selected' if c.name == Category.first.name %>" category=<%=h c.name%>><%=h c.name %></a></li>
     <% end %>
 		</ul>
 
@@ -31,20 +28,27 @@
 
 <div id="bio-bytes-table">
   
+		<% if logged_in? && current_user.can_edit_categories? %>
+      <%= link_to "New Category", new_category_path %> 
+    <%end%>
+
   <% @categories.each do |c| %>
 
-    <div class="category" id=<%=h c.name %> style="display:none;">
+    <div class="category" id=<%=h c.name %> style=<%= "display:none;" unless c.name == Category.first.name %>>
 
-		<% if logged_in? && current_user.can_edit_categories? %>
-      <%= link_to "Edit Category", edit_category_path(c)%> 
-      <%= link_to "Delete Category", c,
-          :confirm => "Are you sure? Bytes will be moved to 'Other'.",
-          :method => :delete %>
-    <%end%>
 
     <h3><%=h c.name %></h3>
     <p><%=h c.description %></p>
     
+		<% if logged_in? && current_user.can_edit_categories? %>
+      <p>
+      <%= link_to "Edit Category", edit_category_path(c)%> 
+      <%= link_to "Delete Category", c,
+          :confirm => "Are you sure? Bytes will be moved to 'Other'.",
+          :method => :delete %>
+      </p>
+    <%end%>
+
 	  <% c.bio_bytes.each do |byte| %>
 	  	<div class=byte-row> 
 	  		<div class=byte-name>

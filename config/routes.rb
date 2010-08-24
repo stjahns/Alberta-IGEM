@@ -44,7 +44,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :requests, :only => ['destroy'], :member=>{:accept => :post, :reject=>:post}
 
 
-  map.resources :categories
+  map.resources :categories, :member => { :update => :post }
 
   #map annoations as nested resource of biobytes
   map.resources :bio_bytes, :member => { :upload => :post, 
@@ -102,6 +102,7 @@ ActionController::Routing::Routes.draw do |map|
   # they are cached as jpg instead of as html
   map.with_options :controller => :images do |image|
 	  image.image 'images/:id.jpg', :action =>'thumb',:method=>:get 
+	  image.image 'images/:id.png', :action =>'thumb',:method=>:get, :format => 'png' 
 	  image.step_image 'images/:id/step.jpg', :action=>'step', :method=>:get
 	  image.thumb_image 'images/:id/thumb.jpg', :action=>'thumb',:method=>:get
 	  image.section_image 'images/:id/section.jpg',:action=>'thumb',:method=>:get

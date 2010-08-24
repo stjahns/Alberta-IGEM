@@ -818,4 +818,11 @@ a:visited { color: #666; }
   list-style: square;
 }
 
+.function_image{
+  float: left;
+  margin-right: 5px;
+}
+.icon_image{
+  float: right;
+}
 
