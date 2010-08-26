@@ -238,8 +238,15 @@ function getFormattedFeatureLine(features){
     output += "<span class='annotation' style='"
           + "left:" + features[f].start + "ex;"
           + "width:" + (features[f].stop - features[f].start) + "ex;"
-          + "background-color:" + features[f].colour + ";'>"
-          + "<span class='ann_label'>" + features[f].name + "</span></span>";
+          + "background-color:" + features[f].colour + ";'><span class='ann_label'>"; 
+    if (features[f].stop - features[f].start > features[f].name.length){
+      output += features[f].name;
+    }
+    else{
+      output += "&nbsp";
+    }
+    output += "</span></span>";
+    
   }
   output += "</div>";
   return output;
@@ -282,8 +289,14 @@ function formatParts(parts){
     output += "<span class='annotation' style='"
           + "left:" + parts[p].start + "ex;"
           + "width:" + (parts[p].stop - parts[p].start) + "ex;"
-          + "background-color:" + parts[p].colour + ";'>"
-          + "<span class='ann_label'>" + parts[p].name + "</span></span>";
+          + "background-color:" + parts[p].colour + ";'>" + "<span class='ann_label'>";
+    if (parts[p].stop - parts[p].start > parts[p].name.length){
+      output +=  parts[p].name;
+    }
+    else{
+      output += "&nbsp";
+    }
+    output += "</span></span>";
   }
   output += "</div>";
   return output;

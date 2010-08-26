@@ -36,7 +36,11 @@
 
       $("*").disableSelection();
 
-      $("#parts-bin-tabs").tabs();
+      //$("#parts-bin-tabs").tabs();
+      $("#parts-list").accordion({
+          autoHeight: false,
+          collapsible: true,
+      });
       
       $(".byte").draggable({ 	
 
@@ -88,55 +92,14 @@
 
 
 
-//update sequence TODO get this to work with byte_id instead?
-function getSequence(){
-
-  var seq = '';
-  partcoords = [];
-  var parts = $('ol#parts_list').sortable('toArray');
-  //have array of part_id strings
-  //need to get the byte id numbers isolated (middle)
-  for (i in parts){
-    var temp = new Array();
-    temp = parts[i].split('_');
-    parts[i]= temp[1];
-  }
-  //ok, now get sequence corresponding to each byte 
-  //and add to sequence string
-  // TODO to cut this down, need a type field in the json array of bytes
-        // - do with js, or server side by adding a type field to db
-  for (i in parts){
-    for (j in orfs){
-      if (parts[i]==orfs[j].id){
-        var first = seq.length; 
-        seq += orfs[j].sequence;
-        var second = seq.length;
-        var id = orfs[j].name;
-        var byte_id = orfs[j].id;
-        partcoords.push( [id, first, second, "orf", byte_id]);
-      }
-    }
-    for (j in linkers){
-      if (parts[i]==linkers[j].id){
-        var first = seq.length;
-        seq += linkers[j].sequence;
-        var second = seq.length;
-        var id = linkers[j].name;
-        var byte_id = linkers[j].id;
-        partcoords.push( [id, first, second, "linker", byte_id]);
-      }
-    }
-  }
-  return seq;
-
-}
 
 function validate(bytes){
-  var toggle = "Linker";
+  // check ab ba alternation
+  var toggle = bytes[0].split(' ', 1)[0];
   var valid = true;
   for (x in bytes){
 
-    if (bytes[x].split(' ', 1) != toggle){
+    if (bytes[x].split(' ', 1)[0] != toggle){
       valid = false;
       break;
     }
@@ -150,6 +113,12 @@ function validate(bytes){
     }
 
   }
+
+  //check circularizable
+  if (bytes[0].split(' ',1)[0] == bytes[bytes.length-1].split(' ',1)[0]){
+    valid = false;
+  }
+
   return valid;
 
 }
@@ -275,16 +244,6 @@ function initConstructSortable(){
               $("#part-info").contents().replaceWith($("#info_" + id).clone());
             });
             $(this).addClass('part').removeClass('byte').text('');
-            /*
-            $(this).tooltip({
-              opacity: 0.9,
-              onShow: function(){
-                if (moving==true){
-                  this.hide(); // temp. disable
-                }
-              }
-           });
-            */
           });
           //changes=true; // for future "YOU've Neer saved yer changes!"
           //$("#sequence").html(getFormattedSequence());
@@ -334,8 +293,17 @@ function initConstructSortable(){
       return height - 46 + 'px';
     });
 
-    //add line cont. markers? eg ------//
-    //                         //------]
+    // add plasmid line wraps
+    // delete em all and rebuild
+    $(".plasmid-wrap").remove();
+    // How many wraps?
+    var wraps = -(Math.floor(-numparts/6))-1;
+    for (var i=1; i<=wraps; i++){
+      $("#top-left").after(
+        "<div class=plasmid-wrap id=wrap-"+ i + " "
+        + "style='top:" + (i-1)*46 + "'></div>"
+        );
+    }
 
   }
 

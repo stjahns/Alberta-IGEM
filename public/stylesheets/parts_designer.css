@@ -14,9 +14,10 @@ ol#parts_list{
   list-style-type:  none;
   float:            left;
   height:           50;
-  width:            650;
+  width:            600;
   padding:          0;
   margin:           0;
+  background:       transparent;
 }
 
 #parts_list li{
@@ -34,8 +35,61 @@ ol#parts_list{
 
 #parts-bin{
   float:            left;
+  height:           295px;
+  width:            146px;
+  overflow-y:       scroll;
+  overflow-x:       hidden;
   border:           1px solid #999;
+  background-color: #DDD;
 }
+#parts-list{
+  text-align: center;
+}
+.cat-list p {
+  background: transparent;
+  background-color: #BBB;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+.cat-list ul {
+  background: transparent;
+}
+
+
+#parts-bin a{
+  font-size: 11pt;
+
+}
+
+#parts-bin h2 {
+  background-color: #333;
+  text-align: center;
+  margin: 0;
+  padding-top: 6px;
+  padding-bottom: 6px;
+  color: #CCC;
+}
+#parts-bin h3 {
+  background-color: #666;
+  margin: 0;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  border: 1px solid #333;
+}
+
+#parts-bin h3:hover {
+  background-color: #999;
+}
+
+#parts-bin a {
+  color: white;
+  text-decoration: none;
+}
+
+#parts-bin a:hover {
+  background-color: transparent;
+}
+
 
 #part-info-box{
   margin-left:      -1px;
@@ -54,56 +108,11 @@ ol#parts_list{
   float:      left;
   margin: 0 10 10 0px;
 }
-
-#parts-bin-tabs{
-  width:            146px;
-}
-
-.tab-widget {
-  list-style-type:  none;
-  margin:           0 0 -1 0px;
-  padding:          10 5 5 5px;
-}
-.tab-widget li{
-  list-style:       none;
-  display:          inline;
-  text-align:       center;
-  margin:           0;
-  padding:          6 0 6 0;
-  background-color: #666;
-}
-.tab-widget a{
-  padding:          6px 10px 6px 10px;
-  margin:           0;
-  text-decoration:  none;
-}
-.tab-widget a:visited {
-  color: black;
-}
-.tab-widget a:focus {
-  outline:  none;
-}
-.tab-widget a:hover {
-  background: #666;
-}
-li.ui-tabs-selected a:hover {
-  background: #BBB;
-}
-
-li.ui-tabs-selected{
-  background: #BBB;
-  border:        1px solid #999;
-  border-bottom: 1px solid #BBB;
-}
 ul.parts_bin{
   list-style-type:  none;
   margin:           0 -1 -1 -1;
   padding:          5;
-  height:           252;
-  overflow-y:       scroll;
-  border:           1px solid #999;
-  background: #BBB;
-
+  background-color: #BBB;
 }
 div#trash {
   padding:          22 0 0 0;
@@ -113,14 +122,11 @@ div#trash {
   text-align:       center;
 }
 ul.parts_bin li{
-  margin:           3 3 3 6;
+  margin:           3 3 3 10;
   width:            100px;
   height:           40px;
   text-align:       center;
   border:           1px solid #555;
-}
-.ui-tabs-hide{
-  display:          none;
 }
 
 .annotation{
@@ -210,6 +216,16 @@ div#nav {
   height:           46px;
   background: url(../images/top-left.png);
 }
+.plasmid-wrap{
+  position:         absolute;
+  top:              0;
+  left:             0;
+  width:            750px;
+  height:           92px;
+  z-index:          -100;
+  background: url(../images/plasmid-wrap.png);
+}
+
 #left-side{
   position:         absolute;
   top:              46px;

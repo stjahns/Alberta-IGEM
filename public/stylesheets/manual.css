@@ -28,6 +28,7 @@ ol.parts_list{
   width:            650;
   padding:          0;
   margin:           0;
+  background:       transparent;
 }
 
 .parts_list li{
@@ -49,6 +50,15 @@ ol.parts_list{
   background: url(../images/top-left.png);
 }
 
+.plasmid-wrap{
+  position:         absolute;
+  top:              0;
+  left:             0;
+  width:            750px;
+  height:           92px;
+  z-index:          -100;
+  background: url(../images/plasmid-wrap.png);
+}
 
 .left-side{
   position:         absolute;
