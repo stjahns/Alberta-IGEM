@@ -87,8 +87,10 @@ class ExperimentsController < ApplicationController
 
   def clone 
     old_exp = Experiment.find(params[:id])
-    @experiment = old_exp.clone_experiment_for( current_user )
-
+    @experiment = old_exp.clone_experiment_for( current_user ) #memory leak!!!
+    
+    flash[:notice] = 'Experiment added to your lab book'
+     
     respond_to do |format|
       format.html { redirect_to(experiments_url) }
       format.xml  { head :ok }
