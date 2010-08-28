@@ -1,5 +1,6 @@
 annotate_models=Add schema information (as comments) to model files
 auth\:gen\:site_key=Generates config/initializers/site_keys.rb
+categories\:build_categories=Create byte categories
 db\:abort_if_pending_migrations=Raises an error if there are pending migrations
 db\:charset=Retrieves the charset for the current environment's database
 db\:collation=Retrieves the collation for the current environment's database
@@ -48,6 +49,7 @@ doc\:plugins\:annotate_models=Generate documentation for the annotate_models plu
 doc\:plugins\:fleximage=Generate documentation for the fleximage plugin
 doc\:plugins\:jrails=Generate documentation for the jrails plugin
 doc\:plugins\:restful-authentication=Generate documentation for the restful-authentication plugin
+doc\:plugins\:wicked_pdf=Generate documentation for the wicked_pdf plugin
 doc\:rails=Build the RDOC HTML Files
 doc\:reapp=Force a rebuild of the RDOC files
 doc\:rerails=Force a rebuild of the RDOC files

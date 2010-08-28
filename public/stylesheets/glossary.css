@@ -21,7 +21,7 @@
     text-align: center;
     
 }
-#encyclopaedia .header{
+#encyclopaedia .title-header{
     margin-top: 50px;
     margin-bottom:50px;
 }
@@ -113,8 +113,7 @@ a:visited { color: #666; }
         -moz-box-shadow: 5px 5px 7px #333;
   }
 
-  .term{
-      border-top: 1px solid silver;
+  .show_term{
       padding-top: 1em;
     }
 
@@ -149,6 +148,10 @@ a:visited { color: #666; }
     margin-bottom: 0px;
     border-top: 2px silver solid;
     clear:right;
+}
+
+#glossary .hanging-toolbar{
+    margin-top: 0px;
 }
 
 .caption{
@@ -313,4 +316,32 @@ a:visited { color: #666; }
 
 #encyclopaedia .update_button{
     text-align: left;
+}
+
+#encyclopaedia .letter_section{
+    display: none;
+}
+
+#encyclopaedia #glossary .index_new_gloss_form{
+    display:none;
+}
+
+#encyclopaedia .glossary_edit_form{
+    display:none;
+}
+
+#encyclopaedia .glossary_index_edit_links{
+    float: right;
+}
+
+#encyclopaedia .glossary_index_term_text{
+    margin-top: 5px;
+}
+
+#encyclopaedia .glossary_index_term{
+    line-height: 21px;
+    font-size:15px;
+}
+#encyclopaedia .glossary_index_definition{
+    margin-top: 5px;
 }

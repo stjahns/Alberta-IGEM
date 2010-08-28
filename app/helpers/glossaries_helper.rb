@@ -5,26 +5,27 @@ module GlossariesHelper
 
     #create a list of terms which must be checked
     @glossaries.each do |entry|
-    
       #check each term to see if it is found in the text
 
-      id = entry.id
       term = entry.term
+      term = term.sub(/\s*$/i){""}
+       
       @def_str = @def.to_s
 
-      @regex = Regexp.new(/#{term}\w*/)
+      @regex = Regexp.new(/#{term}\w*/i)
       matchdata = @regex.match(@def_str)
+      
       if matchdata
         
         #if the term was found in the text, split the text on that term and insert
         # an html link
         matchdata = matchdata.to_s
-        matchdata = matchdata.sub(/\s#{term}/){"#{term}"}
-
+        matchdata = matchdata.sub(/\s#{term}\w*/i){"#{term}"}
+      
 
         @def = @def.to_s
         
-	@def = @def.sub(/\s#{term}\w*/){"\s<a href=http://#{SITE_URL}/glossaries/#{id}>#{matchdata}</a>"}
+	@def = @def.sub(/\s#{term}\w*/i){"\s<a href=http://#{SITE_URL}/glossaries/#{term}>#{matchdata}</a>"}
         #find a way to not match em's when looking for terms in the string
         #@insert_num += 1
       end

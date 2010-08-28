@@ -11,6 +11,21 @@
           }, function() {
             $(this).next("em").animate({opacity: "hide", top: "-85"}, "fast");
 	});
+         $("div.letter_section:first").show();
+         $("div#header-toolbar .left a").click(function(event){
+            var locator = $(this).attr("href");
+            $("div.letter_section:visible").hide("slow");
+            $("div [class="+locator+"] .letter_section").show("slow");
+            $("div.glossary_edit_form:visible").hide("fast");
+         });
+         $("div#header-toolbar .right a").click(function(event){
+            $("div.index_new_gloss_form").toggle("slow");
+         });
+         $("div.glossary_index_edit_links a ").click(function(event){
+           var locator = $(this).attr("href");
+            //$("div ."+locator+" .glossary_index_term_text").hide("slow");
+            $("div ."+locator ).hide("slow");
+         });
       });
 
 
@@ -19,35 +34,118 @@
 
   <body>
 
-    <div class =" header"><h1>Glossary</h1></div>
-<%unless @glossaries.first.blank?%>
-    <div id = "menu">
-      <b>Contents:</b>
-      <%for glossary in @glossaries %>
-        <div class ="item">
-          <%= create_menu_links(glossary.term) %><br/>
-        </div>
-      <%end%>
+    <div class ="title-header"><h1>Glossary</h1></div>
+
+<div class="header">
+	<div id="header-toolbar" >
+		<ul>
+		<% if logged_in? && current_user.can_create_glossaries? %>
+	  	<li class="right"><a href ="#New_Entry">New Entry</a></li>
+		<% end %>
+       <%letter = ""%>
+    <% @glossaries.each do |c| %>
+       <%@regex = Regexp.new(/^\w/)%>
+       <% matchdata = @regex.match(c.term) %>
+        <%matchdata = matchdata.to_s%>
+        <%unless matchdata.upcase == letter%>
+            <%letter = matchdata.upcase%>
+            <li class="left" ><a href="#<%=h letter %>"><%=h letter %></a></li>
+        <%end%>
+    <% end %>
+		</ul>
+
+
+	</div>
+</div>
+
+<div id ="glossary">
+    <div class ="index_new_gloss_form">
+      <div class ="hanging-toolbar"
+           <h3>New Glossary Entry Form</h3>
+      <% form_for(@new_gloss) do |f| %>
+  <%= f.error_messages %>
     </div>
+
+  <p>
+    <%= f.label :term %><br />
+    <%= f.text_field :term %>
+  </p>
+  <p>
+    <%= f.label :definition %><br />
+    <%= f.text_area :definition %>
+  </p>
+  <p>
+    <%= f.submit 'Create' %>
+  </p>
+    <% end %>
+    </div>
+
+<%@letter = @glossaries.first.term.first.upcase%>
+ <%if @letter%>
+  <div class="#<%=@letter%>">
+  <div class = "letter_section">
  <%end%>
 
 <% @glossaries.each do |glossary| %>
+  <% @regex = Regexp.new(/^\w/) %>
+     <% matchdata = @regex.match(glossary.term) %>
+     <%matchdata = matchdata.to_s%>
 
-  <p class = "term">
-    <b><%= create_bookmark(glossary.term) %></b>
+    <%unless matchdata.upcase == @letter%>
+    <%@letter = matchdata.upcase%>
+    </div>
+  </div>
+  <div class ="#<%=@letter%>">
+  <div class="letter_section">
+
+    <%end%>
+
+    <div class = "hanging-toolbar"></div>
+    <div class="#<%=glossary.term%>Edit">
+    <div class="glossary_index_term_text">
+
+       <% if logged_in? && current_user.can_create_glossaries? %>
+      <div class="glossary_index_edit_links" >
+         <%=link_to 'Edit', edit_glossary_path(glossary)%>|
+       <%= link_to 'Delete',glossary, :confirm => 'Are you sure?', :method => :delete %>
+      </div>
+      <%end%>
+
+
+        <div class="glossary_index_term">
+        <b><%=glossary.term%></b>
+        </div>
+        <div class="glossary_index_definition">
+        <% definition=add_glossary_links(glossary.definition)%>
+         <%= add_popups(definition)  %>
+        </div>
+
+  </div>
+    <div class="glossary_edit_form">
+      <h3>Editing glossary</h3>
+
+<% form_for(glossary) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :term %><br />
+    <%= f.text_field :term %>
   </p>
-
-  <p class ="entry">
-    <%  definition= add_glossary_links(glossary.definition)%>
-
-    <%= add_popups(definition) %>
+  <p>
+    <%= f.label :definition %><br />
+    <%= f.text_area :definition %>
   </p>
-
-
-  <p><%= link_to 'Edit', edit_glossary_path(glossary) %>|
-    <%= link_to 'Delete', glossary, :confirm => 'Are you sure?', :method => :delete %></p>
+  <p>
+    <%= f.submit 'Update' %>
+  </p>
 <% end %>
-  <p><%= link_to 'New Entry', new_glossary_path %></p>
+    </div>
+    </div>
+<% end %>
+  </div>
+</div>
+  </div>
+     <div class = "hanging-toolbar"></div>
   </body>
 </html>
 </div>

@@ -6,7 +6,7 @@ class GlossariesController < ApplicationController
   # GET /glossaries.xml
   def index
     @glossaries = Glossary.alphabetise
-
+    @new_gloss = Glossary.new
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @glossaries }
@@ -50,7 +50,7 @@ class GlossariesController < ApplicationController
     respond_to do |format|
       if @glossary.save
         flash[:notice] = 'Glossary was successfully created.'
-        format.html { redirect_to(@glossary) }
+        format.html { redirect_to(glossaries_url) }
         format.xml  { render :xml => @glossary, :status => :created, :location => @glossary }
       else
         format.html { render :action => "new" }
@@ -63,11 +63,10 @@ class GlossariesController < ApplicationController
   # PUT /glossaries/1.xml
   def update
     @glossary = Glossary.find(params[:id])
-
     respond_to do |format|
       if @glossary.update_attributes(params[:glossary])
         flash[:notice] = 'Glossary was successfully updated.'
-        format.html { redirect_to(@glossary) }
+        format.html { redirect_to(glossaries_url) }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
