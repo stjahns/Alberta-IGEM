@@ -136,8 +136,8 @@ $(document).ready(function(){
 			// have to unescape data because of iframe
 			data = unescapeHTML(data);	
 			var $r = $(data);	
-			var imageURL = $r.find('img').attr('src').replace("step","");
-			var source = imageURL + "thumb";
+			var imageURL = $r.find('img').attr('src').replace("step.jpg","");
+			var source = imageURL + "thumb.jpg";
 
 			//get the new thumbnail and put in place of old one
 			var thumb = new Image();
@@ -280,8 +280,8 @@ $(document).ready(function(){
 				  data = unescapeHTML(data);	
 				  var $r = $(data);	
 				  // get general img url and thumb url
-				  var imageURL = $r.find('img').attr('src').replace("step","");
-				  var source = imageURL + "thumb";
+				  var imageURL = $r.find('img').attr('src').replace("step.jpg","");
+				  var source = imageURL + "thumb.jpg";
 				
 				//get the new thumbnail and put in place of old one
 				var thumb = new Image();

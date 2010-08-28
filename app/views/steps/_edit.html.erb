@@ -15,7 +15,7 @@
 		    <% end %>
 
 		    <div class= "upload_thumb_container">
-		    	<%= image_tag( thumb_image_path(step.image)) unless step.image.blank?  %>
+		    	<%= image_tag( thumb_image_path(step.image, :jpg)) unless step.image.blank?  %>
 		    </div>  
 		    
 		    <% image_label = step.image.blank? ? "attach an image" : "change the image" %> 

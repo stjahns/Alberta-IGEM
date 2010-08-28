@@ -1,6 +1,6 @@
 <p class= step_note_container >
 <%= save_notice %></br>
-<%= image_tag( step_image_path( note.image ), :class => "step_note" ) unless note.image.blank? %>
+<%= image_tag( step_image_path( note.image, :jpg ), :class => "step_note" ) unless note.image.blank? %>
 
 <%=h note.text %></p>
 <div class="hanging-toolbar" >

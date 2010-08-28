@@ -94,7 +94,7 @@
   
   <div id='info_<%=h byte.id%>'>
     <% unless byte.bio_byte_image.blank? %>
-      <div class="byte_desc_img"><%= image_tag step_image_path(byte.bio_byte_image.image) %></div> 
+      <div class="byte_desc_img"><%= image_tag step_image_path(byte.bio_byte_image.image, :jpg) %></div> 
     <% end %>
     <h3><%=h byte.name%></h3>
     <p><i><%=h byte.description%></i><p>

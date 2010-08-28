@@ -1,6 +1,8 @@
 class ImagesController < ApplicationController
   before_filter :login_required, :except => [:thumb, :step, :show, :section, :image150]
 
+  Mime::Type.register "image/png", :png
+
 # need image caching so we don't dynamically generate images every time
 # put all the actions that render an image here 
   caches_page :thumb, :step, :show
@@ -9,6 +11,10 @@ class ImagesController < ApplicationController
 	
 
 ### these actions return different images ##TODO move them to flexi templates 
+  def test
+    @image = Image.find(params[:id])
+    render :inline => "@image.operate {|p| p.resize '100x100'}", :type => :flexi
+  end
   # Get /images/1/thumb
   def thumb
     @image = Image.find(params[:id])

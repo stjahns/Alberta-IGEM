@@ -1,6 +1,6 @@
   <h2><span class="step_number"><%=h step.step_order %></span> <%=h step.title %></h2>
 <%= save_notice %>
   <% unless step.image.blank? %>
-	  <p><%= image_tag step_image_path( step.image ), :class=>"step_view" %></p>
+	  <p><%= image_tag step_image_path( step.image,:jpg) , :class=>"step_view" %></p>
   <% end %> 
   <p class= 'description'  ><%= add_popups( add_glossary_links(  step.description ) ) %> </p>
