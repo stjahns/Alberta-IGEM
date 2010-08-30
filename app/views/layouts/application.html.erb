@@ -10,9 +10,9 @@
   <%= yield :includes %>
 
 </head>
-<body class="background">
-	<%= render :partial=>'shared/navBar' %>
+<body>
 	<div id= container>
+		<%= render :partial=>'shared/navBar' %>
 		<%= yield :header %>
 		<div id='flash-notice-container'>
 		
