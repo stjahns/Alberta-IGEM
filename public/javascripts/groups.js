@@ -217,7 +217,7 @@ $(document).ready(function(){
 
 });
 
-function roleBtn( btnClass )
+function roleBtn( btnClass ){
 	$(btnClass).live( 'click', function(){
 		var member = $(this).parents('.member');
 		
@@ -244,3 +244,4 @@ function roleBtn( btnClass )
 		});
 		return false;
 	});
+}
