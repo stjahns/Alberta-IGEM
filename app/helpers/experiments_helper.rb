@@ -15,6 +15,11 @@ module ExperimentsHelper
 			( type, number ) = args
 			number = "" if number.nil?
 		        status = type.nil? ? "" : "class=\"#{type}\"" 
-			"<a #{status} >#{number}</a>"
+
+			alt = type == "working" ? "In progress" :
+			      type == "complete"? "Completed"   : 
+				      "No status"
+
+			"<a #{status} TITLE=\"#{alt}\" >#{number}</a>"
 		end
 end
