@@ -1,3 +1,31 @@
+<% content_for :includes do %>
+  <%= javascript_include_tag 'sequence_display' %>
+  <%= javascript_include_tag 'parts_designer' %>
+  <%= stylesheet_link_tag 'parts_designer' %> 
+<%end%>
+
+<% content_for :title do %>
+  <%=h @byte.name %>
+<% end %>
+
+<% content_for :header do %>
+<div id="header">
+  <%= image_tag( image_path( @byte.icon), :style=>"float:right;" ) unless @byte.icon.blank? %> 
+  <h1><%=h @byte.name %></h1>
+  <p>Part Information and Sequence</p>
+
+  <div id="header-toolbar" >
+    <ul>
+      <li class="right"><%= link_to "Detailed Sequence", bio_byte_path(@byte) %></li>
+    </ul>
+  </div>
+</div>
+<%end%>
+
+
+
+
+
 <!-- BioByte datasheet -->
 <div class = datasheet>
 <h2><u>Byte Specification sheet: <%=h @byte.biobyte_id %> in <%=h @byte.backbone.name %></u></h2>

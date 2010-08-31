@@ -14,11 +14,15 @@
 <body>
 	<div id= container>
 		<%= render :partial=>'shared/navBar' %>
-		<% if flash[:error] || flash[:notice] %>
-			<div id='flash-notice' <%= 'class="error"' if flash[:error] %>>
-			<%=flash[:error] || flash[:notice] %></div>
-		<% end %>
-	<%= yield %>
+		<%= yield :header %>
+
+    		<div id='flash-notice-container'>
+		  <% if flash[:error] || flash[:notice] %>
+		  	<div id='flash-notice' <%= 'class="error"' if flash[:error] %>>
+		  	<%=flash[:error] || flash[:notice] %></div>
+		  <% end %>
+    		</div>
+	   <%= yield %>
 	</div>
 </body>
 <%= javascript_tag "var AUTH_TOKEN = #{form_authenticity_token.inspect};" if protect_against_forgery? %>

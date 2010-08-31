@@ -42,34 +42,33 @@ The main construct designer view.
 <div id="parts-row">
 <!-- Parts Bin -->
 <div id="parts-bin">
-<div id="parts-bin-tabs">
 
-  <ul class='tab-widget'>
-    <li><a href="#orf-tab">ORFs</a></li>
-    <li><a href="#linker-tab">Linkers</a></li>
-  </ul>
+<h2> Parts Bin </h2>
 
-<div id="orf-tab">
-<ul id="orf_bin" class="parts_bin">
-<% ORF.all.each do |byte| %>
-  <li id = "part_<%=byte.id%>_0" part_id="part_new" byte_id="byte_<%=byte.id%>" class = "ORF byte" ><%=h byte.name %></li>
-<% end %>
-</ul>
-</div>
+<div id="parts-list">
 
-<div id="linker-tab">
-<ul id="linker_bin" class="parts_bin">
-<% Linker.all.each do |byte| %>
-  <li id = "part_<%=byte.id%>_0" part_id="part_new" byte_id="byte_<%=byte.id%>" class = "Linker byte" ><%=h byte.name %></li>
-<% end %>
-</ul>
+  <% Category.all.each do |cat| %>
+    <h3><a href='#'><%=h cat.name %></a></h3>
+    <div class="cat-list">
+      
+      <% if cat.bio_bytes.empty? %>
+        <p>None</p>
+      <% else %>
+        <ul class="parts_bin">
+        <% cat.bio_bytes.each do |byte| %>
+          <li id = "part_<%=byte.id%>_0" part_id="part_new" byte_id="byte_<%=byte.id%>" class = "<%=h byte.type %> byte" ><%=h byte.name %></li>
+        <% end %>
+        </ul>
+      <%end%>
+
+    </div>
+
+  <% end %>
 </div>
 
 </div>
 <!-- END Parts Bin-->
 
-
-</div>
 <!-- Part info box -->
 <div id='part-info-box'>
 
@@ -106,7 +105,9 @@ The main construct designer view.
     
     <h3><%=h byte.name%></h3>
     <p><i><%=h byte.description%></i><p>
+    <p><%= link_to "More information",  bio_byte_path(byte) %></p>
     <div style="clear:both; height:1px; margin-bottom:-1px;">&nbsp;</div>
+
 
   </div>
 

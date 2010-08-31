@@ -1,0 +1,13 @@
+<h1>Editing <%= @category.name %></h1>
+
+<% form_tag :action => 'update', :id => @category do %>
+  <p><label for = "category_name">Name</label>
+  <%= text_field 'category', 'name' %></p>
+
+  <p><label for="category_description">Description</label>
+  <%= text_area 'category', 'description' %></p>
+  
+  <%= submit_tag "Update" %>
+<% end %>
+
+<%= link_to 'Back', bio_bytes_path %>

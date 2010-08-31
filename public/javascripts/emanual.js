@@ -590,9 +590,15 @@ function updatePlasmidDisplay(placeholders){
       return height - 46 + 'px';
     });
 
-    //add line cont. markers? eg ------//
-    //                         //------]
+    // add plasmid line wraps
 
+    var wraps = -(Math.floor(-numparts/6))-1;
+    for (var j=1; j<=wraps; j++){
+      $(".top-left." + constructs[i]).after(        
+        "<div class=plasmid-wrap id=wrap-"+ constructs[i] + " "
+        + "style='top:" + (j-1)*46 + "'></div>"
+        );
+    }
   }
 }
 

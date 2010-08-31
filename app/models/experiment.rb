@@ -22,23 +22,22 @@ class Experiment < ActiveRecord::Base
   has_many :notes, :through => :steps
   belongs_to :user
 
-   before_create :status_none
+   after_create :status_none 
 #  after_create :assign_owner  
 
   def clone_experiment_for( user )
-  #TODO should this code just be in the controller? no this is the right spot
     
     # user object has to be passed in because model does not have access to
     #  session info
     
     # assign the current user's info to the cloned experiment
-
     new_experiment = self.clone
     new_experiment.user_id = user.id
     new_experiment.authour = user.login
     new_experiment.published = false
-    new_experiment.status_none
+    new_experiment.status_none 
     new_experiment.save
+
 
     i = 1
     self.steps.all(:order => :step_order).each do |step|
@@ -46,6 +45,7 @@ class Experiment < ActiveRecord::Base
       new_step.experiment = new_experiment
       new_step.save
     end
+
 
     self.constructs.each do |construct|
       new_construct = construct.clone
@@ -97,7 +97,7 @@ class Experiment < ActiveRecord::Base
 		  u.working_counter  += 1 if( new_status == "working" )
 	  end
 	  self.status = new_status
-	  self.save && u.save
+	  self.save && u.save 
   end
  
 
