@@ -1,9 +1,20 @@
 /* general styling */
-.gray-box {
+.gray-box, .search-form {
 	background: none #efefef;
 	padding: 1em;
 	text-align:center;
 	border:1px solid #ccc;
+}
+
+.search-form {
+	-moz-border-radius: 15px;
+	display:table;
+	font-family:georgia;
+	font-style:italic;
+	margin-left:auto;
+	margin-right:auto;
+	padding:1em;
+	text-align:center;
 }
 
 .gray-box textarea {
@@ -755,29 +766,12 @@ div#bio-bytes-table .sequence {
 	margin-top:0;
 	margin-left:auto;
 	margin-right:auto;
-	padding-top:0;
-	padding-left:201px;
-	padding-right:201px;
-	padding-bottom:4em;
-	/*
-	text-align:left;
-	*/
+	padding:0 201px;
 }
 
 body {
-	margin-top: 0;
-/* may need this part
-	text-align:center;
-	width:100%;
-*/
-
-
-/*	background-image: url(../images/background.png);
-	background-repeat: repeat-y;
-	background-position: center;
-*/
+	margin: 0;
 	background-color:#efefef;
-
 }
 
 body, p, ol, ul, td {

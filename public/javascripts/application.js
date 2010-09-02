@@ -46,6 +46,15 @@ $(document).ready(function(){
 		}
 		return false;
 	});
+	
+	// resize the content div so the background fills the whole browser
+	$('#container').css( 'minHeight', $(window).height() );
+	
+	// bind to resize so it stays proper size
+	$(window).resize( function(){
+		$('#container').css( 'minHeight', $(window).height() );
+	})
+	
 	//higlight text in login form on click
 	$('#user-nav #login, #user-nav #password').focus( function(){this.select()} );
 
