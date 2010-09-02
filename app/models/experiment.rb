@@ -23,7 +23,16 @@ class Experiment < ActiveRecord::Base
   belongs_to :user
 
    after_create :status_none 
-#  after_create :assign_owner  
+   
+  # pagination stuff
+  cattr_reader :per_page
+  @@per_page = 10
+
+  def self.search(search,page)
+	paginate :per_page => 10, :page => page,
+		:conditions => ['published = ? AND ( description like ? OR title like ? )', true , "%#{search}%", "%#{search}%" ],:order => 'title'
+
+  end
 
   def clone_experiment_for( user )
     

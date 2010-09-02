@@ -1,5 +1,11 @@
 # Methods added to this helper will be available to all templates in the application.
 module ApplicationHelper
+	def search_box( path, name )
+		render :partial => "shared/search_form", 
+			:locals =>{:path => path, :name=>name }
+	end
+		
+
 	def more_text( text, length )
 		    if text.length > length
 				  "<p>#{text[0..length]}" + 

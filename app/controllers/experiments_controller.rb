@@ -18,9 +18,20 @@ class ExperimentsController < ApplicationController
   # GET /experiments
   # GET /experiments.xml
     def index
-     admin_role  = Role.find_by_name( 'admin' )
+      admin_role  = Role.find_by_name( 'admin' )
     
-     @experiments = User.find_by_role_id( admin_role.id  ).experiments.find_all_by_published( true );
+#      @experiments = User.find_by_role_id( admin_role.id  ).experiments.find_all_by_published( true );
+
+     #@groups = params[:search] ? Group.search( params[:search], params[:page] ) : 
+#		  	Group.paginate( :page => params[:page], :order => 'name' )
+    if params[:search]			
+      @experiments = Experiment.search( params[:search], params[:page] )
+    else
+      @experiments = User.find_by_role_id( admin_role.id  ).experiments.find_all_by_published( true )
+      @experiments = @experiments.paginate( :page => params[:page], :order => 'name' );
+    end
+
+
 
     respond_to do |format|
       format.html # index.html.erb
