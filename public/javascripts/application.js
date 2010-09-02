@@ -48,11 +48,15 @@ $(document).ready(function(){
 	});
 	
 	// resize the content div so the background fills the whole browser
-	$('#container').css( 'minHeight', $(window).height() );
+	$('#container').css( 'minHeight', 
+			( $(window).height() > $(document).height() ) ?  
+			  $(window).height() : $(document).height() );
 	
 	// bind to resize so it stays proper size
 	$(window).resize( function(){
-		$('#container').css( 'minHeight', $(window).height() );
+		$('#container').css( 'minHeight', 
+			( $(window).height() > $(document).height() ) ?  
+			  $(window).height() : $(document).height() );
 	})
 	
 	//higlight text in login form on click
