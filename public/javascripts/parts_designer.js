@@ -88,6 +88,8 @@
         $("#part-info").contents().replaceWith($("#info_" + id).clone());
       });
     
+      $(".placeholder").remove(); // wussy hack to get sortable usable for
+      updatePlasmidDisplay(0);    // empty plasmid
   }); 
 
 
