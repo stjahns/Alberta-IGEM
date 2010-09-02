@@ -182,11 +182,13 @@ function initSaveButton(){
         // require selection?
 
         var bytes = $('#parts_list').sortable('toArray', {attribute: 'class'});
-         
+
         if (validate(bytes)){
 
+          $(this).after("<div id=saving-text style='text-align:center'>Saving...</div><div id=saving-anim class=loading style='height:35px'></div>");
+
           //submit to server
-         $.ajax({
+          $.ajax({
            type: 'put',
            dataType: 'json',
            data: $('#parts_list').sortable('serialize', {attribute: 'part_id'}) + '&'
@@ -196,10 +198,13 @@ function initSaveButton(){
 
             url: '/save_construct',
             success: function(data){
+              //kill saving anim
+              $("#saving-anim").fadeOut('slow');
+              $("#saving-text").html("Saved.").fadeOut('slow');
+
               $("#parts_list > li").each(function(index) {
                 $(this).attr('part_id', "part_"+data.part_ids[index]);
               })
-              alert("Saved!");
             }
           
           })
@@ -217,6 +222,7 @@ function initConstructSortable(){
 
         connectWith:  '#trash',
         helper: 'clone',
+        cursor: 'move',
         appendTo: 'body',
         tolerance: 'pointer',
         start: function(){
@@ -330,10 +336,12 @@ function getParts(){
           if (p.type == "linker"){
             start.sequence = "GCCT";
             start.name = "B";
+            start.colour = "#0000FF";
           }
           else{
             start.sequence = "TGGG";
             start.name = "A"
+            start.colour = "#FF0000";
           }
           start.start = loc;
           loc += 4;
@@ -357,10 +365,12 @@ function getParts(){
         if (p.type == "orf"){
           end.sequence = "GCCT";
           end.name = "B";
+          end.colour = "#0000FF";
         }
         else{
           end.sequence = "TGGG";
           end.name = "A"
+          end.colour = "#FF0000";
         }
         end.start = loc;
         loc += 4;

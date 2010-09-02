@@ -7,6 +7,7 @@
 <% end %>
 
 <% content_for :header do %>
+
 <div id="header">
 <h1>Parts Bin</h1>
 <p>Browse the parts in the kit and view detailed information in the stats sheet.</p> 
@@ -15,9 +16,6 @@
 		<% if logged_in? && current_user.can_create_bio_bytes? %>
 	  	<li class="right"><%= link_to "New Part", new_bio_byte_path %></li>
 		<% end %>
-    <% @categories.each do |c| %>    
-      <li class="left" ><a href=# class="cat <%= 'selected' if c.name == Category.first.name %>" category=<%=h c.name%>><%=h c.name %></a></li>
-    <% end %>
 		</ul>
 
 
@@ -28,16 +26,32 @@
 
 <div id="bio-bytes-table">
   
-		<% if logged_in? && current_user.can_edit_categories? %>
-      <%= link_to "New Category", new_category_path %> 
-    <%end%>
+
+  <div id=cat_list>
+
+  <h3>Part Categories:</h3>
+
+  <ul>
+  <% @categories.each do |c| %>    
+    <li><a href=#<%=h c.name%>><%=h c.name %></a></li>
+  <% end %>
+  </ul>
+
+	<% if logged_in? && current_user.can_edit_categories? %>
+    <p><%= link_to "New Category", new_category_path %></p>
+  <%end%>
+
+  </div>
+
 
   <% @categories.each do |c| %>
 
-    <div class="category" id=<%=h c.name %> style=<%= "display:none;" unless c.name == Category.first.name %>>
+    <div class="category" >
+
+    <a class=link_targ id=<%=h c.name %>></a>
 
 
-    <h3><%=h c.name %></h3>
+    <h2 class=cat_title><%=h c.name %></h2>
     <p><%=h c.description %></p>
     
 		<% if logged_in? && current_user.can_edit_categories? %>
@@ -79,6 +93,7 @@
 	  		</div>
 	  	</div>
 	  <% end %>
+    <p><a href=#>Back to top...</a></p>
 
     </div>
 

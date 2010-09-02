@@ -1,16 +1,18 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
   <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
   <title>Constructs: <%= controller.action_name %></title>
   <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
   <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.2/jquery-ui.min.js"></script>
+  <%= javascript_include_tag 'jrails', 'jquery.form','jquery.cookie','jquery.download', 'application','header', 'groups','profile'%>
+  <%= stylesheet_link_tag 'scaffold', 'toolbar', 'header', :media=>'all' %>
   <%= javascript_include_tag 'parts_designer' %>
   <%= javascript_include_tag 'sequence_display' %>
-  <%= javascript_include_tag 'application', 'jquery.cookie' %>
-
   <%= javascript_tag "var AUTH_TOKEN = #{form_authenticity_token.inspect};" if protect_against_forgery? %>
   <%= stylesheet_link_tag 'parts_designer' %> 
-  <%= stylesheet_link_tag 'scaffold' %>
 </head>
 
 <body>

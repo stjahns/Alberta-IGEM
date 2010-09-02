@@ -43,6 +43,7 @@ div#header-toolbar ul {
 
 }
 div#header-toolbar ul li {
+  height:
 	float: left;
 }
 div#header-toolbar ul li.right {
@@ -69,6 +70,7 @@ div#header-toolbar ul li a:link, div#header-toolbar ul li a:visited {
 	border-width:1px 1px 0 1px;
 
 	-moz-border-radius:4px 4px 0 0;
+  -webkit-border-radius:4px 4px 0 0;
 
 
 }

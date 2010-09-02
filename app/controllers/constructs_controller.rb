@@ -1,5 +1,5 @@
 class ConstructsController < ApplicationController
-  before_filter :get_exp, :except => :get_data
+  before_filter :get_exp, :except => [:get_data, :sandbox]
   #before_filter :login_required, :except => :get_data
   
   def get_exp
@@ -48,6 +48,10 @@ class ConstructsController < ApplicationController
     @order = @construct.part_order
   end
 
+  def sandbox
+    @construct = Construct.new
+    @order = @construct.part_order
+  end
 
   def get_data
     

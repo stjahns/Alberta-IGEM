@@ -105,7 +105,7 @@ class BioBytesController < ApplicationController
 
     @byte = BioByte.find(params[:id])
 
-    directory = "public/data"
+    directory = "#{RAILS_ROOT}/public/data"
 
     #TODO validate file type
 
@@ -139,10 +139,10 @@ class BioBytesController < ApplicationController
 
     # TODO check uploaded flags to make sure all data is here ....
 
-    script_path = 'public/perl/val_seq.pl' #store in environments?
-    #ref_path = "public/data/#{@byte.name}.fasta" 
-    vf_path = "public/data/vf_#{@byte.id}.abi"
-    vr_path = "public/data/vr_#{@byte.id}.abi"
+    script_path = "#{RAILS_ROOT}/public/perl/val_seq.pl" #store in environments?
+    #ref_path = "#{RAILS_ROOT}/public/data/#{@byte.name}.fasta" 
+    vf_path = "#{RAILS_ROOT}/public/data/vf_#{@byte.id}.abi"
+    vr_path = "#{RAILS_ROOT}/public/data/vr_#{@byte.id}.abi"
     refseq = @byte.backbone.prefix + @byte.sequence + @byte.backbone.suffix
     
     script_out = `#{script_path} #{refseq} #{vf_path} #{vr_path}`
@@ -162,12 +162,12 @@ class BioBytesController < ApplicationController
 
   def download_vf
     @byte = BioByte.find(params[:id])
-    send_file "public/data/vf_#{@byte.id}.abi", :filename => "vf_#{@byte.biobyte_id}.abi"
+    send_file "#{RAILS_ROOT}/public/data/vf_#{@byte.id}.abi", :filename => "vf_#{@byte.biobyte_id}.abi"
   end
 
   def download_vr
     @byte = BioByte.find(params[:id])
-    send_file "public/data/vr_#{@byte.id}.abi", :filename => "vr_#{@byte.biobyte_id}.abi"
+    send_file "#{RAILS_ROOT}/public/data/vr_#{@byte.id}.abi", :filename => "vr_#{@byte.biobyte_id}.abi"
   end
 
   def upload_desc_img

@@ -22,6 +22,7 @@ ActionController::Routing::Routes.draw do |map|
   map.reset 'reset/:reset_code', :controller => 'users', :action => 'reset'
   map.new_email 'users/:id/new_email/:key', :controller => 'users', :action => 'activate_email'
 
+  map.sandbox '/sandbox', :controller => 'constructs', :action => 'sandbox'
  
   # print to pdf
   map.print '/print', :controller => 'print', :action => 'print', :method => :post 

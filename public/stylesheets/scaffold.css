@@ -401,9 +401,6 @@ div.message h2 {
 	height:36px;
 }
 
-
-
-
 /* styling for navigation bar */
 div#navBar {
 	position: fixed;
@@ -418,7 +415,12 @@ div#navBar {
 	background-color: black;
 	background-image: none;
 	z-index: 1;
+  margin-bottom: 0px;
 
+}
+
+#navBar form{
+  margin-bottom: 0px;
 }
 
 #nav-print-to-pdf form { display:none; }
@@ -431,16 +433,13 @@ span#nav-print-to-pdf a#print-to-pdf {
 	cursor:pointer;
  }
 
-
-
-
 div#navBar input {
 	font-size: 10px;
 	margin-right: 5px;
 	border: 1px solid gray;
 	width: 133px;
-	height: 13px;
-	margin-top: 1px;
+	height: 15px;
+	margin-top: 3px;
 	margin-bottom: 1px;	
 }
 div#nav-right-corner{
@@ -697,6 +696,7 @@ div#bio-bytes-table div.byte-row  {
 }
 div.byte-row div.byte-name h2 {
 	display:inline;
+  text-decoration: underline;
 }
 div.byte-row div.byte-name h2.selected {
 	padding-top:0.5em;
@@ -825,4 +825,54 @@ a:visited { color: #666; }
 .icon_image{
   float: right;
 }
+
+.more-info-link{
+  background-color:       transparent;
+  text-align:             left;
+  cursor:                 pointer;
+  border: 1px solid black;
+}
+.more-info-link:hover {
+  background-color:       black;
+  color:                  white;
+}
+
+#cat_list{
+  border: 1px solid #999;
+  background-color: #DDD;
+}
+
+#cat_list h3 {
+  margin-left: 10px;
+}
+#cat_list p, ul{
+  background: transparent;
+}
+#cat_list ul{
+}
+
+.category {
+  border: 1px solid #999;
+  margin-top: 25px;
+  margin-bottom: 25px;
+  padding: 0px 10px 0px 10px;
+  
+}
+
+.cat_title {
+  border-bottom: 3px solid black;
+}
+
+.byte-row {
+  margin: 0px 16px 0px 16px;
+}
+
+.link_targ {
+  position: relative;
+top: -50px;
+}
+
+
+
+
 

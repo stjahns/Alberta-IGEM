@@ -23,9 +23,9 @@
 <%end%>
 
 <div class=description>
-  <h2>Description:</h2> 
   <%= image_tag( step_image_path( @byte.function_image ), :class => "function_image" ) unless @byte.function_image.blank? %>
-  <p><%=h @byte.description%></p>
+  <p><i><%=h @byte.description%></i></p>
+  <p>Sequence length (without A/B overhangs): <%=@byte.sequence.length%> bp</p>
   <div style="clear:both; height:1px; margin-bottom:-1px;">&nbsp;</div>
 </div>
 

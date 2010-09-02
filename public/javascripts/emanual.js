@@ -13,7 +13,7 @@ $(document).ready(function(){
 //	}
 
 
-      	updatePlasmidDisplay(0);
+      updatePlasmidDisplay(0);
       
       
       $.ajax({
@@ -37,18 +37,28 @@ $(document).ready(function(){
         }
       })
 
-      $(".part").mouseenter(function(){
+      $(".part").click(function(){
         var con = $(this).attr('construct');
-        //$(".part-info." + con ).html($(this).attr('info'));
-        var id = $(this).attr('byte_id').split('_')[1];
-        $(".part-info." + con ).contents().replaceWith($("#info_" + id).clone());
-        $(".part-info." + con ).parent().show();
+        if ($(this).hasClass('showing')){
+          $(this).removeClass('showing');
+          $(".part-info." + con ).parent().hide();
+        }
+        else {
+          $(this).addClass('showing');
+          //$(".part-info." + con ).html($(this).attr('info'));
+          var id = $(this).attr('byte_id').split('_')[1];
+          $(".part-info." + con ).contents().replaceWith($("#info_" + id).clone());
+          $(".part-info." + con ).parent().show();
+        }
       });
+
+/*
 
       $(".part").mouseleave(function(){
         var con = $(this).attr('construct');
         $(".part-info." + con).parent().hide();
       });
+*/
       
 	//**********************************************************
 	// javascript for editing steps
@@ -596,7 +606,7 @@ function updatePlasmidDisplay(placeholders){
     for (var j=1; j<=wraps; j++){
       $(".top-left." + constructs[i]).after(        
         "<div class=plasmid-wrap id=wrap-"+ constructs[i] + " "
-        + "style='top:" + (j-1)*46 + "'></div>"
+        + "style='top:" + (j-1)*46 + "px'></div>"
         );
     }
   }

@@ -64,7 +64,7 @@ class BioByte < ActiveRecord::Base
                  "B" => "vronly",
                  "!" => "mismatch",
                  "?" => "unsure" }
-    unless status.include? "inequal" #if lengths refseq obsvseq equal
+    unless status.include? "unequal" #if lengths refseq obsvseq equal
       val_html += "Observed Sequence:<br/>"
       seqouts = [obsvseq]
       seqouts.each do |seq|
