@@ -7,6 +7,7 @@ class GroupsController < ApplicationController
   def index
 	@groups = params[:search] ? Group.search( params[:search], params[:page] ) : 
 		  	Group.paginate( :page => params[:page], :order => 'name' )
+	@search = params[:search]
   end
 
 #  def search 

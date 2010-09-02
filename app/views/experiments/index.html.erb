@@ -16,6 +16,10 @@
 
 <%= search_box experiments_path, "Search all published experiments:" %>
 
+<p class="search_info">
+	<%= search_page_info( @search, @groups ) if @search %>
+</p>
+
 <% paginated_section @experiments do %>
 	<%= render :partial=>'description', :collection => @experiments, :as=>:experiment %>
 <% end %>
