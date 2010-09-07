@@ -236,6 +236,7 @@ when I figure out what these two are for, I need to re label them and put a comm
 }*/
 .video{
     margin-left: 12em;
+    display:none;
 }
 
 #encyclopaedia .show_section_vidlink{
@@ -262,13 +263,16 @@ when I figure out what these two are for, I need to re label them and put a comm
 #encyclopaedia .index{
     width:825px;
     position:relative;
-    left: -12px;
+    
+    margin-left:50px;
+    
     
     border-top: 1px solid gray;
 }
 
 #encyclopaedia .article_button{
     border-bottom: 1px solid gray;
+    overflow: hidden;
 }
 
 #encyclopaedia .links{
@@ -295,7 +299,7 @@ when I figure out what these two are for, I need to re label them and put a comm
 
 #encyclopaedia .show_nav_links{
     position: relative;
-    left: 610px;
+    left:800px;
     margin-top: 45px;
 }
 
