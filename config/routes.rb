@@ -7,7 +7,7 @@ ActionController::Routing::Routes.draw do |map|
   
 
 
-  map.resources :encyclopaedias, :member => {:upload => :post, :image_form => :get} do |encyclopaedias|
+  map.resources :encyclopaedias, :member => {:upload => :post} do |encyclopaedias|
      encyclopaedias.resources :sections,
        :member => { :upload => :put}
   end
@@ -105,7 +105,7 @@ ActionController::Routing::Routes.draw do |map|
 	  image.image 'images/:id.:format', :action =>'show',:method=>:get 
 	  image.step_image 'images/:id/step.:format', :action=>'step', :method=>:get
 	  image.thumb_image 'images/:id/thumb.:format', :action=>'thumb',:method=>:get
-	  image.section_image 'images/:id/section.:format',:action=>'thumb',:method=>:get
+	  image.section_image 'images/:id/section.:format',:action=>'section',:method=>:get
     image.image150 'images/:id/image150.:format',:action=>'image150',:method=>:get
   end
   map.resources :images, :except => [ :show ]
