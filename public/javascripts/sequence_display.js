@@ -8,6 +8,10 @@ function getAnnotatedSequence(width){
   var forwardSeq = getForwardSequence(parts);
   var revSeq = getComplement(forwardSeq);
 
+  // set sequence length in view
+  $('#seq_length').html(forwardSeq.length);
+  
+
   // todo get array of parts to display part borders
   // get them split into each line 
   // split, truncate features into separate sequence lines
@@ -24,9 +28,9 @@ function getAnnotatedSequence(width){
     // add parts
     output += formatParts(partlines[l]);
     // add forward seq
-    output += formatSeq(forwardSeqlines[l], l*width); 
+    output += formatSeq(forwardSeqlines[l], l*width, "selectable"); 
     // add reverse seq
-    output += formatSeq(revSeqlines[l], l*width);
+    output += formatSeq(revSeqlines[l], l*width, "");
     // add line spacer
     output += "<div>&nbsp;</div>";
   }
@@ -275,10 +279,10 @@ function clone(obj){
     return temp;
 }
 
-function formatSeq(seq, linenumber){
+function formatSeq(seq, linenumber, classes){
   var output = "<div class='sequence'>" 
         + "<span class='numspacer'>" + linenumber + ":</span>"
-        + "<span class='seq'>" + seq + "</span>"
+        + "<span class='seq " + classes + "'>" + seq + "</span>"
         + "</div>";
   return output;
 }

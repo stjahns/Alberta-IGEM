@@ -1,0 +1,122 @@
+<!--
+The main construct designer view.
+-->
+
+<h1>Plasmid Sandbox:</h1>
+
+<!-- plasmid box -->
+<div id="parts_box">
+  <div id="top-left">
+  </div>
+  <div id="left-side">
+  </div>
+  <div id="bottom-left">
+  </div>
+  <div id="bottom-right">
+  </div>
+  <div id="bottom">
+  </div>
+
+  <div id="plasmid-inner">
+<ol id="parts_list">
+<% unless @order.empty? %>
+<% @order.each do |part| %>
+  <li id = "part_<%=part.bio_byte_id%>_<%=part.id%>" class = "<%=part.bio_byte.type %> part" byte_id="byte_<%=part.bio_byte_id%>" part_id="part_<%=part.id%>" > </li>
+<% end %>
+<% else %>
+  <li class='part placeholder'>DRAG PARTS HERE</li>
+<% end %>
+</ol>
+</div>
+  <div id="plasmid-spacer">
+  </div>
+  <div id="plasmid-end">
+  </div>
+</div>
+<!-- END plasmid box -->
+
+<div id="parts-row">
+<!-- Parts Bin -->
+<div id="parts-bin">
+
+<h2> Parts Bin </h2>
+
+<div id="parts-scroll">
+
+<div id="parts-list">
+
+  <% Category.all.each do |cat| %>
+    <h3><a href='#'><%=h cat.name %></a></h3>
+    <div class="cat-list">
+      
+      <% if cat.bio_bytes.empty? %>
+        <p>None</p>
+      <% else %>
+        <ul class="parts_bin">
+        <% cat.bio_bytes.each do |byte| %>
+          <li id = "part_<%=byte.id%>_0" part_id="part_new" byte_id="byte_<%=byte.id%>" class = "<%=h byte.type %> byte" >&nbsp</li>
+        <% end %>
+        </ul>
+      <%end%>
+
+    </div>
+
+  <% end %>
+</div>
+
+</div>
+
+</div>
+<!-- END Parts Bin-->
+
+<!-- Part info box -->
+<div id='part-info-box'>
+
+<h2>Part Description:</h2>
+<div id='part-info'>
+<i>Mouse over a part to see its description.</i>
+</div>
+
+
+</div>
+</div>
+<!-- END part info box -->
+
+
+
+
+<!-- Sequence box -->
+<div id="sequence_box">
+  <h2>Sequence:</h2>
+  <p>Length: <span id=seq_length>0</span> bp</p>
+  <div id = "sequence">
+  <!-- content generated in parts_designer.js -->
+  </div>
+</div>
+<!-- END sequence -->
+
+
+<!-- part-info-data -->
+<div id="part-info-data", style="display:none;">
+
+<% BioByte.all.each do |byte| %>
+  
+  <div id='info_<%=byte.id%>'>
+    <div class="byte_desc_img"><%= image_tag step_image_path(byte.bio_byte_image.image, :jpg ) unless byte.bio_byte_image.blank? %></div> 
+    
+    <h3><%=h byte.name%></h3>
+    <p><i><%=h byte.description%></i><p>
+    <p>Length: <%= byte.sequence.length %> bp</p>
+    <form> 
+      <input type="button", class='more-info-link', value="More information"
+      onClick="window.open('<%= bio_byte_path(byte) %>', '', 'toolbar=yes,location=yes,directories=yes,status=yes,menubar=yes,scrollbars=yes,copyhistory=yes,resizable=yes')">
+    </form>
+    <div style="clear:both; height:1px; margin-bottom:-1px;">&nbsp;</div>
+
+
+  </div>
+
+<% end %>
+
+</div>
+<!-- END part-info-data -->

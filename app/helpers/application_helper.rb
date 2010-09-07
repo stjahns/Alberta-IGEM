@@ -44,8 +44,9 @@ module ApplicationHelper
 			:manual => link_to( "Lab Manual", experiments_path ),
 			:parts => link_to( "Parts Bin", bio_bytes_path ),
 			:groups => link_to( "Groups", groups_path ),
+			:sandbox => link_to( "Sandbox", sandbox_path ),
 			:home => link_to( "Home", root_path ) }
-		order = [:home,:groups,:parts,:manual,:articles,:glossary].reverse  
+		order = [:home,:sandbox,:groups,:parts,:manual,:articles,:glossary].reverse  
 		order.each do |page|
 			output += "<li"
 			output += ' class="selected"' if page == selection

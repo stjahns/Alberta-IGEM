@@ -218,7 +218,7 @@ $(document).ready(function(){
 });
 
 function roleBtn( btnClass ){
-	$(btnClass).live( 'click', function(){
+    $(btnClass).live( 'click', function(){
 		var member = $(this).parents('.member');
 		
 		var form = $(this).next('form')

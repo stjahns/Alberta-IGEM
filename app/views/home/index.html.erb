@@ -4,8 +4,9 @@
 	  <ul>	
 		<li><%= link_to "Parts Bin", bio_bytes_path if logged_in? && current_user.can_create_bio_bytes? %></li>
 		<li><%= link_to "Protocol Generator", step_generators_path if logged_in? && current_user.can_edit_step_generators? %></li>
-  <li><%= link_to "Experiments", experiments_path %></li>
   <li><%= link_to "About", '#' %></li>
+  <li><%= link_to "Sandbox", sandbox_path %></li>
+  <li><%= link_to "Experiments", experiments_path %></li>
 
   <% if logged_in?  %>
      <li><%= link_to "View your profile", profile_path( current_user ) %></li>  
@@ -19,4 +20,8 @@
 <h2 id="home-notice" <%= 'class="error"' if flash[:error]%>>
 	<%= flash[:error] || flash[:notice] %></h2>
 
+<div id="home-content">
+
+
+</div>
 

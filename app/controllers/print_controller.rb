@@ -20,7 +20,7 @@ class PrintController < ApplicationController
 		# TODO add page breaks somehow!!!
 
 		#write to a temp file
-		temp_file = File.open( 'app/views/print/' + file_name , 'w') do |f|
+		temp_file = File.open( "#{RAILS_ROOT}/app/views/print/" + file_name , 'w') do |f|
 		       f.write( html )	
 		end
 		
@@ -32,7 +32,7 @@ class PrintController < ApplicationController
 		       :layout => 'pdf'
 
 		# delete the temp file
-		File.delete( 'app/views/print/' + file_name )
+		File.delete( "#{RAILS_ROOT}/app/views/print/" + file_name )
 
 
 	end
