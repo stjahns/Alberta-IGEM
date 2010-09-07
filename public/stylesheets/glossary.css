@@ -252,7 +252,6 @@ when I figure out what these two are for, I need to re label them and put a comm
 }
 
 #encyclopaedia .article_intro{
-    display:none;
     font-family: Courrier;
     float: right;
     width:490px;
@@ -367,4 +366,8 @@ when I figure out what these two are for, I need to re label them and put a comm
 
 .gloss_links{
     position:relative;
+}
+
+#encyclopaedia .article_text{
+    display: none;
 }
