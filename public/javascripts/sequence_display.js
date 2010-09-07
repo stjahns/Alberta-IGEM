@@ -8,6 +8,10 @@ function getAnnotatedSequence(width){
   var forwardSeq = getForwardSequence(parts);
   var revSeq = getComplement(forwardSeq);
 
+  // set sequence length in view
+  $('#seq_length').html(forwardSeq.length);
+  
+
   // todo get array of parts to display part borders
   // get them split into each line 
   // split, truncate features into separate sequence lines

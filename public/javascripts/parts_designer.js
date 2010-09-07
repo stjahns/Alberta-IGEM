@@ -64,7 +64,7 @@
 */
       $("#parts-row").droppable({
         accept: '#parts_list >li',
-        tolerace: 'pointer',
+        tolerace: 'intersect',
         drop: function(event, ui) {
           ui.draggable.attr()
           ui.draggable.remove();
@@ -226,7 +226,7 @@ function initConstructSortable(){
         helper: 'clone',
         cursor: 'move',
         appendTo: 'body',
-        tolerance: 'pointer',
+        tolerance: 'intersect',
         start: function(){
           updatePlasmidDisplay(1);
           /*
