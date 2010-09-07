@@ -45,16 +45,16 @@ class GlossariesController < ApplicationController
   # POST /glossaries
   # POST /glossaries.xml
   def create
-    @glossary = Glossary.new(params[:glossary])
-
+    @new_gloss = Glossary.new(params[:glossary])
+    @glossaries = Glossary.all
     respond_to do |format|
-      if @glossary.save
+      if @new_gloss.save
         flash[:notice] = 'Glossary was successfully created.'
         format.html { redirect_to(glossaries_url) }
-        format.xml  { render :xml => @glossary, :status => :created, :location => @glossary }
+        format.xml  { render :xml => @new_gloss, :status => :created, :location =>@new_gloss}
       else
-        format.html { render :action => "new" }
-        format.xml  { render :xml => @glossary.errors, :status => :unprocessable_entity }
+        format.html { render :action => "index" }
+        format.xml  { render :xml => @new_gloss.errors, :status => :unprocessable_entity }
       end
     end
   end

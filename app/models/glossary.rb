@@ -29,4 +29,12 @@ class Glossary < ActiveRecord::Base
 
    return @glossaries
   end
+  private
+   def validate
+        errors.add_on_empty %w( term )
+        errors.add_on_empty %w( definition )
+
+   end
+   validates_format_of :term, :with => /^(\s|[a-zA-Z])+$/, :message =>"must be written with alphabetical letters"
+   
 end

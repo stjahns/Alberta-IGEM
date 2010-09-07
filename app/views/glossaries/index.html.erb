@@ -1,42 +1,34 @@
-<div id ="encyclopaedia">
+
 <!doctype html>
 <html>
   <head>
+
     <script type="text/javascript" src="http://code.jquery.com/jquery-1.4.2.min.js"></script>
 
     <script type="text/javascript">
       $(document).ready(function(){
-         $("a.term-link").hover(function(event){
-            $(this).next("em").animate({opacity: "show", top: "-75"}, "fast");
-          }, function() {
-            $(this).next("em").animate({opacity: "hide", top: "-85"}, "fast");
-	});
-         $("div.letter_section:first").show();
-         $("div#header-toolbar .left a").click(function(event){
-            var locator = $(this).attr("href");
-            $("div.letter_section:visible").hide("slow");
-            $("div [class="+locator+"] .letter_section").show("slow");
-            $("div.glossary_edit_form:visible").hide("fast");
-         });
-         $("div#header-toolbar .right a").click(function(event){
+        if($('div#errorExplanation').length>0){
+          $("div.index_new_gloss_form").show("slow")
+        }
+
+         $("div#encyclopaedia div#header-toolbar .right a").click(function(event){
             $("div.index_new_gloss_form").toggle("slow");
          });
-         $("div.glossary_index_edit_links a ").click(function(event){
-           var locator = $(this).attr("href");
-            //$("div ."+locator+" .glossary_index_term_text").hide("slow");
-            $("div ."+locator ).hide("slow");
-         });
+
       });
 
 
     </script>
   </head>
 
+  
+
+<div id ="encyclopaedia">
   <body>
 
     <div class ="title-header"><h1>Glossary</h1></div>
 
-<div class="header">
+    <div class="header">
 	<div id="header-toolbar" >
 		<ul>
 		<% if logged_in? && current_user.can_create_glossaries? %>
@@ -58,13 +50,13 @@
 	</div>
 </div>
 
+
 <div id ="glossary">
     <div class ="index_new_gloss_form">
-      <div class ="hanging-toolbar"
+      <div class ="hanging-toolbar"></div>
            <h3>New Glossary Entry Form</h3>
       <% form_for(@new_gloss) do |f| %>
   <%= f.error_messages %>
-    </div>
 
   <p>
     <%= f.label :term %><br />
@@ -82,10 +74,9 @@
 
 <%@letter = @glossaries.first.term.first.upcase%>
  <%if @letter%>
-  <div class="#<%=@letter%>">
-  <div class = "letter_section">
+  <a name="<%=@letter%>"><%=@letter%></a>
  <%end%>
-
+<div class = "hanging-toolbar"></div>
 <% @glossaries.each do |glossary| %>
   <% @regex = Regexp.new(/^\w/) %>
      <% matchdata = @regex.match(glossary.term) %>
@@ -93,16 +84,9 @@
 
     <%unless matchdata.upcase == @letter%>
     <%@letter = matchdata.upcase%>
-    </div>
-  </div>
-  <div class ="#<%=@letter%>">
-  <div class="letter_section">
-
+       <a name ="<%=@letter%>"><%=@letter%></a>
+       <div class = "hanging-toolbar"></div>
     <%end%>
-
-    <div class = "hanging-toolbar"></div>
-    <div class="#<%=glossary.term%>Edit">
-    <div class="glossary_index_term_text">
 
        <% if logged_in? && current_user.can_create_glossaries? %>
       <div class="glossary_index_edit_links" >
@@ -113,39 +97,17 @@
 
 
         <div class="glossary_index_term">
-        <b><%=glossary.term%></b>
+        <b><a name = "<%=glossary.term%>"><%=glossary.term%></a></b>
         </div>
         <div class="glossary_index_definition">
-        <% definition=add_glossary_links(glossary.definition)%>
-         <%= add_popups(definition)  %>
+        <% response=add_glossary_links(glossary.definition)%>
+        <%= add_popups(response) %>
         </div>
 
-  </div>
-    <div class="glossary_edit_form">
-      <h3>Editing glossary</h3>
-
-<% form_for(glossary) do |f| %>
-  <%= f.error_messages %>
-
-  <p>
-    <%= f.label :term %><br />
-    <%= f.text_field :term %>
-  </p>
-  <p>
-    <%= f.label :definition %><br />
-    <%= f.text_area :definition %>
-  </p>
-  <p>
-    <%= f.submit 'Update' %>
-  </p>
 <% end %>
-    </div>
-    </div>
-<% end %>
-  </div>
-</div>
   </div>
      <div class = "hanging-toolbar"></div>
+
   </body>
+  </div>
 </html>
-</div>

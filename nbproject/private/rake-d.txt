@@ -1,6 +1,7 @@
 annotate_models=Add schema information (as comments) to model files
 auth\:gen\:site_key=Generates config/initializers/site_keys.rb
 categories\:build_categories=Create byte categories
+count_experiments=count the experiments
 db\:abort_if_pending_migrations=Raises an error if there are pending migrations
 db\:charset=Retrieves the charset for the current environment's database
 db\:collation=Retrieves the collation for the current environment's database

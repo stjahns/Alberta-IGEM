@@ -31,7 +31,7 @@
 
   </head>
   <div id ="encyclopaedia">
-
+    <div id ="centered">
 <div class="show_nav_links">
 <%if logged_in? && current_user.can_edit_encyclopaedias?%>
     <%= link_to 'Edit', edit_encyclopaedia_path(@encyclopaedia) %> |
@@ -158,6 +158,7 @@
 <% end %>
 
 <div class ="hanging-toolbar"></div>
+    </div>
 
   </div>
 
