@@ -581,6 +581,8 @@ div#user-form {
 	color:#666;
 	margin: 0 150px;
 	margin-top:30px;
+	border:1px solid #ccc;
+	-moz-border-radius:5px;
 
 }
 div#user-form input.submit-btn {
@@ -634,7 +636,7 @@ div#home-logo {
 	height:100px;
 	width:400px;
 	margin-left:191px;
-	margin-top:90px;
+	padding-top:90px;
 }
 div#home-logo h1 {
 	font-size:52px;

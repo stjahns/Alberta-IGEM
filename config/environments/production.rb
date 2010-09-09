@@ -28,3 +28,7 @@ SITE_URL = "localhost:3000"
 
 # Enable threaded mode
 # config.threadsafe!
+
+# defines whether people must be logged in at all times to view
+# the site or not
+SITE_LOCKED = false
