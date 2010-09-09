@@ -13,11 +13,18 @@
 /*styling for glossaries page*/
 
 #encyclopaedia{
-    margin-left:150px;
+ /* changed by mike to make it zoom propers
+  * margin-left:150px;
     margin-right:150px;
+  */
     /*width:850px;
     margin-right: 175px;
     float: right;*/
+}
+
+.show_intro {
+	/*css fix added by mike*/
+	clear:both;
 }
 
 #encyclopaedia h1{
@@ -255,16 +262,19 @@ when I figure out what these two are for, I need to re label them and put a comm
     display:none;
     font-family: Courrier;
     float: right;
-    width:490px;
+    /* width:490px;
+     * changed by mike for proper zooming
+     * */
+    width:400px;
     margin-left: 10px;
     margin-right:40px;
 }
 
 #encyclopaedia .index{
-    width:825px;
+/* removed by mike for proper zooming    width:825px;*/
     position:relative;
     
-    margin-left:50px;
+/* removed by mike for proper zooming    margin-left:50px; */
     
     
     border-top: 1px solid gray;
@@ -299,7 +309,9 @@ when I figure out what these two are for, I need to re label them and put a comm
 
 #encyclopaedia .show_nav_links{
     position: relative;
-    left:800px;
+ /*   left:800px;
+  *   css fix added by mike*/
+    float:right;
     margin-top: 45px;
 }
 
