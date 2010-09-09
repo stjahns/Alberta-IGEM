@@ -5,7 +5,7 @@ class HomeController < ApplicationController
 	skip_before_filter :lock_site 
 
 
-	# SITE_LOCKED is defined in 	
+	# SITE_LOCKED is defined in config/environments/[environment].rb	
 	def index
 		if SITE_LOCKED && !logged_in?
 			@no_navbar = true
