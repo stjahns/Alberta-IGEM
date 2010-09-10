@@ -174,12 +174,12 @@ div#sequence {
 .partline{
   left: 6ex;
   position:         relative;
-  height: 3ex;
+  height: 4ex;
 }
 .featureline{
   left: 6ex;
   position:         relative;
-  height: 3ex;
+  height: 22px;
 }
 
 div#nav {
