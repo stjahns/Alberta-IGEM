@@ -11,19 +11,18 @@
   <%= stylesheet_link_tag 'datasheet' %>
 
 </head>
-<body class="background">
-	<%= render :partial=>'shared/navBar' %>
+<body>
 	<div id= container>
-    <%= yield :header %>
+		<%= render :partial=>'shared/navBar' %>
+		<%= yield :header %>
 
-    <div id='flash-notice-container'>
+    		<div id='flash-notice-container'>
 		  <% if flash[:error] || flash[:notice] %>
 		  	<div id='flash-notice' <%= 'class="error"' if flash[:error] %>>
 		  	<%=flash[:error] || flash[:notice] %></div>
 		  <% end %>
-    </div>
-
-	<%= yield %>
+    		</div>
+	   <%= yield %>
 	</div>
 </body>
 <%= javascript_tag "var AUTH_TOKEN = #{form_authenticity_token.inspect};" if protect_against_forgery? %>

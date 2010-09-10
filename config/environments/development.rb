@@ -30,3 +30,7 @@ ActionMailer::Base.smtp_settings = {
   :user_name => '***@gmail.com',
   :password => '***'
 }
+
+# defines whether people must be logged in at all times to view
+# the site or not
+SITE_LOCKED = false

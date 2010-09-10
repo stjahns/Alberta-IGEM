@@ -5,8 +5,15 @@ class GroupsController < ApplicationController
   before_filter :not_in_group, :only => [:join, :request_to_join, :join_with_key]
 
   def index
-	@groups = Group.all
+	@groups = params[:search] ? Group.search( params[:search], params[:page] ) : 
+		  	Group.paginate( :page => params[:page], :order => 'name' )
+	@search = params[:search]
   end
+
+#  def search 
+#        @groups = Group.search params[:search], params[:page] 
+#	render :action => 'index'
+#  end
 
   def show
 	@group = get_group_by_id_or_name

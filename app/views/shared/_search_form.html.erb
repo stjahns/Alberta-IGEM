@@ -1,0 +1,8 @@
+<% form_tag path, :method => 'get',:class=>'search-form' do %>
+  <% content_tag :label do %>
+    <%= name %>
+    <%= text_field_tag :search, params[:search] %>
+  <% end %>
+<% end %>
+
+

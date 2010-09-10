@@ -60,7 +60,6 @@
 		</ul></div>
 	<% else %>
 		<%= render( :partial=> 'experiments/description', :collection => @experiments, :as=>:experiment ) %>
-    <%= link_to 'New experiment', new_experiment_path if logged_in? && current_user.can_create_experiment_for_user?( @user )%>
 	<% end %>
 </div>
 

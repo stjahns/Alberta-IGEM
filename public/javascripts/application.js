@@ -46,6 +46,19 @@ $(document).ready(function(){
 		}
 		return false;
 	});
+	
+	// resize the content div so the background fills the whole browser
+	$('#container').css( 'minHeight', 
+			( $(window).height() > $(document).height() ) ?  
+			  $(window).height() : $(document).height() );
+	
+	// bind to resize so it stays proper size
+	$(window).resize( function(){
+		$('#container').css( 'minHeight', 
+			( $(window).height() > $(document).height() ) ?  
+			  $(window).height() : $(document).height() );
+	})
+	
 	//higlight text in login form on click
 	$('#user-nav #login, #user-nav #password').focus( function(){this.select()} );
 
@@ -102,13 +115,13 @@ $(document).ready(function(){
 			if( tstatus ){
 				if( old_status ){ 
 					//subtract from count
-					var count = $( "a." + old_status, tstatus );
-					count.html( count.html() - 1 );
+					var count1 = $( "a." + old_status, tstatus );
+					count1.html( count1.html() - 1 );
 				}
 				if( new_status ){
 					//add to new count
-					var count = $("a." + new_status, tstatus );
-					count.html( parseInt( count.html() ) + 1  );
+					var count2 = $("a." + new_status, tstatus );
+					count2.html( parseInt( count2.html() ) + 1  );
 				}
 			}
 		});

@@ -12,12 +12,12 @@
   
 </head>
 <body>
+	<div id="container">
+	        <%= render :partial=>'shared/navBar' %>
 
-  <%= render :partial=>'shared/navBar' %>
+		<p style="color: green"><%= flash[:notice] %></p>
 
-<p style="color: green"><%= flash[:notice] %></p>
-
-<%= yield %>
-
+		<%= yield %>
+	</div>
 </body>
 </html>

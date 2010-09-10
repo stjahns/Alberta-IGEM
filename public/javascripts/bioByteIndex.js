@@ -21,6 +21,9 @@ $(document).ready(function(){
 			 
 		$(this).next('form.button-to').ajaxSubmit({
 			dataType: 'html',
+			beforeSubmit: function(){
+				return confirm('Are you sure?');
+			},
 		  	success: function(data) { 
 		  	 	// slide the div up then remove it
 				byte_div.slideUp(function(){

@@ -1,9 +1,20 @@
 /* general styling */
-.gray-box {
+.gray-box, .search-form {
 	background: none #efefef;
 	padding: 1em;
 	text-align:center;
 	border:1px solid #ccc;
+}
+
+.search-form {
+	-moz-border-radius: 15px;
+	display:table;
+	font-family:georgia;
+	font-style:italic;
+	margin-left:auto;
+	margin-right:auto;
+	padding:1em;
+	text-align:center;
 }
 
 .gray-box textarea {
@@ -403,10 +414,8 @@ div.message h2 {
 
 /* styling for navigation bar */
 div#navBar {
-	position: fixed;
-	margin-left:-520px;
-	left: 50%;
-	top: 0;
+	margin-left:auto;
+	margin-right:auto;
 	height: 26px;
 	width: 980px;
 	padding-left: 30px;
@@ -415,7 +424,9 @@ div#navBar {
 	background-color: black;
 	background-image: none;
 	z-index: 1;
-  margin-bottom: 0px;
+	position:relative;
+	margin-left:-144px;
+  	margin-bottom: 0px;
 
 }
 
@@ -570,6 +581,8 @@ div#user-form {
 	color:#666;
 	margin: 0 150px;
 	margin-top:30px;
+	border:1px solid #ccc;
+	-moz-border-radius:5px;
 
 }
 div#user-form input.submit-btn {
@@ -623,7 +636,7 @@ div#home-logo {
 	height:100px;
 	width:400px;
 	margin-left:191px;
-	margin-top:90px;
+	padding-top:90px;
 }
 div#home-logo h1 {
 	font-size:52px;
@@ -750,22 +763,21 @@ div#bio-bytes-table .sequence {
 /****** groups ***********/
 #container {
 	width: 750px;
- 	margin-right: auto;
-  	margin-left: auto;
-	margin-top: 4em;
-/*  	position: relative;*/
+	background-image: url(../images/background.png);
+	background-repeat: repeat-y;
+	background-position: center top;
+	margin-top:0;
+	margin-left:auto;
+	margin-right:auto;
+	padding:0 201px;
 }
 
 body {
-	margin-top: 0;
+	margin: 0;
+	background-color:#efefef;
 }
 
 body, p, ol, ul, td {
-	background-image: url(../images/background.png);
-	background-repeat: repeat-y;
-	background-position: center;
-/*background-color: #f7f4ee;*/
-	background-color:#efefef;
   font-family: verdana, arial, helvetica, sans-serif;
   font-size:   13px;
   line-height: 18px;

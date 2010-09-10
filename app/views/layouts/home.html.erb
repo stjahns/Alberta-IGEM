@@ -9,11 +9,10 @@
 
 
 </head>
-<body class="background">
-	<%= render :partial=>'shared/navBar' %>
+<body>
 	<div id= container>
-	<%= yield %>
-  
+		<%= render(:partial=>'shared/navBar') unless @no_navbar %>
+		<%= yield %>
 	</div>
 </body>
 <%= javascript_tag "var AUTH_TOKEN = #{form_authenticity_token.inspect};" if protect_against_forgery? %>

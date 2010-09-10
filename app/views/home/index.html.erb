@@ -1,5 +1,4 @@
 <%= render :partial=>'shared/logo' %>
-
 <div id="home-bar">
 	  <ul>	
 		<li><%= link_to "Parts Bin", bio_bytes_path if logged_in? && current_user.can_create_bio_bytes? %></li>
@@ -24,4 +23,3 @@
 
 
 </div>
-

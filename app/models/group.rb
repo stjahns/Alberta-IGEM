@@ -23,7 +23,12 @@ class Group < ActiveRecord::Base
 	
 	has_many :group_roles
 	#has_and_belongs_to_many :users
-	
+
+
+	# pagination stuff
+	cattr_reader :per_page
+	@@per_page = 10
+		
 	attr_accessible :name, :description
 
 
@@ -43,6 +48,11 @@ class Group < ActiveRecord::Base
 #		self.role
 #	end
 	#
+	def self.search(search,page)
+		paginate :per_page => 10, :page => page,
+			:conditions => ['name like ?', "%#{search}%" ],:order => 'name'
+	end
+	
 	def generate_key
 		self.key =  ActiveSupport::SecureRandom.hex(5) 
 	end

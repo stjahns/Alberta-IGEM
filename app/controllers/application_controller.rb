@@ -8,6 +8,10 @@ class ApplicationController < ActionController::Base
   include AuthenticatedSystem
   # Scrub sensitive parameters from your log
   
+  # if the site is locked must be logged in to do anything
+  before_filter( :lock_site ) if SITE_LOCKED
+
+  
   # pretty url helpers for group and user 
   helper_method :pretty_group_path
   helper_method :pretty_group_url
@@ -47,6 +51,15 @@ class ApplicationController < ActionController::Base
   def access_denied
 	  flash[:error] = "You must login to continue."
 	  redirect_to login_path
+  end
+
+  private
+
+  def lock_site
+ 	 unless logged_in?
+		 flash[:error] = "You must login to view the site."
+	 	 redirect_to root_path 
+	 end
   end
 
 end

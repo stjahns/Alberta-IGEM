@@ -244,4 +244,4 @@ function roleBtn( btnClass ){
 		});
 		return false;
 	});
- }
+}

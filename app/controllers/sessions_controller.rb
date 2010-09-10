@@ -5,6 +5,7 @@ class SessionsController < ApplicationController
 
   layout 'home'
   
+  skip_before_filter :lock_site, :only => :create 
 
   # render new.rhtml
   def new

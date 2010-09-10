@@ -32,7 +32,10 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :users, :member=>{:new_email=>:put}
   
   # group routes
-  map.resources :groups, :member => { :upload => :post, :join => :get, :join_with_key=>:post, :request_to_join => :post , :quit=>:delete, :new_key=>:put, :change_role=>:put, :kick_out=>:delete } do |groups|
+  map.resources :groups, 
+	  :member => { 	:upload => :post, :join => :get, :join_with_key=>:post, 
+		  	:request_to_join => :post , :quit=>:delete, 
+			:new_key=>:put, :change_role=>:put, :kick_out=>:delete} do |groups|
 	  groups.resources :messages, :only=>[ :index,:create,:destroy,:update ]
   end
 

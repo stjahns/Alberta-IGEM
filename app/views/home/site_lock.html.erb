@@ -1,0 +1,19 @@
+<%= render :partial=>'shared/logo' %>
+
+<h2 id="home-notice" <%= 'class="error"' if flash[:error]%>>
+	<%= flash[:error] || flash[:notice] %></h2>
+
+
+<div id="user-form">
+<h1>Log In</h1>
+<p><em class="gray">The site is currently in beta mode.  You must log in to view it.</em></p>
+<% form_tag session_path do -%>
+<p><%= label_tag 'login' %><br />
+<%= text_field_tag 'login', @login %></p>
+
+<p><%= label_tag 'password' %><br/>
+<%= password_field_tag 'password', nil %></p>
+<p><%= submit_tag 'Log in',:class=>'submit-btn' %></p>
+<% end -%>
+</div>
+
