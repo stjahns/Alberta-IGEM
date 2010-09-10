@@ -145,6 +145,7 @@ ul.parts_bin li{
 .annotation{
   position:         absolute;
   border:           1px solid black;
+  font-size:        16px;
 }
 
 .annotation.orf{
@@ -156,7 +157,7 @@ div#sequence {
   text-align:       left;
   font-size:        9pt;
   white-space:      nowrap;
-  font-family:      'monospace';
+  font-family:      'Courier New';
   border:           1px solid #999;
   padding-top:      7px;
 }
