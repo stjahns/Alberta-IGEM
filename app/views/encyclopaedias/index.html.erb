@@ -3,21 +3,22 @@
 
     <script type="text/javascript">
       $(document).ready(function(){
-        $('div .article_intro:first').show();
+        $('div .article_intro .article_text:first').show();
         $('.article_button a').click(function() {
           var locator = $(this).attr("href");
           
           $("div:visible .article_intro").hide("fast");
-          $("div:visible .new_article_form").hide("fast");
           $("div [class="+locator+"] .article_intro").show("fast");
+          $("div [class="+locator+"] .article_intro .article_text").show("fast");
           $("div .edit_form").hide("fast");
+          $("div:visible .new_article_form").hide("fast");
         });
         $('.article_intro .links a[href$=edit]').click(function() {
             $("div:visible .article_text").hide("fast");
             $("div .edit_form").show("fast");
         });
         $('.index_new_article a[href$=new_article_form]').click(function() {
-            $("div:visible .article_text").hide("fast");
+            $("div:visible .article_intro").hide("fast");
             $("div .new_article_form").show("fast");
         });
 
@@ -38,7 +39,7 @@
 
    <div class ="article_list">
     <% for encyclopaedia in @encyclopaedias do %>
-      <div class ="article_button"><%= create_menu_links(encyclopaedia.title) %></div>
+      <div class ="article_button"><a href ="#<%= encyclopaedia.id%>"><%= encyclopaedia.title%></a></div>
   <%end%>
   <div class="index_new_article">
   <% if logged_in? && current_user.can_create_encyclopaedias?%>
@@ -48,7 +49,7 @@
   </div>
 
    <% for encyclopaedia in @encyclopaedias do %>
-      <%= create_div_class(encyclopaedia) %>
+      <div class ="#<%=encyclopaedia.id%>">
           <div class ="article_intro">
             <div class="article_text">
               <h2><%= encyclopaedia.title%></h2>
@@ -114,7 +115,7 @@
               </div>
           </div>
 
-      <%= last_div() %>
+      </div>
 
    <%end%>
 
