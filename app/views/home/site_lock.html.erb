@@ -6,7 +6,7 @@
 
 <div id="user-form">
 <h1>Log In</h1>
-<p><em class="gray">The site is currently in beta mode.  You must log in to view it.</em></p>
+<p><em class="gray">The site is currently in beta mode.  You must log in to view it.  <%= link_to "Click here to try the construct designer.", sandbox_path %></em></p>
 <% form_tag session_path do -%>
 <p><%= label_tag 'login' %><br />
 <%= text_field_tag 'login', @login %></p>

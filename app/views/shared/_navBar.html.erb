@@ -1,3 +1,4 @@
+<% unless SITE_LOCKED and not logged_in? %>
 	<div id=navBar >
 		<div id="nav-right-corner"></div>
 		<div id="nav-left-corner"></div>
@@ -27,4 +28,4 @@
 	</ul>
 	<div id="btn-hide-nav"><a href='#'></a></div>
 	</div>
-
+<% end %>

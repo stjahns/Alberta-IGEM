@@ -8,7 +8,6 @@ class HomeController < ApplicationController
 	# SITE_LOCKED is defined in config/environments/[environment].rb	
 	def index
 		if SITE_LOCKED && !logged_in?
-			@no_navbar = true
 			render "site_lock"
 		end
 	end
