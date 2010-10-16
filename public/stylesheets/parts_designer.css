@@ -22,6 +22,8 @@ ol#parts_list{
   padding:          0;
   margin:           0;
   background:       transparent;
+  z-index:          1;
+  position:         absolute;
 }
 
 #parts_list li{
@@ -236,7 +238,7 @@ div#nav {
   left:             0;
   width:            750px;
   height:           92px;
-  z-index:          -100;
+  z-index:          0;
   background: url(../images/plasmid-wrap.png);
 }
 
@@ -279,6 +281,7 @@ div#nav {
 
 #plasmid-inner{
   margin:           0 0 0 50px;
+  z-index:          1;
 }
 
 #plasmid-spacer{

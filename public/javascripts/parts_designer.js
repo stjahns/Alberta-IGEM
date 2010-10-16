@@ -48,7 +48,7 @@
         revert: 'invalid',
         helper: "clone"
 
-      });
+      }).addTouch();
 /*
       $("#trash").droppable({
         activeClass: 'ui-state-hover',
@@ -259,6 +259,8 @@ function initConstructSortable(){
         }
       });
 
+      $("ol#parts_list > li").addTouch();
+
 }
   function updatePlasmidDisplay(placeholders){
     var numparts = $("#parts_list").children().length - placeholders;
@@ -309,7 +311,7 @@ function initConstructSortable(){
     for (var i=1; i<=wraps; i++){
       $("#top-left").after(
         "<div class=plasmid-wrap id=wrap-"+ i + " "
-        + "style='top:" + (i-1)*46 + "'></div>"
+        + "style='top:" + (i-1)*46 + "px'></div>"
         );
     }
 
