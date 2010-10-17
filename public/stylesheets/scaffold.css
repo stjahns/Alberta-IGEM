@@ -41,7 +41,7 @@ div.left-column {
 }
 
 em.gray {
-	text-align: left;
+	/*text-align: left;*/
 	font-family:georgia,serif;
 	color:#666;
 	font-style:italic;
