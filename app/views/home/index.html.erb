@@ -1,25 +1,101 @@
-<%= render :partial=>'shared/logo' %>
-<div id="home-bar">
-	  <ul>	
-		<li><%= link_to "Parts Bin", bio_bytes_path if logged_in? && current_user.can_create_bio_bytes? %></li>
-		<li><%= link_to "Protocol Generator", step_generators_path if logged_in? && current_user.can_edit_step_generators? %></li>
-  <li><%= link_to "About", '#' %></li>
-  <li><%= link_to "Sandbox", sandbox_path %></li>
-  <li><%= link_to "Experiments", experiments_path %></li>
 
-  <% if logged_in?  %>
-     <li><%= link_to "View your profile", profile_path( current_user ) %></li>  
-     <li><%= link_to "Log out", logout_path %></li>
-  <% else %>
-    <li><%= link_to "Log in", login_path %></li>
-    <li><%= link_to "Sign up", signup_path %></li>
-  <% end %>
-</ul>
-</div>
 <h2 id="home-notice" <%= 'class="error"' if flash[:error]%>>
 	<%= flash[:error] || flash[:notice] %></h2>
 
 <div id="home-content">
 
+  <div id=left-sidebar>
+
+    
+    <div id=info-box1 class=right-info-box>
+
+      <% if logged_in? and current_user.is_an_admin? %>
+        <h3>Admin Tools</h3>
+        <p><%= link_to "Parts Bin", bio_bytes_path if logged_in? and current_user.can_create_bio_bytes? %></p>
+        <p><%= link_to "Protocol Generator", step_generators_path if logged_in? and current_user.can_edit_step_generators? %></p>
+      <% end %>
+
+    </div>
+
+    <div id=info-box2 class=right-info-box>
+      <h3>I am info box 2</h3>
+      <p><i>Put a picture here or something, I'm so lonely...</i></p>
+      
+    </div>
+
+  </div>
+
+  <div id=center-content>
+
+    <div id=main-info-box>
+
+      <h2>YO WHATS THE DEAL DAWG:</h2>
+      
+      <p>
+        <i>Genomikon: an Educational Toolkit for the Rapid Assembly of Plasmids</i>
+      </p>
+
+      <p>
+        With Genomikon, you can make bacteria do all kinds of crazy crap! Like, glow in the dark
+        or smell nice or whatever. The sky is the rainbow limit! Science is all sunshine and 
+        fluffy clouds and bunnies that hop through the meadows.
+      </p>
+
+      <p>
+        All you need to do is squirt some water into some tubes and drag magnets around or 
+        something and then all your wildest dreams will come true!
+      </p>
+
+      <p><%= link_to "Learn more about this product", about_path %></p>
+
+    </div>
+
+    <div id=info-box3 class=center-info-box>
+      <h3>Try it out!</h3>
+      <p>Get started building your first plasmid right away, with our easy to use drag-and-drop plasmid constructor!</p>
+      <p><%= link_to "click here for more...", sandbox_path %></p>
+      
+    </div>
+
+    <div id=info-box4 class=center-info-box>
+      
+      <h3>Get the background!</h3>
+       <p>Want to learn more about molecular biology? Check out our 
+         <%= link_to "encyclopedia articles" , encyclopaedias_path %>
+          and learn the science behind what goes on in the cells.
+       </p>
+
+      <h3>Brush up on your vocabulary</h3>
+       <p>Forget what ligase is? Our 
+         <%= link_to "glossary of terms",  glossaries_path %> 
+         can help!
+       </p>
+
+    </div>
+
+  </div>
+
+  <div id=right-sidebar>
+    <div id=info-box1 class=right-info-box>
+
+      <h3>Get started</h3>
+      <p><%= link_to "Login" , login_path %> or <%= link_to "sign up now" , signup_path %>
+            to get started performing your very own molecular biology experiments!
+      </p>
+
+    </div>
+    
+    <div id=info-box2 class=right-info-box>
+
+      <h3>See also:</h3>
+      <p>
+        Check out our team's <a href=http://2010.igem.org/Team:Alberta>project page</a>!
+      </p>
+      <p>
+        Read comics about <a href=http://poo.ca>dinosaurs!</a>
+      </p>
+      
+    </div>
+  </div>
 
 </div>

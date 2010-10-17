@@ -16,8 +16,9 @@
 </head>
 
 <body>
+  <%= render :partial=>'shared/genomikonBar' %>
+  <%= render :partial=>'shared/navBar' %>
   <div id='container'>
-	<%= render :partial=>'shared/navBar' %>
 	<% if flash[:error] || flash[:notice] %>
 		<div id='flash-notice' <%= 'class="error"' if flash[:error] %>>
 		<%=flash[:error] || flash[:notice] %></div>

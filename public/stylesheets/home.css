@@ -1,0 +1,94 @@
+/* home page area styling - its a little wider... */
+#container {
+	width: 1000px;
+	/*width: 750px;*/
+	/*padding: 15px 201px;*/
+	padding: 15px 100px;
+}
+
+#home-content h2{
+  color: #9D2063;
+  font-weight: normal;
+}
+
+#home-content h3{
+  color: #9D2063;
+  font-weight: bold;
+}
+
+#home-content {
+    width: 100%;
+  }
+
+#center-content, #left-sidebar, #right-sidebar{
+  float: left;
+}
+
+#center-content{
+  width: 550px;
+}
+
+#left-sidebar, #right-sidebar{
+  width: 188px;
+  position: relative;
+}
+
+#left-sidebar{
+  margin-left: 18px;
+  margin-right: 18px;
+}
+#right-sidebar{
+  margin-left: 18px;
+  margin-right: 18px;
+}
+/* the info boxes on homepage */
+#main-info-box, #info-box1, #info-box2, #info-box3, #info-box4{
+    height:250px;
+    padding:18px;
+}
+
+#main-info-box {
+    width:100%;
+    overflow:hidden;
+    padding:0;
+    height:286px;
+    clear:both;
+}
+
+#info-box1, #info-box2, #info-box3, #info-box4 {
+    background-color:#00CDD0;
+    color:#282560;
+    overflow:hidden;
+    margin-top: 18px;
+}
+
+.right-info-box{
+    position:relative;
+    left:1px;
+}
+.center-info-box{
+    width:230px;
+    float:left;
+}
+
+.left-info-box{
+    position:relative;
+    left:1px;
+}
+
+#info-box1{
+    margin-top:0;
+    background-color:#00cdd0;
+}
+#info-box2{
+    background-color:#b8fed1;
+}
+#info-box3{
+    background-color:#00F2BC;
+    margin-left:0;
+}
+#info-box4{
+    background-color:#73FF9A;
+    margin-left:18px;
+}
+

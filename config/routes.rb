@@ -100,6 +100,7 @@ ActionController::Routing::Routes.draw do |map|
 
   map.root :controller => :home 
   map.home '', :controller => :home
+  map.about  "/about", :controller => :home, :action => :about
 
   # routes for images
   # paths that get images need to use default .jpg format so that 
