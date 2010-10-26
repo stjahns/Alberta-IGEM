@@ -2,7 +2,18 @@
 The main construct designer view.
 -->
 
-<h1>Plasmid Sandbox:</h1>
+<% content_for :title do %>
+  <%= 'Plasmid Constructor' %>
+<% end %>
+
+<% content_for :header do %>
+
+<div id= "header">
+  <h1>Plasmid Constructor</h1>
+  <p>Piece together your very own plasmid from our parts collection.
+     </p>
+</div>
+<%end%>
 
 <!-- plasmid box -->
 <div id="parts_box">

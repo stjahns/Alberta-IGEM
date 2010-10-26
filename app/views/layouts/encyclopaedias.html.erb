@@ -16,6 +16,8 @@
     <%= render :partial=>'shared/navBar' %>
 	<div id="container">
 
+        <%= yield :header %>
+
 		<p style="color: green"><%= flash[:notice] %></p>
 
 		<%= yield %>

@@ -16,11 +16,22 @@
   </head>
 
   
+<% content_for :title do %>
+  <%= 'Glossary' %>
+<% end %>
+
+<% content_for :header do %>
+
+<div id="header">
+  <h1>Glossary</h1>
+  <p>Read more about the science of the cells.
+     </p>
+</div>
+
+<%end%>
 
 <div id ="encyclopaedia">
   <body>
-
-    <div class ="title-header"><h1>Glossary</h1></div>
 
     <div class="header">
 	<div id="header-toolbar" >
@@ -46,6 +57,7 @@
 
 
 <div id ="glossary">
+<% if logged_in? && current_user.can_create_glossaries? %>
     <div class ="index_new_gloss_form">
       <div class ="hanging-toolbar"></div>
            <h3>New Glossary Entry Form</h3>
@@ -65,6 +77,9 @@
   </p>
     <% end %>
     </div>
+<% end %>
+
+<div class = "hanging-toolbar"></div>
 
 <%@letter = @glossaries.first.term.first.upcase%>
  <%if @letter%>

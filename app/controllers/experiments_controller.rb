@@ -156,6 +156,12 @@ class ExperimentsController < ApplicationController
                       current_user.can_edit_own_experiments?) )
   end
 
+  def complete_step
+    @step = Step.find(params[:step_id])
+    @step.completed = params[:checked]
+    render :text => @step.save
+  end
+
   private
   def set_nav
 	  @navbar_selected = :manual 

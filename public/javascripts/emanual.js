@@ -242,7 +242,21 @@ $(document).ready(function(){
 		}
 	});
 
+    // ajax submit a change in step completion status
+    $('.complete').change(function(){
 
+        var completed = $("#step_completed", this);
+        var checked = completed.is(':checked');
+
+        $.ajax({
+          type: 'post',
+          data: "step_id=" + this.id + "&checked=" + checked, 
+          url: location.pathname + '/complete_step',
+          });
+          
+    });
+
+    
 
 	// submit a new note for a step with Ajax
 	$('.new_note').live('submit', function() {

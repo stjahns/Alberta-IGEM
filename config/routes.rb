@@ -78,7 +78,8 @@ ActionController::Routing::Routes.draw do |map|
   # map steps as nested resource of experiments
   map.resources :experiments, :member => { :print => :get,
                                            :clone => :get,
- 					   :set_status => :post } do |experiments|
+ 					   :set_status => :post,
+                       :complete_step => :post} do |experiments|
      experiments.resources :steps, 
 	     :member => { :upload => :post, 
 	     		  :up => :put,

@@ -1,13 +1,29 @@
-<div id="nav">
-  <%= link_to "Back", experiment_path(@construct.experiment) %>
-  <a href="#", id="save">Save</a>
-</div>
-
 <!--
 The main construct designer view.
 -->
 
-<h1>Editing <%=h @construct.name %>:</h1>
+<% content_for :title do %>
+  <%= 'Editing ' + @construct.name %>
+<% end %>
+
+<% content_for :header do %>
+
+<div id= "header">
+
+  <h1>Editing <%=h @construct.name %>:</h1>
+  <p>Edit or piece together your own plasmid from our parts collection.
+  </p>
+
+</div>
+
+<% end %>
+
+<div id="nav">
+  <p>
+  <%= link_to "Back", experiment_path(@construct.experiment) %>
+  <a href="#", id="save">Save</a>
+  </p>
+</div>
 
 <!-- plasmid box -->
 <div id="parts_box">
