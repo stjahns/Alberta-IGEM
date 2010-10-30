@@ -47,10 +47,12 @@ div.hanging-toolbar ul li a:link, div.hanging-toolbar ul li a:visited , div.step
 	border-width: 0 1px 1px 0;
 	border-style:solid;
 	-moz-border-radius: 0 0 4px 4px;
+    border-radius: 0 0 4px 4px;
 	/*background:url("../images/btn-grad.png") repeat-x scroll left bottom #efefef;*/
 }
 div.step-toolbar ul li a:link, div.step-toolbar ul li a:visited, div.step-toolbar ul li a:hover {
 	-moz-border-radius: 4px 4px 0 0;
+    border-radius: 4px 4px 0 0;
 	border: 0;
 
 }
@@ -63,7 +65,7 @@ div.step-toolbar ul li a:link, div.step-toolbar ul li a:visited, div.step-toolba
 
 
 div.hanging-toolbar ul li a:hover, div.step-toolbar ul li a:hover, div.hanging-btns ul li input:hover {
-	background-color: #000000;
+	background-color: #282560;
 	color: #fff;
 }
 
