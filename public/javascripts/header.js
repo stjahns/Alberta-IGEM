@@ -5,6 +5,9 @@ $(document).ready(function(){
 	header_tab('#lab-book');
 	header_tab('#profile-options');
 
+    // tab in lab manual page
+    header_tab('#published');
+
 	// tabs on group profile page
 	header_tab('#group-info');
 	header_tab('#group-members');

@@ -10,21 +10,51 @@
 <div id="header" >
 	<h1>Lab Manual</h1>
 	<p>View an experiment, without the ability to edit or add notes, or add it to your lab book for full control.</p>
-	<div id="header-toolbar" ></div>
+    <div id="header-toolbar" >
+    
+    <ul>
+      <li><a id="published-tab" class="selected" href="#">Published Experiments</a></li>
+      <li><a id="lab-book-tab" href="#">Lab Book</a></li>
+    </ul>
+
+    </div>
 </div>
 <% end %>
 
-<%= search_box experiments_path, "Search all published experiments:" %>
+<div id=tab-container>
+<div id=published>
+  <%= search_box experiments_path, "Search all published experiments:" %>
+  
+  <p class="search_info">
+  	<%= search_page_info( @search, @groups ) if @search %>
+  </p>
+  
+  <% paginated_section @experiments do %>
+  	<%= render :partial=>'description', :collection => @experiments, :as=>:experiment %>
+  <% end %>
+  
+  <!-- TODO put in toolbar -->
+  <% if logged_in? && current_user.can_create_experiments? %>
+  <%= link_to 'New experiment', new_experiment_path %>
+  <%end%>
+</div>
 
-<p class="search_info">
-	<%= search_page_info( @search, @groups ) if @search %>
-</p>
+<div id=lab-book>
 
-<% paginated_section @experiments do %>
-	<%= render :partial=>'description', :collection => @experiments, :as=>:experiment %>
-<% end %>
+  <% if logged_in? %>
 
-<!-- TODO put in toolbar -->
-<% if logged_in? && current_user.can_create_experiments? %>
-<%= link_to 'New experiment', new_experiment_path %>
-<%end%>
+  	<% if current_user.experiments.blank?  %>
+		<div id="home-bar"><ul>
+       		<li><%= link_to "Create a new experiment", new_experiment_path %></li>
+       		<li><%= link_to "Add an experiment from the lab manual", experiments_path %></li>
+		</ul></div>
+	<% else %>
+		<%= render( :partial=> 'experiments/description', :collection => current_user.experiments, :as=>:experiment ) %>
+    <% end %>
+
+  <% else %>
+    <p>Log in or create account to see your lab book.</p>
+  <% end %>
+
+</div>
+</div>
