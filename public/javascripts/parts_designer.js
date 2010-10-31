@@ -17,7 +17,7 @@
   $(document).ready(function() {
 
       
-      updatePlasmidDisplay(0);
+      updatePlasmidDisplay(1);
 
       //Get experiment + construct id's TODO this is lazy!!
       var url = window.location.pathname.split('/');
@@ -48,8 +48,12 @@
 
         connectToSortable: 'ol#parts_list',
         revert: 'invalid',
-        helper: "clone"
-
+        helper: "clone",
+        zIndex: 11,
+        revertDuration: 0,
+        stop: function(){
+          updatePlasmidDisplay(0);
+        }
       }).addTouch();
 /*
       $("#trash").droppable({
@@ -230,7 +234,8 @@ function initConstructSortable(){
         helper: 'clone',
         cursor: 'move',
         appendTo: 'body',
-        tolerance: 'intersect',
+        tolerance: 'pointer',
+        placeholder: 'part-placeholder',
         start: function(){
           updatePlasmidDisplay(1);
           /*
@@ -260,6 +265,7 @@ function initConstructSortable(){
           //changes=true; // for future "YOU've Neer saved yer changes!"
           //$("#sequence").html(getFormattedSequence());
           $("#sequence").html(getAnnotatedSequence(100));
+          $("ol#parts_list > li").addTouch();
         }
       });
 

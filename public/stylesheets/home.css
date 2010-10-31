@@ -130,4 +130,6 @@ p.clickHere {
 #info-box4:hover {
     background-color:#a6ffbe;
 }
-
+#genomikon-logo a {
+    color: transparent;
+}
