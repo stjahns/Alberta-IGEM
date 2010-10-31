@@ -58,6 +58,8 @@ p.clickHere {
     height:250px;
     padding:18px;
     position: relative;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
 }
 
 

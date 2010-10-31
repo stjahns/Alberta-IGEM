@@ -30,6 +30,8 @@
 
       //save button
       initSaveButton();
+      //generate protocol link
+      initGenerateProtocol();
 
       //init construct sortable list
       initConstructSortable();
@@ -185,9 +187,9 @@ function initSaveButton(){
 
         var bytes = $('#parts_list').sortable('toArray', {attribute: 'class'});
 
-        if (validate(bytes)){
+        if (bytes.length>0 && validate(bytes)){
 
-          $(this).after("<div id=saving-text style='text-align:center'>Saving...</div><div id=saving-anim class=loading style='height:35px'></div>");
+          $('#header').after("<div id=saving-text style='text-align:center'>Saving...</div><div id=saving-anim class=loading style='height:35px'></div>");
 
           //submit to server
           $.ajax({
@@ -202,7 +204,8 @@ function initSaveButton(){
             success: function(data){
               //kill saving anim
               $("#saving-anim").fadeOut('slow');
-              $("#saving-text").html("Saved.").fadeOut('slow');
+              $('#saving-text').html('Saved.')
+              setTimeout("$('#saving-text').fadeOut('slow');", 2000);
 
               $("#parts_list > li").each(function(index) {
                 $(this).attr('part_id', "part_"+data.part_ids[index]);
@@ -212,7 +215,8 @@ function initSaveButton(){
           })
         }
         else{
-          alert("Construct is not valid!"); //todo: invalid message
+           $('#header').after("<div id=saving-text style='text-align:center'>Construct is not valid!</div>");
+           setTimeout("$('#saving-text').fadeOut('slow');", 2000);
         }
       });
 
@@ -389,4 +393,45 @@ function getParts(){
   }
   //return array of parts 
   return parts;
+}
+
+function initGenerateProtocol(){
+    $("a#generate_protocol").click(function() {
+
+        var bytes = $('#parts_list').sortable('toArray', {attribute: 'class'});
+
+        if (bytes.length>0 && validate(bytes)){
+
+          $('#header').after("<div id=saving-text style='text-align:center'>Generating protocol...</div><div id=saving-anim class=loading style='height:35px'></div>");
+
+          //submit to server
+          $.ajax({
+           type: 'put',
+           dataType: 'json',
+           data: $('#parts_list').sortable('serialize', {attribute: 'part_id'}) + '&'
+                + $('#parts_list').sortable('serialize', {attribute: 'byte_id'}) + '&'
+                + 'id=' + construct_id + '&'
+                + 'experiment_id=' + experiment_id,
+
+            url: '/generate_protocol',
+            success: function(id){
+              //kill saving anim
+              //go to 
+              $("#saving-anim").fadeOut('slow');
+              $("#saving-text").html("Done.").fadeOut('slow');
+
+              window.open('/experiments/' + id, 'Protocol', 'toolbar=yes,location=yes,directories=yes,status=yes,menubar=yes,scrollbars=yes,copyhistory=yes,resizable=yes');
+            },
+            error: function(){
+              $("#saving-anim").fadeOut('slow');
+              $("#saving-text").html("Something has gone horribly wrong!").fadeOut('slow');
+            }
+          
+          })
+        }
+        else{
+           $('#header').after("<div id=saving-text style='text-align:center'>Construct is not valid!</div>");
+           setTimeout("$('#saving-text').fadeOut('slow');", 2000);
+        }
+      });
 }

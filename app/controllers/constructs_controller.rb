@@ -1,5 +1,5 @@
 class ConstructsController < ApplicationController
-  before_filter :get_exp, :except => [:get_data, :sandbox]
+  before_filter :get_exp, :except => [:get_data, :sandbox, :generate_protocol]
   #before_filter :login_required, :except => :get_data
   
   def get_exp
@@ -49,6 +49,7 @@ class ConstructsController < ApplicationController
   end
 
   def sandbox
+    @navbar_selected = :sandbox
     @construct = Construct.new
     @order = @construct.part_order
   end
@@ -113,6 +114,34 @@ class ConstructsController < ApplicationController
 
     #gotta return the ids of new parts
     render :json => { :part_ids => partids }
+
+  end
+  
+  def generate_protocol
+
+    partids = params[:part]
+    byteids = params[:byte]
+    #temporary experiment
+    experiment = Experiment.create( :title => "Constructing MyPlasmid",
+                                    :temp => true )
+    #temporary construct
+    construct = Construct.create( :name => "MyPlasmid" );
+    experiment.constructs << construct
+
+    #add parts to temp. construct
+    i=0
+    byteids.each do |byte|
+      p = Part.new( :bio_byte => BioByte.find(byte),
+                    :construct => construct,
+                    :part_order => i )
+      p.save
+      construct.parts << p
+      i+=1
+    end
+
+    StepGenerator.generate_steps(experiment)
+    
+    render :text => experiment.id
 
   end
 

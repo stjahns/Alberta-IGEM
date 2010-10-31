@@ -111,3 +111,8 @@
 
 </div>
 <!-- END part-info-data -->
+<%
+    if @experiment.temp == true
+      @experiment.destroy
+    end
+%>

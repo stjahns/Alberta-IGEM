@@ -185,6 +185,7 @@ div#sequence {
 }
 
 div#nav {
+  float: right;
 }
 
 
@@ -307,4 +308,8 @@ div#nav {
 .more-info-link:hover {
   background-color:       black;
   color:                  white;
+}
+
+#generate_protocol {
+  float: right;
 }

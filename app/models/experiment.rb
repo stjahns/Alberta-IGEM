@@ -16,13 +16,14 @@
 #
 
 class Experiment < ActiveRecord::Base
-  attr_accessible :title, :authour, :description, :published, :image, :user_id, :status
+  attr_accessible :title, :authour, :description, :published, :image, :user_id, :status, :temp
   has_many :steps, :dependent => :destroy  
   has_many :constructs, :dependent => :destroy
   has_many :notes, :through => :steps
   belongs_to :user
 
-   after_create :status_none 
+   #after_create :status_none 
+   #TODO do we want to kill all this status stuff?
    
   # pagination stuff
   cattr_reader :per_page

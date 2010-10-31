@@ -34,6 +34,8 @@ class ExperimentsController < ApplicationController
   def show
     @steps = @experiment.steps.all(:order => :step_order)
 
+    #NB - in experiment/show view, experiment destroyed at end if temp==true
+
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @experiment }
