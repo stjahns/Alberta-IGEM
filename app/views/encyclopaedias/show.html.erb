@@ -60,10 +60,10 @@
           <div class = "image"><%= image_tag section_image_path(@encyclopaedia.image, :jpg) %></div>
           <i><div class ="caption"><%= section.caption %></div></i>
         </div>
+    <% end %>
   <div class ="article_header">
     <h2><%= @encyclopaedia.title %></h2>
 </div>
-    <% end %>
   <%= add_popups(intro) %>
 
 </div>

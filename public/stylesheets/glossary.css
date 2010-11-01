@@ -36,8 +36,8 @@
     margin-bottom:50px;
 }
 #encyclopaedia .article_header{
-    Line-height: 35px;
-    font-size: 30px;
+    Line-height: 25px;
+    font-size: 20px;
 }
 #container {
 	width: 750px;
@@ -63,6 +63,7 @@
 
 #encyclopaedia h2{
   text-align: left;
+  color: #9D2063;
 }
 pre {
   background-color: #eee;
@@ -310,10 +311,10 @@ when I figure out what these two are for, I need to re label them and put a comm
 
 #encyclopaedia .show_section_title{
     position: relative;
-    top: -20px;
     line-height: 24px;
     font-size: 22px;
     margin-top: 5px;
+    top: -10px;
 }
 
 #encyclopaedia .edit_section_form{
@@ -378,5 +379,8 @@ when I figure out what these two are for, I need to re label them and put a comm
 }
 
 .contents{
+  color: #282560;
+}
+.section_title{
   color: #282560;
 }
