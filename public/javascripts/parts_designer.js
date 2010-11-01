@@ -71,6 +71,8 @@
       $("#parts-row").droppable({
         accept: '#parts_list >li',
         tolerace: 'intersect',
+        activeClass: 'trash-active',
+        hoverClass: 'trash-hover',
         drop: function(event, ui) {
           ui.draggable.attr()
           ui.draggable.remove();
