@@ -53,7 +53,7 @@
     <% end %>
 
   <% else %>
-    <p>Log in or create account to see your lab book.</p>
+    <p><%= link_to "Log in", login_path %> or <%= link_to  "create an account", signup_path %> to see your lab book.</p>
   <% end %>
 
 </div>

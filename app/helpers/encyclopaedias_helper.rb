@@ -1,6 +1,6 @@
 module EncyclopaediasHelper
   def create_menu_links(title)
-    link = "<a href = \"##{title}\">#{title}</a>"
+    link = "<a href = \"##{title}\"><h3>#{title}</h3></a>"
     return link
   end
   def create_section_edit_link(href, link_text)

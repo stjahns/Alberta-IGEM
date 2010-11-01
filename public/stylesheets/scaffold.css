@@ -551,8 +551,8 @@ div#navBar ul li.selected a:link, div#navBar ul li .selected a:hover, div#navBar
 div#navBar ul li a#toggle-edit-steps {
 	background-color:#efefef;
 	color:#666;
-	left:72px;
-	margin-top:26px;
+	left:165px;
+	margin-top:40px;
 	position:absolute;
 	-moz-border-radius:0 0 3px 3px;
 	border-radius:0 0 3px 3px;
@@ -600,7 +600,6 @@ div#user-form {
 div#user-form input.submit-btn {
 	text-decoration:none;
 	height:30px;
-	line-height:30px;
 	font-family: verdana,arial,helvetica,sans-serif;
 	background-color:#666666;
 	border:0 none;

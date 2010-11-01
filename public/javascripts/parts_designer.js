@@ -352,12 +352,12 @@ function getParts(){
           if (p.type == "linker"){
             start.sequence = "GCCT";
             start.name = "B";
-            start.colour = "#0000FF";
+            start.colour = "#5555FF";
           }
           else{
             start.sequence = "TGGG";
             start.name = "A"
-            start.colour = "#FF0000";
+            start.colour = "#FF5555";
           }
           start.start = loc;
           loc += 4;
@@ -381,12 +381,12 @@ function getParts(){
         if (p.type == "orf"){
           end.sequence = "GCCT";
           end.name = "B";
-          end.colour = "#0000FF";
+          end.colour = "#5555FF";
         }
         else{
           end.sequence = "TGGG";
           end.name = "A"
-          end.colour = "#FF0000";
+          end.colour = "#FF5555";
         }
         end.start = loc;
         loc += 4;
