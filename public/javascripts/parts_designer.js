@@ -66,8 +66,8 @@
           ui.draggable.remove();
           $("#parts_list").sortable('refresh');
         }
-      }); 
-*/
+      });  
+*/         
       $("#parts-row").droppable({
         accept: '#parts_list >li',
         tolerace: 'intersect',

@@ -19,7 +19,9 @@
 
   <ol class="parts_list <%=construct.id%>">
   <% construct.parts.all(:order => :part_order).each do |part| %>
-  <li id = "part_<%=part.bio_byte_id%>_<%=part.id%>" class = "<%=part.bio_byte.type %> part <%=construct.id%>" byte_id="byte_<%=part.bio_byte_id%>" part_id="part_<%=part.id%>"
+    <li 
+    onClick="window.open('<%= bio_byte_path(part.bio_byte) %>', '', 'toolbar=yes,location=yes,directories=yes,status=yes,menubar=yes,scrollbars=yes,copyhistory=yes,resizable=yes')"
+    id = "part_<%=part.bio_byte_id%>_<%=part.id%>" class = "<%=part.bio_byte.type %> part <%=construct.id%>" byte_id="byte_<%=part.bio_byte_id%>" part_id="part_<%=part.id%>"
    construct='<%=construct.id%>'
    info="<h2><%=part.bio_byte.name%></h2>
           <p><%=part.bio_byte.description%></p>">

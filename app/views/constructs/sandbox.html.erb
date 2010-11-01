@@ -35,7 +35,7 @@ The main construct designer view.
 <ol id="parts_list">
 <% unless @order.empty? %>
 <% @order.each do |part| %>
-  <li id = "part_<%=part.bio_byte_id%>_<%=part.id%>" class = "<%=part.bio_byte.type %> part" byte_id="byte_<%=part.bio_byte_id%>" part_id="part_<%=part.id%>" > </li>
+  <li onClick="window.open('<%= bio_byte_path(part.bio_byte) %>', '', 'toolbar=yes,location=yes,directories=yes,status=yes,menubar=yes,scrollbars=yes,copyhistory=yes,resizable=yes')" id = "part_<%=part.bio_byte_id%>_<%=part.id%>" class = "<%=part.bio_byte.type %> part" byte_id="byte_<%=part.bio_byte_id%>" part_id="part_<%=part.id%>" > </li>
 <% end %>
 <% else %>
   <li class='part placeholder'>DRAG PARTS HERE</li>
@@ -69,7 +69,7 @@ The main construct designer view.
       <% else %>
         <ul class="parts_bin">
         <% cat.bio_bytes.each do |byte| %>
-          <li id = "part_<%=byte.id%>_0" part_id="part_new" byte_id="byte_<%=byte.id%>" class = "<%=h byte.type %> byte" >&nbsp</li>
+          <li onClick="window.open('<%= bio_byte_path(byte) %>', '', 'toolbar=yes,location=yes,directories=yes,status=yes,menubar=yes,scrollbars=yes,copyhistory=yes,resizable=yes')" id = "part_<%=byte.id%>_0" part_id="part_new" byte_id="byte_<%=byte.id%>" class = "<%=h byte.type %> byte" >&nbsp</li>
         <% end %>
         </ul>
       <%end%>

@@ -1,5 +1,3 @@
-<%= render :partial=>'shared/logo' %>
-
 <h2 id="home-notice" <%= 'class="error"' if flash[:error]%>>
 	<%= flash[:error] || flash[:notice] %></h2>
 
@@ -22,13 +20,6 @@
 <p><%= submit_tag 'Log in',:class=>'submit-btn' %></p>
 <% end -%>
 <%= link_to 'Forgot Password?', :forgot %>
+<%= link_to "Sign up", new_user_path %>
 </div>
 
-<div id="home-bar">
-   <ul>	
-       <li><%= link_to "Home", '/' %></li>
-       <li><%= link_to "Experiments", experiments_path %></li>
-       <li><%= link_to "Sign up", new_user_path %></li>
-       <li><%= link_to "Forgot Password?", '#' %></li>
-    </ul>
-</div>

@@ -21,6 +21,7 @@ h3 {
 
 .search-form {
 	-moz-border-radius: 15px;
+	border-radius: 15px;
 	display:table;
 	font-family:georgia;
 	font-style:italic;
@@ -455,6 +456,10 @@ div#genWidth{
 div#genomikon-logo{
     float: left;
 }
+div#genomikon-logo a {
+    color:#282560;
+}
+
 div#genomikon-logo img{
     height: 79px;
 }
@@ -550,6 +555,7 @@ div#navBar ul li a#toggle-edit-steps {
 	margin-top:26px;
 	position:absolute;
 	-moz-border-radius:0 0 3px 3px;
+	border-radius:0 0 3px 3px;
 }
 div#navBar ul li a#toggle-edit-steps:hover {
 	background-color:#ccc;
@@ -588,6 +594,7 @@ div#user-form {
 	margin-top:30px;
 	border:1px solid #ccc;
 	-moz-border-radius:5px;
+	border-radius:5px;
 
 }
 div#user-form input.submit-btn {
@@ -856,6 +863,8 @@ a { color: #000; }
 #cat_list{
   border: 1px solid #999;
   background-color: #DDD;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
 }
 
 #cat_list h3 {
@@ -872,7 +881,8 @@ a { color: #000; }
   margin-top: 25px;
   margin-bottom: 25px;
   padding: 0px 10px 0px 10px;
-  
+  -moz-border-radius: 10px;
+  border-radius: 10px;
 }
 
 .cat_title {

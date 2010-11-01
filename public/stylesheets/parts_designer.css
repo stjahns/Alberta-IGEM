@@ -12,6 +12,8 @@ div#parts_box{
   border:           1px solid #999;
   height:           114px;
   margin-bottom:    -1px;
+  -moz-border-radius: 10px 10px 0 0;
+  border-radius: 10px 10px 0 0;
 }
 
 ol#parts_list{
@@ -40,6 +42,8 @@ ol#parts_list{
   height: 297px;
   background: white;
   margin: -1px;
+  -moz-border-radius: 0 0 10px 0;
+  border-radius: 0 0 10px 0;
 }
 
 #parts-bin{
@@ -59,6 +63,10 @@ ol#parts_list{
 #parts-list{
   text-align: center;
 }
+#parts-list > .ui-state-active {
+  background-color: #999;
+}
+
 .cat-list p {
   background: transparent;
   background-color: #BBB;
@@ -113,6 +121,8 @@ ol#parts_list{
   border:           1px solid #999;
   padding:          0 0 0 15px;
   overflow-y:       auto;
+  -moz-border-radius: 0 0 10px 0;
+  border-radius: 0 0 10px 0;
 }
 
 #part-info{
@@ -158,6 +168,8 @@ div#sequence {
   font-family:      'Courier New';
   border:           1px solid #999;
   padding-top:      7px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
 }
 
 .numspacer{
@@ -319,6 +331,8 @@ div#nav {
 div#trash {
   border:           1px solid #888;
   background: url(../images/trash-can.jpg);
+  -moz-border-radius: 0 0 10px 0;
+  border-radius: 0 0 10px 0;
 }
 .trash-active {
   /* for IE */

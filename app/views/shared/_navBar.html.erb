@@ -13,11 +13,14 @@
 		
 			<%= yield :user_nav %>
 		<% else %>
+          <!--
 			<% form_tag session_path do -%>
-				<li><%= password_field_tag 'password', '******' %></li>
 				<li><%= text_field_tag 'login','username' %></li>
+				<li><%= password_field_tag 'password', '******' %></li>
 
 			<% end -%>
+          -->
+			<li><%= link_to "Log In", login_path %></li>
 			<li><%= link_to "Sign up?", signup_path %></li>
 		<% end %>
 		</span>

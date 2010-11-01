@@ -37,6 +37,16 @@ $(document).ready(function(){
         }
       })
 
+      
+      
+      $(".part").mouseover(function(){
+        var con = $(this).attr('construct');
+        var id = $(this).attr('byte_id').split('_')[1];
+        $(".part-info." + con ).contents().replaceWith($("#info_" + id).clone());
+        $(".part-info." + con ).parent().show();
+      });
+
+          /*
       $(".part").click(function(){
         var con = $(this).attr('construct');
         if ($(this).hasClass('showing')){
@@ -51,14 +61,13 @@ $(document).ready(function(){
           $(".part-info." + con ).parent().show();
         }
       });
+      */
 
-/*
 
       $(".part").mouseleave(function(){
         var con = $(this).attr('construct');
         $(".part-info." + con).parent().hide();
       });
-*/
       
 	//**********************************************************
 	// javascript for editing steps
