@@ -3,6 +3,7 @@
                               POST   /sections(.:format)                                             {:action=>"create", :controller=>"sections"}
                   new_section GET    /sections/new(.:format)                                         {:action=>"new", :controller=>"sections"}
                  edit_section GET    /sections/:id/edit(.:format)                                    {:action=>"edit", :controller=>"sections"}
+          auto_create_section POST   /sections/:id/auto_create(.:format)                             {:action=>"auto_create", :controller=>"sections"}
                       section GET    /sections/:id(.:format)                                         {:action=>"show", :controller=>"sections"}
                               PUT    /sections/:id(.:format)                                         {:action=>"update", :controller=>"sections"}
                               DELETE /sections/:id(.:format)                                         {:action=>"destroy", :controller=>"sections"}
@@ -32,6 +33,7 @@
                               POST   /encyclopaedias(.:format)                                       {:action=>"create", :controller=>"encyclopaedias"}
             new_encyclopaedia GET    /encyclopaedias/new(.:format)                                   {:action=>"new", :controller=>"encyclopaedias"}
            edit_encyclopaedia GET    /encyclopaedias/:id/edit(.:format)                              {:action=>"edit", :controller=>"encyclopaedias"}
+         upload_encyclopaedia POST   /encyclopaedias/:id/upload(.:format)                            {:action=>"upload", :controller=>"encyclopaedias"}
                 encyclopaedia GET    /encyclopaedias/:id(.:format)                                   {:action=>"show", :controller=>"encyclopaedias"}
                               PUT    /encyclopaedias/:id(.:format)                                   {:action=>"update", :controller=>"encyclopaedias"}
                               DELETE /encyclopaedias/:id(.:format)                                   {:action=>"destroy", :controller=>"encyclopaedias"}
@@ -43,7 +45,8 @@
                        forgot        /forgot                                                         {:action=>"forgot", :controller=>"users"}
                         reset        /reset/:reset_code                                              {:action=>"reset", :controller=>"users"}
                     new_email        /users/:id/new_email/:key                                       {:action=>"activate_email", :controller=>"users"}
-                        print        /print                                                          {:action=>"print", :method=>:post, :controller=>"print"}
+                      sandbox        /sandbox                                                        {:action=>"sandbox", :controller=>"constructs"}
+                        print        /print                                                          {:method=>:post, :action=>"print", :controller=>"print"}
                         users GET    /users(.:format)                                                {:action=>"index", :controller=>"users"}
                               POST   /users(.:format)                                                {:action=>"create", :controller=>"users"}
                      new_user GET    /users/new(.:format)                                            {:action=>"new", :controller=>"users"}
@@ -66,8 +69,8 @@
         request_to_join_group POST   /groups/:id/request_to_join(.:format)                           {:action=>"request_to_join", :controller=>"groups"}
                 new_key_group PUT    /groups/:id/new_key(.:format)                                   {:action=>"new_key", :controller=>"groups"}
             change_role_group PUT    /groups/:id/change_role(.:format)                               {:action=>"change_role", :controller=>"groups"}
-                   quit_group DELETE /groups/:id/quit(.:format)                                      {:action=>"quit", :controller=>"groups"}
                kick_out_group DELETE /groups/:id/kick_out(.:format)                                  {:action=>"kick_out", :controller=>"groups"}
+                   quit_group DELETE /groups/:id/quit(.:format)                                      {:action=>"quit", :controller=>"groups"}
                         group GET    /groups/:id(.:format)                                           {:action=>"show", :controller=>"groups"}
                               PUT    /groups/:id(.:format)                                           {:action=>"update", :controller=>"groups"}
                               DELETE /groups/:id(.:format)                                           {:action=>"destroy", :controller=>"groups"}
@@ -81,6 +84,14 @@
                reject_request POST   /requests/:id/reject(.:format)                                  {:action=>"reject", :controller=>"requests"}
                accept_request POST   /requests/:id/accept(.:format)                                  {:action=>"accept", :controller=>"requests"}
                       request DELETE /requests/:id(.:format)                                         {:action=>"destroy", :controller=>"requests"}
+                   categories GET    /categories(.:format)                                           {:action=>"index", :controller=>"categories"}
+                              POST   /categories(.:format)                                           {:action=>"create", :controller=>"categories"}
+                 new_category GET    /categories/new(.:format)                                       {:action=>"new", :controller=>"categories"}
+                edit_category GET    /categories/:id/edit(.:format)                                  {:action=>"edit", :controller=>"categories"}
+              update_category POST   /categories/:id/update(.:format)                                {:action=>"update", :controller=>"categories"}
+                     category GET    /categories/:id(.:format)                                       {:action=>"show", :controller=>"categories"}
+                              PUT    /categories/:id(.:format)                                       {:action=>"update", :controller=>"categories"}
+                              DELETE /categories/:id(.:format)                                       {:action=>"destroy", :controller=>"categories"}
          bio_byte_annotations GET    /bio_bytes/:bio_byte_id/annotations(.:format)                   {:action=>"index", :controller=>"annotations"}
                               POST   /bio_bytes/:bio_byte_id/annotations(.:format)                   {:action=>"create", :controller=>"annotations"}
       new_bio_byte_annotation GET    /bio_bytes/:bio_byte_id/annotations/new(.:format)               {:action=>"new", :controller=>"annotations"}
@@ -94,11 +105,12 @@
                 edit_bio_byte GET    /bio_bytes/:id/edit(.:format)                                   {:action=>"edit", :controller=>"bio_bytes"}
          download_vf_bio_byte GET    /bio_bytes/:id/download_vf(.:format)                            {:action=>"download_vf", :controller=>"bio_bytes"}
          download_vr_bio_byte GET    /bio_bytes/:id/download_vr(.:format)                            {:action=>"download_vr", :controller=>"bio_bytes"}
+           datasheet_bio_byte GET    /bio_bytes/:id/datasheet(.:format)                              {:action=>"datasheet", :controller=>"bio_bytes"}
    validate_sequence_bio_byte GET    /bio_bytes/:id/validate_sequence(.:format)                      {:action=>"validate_sequence", :controller=>"bio_bytes"}
-     upload_desc_img_bio_byte POST   /bio_bytes/:id/upload_desc_img(.:format)                        {:action=>"upload_desc_img", :controller=>"bio_bytes"}
           upload_abi_bio_byte POST   /bio_bytes/:id/upload_abi(.:format)                             {:action=>"upload_abi", :controller=>"bio_bytes"}
               upload_bio_byte POST   /bio_bytes/:id/upload(.:format)                                 {:action=>"upload", :controller=>"bio_bytes"}
               update_bio_byte POST   /bio_bytes/:id/update(.:format)                                 {:action=>"update", :controller=>"bio_bytes"}
+     upload_desc_img_bio_byte POST   /bio_bytes/:id/upload_desc_img(.:format)                        {:action=>"upload_desc_img", :controller=>"bio_bytes"}
                      bio_byte GET    /bio_bytes/:id(.:format)                                        {:action=>"show", :controller=>"bio_bytes"}
                               PUT    /bio_bytes/:id(.:format)                                        {:action=>"update", :controller=>"bio_bytes"}
                               DELETE /bio_bytes/:id(.:format)                                        {:action=>"destroy", :controller=>"bio_bytes"}
@@ -168,6 +180,7 @@ insert_before_experiment_step PUT    /experiments/:experiment_id/steps/:id/inser
               edit_experiment GET    /experiments/:id/edit(.:format)                                 {:action=>"edit", :controller=>"experiments"}
              clone_experiment GET    /experiments/:id/clone(.:format)                                {:action=>"clone", :controller=>"experiments"}
              print_experiment GET    /experiments/:id/print(.:format)                                {:action=>"print", :controller=>"experiments"}
+     complete_step_experiment POST   /experiments/:id/complete_step(.:format)                        {:action=>"complete_step", :controller=>"experiments"}
         set_status_experiment POST   /experiments/:id/set_status(.:format)                           {:action=>"set_status", :controller=>"experiments"}
                    experiment GET    /experiments/:id(.:format)                                      {:action=>"show", :controller=>"experiments"}
                               PUT    /experiments/:id(.:format)                                      {:action=>"update", :controller=>"experiments"}
@@ -181,14 +194,17 @@ insert_before_experiment_step PUT    /experiments/:experiment_id/steps/:id/inser
                               DELETE /step_generators/:id(.:format)                                  {:action=>"destroy", :controller=>"step_generators"}
                     part_data        /get_part_data                                                  {:action=>"get_data", :controller=>"constructs"}
                save_construct        /save_construct                                                 {:action=>"save", :controller=>"constructs"}
+            generate_protocol        /generate_protocol                                              {:action=>"generate_protocol", :controller=>"constructs"}
                  move_step_up        /experiments/:experiment_id/steps/:id/up                        {:action=>"up", :controller=>"steps"}
                move_step_down        /experiments/:experiment_id/steps/:id/down                      {:action=>"down", :controller=>"steps"}
                          root        /                                                               {:action=>"index", :controller=>"home"}
                          home        /                                                               {:action=>"index", :controller=>"home"}
-                        image        /                                                               {:method=>:get, :action=>"thumb", :controller=>"images"}
-                   step_image        /:id/step                                                       {:method=>:get, :action=>"step", :controller=>"images"}
-                  thumb_image        /:id/thumb                                                      {:method=>:get, :action=>"thumb", :controller=>"images"}
-                section_image        /:id/section                                                    {:method=>:get, :action=>"thumb", :controller=>"images"}
+                        about        /about                                                          {:action=>"about", :controller=>"home"}
+                        image        /images/:id(.:format)                                           {:method=>:get, :action=>"show", :controller=>"images"}
+                   step_image        /images/:id/step(.:format)                                      {:method=>:get, :action=>"step", :controller=>"images"}
+                  thumb_image        /images/:id/thumb(.:format)                                     {:method=>:get, :action=>"thumb", :controller=>"images"}
+                section_image        /images/:id/section(.:format)                                   {:method=>:get, :action=>"section", :controller=>"images"}
+                     image150        /images/:id/image150(.:format)                                  {:method=>:get, :action=>"image150", :controller=>"images"}
                        images GET    /images(.:format)                                               {:action=>"index", :controller=>"images"}
                               POST   /images(.:format)                                               {:action=>"create", :controller=>"images"}
                     new_image GET    /images/new(.:format)                                           {:action=>"new", :controller=>"images"}

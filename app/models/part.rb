@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20100819165030
+# Schema version: 20101030224800
 #
 # Table name: parts
 #

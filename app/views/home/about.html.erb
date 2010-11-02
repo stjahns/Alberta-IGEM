@@ -8,7 +8,13 @@
       
     <div id=info-box1 class=right-info-box>
       <h3>Contents</h3>
-      <p><i>Put contents of about page here...</i></p>
+      <ul>
+	      <li><a href="#lab_manual">How to start an experiment</a></li>
+	      <li><a href="#plasmid_designer">Make your own experiment</a></li>
+	      <li><a href="#profile">Make a profile</a></li>
+	      <li><a href="#join_group">Join a group</a></li>
+	      <li><a href="#make_a_group">Make a group</a></li>
+      </ul>
     </div>
 
   </div>
@@ -16,22 +22,34 @@
     
   <div id=center-content>
 
-    <div id=main-info-box>
+      <h1>INTRODUCTION TO GENOMIKON</h1>
 
-      <h2>INTRODUCTION TO GENOMIKON</h2>
+        <h2>How to start an experiment</h2>
+	<a id="lab_manual" />
+	<p>To start an experiment browse through the selection of experiments found in the lab manual.  Then add one of them to your lab book.  When you add it to your lab book you will be able to take notes and save images of your results. <p>
+	<%= link_to "Go to the lab manual", experiments_path, :class=>"box-link"  %>
 
-      <p>Here we can relate to the students what the haps are with this kit</p>
+        <h2>How to build something with the plasmid designer</h2>
+	<a id="plasmid_designer" />
+	<p>After you have the hang of the kit you will probably want to try designing your own plasmid.</p>
+	<p>To get started building your designing a plasmid, just click on a part from the parts list on the side and drag it up to the box at the top.  Keep this process up until you have built up an interesting plasmid.</p>
+	<p>You can check out all the parts in the parts library <%= link_to "here", bio_bytes_path %> to get an idea of what you would like to build<p> 
+	<%= link_to "Try the plasmid designer", sandbox_path , :class=>"box-link" %>
+	<%= link_to "Create a new experiment in your lab book",new_experiment_path , :class=>"box-link" %>
 
-      <p>Things to include:</p>
-      <ul>
-        <li>How to start an experiment</li>
-        <li>How to build something with the plasmid designer</li>
-        <li>Legend for part icons</li>
-        <li>Talk about parts library</li>
-        <li>Etc etc</li>
-      </ul>
 
-    </div>
+	<h2>Your profile and lab-book</h2>
+	<a id="profile" />
+	<p>Once you're a member you will get a profile page where you can add a description of your self and add new experiments to your lab book. You can also change your password and email address here. </p>
+
+	<h2>Joining or creating a group</h2>
+	<a id="join_a_group" />
+	<p>You can ask to join a group that already exists or if you have the group key then you can join that group immediatley</p>
+
+	<h2>Creating a group</h2>
+	<a id="create_a_group" />
+	<p>Creating a group is a great way to organize your class or a group of friends.  When you create a group you will become the admin and you will be able to send messages to your group, accept requests to join your group kick people out of your group, etc.  You can also create a description so people know what your group is about.<p>
+
 
   </div>
 

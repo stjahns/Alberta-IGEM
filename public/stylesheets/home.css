@@ -62,7 +62,24 @@ p.clickHere {
     border-radius: 10px;
 }
 
+.box-link{
+   background-color:#282560;
+   color:#FFFFFF;
+   display:block;
+   font-size:20px;
+   font-weight:bold;
+   padding:15px;
+   text-align:center;
+   text-decoration:none;
+   width:517px;
+   -moz-border-radius: 10px;
+   border-radius: 10px;
+   margin-bottom:10px;
+}
 
+.box-link:hover {
+  background-color:#5A56A0;
+}
 #main-info-box {
     width:100%;
     overflow:hidden;

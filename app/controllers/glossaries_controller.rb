@@ -1,6 +1,8 @@
 class GlossariesController < ApplicationController
 
   before_filter :set_nav
+  
+  caches_page :index
 
   # GET /glossaries
   # GET /glossaries.xml
@@ -30,6 +32,7 @@ class GlossariesController < ApplicationController
   # GET /glossaries/new.xml
   def new
     @glossary = Glossary.new
+    expire_page :action => :index
 
     respond_to do |format|
       format.html # new.html.erb
@@ -39,12 +42,15 @@ class GlossariesController < ApplicationController
 
   # GET /glossaries/1/edit
   def edit
+    expire_page :action => :index
+
     @glossary = Glossary.find(params[:id])
   end
 
   # POST /glossaries
   # POST /glossaries.xml
   def create
+    expire_page :action => :index
     @new_gloss = Glossary.new(params[:glossary])
     @glossaries = Glossary.all
     respond_to do |format|
@@ -62,6 +68,8 @@ class GlossariesController < ApplicationController
   # PUT /glossaries/1
   # PUT /glossaries/1.xml
   def update
+    expire_page :action => :index
+
     @glossary = Glossary.find(params[:id])
     respond_to do |format|
       if @glossary.update_attributes(params[:glossary])
@@ -78,6 +86,8 @@ class GlossariesController < ApplicationController
   # DELETE /glossaries/1
   # DELETE /glossaries/1.xml
   def destroy
+    expire_page :action => :index
+
     @glossary = Glossary.find(params[:id])
     @glossary.destroy
 

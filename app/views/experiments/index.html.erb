@@ -23,7 +23,7 @@
 
 <div id=tab-container>
 <div id=published>
-  <%= search_box experiments_path, "Search all published experiments:" %>
+  <%= search_box experiments_path, "Search all published experiments:" if false %>
   
   <p class="search_info">
   	<%= search_page_info( @search, @groups ) if @search %>

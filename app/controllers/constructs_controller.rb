@@ -1,6 +1,8 @@
 class ConstructsController < ApplicationController
   before_filter :get_exp, :except => [:get_data, :sandbox, :generate_protocol]
   #before_filter :login_required, :except => :get_data
+  #
+  skip_before_filter :lock_site, :only => [:get_data, :sandbox]
   
   def get_exp
     @experiment = Experiment.find(params[:experiment_id])
