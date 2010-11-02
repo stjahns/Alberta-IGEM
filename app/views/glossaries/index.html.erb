@@ -83,7 +83,7 @@
 
 <%@letter = @glossaries.first.term.first.upcase%>
  <%if @letter%>
-  <a name="<%=@letter%>"><%=@letter%></a>
+  <a class ="letter_divider" name="<%=@letter%>"><%=@letter%></a>
  <%end%>
 <div class = "hanging-toolbar"></div>
 <% @glossaries.each do |glossary| %>
@@ -93,7 +93,8 @@
 
     <%unless matchdata.upcase == @letter%>
     <%@letter = matchdata.upcase%>
-       <a name ="<%=@letter%>"><%=@letter%></a>
+    <div class ="hanging-toolbar"></div>
+       <a class ="letter_divider" name ="<%=@letter%>"><%=@letter%></a>
        <div class = "hanging-toolbar"></div>
     <%end%>
 
