@@ -32,7 +32,7 @@ class UserMailer < ActionMailer::Base
     def setup_email(user)
       @recipients  = "#{user.email}"
       @from        = "admin@genomikon.ca"
-      @subject     = "#{SITE_URL}"
+      @subject     = "GENOMIKON.ca: "
       @sent_on     = Time.now
       @body[:user] = user
     end
