@@ -74,6 +74,7 @@ p.clickHere {
    width:517px;
    -moz-border-radius: 10px;
    border-radius: 10px;
+   margin-bottom:10px;
 }
 
 .box-link:hover {
