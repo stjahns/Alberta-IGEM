@@ -1,4 +1,17 @@
 /* general styling */
+h1 {
+  color: #9D2063;
+}
+h2 {
+  color: #282560;
+}
+h3 {
+  color: #9D2063;
+}
+
+  
+
+
 .gray-box, .search-form {
 	background: none #efefef;
 	padding: 1em;
@@ -8,6 +21,7 @@
 
 .search-form {
 	-moz-border-radius: 15px;
+	border-radius: 15px;
 	display:table;
 	font-family:georgia;
 	font-style:italic;
@@ -41,7 +55,7 @@ div.left-column {
 }
 
 em.gray {
-	text-align: left;
+	/*text-align: left;*/
 	font-family:georgia,serif;
 	color:#666;
 	font-style:italic;
@@ -411,23 +425,64 @@ div.message h2 {
 	text-align:center;
 	height:36px;
 }
+/* styling for Genomikon title bar */
+div#genomikonBar{
+    padding-top: 10px;
+    height: 79px;
+    background-color:#282560;
+    text-align: center;
+}
+div#genomikonBar h2{
+    color: #73FF9A;
+    font-size: 35px;
+    margin-top: 0px;
+    margin-bottom: 5px;
+    margin-left: 10px;
+    padding-top: 0px;
+    padding-bottom: 5px;
+    width: 0px;
+    display: block;
+    position: relative;
+    line-height: 39px;
+    float: left;
+    z-index: 2;
+}
+
+div#genWidth{
+    display: inline-block;
+    width: 1000px;
+    text-align: left;
+}
+div#genomikon-logo{
+    float: left;
+}
+div#genomikon-logo a {
+    color:#282560;
+}
+
+div#genomikon-logo img{
+    height: 79px;
+}
 
 /* styling for navigation bar */
 div#navBar {
 	margin-left:auto;
 	margin-right:auto;
-	height: 26px;
-	width: 980px;
-	padding-left: 30px;
-	padding-right: 30px;
+	/*height: 26px;*/
+    height: 40px;
+    padding-top: 10px;
 	color: white;
-	background-color: black;
+    background-color:#282560;
 	background-image: none;
 	z-index: 1;
 	position:relative;
-	margin-left:-144px;
+	/*margin-left:-144px;*/
   	margin-bottom: 0px;
-
+    text-align: center;
+}
+div#navWidth {
+    width: 1000px;
+    display: inline-block;
 }
 
 #navBar form{
@@ -439,7 +494,7 @@ span#nav-print-to-pdf a#print-to-pdf {
 	display:block;
 	height:26px;
 	width:26px;
-	background:#000 url(/images/pdf_logo.png) no-repeat center;
+	background: transparent url(/images/pdf_logo.png) no-repeat center;
 	padding:0;
 	cursor:pointer;
  }
@@ -453,67 +508,10 @@ div#navBar input {
 	margin-top: 3px;
 	margin-bottom: 1px;	
 }
-div#nav-right-corner{
-	background-image: url(../images/rcorner.png);
-	float: right;
-	height: 26px;
-	width: 26px;
-	margin-right:-56px;
-	background-color:transparent; 
-
-}
-div#nav-left-corner{
-	background-image: url(../images/lcorner.png);
-	float: left;
-	height: 26px;
-	width: 26px;
-	margin-left:-56px;
-	background-color:transparent;
-}
-div#btn-hide-nav {
-	float:right;
-	background-color: transparent;	
-	margin-left: 0px;
-}
-div#btn-hide-nav a:link, div#btn-hide-nav a:visited {
-	display:block;
-	width:58px;
-	height:19px;
-	background-image: url(../images/slideUp.png);
-}
-div#btn-hide-nav a:hover {
-	display:block;
-	background-color:transparent;
-	width:58px;
-	height:19px;
-	background-image: url(../images/slideUphover.png);
-}
-div#btn-hide-nav a.slid:link, div#btn-hide-nav a.slid:visited {
-	display:block;
-	width:58px;
-	height:19px;
-	background-image: url(../images/slideDown.png);
-}
-div#btn-hide-nav a.slid:hover {
-	display:block;
-	background-color:transparent;
-	width:58px;
-	height:19px;
-	background-image: url(../images/slideDownhover.png);
-}
 
 div#navBar ul {
-	background-color:black;
 	color: white;
 	background-image: none;
-}
-div#navBar ul li{
-	float: right;
-}
-div#navBar ul span#user-nav li{
-	float: left;
-}
-div#navBar ul {
 	list-style-type: none;
 	margin: 0;
 	padding: 0;	
@@ -521,33 +519,43 @@ div#navBar ul {
 	height: 26px;
 }
 
+div#navBar ul li{
+	float: left;
+    margin-right: 10px;
+}
+div#navBar ul span#user-nav li{
+	float: right;
+    margin-right: 0px;
+}
+
 div#navBar ul li a {
 	text-decoration: none;
 	display: block;
-	font-weight: normal;
 	padding: 4px;
-	color: #efefef;
-	text-decoration: none;
+	color: #FFFFFF;
 	margin-right: 2px;
+    font-weight: bold;
 }
 
 div#navBar ul li a:link, div#navBar ul li a:visited {
 }
 div#navBar ul li a:hover {
-	color: white;
+    color:#00F2BC;
 	/*font-weight: bold;*/
 }
 div#navBar ul li.selected a:link, div#navBar ul li .selected a:hover, div#navBar ul li.selected a:visited {
 	font-weight: bold;
+    color:#00F2BC;
 }
 
 div#navBar ul li a#toggle-edit-steps {
 	background-color:#efefef;
 	color:#666;
-	left:72px;
-	margin-top:26px;
+	left:165px;
+	margin-top:40px;
 	position:absolute;
 	-moz-border-radius:0 0 3px 3px;
+	border-radius:0 0 3px 3px;
 }
 div#navBar ul li a#toggle-edit-steps:hover {
 	background-color:#ccc;
@@ -558,9 +566,12 @@ div#navBar ul li a#toggle-edit-steps.edit-on {
 }
 
 div#navBar ul li h2 {
+    color: #73FF9A;
 	display: block;
 	margin: 2px;
 	font-size: 18px;
+    line-height: 18px;
+    margin: 4px 4px;
 }
 a#home-link:link, a#home-link:visited {
 	height:20px;
@@ -583,12 +594,12 @@ div#user-form {
 	margin-top:30px;
 	border:1px solid #ccc;
 	-moz-border-radius:5px;
+	border-radius:5px;
 
 }
 div#user-form input.submit-btn {
 	text-decoration:none;
 	height:30px;
-	line-height:30px;
 	font-family: verdana,arial,helvetica,sans-serif;
 	background-color:#666666;
 	border:0 none;
@@ -601,7 +612,7 @@ div#user-form input.submit-btn {
 }
 div#user-form input.submit-btn:hover {
 	color:white;
-	background-color:black;
+	background-color:#282560;
 }
 div#user-form form {
 	display:table;
@@ -655,7 +666,6 @@ div#home-bar {
 	display:table;
 	margin-left:auto;
 	margin-right:auto;
-	margin-top:35px;
 }
 
 div#home-bar ul {
@@ -769,7 +779,7 @@ div#bio-bytes-table .sequence {
 	margin-top:0;
 	margin-left:auto;
 	margin-right:auto;
-	padding:0 201px;
+	padding: 15px 201px;
 }
 
 body {
@@ -778,7 +788,7 @@ body {
 }
 
 body, p, ol, ul, td {
-  font-family: verdana, arial, helvetica, sans-serif;
+  font: x-small sans-serif;
   font-size:   13px;
   line-height: 18px;
   text-align: left;
@@ -791,8 +801,8 @@ pre {
 }
 
 a { color: #000; }
-a:hover { color: #fff; background-color:#000; }
-a:visited { color: #666; }
+/*a:hover { color: #fff; background-color:#000; }*/
+/*a:visited { color: #666; }*/
 
 .fieldWithErrors {
   padding: 2px;
@@ -845,13 +855,15 @@ a:visited { color: #666; }
   border: 1px solid black;
 }
 .more-info-link:hover {
-  background-color:       black;
+  background-color:       #282560;
   color:                  white;
 }
 
 #cat_list{
   border: 1px solid #999;
   background-color: #DDD;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
 }
 
 #cat_list h3 {
@@ -868,11 +880,12 @@ a:visited { color: #666; }
   margin-top: 25px;
   margin-bottom: 25px;
   padding: 0px 10px 0px 10px;
-  
+  -moz-border-radius: 10px;
+  border-radius: 10px;
 }
 
 .cat_title {
-  border-bottom: 3px solid black;
+  border-bottom: 3px solid #282560;
 }
 
 .byte-row {

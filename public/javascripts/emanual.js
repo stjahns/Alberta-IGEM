@@ -37,6 +37,16 @@ $(document).ready(function(){
         }
       })
 
+      
+      
+      $(".part").mouseover(function(){
+        var con = $(this).attr('construct');
+        var id = $(this).attr('byte_id').split('_')[1];
+        $(".part-info." + con ).contents().replaceWith($("#info_" + id).clone());
+        $(".part-info." + con ).parent().show();
+      });
+
+          /*
       $(".part").click(function(){
         var con = $(this).attr('construct');
         if ($(this).hasClass('showing')){
@@ -51,14 +61,13 @@ $(document).ready(function(){
           $(".part-info." + con ).parent().show();
         }
       });
+      */
 
-/*
 
       $(".part").mouseleave(function(){
         var con = $(this).attr('construct');
         $(".part-info." + con).parent().hide();
       });
-*/
       
 	//**********************************************************
 	// javascript for editing steps
@@ -242,7 +251,21 @@ $(document).ready(function(){
 		}
 	});
 
+    // ajax submit a change in step completion status
+    $('.complete').change(function(){
 
+        var completed = $("#step_completed", this);
+        var checked = completed.is(':checked');
+
+        $.ajax({
+          type: 'post',
+          data: "step_id=" + this.id + "&checked=" + checked, 
+          url: location.pathname + '/complete_step',
+          });
+          
+    });
+
+    
 
 	// submit a new note for a step with Ajax
 	$('.new_note').live('submit', function() {

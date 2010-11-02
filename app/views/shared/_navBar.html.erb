@@ -1,31 +1,32 @@
 <% unless SITE_LOCKED and not logged_in? %>
 	<div id=navBar >
-		<div id="nav-right-corner"></div>
-		<div id="nav-left-corner"></div>
+      <div id=navWidth>
 		<ul>
 		<%= yield :nav %>
 
 		<%= nav_bar_select( @navbar_selected ) %>
 
 		<span id="user-nav">
-			<li><a id="home-link" href="/"></a></li>
 		<% if logged_in? %>
-			<li><h2><%= current_user.login %></h2></li>
-			<li><%= link_to "Profile", profile_path(current_user) %></a></li>
-		
 			<li><%= link_to "Logout", logout_path %></a></li>
+			<li><%= link_to "Profile", profile_path(current_user) %></a></li>
+			<li><h2><%= current_user.login %></h2></li>
+		
 			<%= yield :user_nav %>
 		<% else %>
+          <!--
 			<% form_tag session_path do -%>
 				<li><%= text_field_tag 'login','username' %></li>
-				<li><%= password_field_tag 'password', '123' %></li>
+				<li><%= password_field_tag 'password', '******' %></li>
 
 			<% end -%>
+          -->
+			<li><%= link_to "Log In", login_path %></li>
 			<li><%= link_to "Sign up?", signup_path %></li>
 		<% end %>
 		</span>
 		
 	</ul>
-	<div id="btn-hide-nav"><a href='#'></a></div>
+    </div>
 	</div>
 <% end %>

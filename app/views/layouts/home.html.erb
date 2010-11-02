@@ -6,12 +6,13 @@
   <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
   <title>Genomikon: home</title>
   <%= render :partial=>'layouts/includes' %>
-
+  <%= stylesheet_link_tag 'home' %>
 
 </head>
 <body>
+    <%= render(:partial=>'shared/genomikonBar') %>
+    <%= render(:partial=>'shared/navBar') unless @no_navbar %>
 	<div id= container>
-		<%= render(:partial=>'shared/navBar') %>
 		<%= yield %>
 	</div>
 </body>

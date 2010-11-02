@@ -34,6 +34,8 @@ class ExperimentsController < ApplicationController
   def show
     @steps = @experiment.steps.all(:order => :step_order)
 
+    #NB - in experiment/show view, experiment destroyed at end if temp==true
+
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @experiment }
@@ -154,6 +156,12 @@ class ExperimentsController < ApplicationController
 		logged_in? && ( current_user.can_edit_experiments? || 
                     (current_user.id  == experiment.user.id && 
                       current_user.can_edit_own_experiments?) )
+  end
+
+  def complete_step
+    @step = Step.find(params[:step_id])
+    @step.completed = params[:checked]
+    render :text => @step.save
   end
 
   private

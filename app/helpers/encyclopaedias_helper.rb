@@ -8,7 +8,7 @@ module EncyclopaediasHelper
     return link
   end
   def create_bookmark(title)
-    bookmark = "<a name=\"#{title}\">#{title}</a> "
+    bookmark = "<a class=section_title name=\"#{title}\">#{title}</a> "
     return bookmark
   end
   def create_em(term)

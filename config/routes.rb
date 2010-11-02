@@ -78,7 +78,8 @@ ActionController::Routing::Routes.draw do |map|
   # map steps as nested resource of experiments
   map.resources :experiments, :member => { :print => :get,
                                            :clone => :get,
- 					   :set_status => :post } do |experiments|
+ 					   :set_status => :post,
+                       :complete_step => :post} do |experiments|
      experiments.resources :steps, 
 	     :member => { :upload => :post, 
 	     		  :up => :put,
@@ -94,12 +95,14 @@ ActionController::Routing::Routes.draw do |map|
   # named route for getting part data for construct/experiment views
   map.part_data '/get_part_data', :controller => :constructs, :action => :get_data
   map.save_construct '/save_construct', :controller => :constructs, :action => :save
+  map.generate_protocol '/generate_protocol', :controller => :constructs, :action => :generate_protocol
   # some shorthand for routes
   map.move_step_up 'experiments/:experiment_id/steps/:id/up' , :controller => :steps, :action =>:up
   map.move_step_down 'experiments/:experiment_id/steps/:id/down', :controller => :steps, :action =>:down
 
   map.root :controller => :home 
   map.home '', :controller => :home
+  map.about  "/about", :controller => :home, :action => :about
 
   # routes for images
   # paths that get images need to use default .jpg format so that 

@@ -53,6 +53,12 @@ class ApplicationController < ActionController::Base
 	  redirect_to login_path
   end
 
+  def is_admin
+    unless logged_in? and current_user.is_an_admin?
+      redirect_to root_path
+    end
+  end
+
   private
 
   def lock_site

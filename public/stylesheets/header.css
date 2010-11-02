@@ -11,7 +11,7 @@
 
 /* general header styling */
 div#header {
-	border-bottom: 5px solid black;
+	border-bottom: 5px solid #282560;
 }
 #header div.experiment-status {
 	float:right;
@@ -20,7 +20,7 @@ div#header h1 {
 	float:left;
 }
 div#header p, #group-info p, div.message p {
-	color: #666;
+	color: #282560;
 	font-family:georgia,serif;
 	font-style:italic;
 	font-size:1.2em;
@@ -70,20 +70,21 @@ div#header-toolbar ul li a:link, div#header-toolbar ul li a:visited {
 
 	-moz-border-radius:4px 4px 0 0;
   -webkit-border-radius:4px 4px 0 0;
+    border-radius: 4px 4px 0 0;
 
 
 }
 div#header-toolbar ul li a.selected:link, div#header-toolbar ul li a.selected:visited  {
 	background-image: none;
-	background-color:black;
+	background-color:#282560;
 	color: #fff;
-	border: 2px solid black;
+	border: 2px solid #282560;
 	border-bottom-width: 0;
 	font-weight:bold;
 }
 div#header-toolbar ul li a:hover {
 	background-image: none;
-	background-color: #000000;
+	background-color: #282560;
 	color: #fff;
 }
 div#header-toolbar ul li form {

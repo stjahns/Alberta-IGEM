@@ -7,7 +7,7 @@
   <title>Constructs: <%= controller.action_name %></title>
   <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
   <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.2/jquery-ui.min.js"></script>
-  <%= javascript_include_tag 'jrails', 'jquery.form','jquery.cookie','jquery.download', 'application','header', 'groups','profile'%>
+  <%= javascript_include_tag 'jrails', 'jquery.form','jquery.cookie','jquery.download', 'jquery.iphoneui', 'application','header', 'groups','profile'%>
   <%= stylesheet_link_tag 'scaffold', 'toolbar', 'header', :media=>'all' %>
   <%= javascript_include_tag 'parts_designer' %>
   <%= javascript_include_tag 'sequence_display' %>
@@ -16,12 +16,16 @@
 </head>
 
 <body>
+  <%= render :partial=>'shared/genomikonBar' %>
+  <%= render :partial=>'shared/navBar' %>
   <div id='container'>
-	<%= render :partial=>'shared/navBar' %>
-	<% if flash[:error] || flash[:notice] %>
-		<div id='flash-notice' <%= 'class="error"' if flash[:error] %>>
-		<%=flash[:error] || flash[:notice] %></div>
-	<% end %>
+    <%= yield :header %>
+    <div id= 'flash-notice-container'>
+    	<% if flash[:error] || flash[:notice] %>
+    		<div id='flash-notice' <%= 'class="error"' if flash[:error] %>>
+    		<%=flash[:error] || flash[:notice] %></div>
+    	<% end %>
+    </div>
 	<%= yield %>
 </body>
 </html>

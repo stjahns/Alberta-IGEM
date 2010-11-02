@@ -45,7 +45,7 @@
 
   <%unless @encyclopaedia.sections.blank?%>
     <div id = "menu">
-      <b>Contents:</b>
+      <b class=contents>Contents:</b>
       <%for section in @sections %>
         <div class ="item">
         <%= create_menu_links(section.title) %><br/>
@@ -60,10 +60,10 @@
           <div class = "image"><%= image_tag section_image_path(@encyclopaedia.image, :jpg) %></div>
           <i><div class ="caption"><%= section.caption %></div></i>
         </div>
-  <div class ="article_header">
-    <i><%= @encyclopaedia.title %></i>
-</div>
     <% end %>
+  <div class ="article_header">
+    <h2><%= @encyclopaedia.title %></h2>
+</div>
   <%= add_popups(intro) %>
 
 </div>

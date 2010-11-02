@@ -99,10 +99,7 @@
     <h3><%=h byte.name%></h3>
     <p><i><%=h byte.description%></i><p>
     <p>Length: <%= byte.sequence.length %> bp</p>
-    <form> 
-      <input type="button", class='more-info-link', value="More information"
-      onClick="window.open('<%= bio_byte_path(byte) %>', '', 'toolbar=yes,location=yes,directories=yes,status=yes,menubar=yes,scrollbars=yes,copyhistory=yes,resizable=yes')">
-    </form>
+    <i>Click part for more information.</i>
     <div style="clear:both; height:1px; margin-bottom:-1px;">&nbsp;</div>
 
   </div>
@@ -111,3 +108,8 @@
 
 </div>
 <!-- END part-info-data -->
+<%
+    if @experiment.temp == true
+      @experiment.destroy
+    end
+%>

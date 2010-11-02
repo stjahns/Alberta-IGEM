@@ -17,7 +17,7 @@
   $(document).ready(function() {
 
       
-      updatePlasmidDisplay(0);
+      updatePlasmidDisplay(1);
 
       //Get experiment + construct id's TODO this is lazy!!
       var url = window.location.pathname.split('/');
@@ -30,6 +30,8 @@
 
       //save button
       initSaveButton();
+      //generate protocol link
+      initGenerateProtocol();
 
       //init construct sortable list
       initConstructSortable();
@@ -46,9 +48,13 @@
 
         connectToSortable: 'ol#parts_list',
         revert: 'invalid',
-        helper: "clone"
-
-      });
+        helper: "clone",
+        zIndex: 11,
+        revertDuration: 0,
+        stop: function(){
+          updatePlasmidDisplay(0);
+        }
+      }).addTouch();
 /*
       $("#trash").droppable({
         activeClass: 'ui-state-hover',
@@ -60,11 +66,13 @@
           ui.draggable.remove();
           $("#parts_list").sortable('refresh');
         }
-      }); 
-*/
+      });  
+*/         
       $("#parts-row").droppable({
         accept: '#parts_list >li',
         tolerace: 'intersect',
+        activeClass: 'trash-active',
+        hoverClass: 'trash-hover',
         drop: function(event, ui) {
           ui.draggable.attr()
           ui.draggable.remove();
@@ -185,9 +193,9 @@ function initSaveButton(){
 
         var bytes = $('#parts_list').sortable('toArray', {attribute: 'class'});
 
-        if (validate(bytes)){
+        if (bytes.length>0 && validate(bytes)){
 
-          $(this).after("<div id=saving-text style='text-align:center'>Saving...</div><div id=saving-anim class=loading style='height:35px'></div>");
+          $('#header').after("<div id=saving-text style='text-align:center'>Saving...</div><div id=saving-anim class=loading style='height:35px'></div>");
 
           //submit to server
           $.ajax({
@@ -202,7 +210,8 @@ function initSaveButton(){
             success: function(data){
               //kill saving anim
               $("#saving-anim").fadeOut('slow');
-              $("#saving-text").html("Saved.").fadeOut('slow');
+              $('#saving-text').html('Saved.')
+              setTimeout("$('#saving-text').fadeOut('slow');", 2000);
 
               $("#parts_list > li").each(function(index) {
                 $(this).attr('part_id', "part_"+data.part_ids[index]);
@@ -212,7 +221,8 @@ function initSaveButton(){
           })
         }
         else{
-          alert("Construct is not valid!"); //todo: invalid message
+           $('#header').after("<div id=saving-text style='text-align:center'>Construct is not valid!</div>");
+           setTimeout("$('#saving-text').fadeOut('slow');", 2000);
         }
       });
 
@@ -226,7 +236,8 @@ function initConstructSortable(){
         helper: 'clone',
         cursor: 'move',
         appendTo: 'body',
-        tolerance: 'intersect',
+        tolerance: 'pointer',
+        placeholder: 'part-placeholder',
         start: function(){
           updatePlasmidDisplay(1);
           /*
@@ -256,8 +267,11 @@ function initConstructSortable(){
           //changes=true; // for future "YOU've Neer saved yer changes!"
           //$("#sequence").html(getFormattedSequence());
           $("#sequence").html(getAnnotatedSequence(100));
+          $("ol#parts_list > li").addTouch();
         }
       });
+
+      $("ol#parts_list > li").addTouch();
 
 }
   function updatePlasmidDisplay(placeholders){
@@ -309,7 +323,7 @@ function initConstructSortable(){
     for (var i=1; i<=wraps; i++){
       $("#top-left").after(
         "<div class=plasmid-wrap id=wrap-"+ i + " "
-        + "style='top:" + (i-1)*46 + "'></div>"
+        + "style='top:" + (i-1)*46 + "px'></div>"
         );
     }
 
@@ -338,12 +352,12 @@ function getParts(){
           if (p.type == "linker"){
             start.sequence = "GCCT";
             start.name = "B";
-            start.colour = "#0000FF";
+            start.colour = "#5555FF";
           }
           else{
             start.sequence = "TGGG";
             start.name = "A"
-            start.colour = "#FF0000";
+            start.colour = "#FF5555";
           }
           start.start = loc;
           loc += 4;
@@ -367,12 +381,12 @@ function getParts(){
         if (p.type == "orf"){
           end.sequence = "GCCT";
           end.name = "B";
-          end.colour = "#0000FF";
+          end.colour = "#5555FF";
         }
         else{
           end.sequence = "TGGG";
           end.name = "A"
-          end.colour = "#FF0000";
+          end.colour = "#FF5555";
         }
         end.start = loc;
         loc += 4;
@@ -387,4 +401,45 @@ function getParts(){
   }
   //return array of parts 
   return parts;
+}
+
+function initGenerateProtocol(){
+    $("a#generate_protocol").click(function() {
+
+        var bytes = $('#parts_list').sortable('toArray', {attribute: 'class'});
+
+        if (bytes.length>0 && validate(bytes)){
+
+          $('#header').after("<div id=saving-text style='text-align:center'>Generating protocol...</div><div id=saving-anim class=loading style='height:35px'></div>");
+
+          //submit to server
+          $.ajax({
+           type: 'put',
+           dataType: 'json',
+           data: $('#parts_list').sortable('serialize', {attribute: 'part_id'}) + '&'
+                + $('#parts_list').sortable('serialize', {attribute: 'byte_id'}) + '&'
+                + 'id=' + construct_id + '&'
+                + 'experiment_id=' + experiment_id,
+
+            url: '/generate_protocol',
+            success: function(id){
+              //kill saving anim
+              //go to 
+              $("#saving-anim").fadeOut('slow');
+              $("#saving-text").html("Done.").fadeOut('slow');
+
+              window.open('/experiments/' + id, 'Protocol', 'toolbar=yes,location=yes,directories=yes,status=yes,menubar=yes,scrollbars=yes,copyhistory=yes,resizable=yes');
+            },
+            error: function(){
+              $("#saving-anim").fadeOut('slow');
+              $("#saving-text").html("Something has gone horribly wrong!").fadeOut('slow');
+            }
+          
+          })
+        }
+        else{
+           $('#header').after("<div id=saving-text style='text-align:center'>Construct is not valid!</div>");
+           setTimeout("$('#saving-text').fadeOut('slow');", 2000);
+        }
+      });
 }

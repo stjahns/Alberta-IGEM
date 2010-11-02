@@ -39,14 +39,14 @@ module ApplicationHelper
 	
 	def nav_bar_select( selection )
 		output = ""
-		links = { :glossary => link_to( "Glossary", glossaries_path ),
-			:articles => link_to( "Articles", encyclopaedias_path ),
-			:manual => link_to( "Lab Manual", experiments_path ),
-			:parts => link_to( "Parts Bin", bio_bytes_path ),
-			:groups => link_to( "Groups", groups_path ),
-			:sandbox => link_to( "Sandbox", sandbox_path ),
-			:home => link_to( "Home", root_path ) }
-		order = [:home,:sandbox,:groups,:parts,:manual,:articles,:glossary].reverse  
+		links = { :glossary => link_to( "GLOSSARY", glossaries_path ),
+			:articles => link_to( "ARTICLES", encyclopaedias_path ),
+			:manual => link_to( "LAB MANUAL", experiments_path ),
+			:parts => link_to( "PARTS BIN", bio_bytes_path ),
+			:groups => link_to( "GROUPS", groups_path ),
+			:sandbox => link_to( "SANDBOX", sandbox_path ),
+			:home => link_to( "HOME", root_path ) }
+		order = [:home,:sandbox,:groups,:parts,:manual,:articles,:glossary]
 		order.each do |page|
 			output += "<li"
 			output += ' class="selected"' if page == selection

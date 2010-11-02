@@ -74,6 +74,6 @@ Backbone.create!(:name => "pC.s.A",
                  :suffix => "GCCTAGAGACCACTAGTTGCGGCCGCTGCAG")
 Backbone.create!(:name => "pC.s.B",
                  :prefix => "GAATTCGCGGCCGCTTCTAGAGGTCTCAGCCT",
-                 :suffix => "TGGGTGAGACCACTAGTTGCGGCCGCTGCA")
+                 :suffix => "TGGGTGAGACCACTAGTTGCGGCCGCTGCAG")
                  
 

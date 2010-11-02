@@ -36,9 +36,8 @@
     margin-bottom:50px;
 }
 #encyclopaedia .article_header{
-    Line-height: 35px;
-    font-size: 30px;
-    font-family:Courrier, Times, Monospace, Western;
+    Line-height: 25px;
+    font-size: 20px;
 }
 #container {
 	width: 750px;
@@ -64,6 +63,7 @@
 
 #encyclopaedia h2{
   text-align: left;
+  color: #9D2063;
 }
 pre {
   background-color: #eee;
@@ -107,29 +107,25 @@ a:visited { color: #666; }
   padding: 5px;
 }
 
- .definition {
-        border: 1px solid black;
-        background: silver;
-        
-
-        
-       
-        position: absolute;
-        width: 225px;
-        right: 125%;
-        /*top:30% !important;
-        bottom:auto;
-        right:auto;*/
-        display:none;
-        z-index: 2;
-        
-   
-
-        -webkit-box-shadow: 5px 5px 7px #333;
-        -webkit-border-radius: 5px;
-        -moz-border-radius: 5px;
-        -moz-box-shadow: 5px 5px 7px #333;
-  }
+.definition {
+    background-color:#b8fed1;
+    position: absolute;
+    width: 225px;
+    right: 125%;
+    /*top:30% !important;
+    bottom:auto;
+    right:auto;*/
+    display:none;
+    z-index: 2;
+    padding: 5px;
+    -webkit-box-shadow: 5px 5px 7px #333;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -moz-box-shadow: 5px 5px 7px #333;
+}
+.definition b{
+  color:#282560;
+}
 
   .show_term{
       padding-top: 1em;
@@ -259,8 +255,6 @@ when I figure out what these two are for, I need to re label them and put a comm
 }
 
 #encyclopaedia .article_intro{
-    display:none;
-    font-family: Courrier;
     float: right;
     /* width:490px;
      * changed by mike for proper zooming
@@ -317,11 +311,10 @@ when I figure out what these two are for, I need to re label them and put a comm
 
 #encyclopaedia .show_section_title{
     position: relative;
-    top: -20px;
-    font-family: courrier, times, serif, monospace;
     line-height: 24px;
     font-size: 22px;
     margin-top: 5px;
+    top: -10px;
 }
 
 #encyclopaedia .edit_section_form{
@@ -379,4 +372,15 @@ when I figure out what these two are for, I need to re label them and put a comm
 
 .gloss_links{
     position:relative;
+}
+
+#encyclopaedia .article_text{
+    display: none;
+}
+
+.contents{
+  color: #282560;
+}
+.section_title{
+  color: #282560;
 }

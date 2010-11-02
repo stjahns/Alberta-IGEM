@@ -1,4 +1,14 @@
   <h2><span class="step_number"><%=h step.step_order %></span> <%=h step.title %></h2>
+
+  <% if logged_in? and current_user.can_edit_for_experiment?(@experiment) %>
+    <% form_for(step, :html=>{:class=>'complete', :id=>step.id} ) do |f| %>
+      <%= f.error_messages %>
+        <%= f.check_box :completed %>
+        <%= f.label :completed %>
+        <span class= "save-notice" style= "display: none;"></span>
+    <% end %>
+  <% end %>
+
 <%= save_notice %>
   <% unless step.image.blank? %>
 	  <p><%= image_tag step_image_path( step.image,:jpg) , :class=>"step_view" %></p>

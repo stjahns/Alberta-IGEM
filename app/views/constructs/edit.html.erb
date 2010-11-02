@@ -1,13 +1,26 @@
-<div id="nav">
-  <%= link_to "Back", experiment_path(@construct.experiment) %>
-  <a href="#", id="save">Save</a>
-</div>
-
 <!--
 The main construct designer view.
 -->
 
-<h1>Editing <%=h @construct.name %>:</h1>
+<% content_for :title do %>
+  <%= 'Editing ' + @construct.name %>
+<% end %>
+
+<% content_for :header do %>
+
+<div id= "header">
+
+  <div id=nav>
+    <%= link_to "Back", experiment_path(@construct.experiment) %>
+    <a href="#", id="save">Save</a>
+  </div>
+  <h1>Editing <%=h @construct.name %>:</h1>
+  <p>Edit or piece together your own plasmid from our parts collection.
+  </p>
+
+</div>
+
+<% end %>
 
 <!-- plasmid box -->
 <div id="parts_box">
@@ -26,7 +39,7 @@ The main construct designer view.
 <ol id="parts_list">
 <% unless @order.empty? %>
 <% @order.each do |part| %>
-  <li id = "part_<%=part.bio_byte_id%>_<%=part.id%>" class = "<%=part.bio_byte.type %> part" byte_id="byte_<%=part.bio_byte_id%>" part_id="part_<%=part.id%>" > </li>
+  <li onClick="window.open('<%= bio_byte_path(part.bio_byte) %>', '', 'toolbar=yes,location=yes,directories=yes,status=yes,menubar=yes,scrollbars=yes,copyhistory=yes,resizable=yes')" id = "part_<%=part.bio_byte_id%>_<%=part.id%>" class = "<%=part.bio_byte.type %> part" byte_id="byte_<%=part.bio_byte_id%>" part_id="part_<%=part.id%>" > </li>
 <% end %>
 <% else %>
   <li class='part placeholder'>DRAG PARTS HERE</li>
@@ -40,6 +53,7 @@ The main construct designer view.
 </div>
 <!-- END plasmid box -->
 
+<div id="trash">
 <div id="parts-row">
 <!-- Parts Bin -->
 <div id="parts-bin">
@@ -83,6 +97,7 @@ The main construct designer view.
 </div>
 
 
+</div>
 </div>
 </div>
 <!-- END part info box -->

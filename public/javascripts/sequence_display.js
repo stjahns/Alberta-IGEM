@@ -239,7 +239,8 @@ function getFormattedFeatureLine(features){
   //return html formatted string 
   var output = "<div class='featureline'>";
   for (f in features){
-    output += "<span class='annotation' style='"
+    output += "<span class='annotation' " 
+          + "title='" + features[f].name + "' style='"
           + "left:" + features[f].start + "ex;"
           + "width:" + (features[f].stop - features[f].start) + "ex;"
           + "background-color:" + features[f].colour + ";'><span class='ann_label'>"; 
@@ -290,7 +291,8 @@ function formatSeq(seq, linenumber, classes){
 function formatParts(parts){
   var output = "<div class='partline'>";
   for (p in parts){
-    output += "<span class='annotation' style='"
+    output += "<span class='annotation' "
+          + "title='" + parts[p].name + "' style='"
           + "left:" + parts[p].start + "ex;"
           + "width:" + (parts[p].stop - parts[p].start) + "ex;"
           + "background-color:" + parts[p].colour + ";'>" + "<span class='ann_label'>";

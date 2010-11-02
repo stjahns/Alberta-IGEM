@@ -12,16 +12,20 @@ div#parts_box{
   border:           1px solid #999;
   height:           114px;
   margin-bottom:    -1px;
+  -moz-border-radius: 10px 10px 0 0;
+  border-radius: 10px 10px 0 0;
 }
 
 ol#parts_list{
   list-style-type:  none;
   float:            left;
-  height:           50;
-  width:            600;
+  height:           50px;
+  width:            699px;
   padding:          0;
   margin:           0;
   background:       transparent;
+  z-index:          1;
+  position:         absolute;
 }
 
 #parts_list li{
@@ -36,6 +40,10 @@ ol#parts_list{
 
 #parts-row{
   height: 297px;
+  background: white;
+  margin: -1px;
+  -moz-border-radius: 0 0 10px 0;
+  border-radius: 0 0 10px 0;
 }
 
 #parts-bin{
@@ -55,6 +63,10 @@ ol#parts_list{
 #parts-list{
   text-align: center;
 }
+#parts-list > .ui-state-active {
+  background-color: #999;
+}
+
 .cat-list p {
   background: transparent;
   background-color: #BBB;
@@ -109,6 +121,8 @@ ol#parts_list{
   border:           1px solid #999;
   padding:          0 0 0 15px;
   overflow-y:       auto;
+  -moz-border-radius: 0 0 10px 0;
+  border-radius: 0 0 10px 0;
 }
 
 #part-info{
@@ -126,13 +140,7 @@ ul.parts_bin{
   padding-top: 3px;
   padding-bottom: 3px;
 }
-div#trash {
-  padding:          22 0 0 0;
-  border:           1px solid #888;
-  height:           50;
-  width:            200;
-  text-align:       center;
-}
+
 ul.parts_bin li{
   margin:           3px 0px 3px 0px;
   width:            100px;
@@ -145,6 +153,7 @@ ul.parts_bin li{
 .annotation{
   position:         absolute;
   border:           1px solid black;
+  font-size:        16px;
 }
 
 .annotation.orf{
@@ -156,9 +165,11 @@ div#sequence {
   text-align:       left;
   font-size:        9pt;
   white-space:      nowrap;
-  font-family:      'monospace';
+  font-family:      'Courier New';
   border:           1px solid #999;
   padding-top:      7px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
 }
 
 .numspacer{
@@ -173,15 +184,16 @@ div#sequence {
 .partline{
   left: 6ex;
   position:         relative;
-  height: 3ex;
+  height: 4ex;
 }
 .featureline{
   left: 6ex;
   position:         relative;
-  height: 3ex;
+  height: 22px;
 }
 
 div#nav {
+  float: right;
 }
 
 
@@ -235,7 +247,7 @@ div#nav {
   left:             0;
   width:            750px;
   height:           92px;
-  z-index:          -100;
+  z-index:          0;
   background: url(../images/plasmid-wrap.png);
 }
 
@@ -278,6 +290,7 @@ div#nav {
 
 #plasmid-inner{
   margin:           0 0 0 50px;
+  z-index:          1;
 }
 
 #plasmid-spacer{
@@ -303,4 +316,34 @@ div#nav {
 .more-info-link:hover {
   background-color:       black;
   color:                  white;
+}
+
+#generate_protocol {
+  float: right;
+}
+
+
+.part-placeholder {
+  background-color: #D6FFE2;
+  /*border: -1px solid #282560; border screws with stuff*/
+}
+
+div#trash {
+  border:           1px solid #888;
+  background: url(../images/trash-can.jpg);
+  -moz-border-radius: 0 0 10px 0;
+  border-radius: 0 0 10px 0;
+}
+.trash-active {
+  /* for IE */
+  filter: alpha(opacity=60);
+  /* CSS3 standard */
+  opacity: 0.6;
+  background: transparent;
+}
+.trash-hover {
+  /* for IE */
+  filter: alpha(opacity=20);
+  /* CSS3 standard */
+  opacity: 0.2;
 }
