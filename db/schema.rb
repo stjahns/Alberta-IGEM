@@ -165,7 +165,6 @@ ActiveRecord::Schema.define(:version => 20101030224800) do
   create_table "notes", :force => true do |t|
     t.integer  "step_id"
     t.string   "text"
-    t.integer  "image_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -249,6 +248,7 @@ ActiveRecord::Schema.define(:version => 20101030224800) do
     t.datetime "remember_token_expires_at"
     t.string   "activation_code",           :limit => 40
     t.datetime "activated_at"
+    t.integer  "group_id"
     t.integer  "role_id"
     t.string   "reset_code"
     t.text     "description"

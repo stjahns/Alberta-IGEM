@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20100819165030
+# Schema version: 20101030224800
 #
 # Table name: experiments
 #
@@ -13,6 +13,7 @@
 #  user_id     :integer(4)
 #  group_id    :integer(4)
 #  status      :string(255)
+#  temp        :boolean(1)
 #
 
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html

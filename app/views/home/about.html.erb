@@ -16,22 +16,26 @@
     
   <div id=center-content>
 
-    <div id=main-info-box>
 
       <h2>INTRODUCTION TO GENOMIKON</h2>
 
-      <p>Here we can relate to the students what the haps are with this kit</p>
+
+
 
       <p>Things to include:</p>
-      <ul>
-        <li>How to start an experiment</li>
-        <li>How to build something with the plasmid designer</li>
-        <li>Legend for part icons</li>
-        <li>Talk about parts library</li>
-        <li>Etc etc</li>
-      </ul>
+        <h2>How to start an experiment</h2>
+	<p>To start an experiment browse through the selection of experiments found in the lab manual.  Then add one of them to your lab book.  When you add it to your lab book you will be able to take notes and save images of your results. <p>
+	<%= link_to "Go to the lab manual", experiments_path, :class=>"box-link"  %>
 
-    </div>
+        <h2>How to build something with the plasmid designer</h2>
+	<p>After you have the hang of the kit you will probably want to try designing your own plasmid.</p>
+	<p>To get started building your designing a plasmid, just click on a part from the parts list on the side and drag it up to the box at the top.  Keep this process up until you have built up an interesting plasmid.</p>
+	<p>You can check out all the parts in the parts library <%= link_to "here", bio_bytes_path %> to get an idea of what you would like to build<p> 
+	<%= link_to "Try the plasmid designer", sandbox_path , :class=>"box-link" %>
+	<%= link_to "Create a new experiment in your lab book", :class=>"box-link" %>
+
+
+
 
   </div>
 
