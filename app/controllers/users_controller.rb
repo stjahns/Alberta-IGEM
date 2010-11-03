@@ -3,7 +3,7 @@ class UsersController < ApplicationController
   include AuthenticatedSystem
   
   before_filter :login_required, :except=>[:profile,:new,:forgot,:reset,:create,:activate]
-  before_filter :is_admin, :except=>[:update, :profile,:new,:forgot,:reset,:create,:activate]
+  before_filter :is_admin, :except=>[:show, :update, :profile,:new,:forgot,:reset,:create,:activate]
 
   def edit
     @user = User.find(params[:id])
