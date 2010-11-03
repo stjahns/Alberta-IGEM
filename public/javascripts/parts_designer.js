@@ -124,10 +124,12 @@ function validate(bytes){
 
   }
 
-  //check circularizable
+  /*
+  //check circularizable --- MEH
   if (bytes[0].split(' ',1)[0] == bytes[bytes.length-1].split(' ',1)[0]){
     valid = false;
   }
+  */
 
   return valid;
 

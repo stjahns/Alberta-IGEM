@@ -24,7 +24,7 @@
 		<% if current_user.can_modify_roles_for_group?( group ) %>
 			<% if group.role_for( member ).name == "group_admin" %>
 				<li>
-				<%= link_to "remove admin priveleges", "#", :class=>"btn-remove-admin" %>
+				<%= link_to "Remove Admin Privileges", "#", :class=>"btn-remove-admin" %>
 				<%= change_role_form( group, member, "group_member") %>
 				</li>
 				
