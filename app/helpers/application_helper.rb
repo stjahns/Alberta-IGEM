@@ -45,8 +45,9 @@ module ApplicationHelper
 			:parts => link_to( "PARTS BIN", bio_bytes_path ),
 			:groups => link_to( "GROUPS", groups_path ),
 			:sandbox => link_to( "SANDBOX", sandbox_path ),
+			:about => link_to( "ABOUT", about_path ),
 			:home => link_to( "HOME", root_path ) }
-		order = [:home,:sandbox,:groups,:parts,:manual,:articles,:glossary]
+		order = [:home,:about,:sandbox,:groups,:parts,:manual,:articles,:glossary]
 		order.each do |page|
 			output += "<li"
 			output += ' class="selected"' if page == selection

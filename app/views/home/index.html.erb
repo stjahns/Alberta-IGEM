@@ -15,6 +15,7 @@
         <p><%= link_to "Protocol Generator", step_generators_path if logged_in? and current_user.can_edit_step_generators? %></p>
       <% else %>
 
+        <%= image_tag("front-left.jpg") %>
 
       <% end %>
 
@@ -38,6 +39,8 @@
         <p>
             Building DNA is too hard. It has to be cheaper, faster, and easier, so that everyone can do it. So... we've created an inexpensive, self-contained educational kit called GENOMIKON - everything you need to build, test and operate genetic circuits and metabolic pathways. It comes with an online lab manual, notebook, and experiment software. It can be used by professionals as well.
         </p>
+
+      <p class=clickHere>click here for more...</p>
       
     </div>
 

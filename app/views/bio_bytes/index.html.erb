@@ -10,7 +10,7 @@
 
 <div id="header">
 <h1>Parts Bin</h1>
-<p>Browse the parts in the kit and view detailed information in the stats sheet.</p> 
+<p>Browse the parts in the kit.</p> 
 	<div id="header-toolbar" > 
 		<ul>
 		<% if logged_in? && current_user.can_create_bio_bytes? %>
@@ -86,8 +86,6 @@
 	  				<%= button_to "Delete", byte, :confirm => "Are you sure?", :method => :delete %> </li>
 	  			<% end %>
 	  				<li ><%= link_to "More Information", bio_byte_path(byte) %></li>
-	  				<li  ><%= link_to "Stats Sheet", datasheet_bio_byte_path(byte) %></li>
-
 
 	  			</ul></div>
 	  		</div>

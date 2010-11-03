@@ -54,7 +54,7 @@ p.clickHere {
   margin-right: 18px;
 }
 /* the info boxes on homepage */
-#main-info-box, #info-box1, #info-box2, #info-box3, #info-box4, #info-box-gray {
+#main-info-box, #info-box1, #info-box2, #info-box3, #info-box4, #info-box-gray, #contents-box {
     height:250px;
     padding:18px;
     position: relative;
@@ -89,6 +89,7 @@ p.clickHere {
 }
 #main-info-box:hover {
     background-color: #EEEEEE;
+    cursor:  pointer;
 }
 
 #info-box1, #info-box2, #info-box3, #info-box4, #info-box-gray {
@@ -118,6 +119,12 @@ p.clickHere {
     background-color:#DDDDDD;
     margin-top: 0px;
     height: 554px;
+  }
+
+#contents-box{
+    background-color:#DDDDDD;
+    margin-top: 0px;
+    height: auto;
   }
 
 #info-box1{

@@ -12,6 +12,10 @@ class HomeController < ApplicationController
 		end
 	end
 
+    def about
+      @navbar_selected = :about
+    end
+
 	private
 	def set_nav
 	  @navbar_selected = :home
