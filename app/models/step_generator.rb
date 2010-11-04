@@ -22,14 +22,38 @@ Replace 'bla bla' with actual data
 AND CETERAS!!
 =end
 
+#TODO add code to substitute correct anchor and cap
   def get_title(args)
     subtitle = self.title
+
     unless args[:part]==nil
       subtitle=subtitle.gsub("'part'", args[:part].bio_byte.name)
     end
+
     unless args[:construct]==nil
+
       subtitle=subtitle.gsub("'construct'", args[:construct].name)
+
+      #if byte 1 is AB/orf
+      if args[:construct].part_order.first.bio_byte.type == "Linker"
+        #Anchor B
+        subtitle=subtitle.gsub("'anchor'", "Anchor-B")
+      else
+        #Anchor A
+        subtitle=subtitle.gsub("'anchor'", "Anchor-A")
+      end
+
+      #if last byte is ab/orf
+      if args[:construct].part_order.last.bio_byte.type == "Linker"
+        # A-cap
+        subtitle=subtitle.gsub("'cap'", "A-Cap")
+      else
+        # B-cap
+        subtitle=subtitle.gsub("'cap'", "B-Cap")
+      end
+
     end
+
     return subtitle
   end
 
@@ -41,9 +65,29 @@ AND CETERAS!!
     end
     unless args[:construct]==nil
       subdescription=subdescription.gsub("'construct'", args[:construct].name)
+       #if byte 1 is AB/orf
+      if args[:construct].part_order.first.bio_byte.type == "Linker"
+        #Anchor B
+        subdescription=subdescription.gsub("'anchor'", "Anchor-B")
+      else
+        #Anchor A
+        subdescription=subdescription.gsub("'anchor'", "Anchor-A")
+      end
+
+      #if last byte is ab/orf
+      if args[:construct].part_order.last.bio_byte.type == "Linker"
+        # A-cap
+        subdescription=subdescription.gsub("'cap'", "A-Cap")
+      else
+        # B-cap
+        subdescription=subdescription.gsub("'cap'", "B-Cap")
+      end   
+
     end
+
     return subdescription
   end
+  
 
 #class method
 

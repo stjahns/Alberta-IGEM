@@ -13,6 +13,7 @@
         <h3>Admin Tools</h3>
         <p><%= link_to "Parts Bin", bio_bytes_path if logged_in? and current_user.can_create_bio_bytes? %></p>
         <p><%= link_to "Protocol Generator", step_generators_path if logged_in? and current_user.can_edit_step_generators? %></p>
+        <p><%= link_to "Users", users_path if logged_in? and current_user.is_an_admin? %></p>
       <% else %>
 
         <%= image_tag("front-left.jpg") %>
