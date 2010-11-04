@@ -19,6 +19,12 @@
     <%= f.label :published %><br />
     <%= f.check_box :published %>
   </p>
+  <%if logged_in? && current_user.can_create_glossaries?%>
+   <p>
+    <%= f.label :articles %><br />
+    <%= f.text_field :articles %>
+  </p>
+  <%end%>
  <p>
     <%= f.submit 'Update' %>
   </p>
