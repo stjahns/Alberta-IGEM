@@ -37,6 +37,15 @@
 <p>
   <% result = add_glossary_links(@experiment.description) %>
   <%= add_popups(result) %>
+   <%unless @experiment.articles.blank?%>
+            <%for article in @experiment.articles.split("&")%>
+                <%article = article.split("@")%>
+                <%id = article.first%>
+                <%title = article.last%>
+
+  <br/><a href="http://<%=SITE_URL%>/encyclopaedias/<%=id%>"><%=title%></a>
+            <%end%>
+        <%end%>
 </p>
 </div>
 
@@ -99,8 +108,9 @@
     <% end %>
     <h3><%=h byte.name%></h3>
     <p><i><%=h byte.description%></i></p>
-      
+      <%unless byte.sequence.blank?%>
     <p>Length: <%= byte.sequence.length %> bp</p>
+      <%end%>
     
     <i>Click part for more information.</i>
     <div style="clear:both; height:1px; margin-bottom:-1px;">&nbsp;</div>
