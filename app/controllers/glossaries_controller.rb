@@ -2,7 +2,7 @@ class GlossariesController < ApplicationController
 
   before_filter :set_nav
   
-  #caches_page :index
+  caches_page :index
 
   # GET /glossaries
   # GET /glossaries.xml
