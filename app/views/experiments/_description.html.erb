@@ -25,8 +25,8 @@
 		</tr>
 	</table>
 
-
-	<%= more_text experiment.description, 150 %>
+        
+	<%= more_text add_glossary_links(experiment.description), 150 %>
 </div>
 <div class="edit-experiment">
 	<%= render :partial=>"experiments/edit", :locals=>{:experiment=>experiment} %>
