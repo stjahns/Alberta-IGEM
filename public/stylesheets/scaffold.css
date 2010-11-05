@@ -431,6 +431,9 @@ div#genomikonBar{
     height: 79px;
     background-color:#282560;
     text-align: center;
+    padding-left: 100px;
+    padding-right: 100px;
+    min-width: 1000px;
 }
 div#genomikonBar h2{
     color: #73FF9A;
@@ -479,6 +482,9 @@ div#navBar {
 	/*margin-left:-144px;*/
   	margin-bottom: 0px;
     text-align: center;
+    padding-left: 100px;
+    padding-right: 100px;
+    min-width: 1000px;
 }
 div#navWidth {
     width: 1000px;
