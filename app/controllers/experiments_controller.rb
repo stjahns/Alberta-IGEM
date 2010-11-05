@@ -19,7 +19,6 @@ class ExperimentsController < ApplicationController
   # GET /experiments.xml
     def index
       admin_role  = Role.find_by_name( 'admin' )
-    
     if params[:search]			
       @experiments = Experiment.search( params[:search], params[:page] )
     else

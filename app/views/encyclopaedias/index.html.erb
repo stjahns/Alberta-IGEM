@@ -28,13 +28,13 @@
 </head>
 
 <% content_for :title do %>
-  <%= 'Encyclopaedia Articles' %>
+  <%= 'Encyclopedia Articles' %>
 <% end %>
 
 <% content_for :header do %>
 
 <div id="header">
-  <h1>Encyclopaedia Articles</h1>
+  <h1>Encyclopedia Articles</h1>
   <p>Read more about the science of the cells.
      </p>
 </div>
@@ -47,7 +47,14 @@
 
    <div class ="article_list">
     <% for encyclopaedia in @encyclopaedias do %>
+      <%if encyclopaedia.title == "How To Use These Articles"%>
+        <div class ="article_button"><a href ="#<%= encyclopaedia.id%>"><%= encyclopaedia.title%></a></div>
+      <%end%>
+    <%end%>
+    <% for encyclopaedia in @encyclopaedias do %>
+       <% unless encyclopaedia.title == "How To Use These Articles"%>
       <div class ="article_button"><a href ="#<%= encyclopaedia.id%>"><%= encyclopaedia.title%></a></div>
+      <%end%>
   <%end%>
   <div class="index_new_article">
   <% if logged_in? && current_user.can_create_encyclopaedias?%>
@@ -55,6 +62,7 @@
   <% end %>
   </div>
   </div>
+
 
    <% for encyclopaedia in @encyclopaedias do %>
       <div class ="#<%=encyclopaedia.id%>">

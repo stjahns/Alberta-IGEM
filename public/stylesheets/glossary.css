@@ -160,7 +160,7 @@ a:visited { color: #666; }
 
 #encyclopaedia .hanging-toolbar{
     margin-bottom: 0px;
-    border-top: 2px silver solid;
+    border-top: 2px rgb(104, 104, 104) solid;
     clear:right;
 }
 
@@ -383,4 +383,16 @@ when I figure out what these two are for, I need to re label them and put a comm
 }
 .section_title{
   color: #282560;
+}
+
+.letter_divider{
+    line-height: 21px;
+    font-size:15px;
+    color:gray;
+}
+
+.first_letter_divider{
+    line-height: 21px;
+    font-size:15px;
+    color:gray;
 }

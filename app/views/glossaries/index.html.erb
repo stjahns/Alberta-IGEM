@@ -15,7 +15,7 @@
     </script>
   </head>
 
-  
+
 <% content_for :title do %>
   <%= 'Glossary' %>
 <% end %>
@@ -83,9 +83,10 @@
 
 <%@letter = @glossaries.first.term.first.upcase%>
  <%if @letter%>
-  <a name="<%=@letter%>"><%=@letter%></a>
+  <a class ="first_letter_divider" name ="<%=@letter%>"><%=@letter%></a>
  <%end%>
-<div class = "hanging-toolbar"></div>
+  <div class = "hanging-toolbar"></div>
+
 <% @glossaries.each do |glossary| %>
   <% @regex = Regexp.new(/^\w/) %>
      <% matchdata = @regex.match(glossary.term) %>
@@ -93,7 +94,8 @@
 
     <%unless matchdata.upcase == @letter%>
     <%@letter = matchdata.upcase%>
-       <a name ="<%=@letter%>"><%=@letter%></a>
+    <div class ="hanging-toolbar"></div>
+       <a class ="letter_divider" name ="<%=@letter%>"><%=@letter%></a>
        <div class = "hanging-toolbar"></div>
     <%end%>
 

@@ -17,7 +17,7 @@
 #
 
 class Experiment < ActiveRecord::Base
-  attr_accessible :title, :authour, :description, :published, :image, :user_id, :status, :temp
+  attr_accessible :title, :authour, :description, :published, :image, :user_id, :status, :temp, :articles
   has_many :steps, :dependent => :destroy  
   has_many :constructs, :dependent => :destroy
   has_many :notes, :through => :steps

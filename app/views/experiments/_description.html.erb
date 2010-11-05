@@ -25,8 +25,24 @@
 		</tr>
 	</table>
 
+        
+	<%= add_popups(add_glossary_links(experiment.description))%>
 
-	<%= more_text experiment.description, 150 %>
+  <br/>
+   <%unless experiment.articles.blank?%>
+    <b>Related Articles:</b>
+            <%for article in experiment.articles.split("&")%>
+                <%article = article.split("@")%>
+                <%id = article.first%>
+                <%title = article.last%>
+                <%if id == experiment.articles.first%>
+ <a href="http://<%=SITE_URL%>/encyclopaedias/<%=id%>"><%=title%></a>
+                <%else%>
+  | <a href="http://<%=SITE_URL%>/encyclopaedias/<%=id%>"><%=title%></a>
+                <%end%>
+            <%end%>
+        <%end%>
+
 </div>
 <div class="edit-experiment">
 	<%= render :partial=>"experiments/edit", :locals=>{:experiment=>experiment} %>

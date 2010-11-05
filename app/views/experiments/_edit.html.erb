@@ -6,6 +6,12 @@
 		<p class= 'description' >
 		    <%= f.text_area :description %>
 		</p>
+                <%if logged_in? && current_user.can_create_glossaries?%>
+                <p>
+                  <%= f.label :articles %><br />
+                  <%= f.text_field :articles %>
+                </p>
+                <%end%>
 		<p><%= f.submit 'Save' %>
 		<%= save_notice %>
 		</p>
