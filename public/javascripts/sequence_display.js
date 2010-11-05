@@ -141,6 +141,9 @@ function splitFeatures(features, width, length){
     var f1 = clone(features[i]);
     var startrow = Math.floor ( f1.start / width );  
     var stoprow = Math.floor ( f1.stop / width );
+    if (f1.stop % width == 0){
+      stoprow -= 1; //cut empty row -- woo last minute hacks, screw sleep i'll sleep on the plane!!
+    }
     
     if (stoprow == startrow){
       f1.start = f1.start - startrow * width;

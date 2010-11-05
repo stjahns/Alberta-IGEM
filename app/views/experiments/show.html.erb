@@ -4,10 +4,6 @@
 	<script src="http://cdn.jquerytools.org/1.2.3/tiny/jquery.tools.min.js"></script>
 <% end  %>
 
-<% content_for :nav do %>
-	<li><%= print_to_pdf_btn 'nav-print-to-pdf','genomikon' %></li>
-<% end %>
-
 <script> //get part background image data
 
   var constructs = [<% @experiment.constructs.each do |const| %>
