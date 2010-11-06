@@ -73,8 +73,9 @@
 <div class ="hanging-toolbar"></div>
 <%=create_div_class(section)%>
 <div class="section_text">
+  <%if logged_in? && current_user.can_edit_encyclopaedias?%>
   <div class ="edit"><%= create_section_edit_link(section.title, "Edit") %></div> <br/>
-
+  <%end%>
   <div class ="section">
    <% unless  section.image.blank? %>
 	<div class ="captionimage">
